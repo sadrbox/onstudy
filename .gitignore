@@ -1,2 +1,2 @@
-# dependencies 
-**/node_modules
+# ignore dependencies directory /node_modules 
+**/node_modules 
