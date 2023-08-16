@@ -3,13 +3,12 @@ import Card, { CardVariant } from "./components/Card";
 import UserList from "./components/UserList";
 import { IUser } from "./components/types/types";
 
-const getDataUsers: IUser = async () =>
-	await fetch("https://jsonplaceholder.typicode.com/users").then((res) =>
-		res.json()
-	);
+// const getDataUsers: IUser = async () =>
+// 	await fetch("https://jsonplaceholder.typicode.com/users").then((res) =>
+// 		res.json()
+// 	);
 
 const App = () => {
-	console.log(getDataUser);
 	return (
 		<div>
 			<Card
@@ -20,7 +19,7 @@ const App = () => {
 			>
 				<button>Кнопка</button>
 			</Card>
-			<UserList users={getDataUsers} />
+			{/* <UserList users={getDataUsers} /> */}
 		</div>
 	);
 };
