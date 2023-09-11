@@ -28,7 +28,7 @@ code {
 	text-decoration: line-through;
 }
 
-.tod label {
+.todo label {
 	width: 100%;
 	display: flex;
 	align-items: center;

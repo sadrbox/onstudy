@@ -3,7 +3,7 @@ import { ITodo } from "../interfaces";
 
 type TodoListProps = {
 	todos: ITodo[];
-	onToggle(id: number): void;
+	onToggle: (id: number) => void;
 	onRemove: (id: number) => void;
 };
 
@@ -12,6 +12,9 @@ export const TodoList: React.FC<TodoListProps> = ({
 	onToggle,
 	onRemove,
 }) => {
+	if (todos.length === 0) {
+		return <p className="center">Пока дел нет</p>;
+	}
 	return (
 		<ul>
 			{todos.map((todo) => {
@@ -25,7 +28,7 @@ export const TodoList: React.FC<TodoListProps> = ({
 							<input
 								type="checkbox"
 								checked={todo.completed}
-								onChange={onToggle.bind(null, todo.id)}
+								onChange={() => onToggle(todo.id)}
 							/>
 							<span>{todo.title}</span>
 							<i

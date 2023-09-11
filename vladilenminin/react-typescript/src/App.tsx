@@ -17,6 +17,23 @@ const App: React.FC = () => {
 	};
 
 	const toggleHandler = (id: number) => {
+		// setTodos((prev) =>
+		// 	prev.map((todo) => {
+		// 		// if (todo.id === id) {
+		// 		todo.completed = !todo.completed
+		// 		// }
+		// 		return todo;
+		// 	})
+		// );
+
+		// setTodos(
+		// 	todos.map((todo) => {
+		// 		if (todo.id === id) {
+		// 			todo.completed = !todo.completed;
+		// 		}
+		// 		return todo;
+		// 	}););
+
 		setTodos((prev) =>
 			prev.map((todo) => {
 				if (todo.id === id) {
@@ -26,9 +43,11 @@ const App: React.FC = () => {
 			})
 		);
 	};
+
 	const removeHandler = (id: number) => {
 		setTodos((prev) => prev.filter((todo) => todo.id !== id));
 	};
+	// console.log(todos);
 	return (
 		<>
 			<Navbar />
