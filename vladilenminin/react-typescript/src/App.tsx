@@ -12,33 +12,12 @@ const App: React.FC = () => {
 			id: Date.now(),
 			completed: false,
 		};
-		// setTodos([newTodo, ...todos]);
 		setTodos((prev) => [newTodo, ...prev]);
 	};
 
 	const toggleHandler = (id: number) => {
-		// debugger;
-		// console.log("first");
-		// setTodos((prev) =>
-		// 	prev.map((todo) => {
-		// 		// if (todo.id === id) {
-		// 		todo.completed = !todo.completed
-		// 		// }
-		// 		return todo;
-		// 	})
-		// );
-
-		// setTodos(
-		// 	todos.map((todo) => {
-		// 		if (todo.id === id) {
-		// 			todo.completed = !todo.completed;
-		// 		}
-		// 		return todo;
-		// 	}););
-
 		setTodos((prev) =>
 			prev.map((todo) => {
-				// debugger;
 				if (todo.id === id) {
 					return {
 						...todo,
@@ -51,9 +30,13 @@ const App: React.FC = () => {
 	};
 
 	const removeHandler = (id: number) => {
-		setTodos((prev) => prev.filter((todo) => todo.id !== id));
+		const shoudRemove = window.confirm(
+			"Вы уверены, что хотите удалит элемент?"
+		);
+		if (shoudRemove) {
+			setTodos((prev) => prev.filter((todo) => todo.id !== id));
+		}
 	};
-	// console.log(todos);
 	return (
 		<>
 			<Navbar />
