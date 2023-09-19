@@ -1,6 +1,6 @@
 import React from "react";
 
-const Loading = () => {
+const Loader = () => {
 	return (
 		<div className="lds-ripple">
 			<div></div>
@@ -9,4 +9,4 @@ const Loading = () => {
 	);
 };
 
-export default Loading;
+export default Loader;
