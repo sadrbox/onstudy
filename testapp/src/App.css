@@ -1,0 +1,29 @@
+body {
+	font-size: 90%;
+}
+.header {
+	padding: 0 10px 0 0;
+	grid-template-columns: auto min-content;
+	/* grid-auto-flow: column; */
+	white-space: nowrap;
+	/* height: 50px; */
+}
+.header__nav_links li {
+	margin-left: 20px;
+}
+.header__nav_links li:last-child {
+	margin-right: 20px;
+}
+.header__user_links li:hover {
+	background-color: silver;
+}
+.layout {
+	display: grid;
+	grid-template-rows: min-content 1fr min-content;
+}
+
+@media (min-width: 1240px) {
+	.header {
+		padding: 0 10px;
+	}
+}
