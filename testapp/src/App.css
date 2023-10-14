@@ -27,3 +27,28 @@ body {
 		padding: 0 10px;
 	}
 }
+
+table,
+thead,
+tbody {
+	display: grid;
+	/* border-collapse: collapse; */
+}
+table {
+	margin: 5px;
+	padding: 5px;
+	/* table-layout: auto; */
+}
+tbody tr {
+	display: grid;
+	grid-template-columns: min-content min-content auto;
+	/* width: auto; */
+	border: 1px solid red;
+	/* justify-content: end; */
+	/* align-content: start; */
+}
+th,
+td {
+	border: 1px blue solid;
+	min-width: 40px;
+}

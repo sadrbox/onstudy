@@ -5,7 +5,7 @@ type Props = {};
 
 const Header = (props: Props) => {
 	return (
-		<header className="header grid grid-flow-col  items-center ">
+		<header className="header grid grid-flow-col  items-center">
 			<div className="header__nav flex items-center">
 				<div className="header__logo p-3">
 					<CgMenuGridO size={25} />
