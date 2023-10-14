@@ -23,5 +23,10 @@
   },
   "include": [
     "src"
+  ],
+  "plugins": [
+    {
+      "transform": "ts-transformer-json-schema/transformer"
+    }
   ]
 }

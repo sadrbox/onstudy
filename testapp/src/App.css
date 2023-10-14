@@ -1,6 +1,7 @@
 body {
 	font-size: 90%;
 }
+
 .header {
 	padding: 0 10px 0 0;
 	grid-template-columns: auto min-content;
@@ -8,15 +9,19 @@ body {
 	white-space: nowrap;
 	/* height: 50px; */
 }
+
 .header__nav_links li {
 	margin-left: 20px;
 }
+
 .header__nav_links li:last-child {
 	margin-right: 20px;
 }
+
 .header__user_links li:hover {
 	background-color: silver;
 }
+
 .layout {
 	display: grid;
 	grid-template-rows: min-content 1fr min-content;
@@ -31,24 +36,59 @@ body {
 table,
 thead,
 tbody {
-	display: grid;
+	border-collapse: collapse;
+	width: 100%;
+	/* display: grid; */
 	/* border-collapse: collapse; */
 }
+
 table {
 	margin: 5px;
 	padding: 5px;
 	/* table-layout: auto; */
 }
-tbody tr {
-	display: grid;
-	grid-template-columns: min-content min-content auto;
-	/* width: auto; */
-	border: 1px solid red;
-	/* justify-content: end; */
-	/* align-content: start; */
+
+thead {
+	/* display: table; */
+	/* to take the same width as tr */
+	/* width: calc(100% - 17px); */
 }
+
+tbody {
+	/* display: block; */
+	/* to enable vertical scrolling */
+	/* max-height: 200px; */
+	/* e.g. */
+	/* overflow-y: scroll; */
+}
+
+thead tr th {
+	/* position: sticky; */
+	top: 0;
+}
+
+tr {
+	/* display: table; */
+	/* display purpose; th's border */
+	width: 100%;
+	box-sizing: border-box;
+}
+
 th,
 td {
-	border: 1px blue solid;
-	min-width: 40px;
+	/* width: 33.33%; */
+	/* to enable "word-break: break-all" */
+	/* padding: 5px; */
+	/* word-break: break-all; */
+	/* 4. */
+
+}
+
+td {
+	vertical-align: top;
+	border: 1px solid blue;
+	max-width: 100px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }

@@ -10,6 +10,7 @@
     "@types/node": "^16.18.55",
     "@types/react": "^18.2.24",
     "@types/react-dom": "^18.2.8",
+    "axios": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
@@ -42,6 +43,9 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "ts-interface-keys-transformer": "^2.3.2",
+    "ts-transformer-json-schema": "^0.6.12",
+    "ts-transformer-keys": "^0.4.4"
   }
 }

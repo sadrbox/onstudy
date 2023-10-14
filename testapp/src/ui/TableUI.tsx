@@ -1,48 +1,62 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { IProduct, CProduct } from "../types";
+import axios from "axios";
+// import { IProducts, CProduct } from '../types/index';
 
 type Props = {};
 
 const TableUI = (props: Props) => {
 	useLayoutEffect(() => {
-		setWidthRow();
+		// setWidthRow();
 	});
 
-	function setWidthRow() {
-		const theadRows: NodeListOf<HTMLElement> =
-			document.querySelectorAll("thead tr td");
-		const tbodyRows = document.querySelectorAll(
-			"tbody tr td"
-		) as NodeListOf<HTMLElement>;
+	const [products, setProducts] = useState<IProduct[] | []>([]);
 
-		const tbodyCells: HTMLElement[] = [...tbodyRows];
-		// tbodyCells.map((elem) => {
-		// 	console.log(elem.offsetWidth);
-		// 	return elem;
-		// });
-		tbodyCells.forEach((element, index) => {
-			// theadRows[index].offsetWidth = element.offsetWidth;
-			console.log(theadRows);
-		});
+	// console.log(keysOfProps);
 
-		// console.log(tbodyRows);
-		// console.log(tbodyRowWidth?.offsetWidth);
-	}
+	useEffect(() => {
+		fetchData();
+		console.log(CProduct);
+	}, []);
+
+	const fetchData = async () => {
+		await axios
+			.get("https://dummyjson.com/products")
+			.then((res) => {
+				setProducts(res.data.products);
+				// console.log(typeof res.data.products);
+				console.log(products);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 	return (
 		<div>
 			<table className="bg-green-300">
 				<thead>
 					<tr>
-						<th>N</th>
-						<th>ID</th>
-						<th>Name</th>
+						{Object.keys(CProduct).map((elm, idx) => (
+							<th key={idx}>{elm}</th>
+						))}
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>12312890</td>
-						<td>Alex</td>
-					</tr>
+					{products.map((elm) => (
+						<tr key={elm.id}>
+							<td>{elm.id}</td>
+							<td>{elm.title}</td>
+							<td>{elm.description}</td>
+							<td>{elm.price}</td>
+							<td>{elm.discountPercentage}</td>
+							<td>{elm.rating}</td>
+							<td>{elm.stock}</td>
+							<td>{elm.brand}</td>
+							<td>{elm.category}</td>
+							<td>{elm.thumbnail}</td>
+							<td>{elm.images}</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</div>
