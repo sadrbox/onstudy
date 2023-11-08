@@ -1,1 +1,1 @@
-# react-onstudy-1
+# onstudy
