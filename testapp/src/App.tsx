@@ -4,7 +4,7 @@ import Layout from "./layouts/Layout";
 
 function App() {
 	return (
-		<div className="h-screen bg-zinc-300">
+		<div className="h-screen">
 			<Layout />
 		</div>
 	);
