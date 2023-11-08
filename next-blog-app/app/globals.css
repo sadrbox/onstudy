@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+
+footer,
+main {
+  @apply container h-10;
+}
+
+header {}
