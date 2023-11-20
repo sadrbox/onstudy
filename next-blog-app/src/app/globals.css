@@ -11,7 +11,7 @@
 
 footer,
 main {
-  @apply container h-10;
+  /* @apply container h-10; */
 }
 
 header {}
