@@ -1,14 +1,14 @@
 import Image from "next/image";
-import TableUI from "../components/TableUI";
+import TableUI from "../components/ListUI";
 import { getData } from "@/src/queries/";
 
 export default async function Home() {
-  const products = await getData();
+  const data = await getData();
   // console.log(products);
   return (
     <>
       <div className="bg-slate-500">
-        <TableUI products={products} />
+        <TableUI data={data} />
       </div>
     </>
   );
