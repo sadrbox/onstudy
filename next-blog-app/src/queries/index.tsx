@@ -1,40 +1,32 @@
-export interface IProduct {
-  id?: number;
+export type TProducts = TProduct[];
+
+export interface TProduct {
+  id: number;
   title: string;
   price: number;
   description: string;
-  category: IProductCategory;
+  category: string;
   image: string;
-  rating: IProductRating;
+  rating: TProductRating;
 }
 
-export enum IProductCategory {
-  Electronics = "electronics",
-  Jewelery = "jewelery",
-  MenSClothing = "men's clothing",
-  WomenSClothing = "women's clothing",
-}
-
-export interface IProductRating {
+export interface TProductRating {
   rate: number;
   count: number;
 }
 
 async function getStaticProps() {
-  const data = await fetch("https://fakestoreapi.com/products");
-  const products = await data.json();
-  // console.log(products);
-
-  return products;
+  const response = await fetch("https://fakestoreapi.com/products");
+  const data = (await response.json()) as TProducts;
+  return data;
 }
 
-export async function getData() {
+export async function getDataProducts() {
   const products = await getStaticProps();
-  // console.log(products);
   return products;
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  getData,
+  getDataProducts,
 };

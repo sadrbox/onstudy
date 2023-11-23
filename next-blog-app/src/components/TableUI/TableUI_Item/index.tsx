@@ -5,7 +5,7 @@ interface ITableUI_Item {
   product: IProduct;
 }
 const TableUI_Item = (props: ITableUI_Item) => {
-  console.log(props.product);
+  // console.log(props.product);
   return (
     <div>
       <h1>{props.product.title}</h1>
