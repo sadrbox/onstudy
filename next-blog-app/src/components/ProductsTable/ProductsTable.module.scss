@@ -1,13 +1,23 @@
 .DataTable {
-  width: 800px;
+  // max-width: 800px;
 
+
+  thead {
+    tr {
+      th {
+
+        font-size: 0.8rem;
+      }
+    }
+  }
 
   tbody {
-    width: 700px;
+    // width: 700px;
 
     tr {
       td {
-        max-width: 200px;
+        // max-width: 200px;
+        font-size: 0.8rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

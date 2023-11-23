@@ -8,6 +8,9 @@
 @tailwind components;
 @tailwind utilities; */
 
+body {
+  background-color: #eee;
+}
 
 footer,
 main {
