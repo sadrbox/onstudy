@@ -33,7 +33,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/TableUI/index.tsx_1"
+    "src/components/TableUI/index.tsx_1",
+    "src/components/ProductsTable/index.tsx_2"
   ],
   "exclude": [
     "node_modules"

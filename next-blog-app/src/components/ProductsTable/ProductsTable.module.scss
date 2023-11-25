@@ -1,26 +1,51 @@
 .DataTable {
-  // max-width: 800px;
+  // border: 1px solid #aaa;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 5px;
 
 
   thead {
-    tr {
-      th {
 
+    tr {
+
+
+      th {
+        background-color: #eee;
         font-size: 0.8rem;
+        // border-bottom: 1px solid #aaaaaa;
+        // border: 1px solid #aaa;
       }
     }
   }
 
   tbody {
-    // width: 700px;
+
 
     tr {
+      // background-color: red;
+
       td {
         // max-width: 200px;
+        // border: 1px solid #aaa;
         font-size: 0.8rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        background-color: #fff;
+        padding: 5px;
+
+        &:first-child {
+          border-top-left-radius: 3px;
+          border-bottom-left-radius: 3px;
+        }
+
+        &:last-child {
+          border-top-right-radius: 3px;
+          border-bottom-right-radius: 3px;
+        }
+
+
       }
     }
   }
