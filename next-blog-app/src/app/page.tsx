@@ -8,11 +8,9 @@ export default async function Page() {
   const products = (await getDataProducts()) || [];
   return (
     <>
-      <div className="">
-        <Box m={5}>
-          <ProductsTable products={products} />
-        </Box>
-      </div>
+      <Box>
+        <ProductsTable products={products} />
+      </Box>
     </>
   );
 }

@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={FontMontserat.className}>
-        <main className="container">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );
