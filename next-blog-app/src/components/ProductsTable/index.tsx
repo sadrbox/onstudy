@@ -4,15 +4,17 @@ import React, { useEffect, useState } from "react";
 import styles from "./ProductsTable.module.scss";
 
 type TTableParams = {
-  tableHeight: number;
+  // wrapperAreaTop: number;
+  scrollAreaHeight: number;
   tableHeaderTop: number;
   tableHeaderCellId: number;
   tableHeaderCellTitle: number;
 };
 
 export default function ProductsTable({ products }: { products: TProducts }) {
-  const [tableParams, setTableParams] = useState<TTableParams>({
-    tableHeight: 0,
+  const [params, setParams] = useState<TTableParams>({
+    // wrapperAreaTop: 0,
+    scrollAreaHeight: 0,
     tableHeaderTop: 0,
     tableHeaderCellId: 0,
     tableHeaderCellTitle: 0,
@@ -22,7 +24,11 @@ export default function ProductsTable({ products }: { products: TProducts }) {
     const body = document.body,
       html = document.documentElement;
 
-    const table = document.querySelector("#DataTable") as HTMLDivElement;
+    const wrapperArea = document.querySelector(
+        "#wrapperArea"
+      ) as HTMLDivElement,
+      scrollArea = document.querySelector("#scrollArea") as HTMLDivElement;
+
     const tableHeader = document.querySelector(
       "#DataTable table thead"
     ) as HTMLTableElement;
@@ -39,64 +45,61 @@ export default function ProductsTable({ products }: { products: TProducts }) {
 
     // console.log(tableHeader?.offsetTop);
     // console.log(html.clientHeight, table?.offsetTop);
-    const tableHeight = html.clientHeight - table?.offsetTop - 100;
-    setTableParams({
-      tableHeight,
-      tableHeaderTop: tableHeader?.offsetTop,
+    const scrollAreaHeight = html.clientHeight - 100;
+    setParams({
+      scrollAreaHeight,
+      tableHeaderTop: wrapperArea?.offsetTop,
       tableHeaderCellId: tableHeaderCellId.offsetWidth,
       tableHeaderCellTitle: tableHeaderCellTitle.offsetWidth,
     });
-    console.log(tableHeaderCellId?.offsetWidth);
+    // console.log(html?.clientHeight);
   }, [products]);
 
-  // console.log(tableParams.tableHeaderTop);
+  // console.log(params.scrollAreaHeight);
   return (
-    <div>
+    <div id="wrapperArea" className={styles.wrapperArea}>
       <table>
-        <thead style={{ backgroundColor: "red" }}>
+        <thead>
           <tr>
-            <th style={{ width: tableParams.tableHeaderCellId }} align="right">
+            <th style={{ width: params.tableHeaderCellId }} align="right">
               ID
             </th>
-            <th
-              style={{ width: tableParams.tableHeaderCellTitle }}
-              align="left"
-            >
+            <th style={{ width: params.tableHeaderCellTitle }} align="left">
               Title
             </th>
-            <th style={{ top: tableParams.tableHeaderTop }} align="right">
+            <th style={{ top: params.tableHeaderTop }} align="right">
               Price
             </th>
-            <th style={{ top: tableParams.tableHeaderTop }} align="right">
+            <th style={{ top: params.tableHeaderTop }} align="right">
               Rating
             </th>
-            <th style={{ top: tableParams.tableHeaderTop }} align="left">
+            <th style={{ top: params.tableHeaderTop }} align="left">
               Category
             </th>
           </tr>
         </thead>
       </table>
       <div
-        id="DataTable"
-        className={styles.DataTable}
-        style={{ maxHeight: tableParams.tableHeight }}
+        id="scrollArea"
+        className={styles.scrollArea}
+        style={{ maxHeight: params.scrollAreaHeight }}
       >
         <table>
           {/* <thead style={{ backgroundColor: "red" }}>
             <tr>
-              <th style={{ top: tableParams.tableHeaderTop }} align="right">
+              <th style={{ top: params.tableHeaderTop }} align="right">
                 ID
               </th>
-              <th style={{ top: tableParams.tableHeaderTop }} align="left">
+              <th style={{ top: params.tableHeaderTop }} align="left">
                 Title
               </th>
-              <th style={{ top: tableParams.tableHeaderTop }} align="right">
+              <th style={{ top: params.tableHeaderTop }} align="right">
                 Price
               </th>
-              <th style={{ top: tableParams.tableHeaderTop }} align="right">
+              <th style={{ top: params.tableHeaderTop }} align="right">
                 Rating
               </th>
-              <th style={{ top: tableParams.tableHeaderTop }} align="left">
+              <th style={{ top: params.tableHeaderTop }} align="left">
                 Category
               </th>
             </tr>
@@ -131,7 +134,7 @@ export default function ProductsTable({ products }: { products: TProducts }) {
             </tr>
           </tfoot>
         </table>
-      </div>{" "}
+      </div>
     </div>
   );
 }

@@ -1,35 +1,19 @@
-.DataTable {
-  display: grid;
+.wrapperArea {
+
+  // display: grid;
   // grid-template-columns: 500px;
   // max-width: 300px;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   // overflow: hidden;
   // background: red;
   // padding: 30px;
   // top: 40px;
-  position: relative;
-
+  // position: relative;
   table {
-    // margin-top: 50px;
-    // border: 1px solid #aaa;
-    // height: 200px;
-    // width: 400px;
-    // overflow: scroll;
-    border-collapse: separate;
-    border-spacing: 0 5px;
-
-
     thead {
-      // position: sticky;
-
-
       tr {
-
-        // position: static;
-
         th {
-          position: sticky;
-          top: 0; // динамический стиль
+          // top: 0; // динамический стиль
           // background-color: #F9F8F8;
           border-bottom: 2px solid #aaa;
           // position: static;
@@ -58,48 +42,69 @@
         }
       }
     }
+  }
 
-    tbody {
-      // padding-top: 50px;
+  .scrollArea {
+
+    display: grid;
+    // min-height: 100%;
+    overflow-y: scroll;
+
+
+    table {
+      // margin-top: 50px;
+      // border: 1px solid #aaa;
       // height: 200px;
+      // width: 400px;
       // overflow: scroll;
-      // height: 100px;
-      /* Just for the demo          */
-      // overflow-y: auto;
-      /* Trigger vertical scroll    */
-      // overflow-x: hidden;
+      border-collapse: separate;
+      border-spacing: 0 5px;
 
-      tr {
 
-        // background-color: red;
-        td {
-          // max-width: 200px;
-          // border: 1px solid #aaa;
-          // overflow: hidden;
-          // text-overflow: ellipsis;
-          background-color: #fff;
-          padding: 5px 10px;
 
-          &:first-child {
-            border-top-left-radius: 3px;
-            border-bottom-left-radius: 3px;
+
+      tbody {
+        // padding-top: 50px;
+        // height: 200px;
+        // overflow: scroll;
+        // height: 100px;
+        /* Just for the demo          */
+        // overflow-y: auto;
+        /* Trigger vertical scroll    */
+        // overflow-x: hidden;
+
+        tr {
+
+          // background-color: red;
+          td {
+            // max-width: 200px;
+            // border: 1px solid #aaa;
+            // overflow: hidden;
+            // text-overflow: ellipsis;
+            background-color: #fff;
+            padding: 5px 10px;
+
+            &:first-child {
+              border-top-left-radius: 3px;
+              border-bottom-left-radius: 3px;
+            }
+
+            &:last-child {
+              border-top-right-radius: 3px;
+              border-bottom-right-radius: 3px;
+            }
+
+            span {
+              font-size: 0.8rem;
+              white-space: nowrap;
+              display: block;
+              max-width: 300px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+
+
           }
-
-          &:last-child {
-            border-top-right-radius: 3px;
-            border-bottom-right-radius: 3px;
-          }
-
-          span {
-            font-size: 0.8rem;
-            white-space: nowrap;
-            display: block;
-            max-width: 300px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-
-
         }
       }
     }
