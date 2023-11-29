@@ -4,20 +4,22 @@ import React, { useEffect, useState } from "react";
 import styles from "./ProductsTable.module.scss";
 
 type TTableParams = {
-  // wrapperAreaTop: number;
-  scrollAreaHeight: number;
-  tableHeaderTop: number;
-  tableHeaderCellId: number;
-  tableHeaderCellTitle: number;
+  scrollAreaHeight: number | string;
+  // IdWidth: number | string;
+  // TitleWidth: number | string;
+  // PriceWidth: number | string;
+  // RatingWidth: number | string;
+  // CategoryWidth?: number | string;
 };
 
 export default function ProductsTable({ products }: { products: TProducts }) {
   const [params, setParams] = useState<TTableParams>({
-    // wrapperAreaTop: 0,
-    scrollAreaHeight: 0,
-    tableHeaderTop: 0,
-    tableHeaderCellId: 0,
-    tableHeaderCellTitle: 0,
+    scrollAreaHeight: 200 || 300,
+    // IdWidth: 60,
+    // TitleWidth: 180,
+    // PriceWidth: 80,
+    // RatingWidth: 80,
+    // CategoryWidth: "auto",
   });
 
   useEffect(() => {
@@ -29,83 +31,57 @@ export default function ProductsTable({ products }: { products: TProducts }) {
       ) as HTMLDivElement,
       scrollArea = document.querySelector("#scrollArea") as HTMLDivElement;
 
-    const tableHeader = document.querySelector(
-      "#DataTable table thead"
-    ) as HTMLTableElement;
+    // const IdWidth =
+    //   document.querySelector<HTMLTableCellElement>(
+    //     '[data-title="id"]'
+    //   )?.clientWidth;
+    // const TitleWidth = document.querySelector<HTMLTableCellElement>(
+    //   '[data-title="title"]'
+    // )?.clientWidth;
+    // const PriceWidth = document.querySelector<HTMLTableCellElement>(
+    //   '[data-title="price"]'
+    // )?.clientWidth;
+    // const RatingWidth = document.querySelector<HTMLTableCellElement>(
+    //   '[data-title="rating"]'
+    // )?.clientWidth;
+    // const CategoryWidth = document.querySelector<HTMLTableCellElement>(
+    //   '[data-title="category"]'
+    // )?.clientWidth;
 
-    const tableHeaderCellId = document.querySelector(
-      '[data-title="id"]'
-    ) as HTMLTableCellElement;
-
-    const tableHeaderCellTitle = document.querySelector(
-      '[data-title="title"]'
-    ) as HTMLTableCellElement;
-
-    // console.log(tableHeaderCellTitle.offsetWidth);
-
-    // console.log(tableHeader?.offsetTop);
     // console.log(html.clientHeight, table?.offsetTop);
     const scrollAreaHeight = html.clientHeight - 100;
     setParams({
-      scrollAreaHeight,
-      tableHeaderTop: wrapperArea?.offsetTop,
-      tableHeaderCellId: tableHeaderCellId.offsetWidth,
-      tableHeaderCellTitle: tableHeaderCellTitle.offsetWidth,
+      scrollAreaHeight: scrollAreaHeight || 300,
+      // IdWidth: IdWidth || 60,
+      // TitleWidth: TitleWidth || 100,
+      // PriceWidth: PriceWidth || 80,
+      // RatingWidth: RatingWidth || 80,
+      // CategoryWidth: CategoryWidth || "auto",
     });
-    // console.log(html?.clientHeight);
+    // console.log(IdWidth?.clientWidth);
   }, [products]);
 
   // console.log(params.scrollAreaHeight);
   return (
     <div id="wrapperArea" className={styles.wrapperArea}>
-      <table>
-        <thead>
-          <tr>
-            <th style={{ width: params.tableHeaderCellId }} align="right">
-              ID
-            </th>
-            <th style={{ width: params.tableHeaderCellTitle }} align="left">
-              Title
-            </th>
-            <th style={{ top: params.tableHeaderTop }} align="right">
-              Price
-            </th>
-            <th style={{ top: params.tableHeaderTop }} align="right">
-              Rating
-            </th>
-            <th style={{ top: params.tableHeaderTop }} align="left">
-              Category
-            </th>
-          </tr>
-        </thead>
-      </table>
       <div
         id="scrollArea"
         className={styles.scrollArea}
         style={{ maxHeight: params.scrollAreaHeight }}
       >
         <table>
-          {/* <thead style={{ backgroundColor: "red" }}>
+          <thead>
             <tr>
-              <th style={{ top: params.tableHeaderTop }} align="right">
-                ID
-              </th>
-              <th style={{ top: params.tableHeaderTop }} align="left">
-                Title
-              </th>
-              <th style={{ top: params.tableHeaderTop }} align="right">
-                Price
-              </th>
-              <th style={{ top: params.tableHeaderTop }} align="right">
-                Rating
-              </th>
-              <th style={{ top: params.tableHeaderTop }} align="left">
-                Category
-              </th>
+              <th align="right">ID</th>
+              <th align="left">Title</th>
+              <th align="right">Price</th>
+              <th align="right">Rating</th>
+              <th align="left">Category</th>
             </tr>
-          </thead> */}
+          </thead>{" "}
           <tbody>
-            {products &&
+            {params &&
+              products &&
               products.map((item) => {
                 return (
                   <tr key={item.id}>
@@ -128,11 +104,6 @@ export default function ProductsTable({ products }: { products: TProducts }) {
                 );
               })}
           </tbody>
-          <tfoot>
-            <tr>
-              <td></td>
-            </tr>
-          </tfoot>
         </table>
       </div>
     </div>

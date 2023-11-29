@@ -1,6 +1,15 @@
 .wrapperArea {
+  overflow: hidden;
+  margin: 0px;
+  padding: 50px;
+  // border: 1px solid #aaa;
 
-  // display: grid;
+  // display: flex;
+  // flex-direction: column;
+
+  position: relative;
+
+
   // grid-template-columns: 500px;
   // max-width: 300px;
   // overflow-y: scroll;
@@ -8,48 +17,17 @@
   // background: red;
   // padding: 30px;
   // top: 40px;
-  // position: relative;
-  table {
-    thead {
-      tr {
-        th {
-          // top: 0; // динамический стиль
-          // background-color: #F9F8F8;
-          border-bottom: 2px solid #aaa;
-          // position: static;
-          // top: 45px;
-          // position: sticky;
-          background-color: #eee;
-          font-size: 0.8rem;
-          // border-bottom: 1px solid #aaaaaa;
-          // border: 1px solid #aaa;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          background-color: #ddd;
-          padding: 5px 10px;
 
 
-          &:first-child {
-            border-top-left-radius: 3px;
-            border-bottom-left-radius: 3px;
-          }
-
-          &:last-child {
-            border-top-right-radius: 3px;
-            border-bottom-right-radius: 3px;
-          }
-        }
-      }
-    }
-  }
 
   .scrollArea {
-
+    // box-shadow: inset 0px 0px 20px 10px #333;
+    border-bottom: 40px solid #aaa;
     display: grid;
     // min-height: 100%;
     overflow-y: scroll;
 
+    // padding-top: -10px;
 
     table {
       // margin-top: 50px;
@@ -60,7 +38,51 @@
       border-collapse: separate;
       border-spacing: 0 5px;
 
+      thead {
 
+
+        position: sticky;
+        top: 5px;
+
+        box-shadow: 0px -5px 0px 0px #aaa;
+        border-radius: 0px;
+        background-color: #aaa;
+
+        tr {
+          // background-color: red;
+          border-radius: 5px;
+
+          th {
+            // top: 0; // динамический стиль
+            // background-color: #F9F8F8;
+            // border: 1px solid #aaa;
+            // border-bottom: 2px solid #aaa;
+            // position: static;
+            // top: 45px;
+            // position: sticky;
+            // background-color: red;
+            font-size: 0.8rem;
+            // border-bottom: 1px solid #aaaaaa;
+            // border: 1px solid #aaa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            // background-color: #ddd;
+            padding: 5px 10px 10px 10px;
+
+
+            &:first-child {
+              // border-top-left-radius: 3px;
+              // border-bottom-left-radius: 3px;
+            }
+
+            &:last-child {
+              // border-top-right-radius: 3px;
+              // border-bottom-right-radius: 3px;
+            }
+          }
+        }
+      }
 
 
       tbody {
@@ -72,8 +94,12 @@
         // overflow-y: auto;
         /* Trigger vertical scroll    */
         // overflow-x: hidden;
+        // border-collapse: separate;
+        // border-spacing: 0 5px;
+
 
         tr {
+          // padding: 40px;
 
           // background-color: red;
           td {
@@ -82,7 +108,7 @@
             // overflow: hidden;
             // text-overflow: ellipsis;
             background-color: #fff;
-            padding: 5px 10px;
+            padding: 10px 10px;
 
             &:first-child {
               border-top-left-radius: 3px;
