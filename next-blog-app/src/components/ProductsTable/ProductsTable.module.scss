@@ -1,5 +1,5 @@
 .wrapperArea {
-  overflow: hidden;
+  // overflow: hidden;
   margin: 0px;
   padding: 50px;
   // border: 1px solid #aaa;
@@ -23,13 +23,14 @@
   .scrollArea {
     // box-shadow: inset 0px 0px 20px 10px #333;
     border-bottom: 40px solid #aaa;
-    display: grid;
+    // display: flex;
     // min-height: 100%;
     overflow-y: scroll;
 
     // padding-top: -10px;
 
     table {
+      width: 100%;
       // margin-top: 50px;
       // border: 1px solid #aaa;
       // height: 200px;
@@ -53,6 +54,7 @@
           border-radius: 5px;
 
           th {
+            width: auto;
             // top: 0; // динамический стиль
             // background-color: #F9F8F8;
             // border: 1px solid #aaa;
@@ -105,19 +107,21 @@
           td {
             // max-width: 200px;
             // border: 1px solid #aaa;
-            // overflow: hidden;
-            // text-overflow: ellipsis;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             background-color: #fff;
             padding: 10px 10px;
 
             &:first-child {
-              border-top-left-radius: 3px;
-              border-bottom-left-radius: 3px;
+              border-top-left-radius: 2px;
+              border-bottom-left-radius: 2px;
             }
 
             &:last-child {
-              border-top-right-radius: 3px;
-              border-bottom-right-radius: 3px;
+              border-top-right-radius: 2px;
+              border-bottom-right-radius: 2px;
             }
 
             span {

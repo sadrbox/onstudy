@@ -5,21 +5,11 @@ import styles from "./ProductsTable.module.scss";
 
 type TTableParams = {
   scrollAreaHeight: number | string;
-  // IdWidth: number | string;
-  // TitleWidth: number | string;
-  // PriceWidth: number | string;
-  // RatingWidth: number | string;
-  // CategoryWidth?: number | string;
 };
 
 export default function ProductsTable({ products }: { products: TProducts }) {
   const [params, setParams] = useState<TTableParams>({
     scrollAreaHeight: 200 || 300,
-    // IdWidth: 60,
-    // TitleWidth: 180,
-    // PriceWidth: 80,
-    // RatingWidth: 80,
-    // CategoryWidth: "auto",
   });
 
   useEffect(() => {
@@ -31,37 +21,12 @@ export default function ProductsTable({ products }: { products: TProducts }) {
       ) as HTMLDivElement,
       scrollArea = document.querySelector("#scrollArea") as HTMLDivElement;
 
-    // const IdWidth =
-    //   document.querySelector<HTMLTableCellElement>(
-    //     '[data-title="id"]'
-    //   )?.clientWidth;
-    // const TitleWidth = document.querySelector<HTMLTableCellElement>(
-    //   '[data-title="title"]'
-    // )?.clientWidth;
-    // const PriceWidth = document.querySelector<HTMLTableCellElement>(
-    //   '[data-title="price"]'
-    // )?.clientWidth;
-    // const RatingWidth = document.querySelector<HTMLTableCellElement>(
-    //   '[data-title="rating"]'
-    // )?.clientWidth;
-    // const CategoryWidth = document.querySelector<HTMLTableCellElement>(
-    //   '[data-title="category"]'
-    // )?.clientWidth;
-
-    // console.log(html.clientHeight, table?.offsetTop);
     const scrollAreaHeight = html.clientHeight - 100;
     setParams({
       scrollAreaHeight: scrollAreaHeight || 300,
-      // IdWidth: IdWidth || 60,
-      // TitleWidth: TitleWidth || 100,
-      // PriceWidth: PriceWidth || 80,
-      // RatingWidth: RatingWidth || 80,
-      // CategoryWidth: CategoryWidth || "auto",
     });
-    // console.log(IdWidth?.clientWidth);
   }, [products]);
 
-  // console.log(params.scrollAreaHeight);
   return (
     <div id="wrapperArea" className={styles.wrapperArea}>
       <div
