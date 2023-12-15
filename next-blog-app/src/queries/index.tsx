@@ -1,3 +1,5 @@
+import { PrismaClient } from "@prisma/client";
+
 export type TProducts = TProduct[];
 
 export interface TProduct {
@@ -25,6 +27,10 @@ export async function getDataProducts() {
   const products = await getStaticProps();
   return products;
 }
+
+const prisma = new PrismaClient();
+
+async function main() {}
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
