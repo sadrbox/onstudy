@@ -28,7 +28,7 @@ export async function getDataProducts() {
   return products;
 }
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 async function main() {}
 
