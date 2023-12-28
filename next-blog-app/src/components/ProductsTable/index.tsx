@@ -1,6 +1,12 @@
 "use client";
 import { TProducts } from "@/src/queries";
-import React, { useEffect, useState } from "react";
+import React, {
+  MouseEventHandler,
+  useEffect,
+  useState,
+  useRef,
+  EventHandler,
+} from "react";
 import styles from "./ProductsTable.module.scss";
 
 type TTableParams = {
@@ -27,6 +33,15 @@ export default function ProductsTable({ products }: { products: TProducts }) {
     });
   }, [products]);
 
+  const selectRowTable = (event: HTMLTableRowElement): void => {
+    // event.preventDefault();
+    console.log(event);
+    // const row = event.target;
+    // const row = document.querySelector(`[data-rowid="${rowId}"]`);
+    // row?.classList.add("bg-gray-900");
+    // row?.attributes.set()
+  };
+
   return (
     <div id="wrapperArea" className={styles.wrapperArea}>
       <div
@@ -43,13 +58,18 @@ export default function ProductsTable({ products }: { products: TProducts }) {
               <th align="right">Rating</th>
               <th align="left">Category</th>
             </tr>
-          </thead>{" "}
+          </thead>
           <tbody>
             {params &&
               products &&
               products.map((item) => {
                 return (
-                  <tr key={item.id}>
+                  <tr
+                    key={item.id}
+                    data-rowid={item.id}
+                    data-row-selected={false}
+                    onClick={(event) => selectRowTable(event)}
+                  >
                     <td data-title="id" align="right">
                       <span>{item.id}</span>
                     </td>
@@ -69,6 +89,15 @@ export default function ProductsTable({ products }: { products: TProducts }) {
                 );
               })}
           </tbody>
+          <tfoot>
+            <tr>
+              <th></th>
+              <th></th>
+              <th align="right">49.34</th>
+              <th align="right">38.23</th>
+              <th></th>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>

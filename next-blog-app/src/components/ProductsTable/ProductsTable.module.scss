@@ -8,6 +8,7 @@
   // flex-direction: column;
 
   position: relative;
+  background-color: #333;
 
 
   // grid-template-columns: 500px;
@@ -22,10 +23,12 @@
 
   .scrollArea {
     // box-shadow: inset 0px 0px 20px 10px #333;
-    border-bottom: 40px solid #aaa;
+
+    // border-bottom: 30px solid #aaa;
     // display: flex;
     // min-height: 100%;
     overflow-y: scroll;
+    background-color: #fff;
 
     // padding-top: -10px;
 
@@ -37,17 +40,17 @@
       // width: 400px;
       // overflow: scroll;
       border-collapse: separate;
-      border-spacing: 0 5px;
+      border-spacing: 0 0px;
 
       thead {
 
 
         position: sticky;
-        top: 5px;
+        top: 0px;
 
         box-shadow: 0px -5px 0px 0px #aaa;
         border-radius: 0px;
-        background-color: #aaa;
+        background-color: #ccc;
 
         tr {
           // background-color: red;
@@ -57,8 +60,8 @@
             width: auto;
             // top: 0; // динамический стиль
             // background-color: #F9F8F8;
-            // border: 1px solid #aaa;
-            // border-bottom: 2px solid #aaa;
+            border-right: 1px solid #666;
+            border-bottom: 1px solid #666;
             // position: static;
             // top: 45px;
             // position: sticky;
@@ -70,7 +73,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             // background-color: #ddd;
-            padding: 5px 10px 10px 10px;
+            padding: 5px;
 
 
             &:first-child {
@@ -81,6 +84,7 @@
             &:last-child {
               // border-top-right-radius: 3px;
               // border-bottom-right-radius: 3px;
+              border-right: 0px;
             }
           }
         }
@@ -111,17 +115,17 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            background-color: #fff;
-            padding: 10px 10px;
+            // background-color: #ffffff;
+            padding: 5px;
 
             &:first-child {
-              border-top-left-radius: 2px;
-              border-bottom-left-radius: 2px;
+              // border-top-left-radius: 2px;
+              // border-bottom-left-radius: 2px;
             }
 
             &:last-child {
-              border-top-right-radius: 2px;
-              border-bottom-right-radius: 2px;
+              // border-top-right-radius: 2px;
+              // border-bottom-right-radius: 2px;
             }
 
             span {
@@ -134,6 +138,55 @@
             }
 
 
+          }
+        }
+      }
+
+      tfoot {
+
+        position: sticky;
+        bottom: 0px;
+
+        // box-shadow: 0px -5px 0px 0px #aaa;
+        border-radius: 0px;
+        background-color: #ccc;
+
+        tr {
+          // background-color: red;
+          border-radius: 5px;
+
+
+          th {
+            width: auto;
+            // top: 0; // динамический стиль
+            // background-color: #F9F8F8;
+            border-right: 1px solid #666;
+            // border-bottom: 1px solid #666;
+            border-top: 1px solid #666;
+            // position: static;
+            // top: 45px;
+            // position: sticky;
+            // background-color: red;
+            font-size: 0.8rem;
+            // border-bottom: 1px solid #aaaaaa;
+            // border: 1px solid #aaa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            // background-color: #ddd;
+            padding: 5px;
+
+
+            &:first-child {
+              // border-top-left-radius: 3px;
+              // border-bottom-left-radius: 3px;
+            }
+
+            &:last-child {
+              // border-top-right-radius: 3px;
+              // border-bottom-right-radius: 3px;
+              border-right: 0px;
+            }
           }
         }
       }
