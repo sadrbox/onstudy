@@ -33,12 +33,18 @@ export default function ProductsTable({ products }: { products: TProducts }) {
     });
   }, [products]);
 
-  const selectRowTable = (event: HTMLTableRowElement): void => {
+  const handlerSelectRow = (
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
+    row: HTMLTableRowElement
+  ) => {
     // event.preventDefault();
-    console.log(event);
+    // console.log(row);
     // const row = event.target;
     // const row = document.querySelector(`[data-rowid="${rowId}"]`);
-    // row?.classList.add("bg-gray-900");
+    const isSelectedRow = row.getAttribute("data-row-selected");
+
+    console.log(isSelectedRow);
+    row?.classList.add("bg-cyan-500/50");
     // row?.attributes.set()
   };
 
@@ -66,9 +72,14 @@ export default function ProductsTable({ products }: { products: TProducts }) {
                 return (
                   <tr
                     key={item.id}
-                    data-rowid={item.id}
+                    data-row-id={item.id}
                     data-row-selected={false}
-                    onClick={(event) => selectRowTable(event)}
+                    onClick={(event) =>
+                      handlerSelectRow(
+                        event,
+                        event.currentTarget as HTMLTableRowElement
+                      )
+                    }
                   >
                     <td data-title="id" align="right">
                       <span>{item.id}</span>
