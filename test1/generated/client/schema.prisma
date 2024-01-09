@@ -1,0 +1,21 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL") // Замените на вашу строку подключения
+}
+
+model testable {
+  Id   Int    @id
+  Name String
+}
+
+model v8users {
+  ID   Bytes  @unique
+  Name String
+}
