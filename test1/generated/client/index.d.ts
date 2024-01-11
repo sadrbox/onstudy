@@ -14,10 +14,10 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model testable
+ * Model person
  * 
  */
-export type testable = $Result.DefaultSelection<Prisma.$testablePayload>
+export type person = $Result.DefaultSelection<Prisma.$personPayload>
 /**
  * Model v8users
  * 
@@ -31,8 +31,8 @@ export type v8users = $Result.DefaultSelection<Prisma.$v8usersPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Testables
- * const testables = await prisma.testable.findMany()
+ * // Fetch zero or more People
+ * const people = await prisma.person.findMany()
  * ```
  *
  * 
@@ -52,8 +52,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Testables
-   * const testables = await prisma.testable.findMany()
+   * // Fetch zero or more People
+   * const people = await prisma.person.findMany()
    * ```
    *
    * 
@@ -147,14 +147,14 @@ export class PrismaClient<
   $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>
 
       /**
-   * `prisma.testable`: Exposes CRUD operations for the **testable** model.
+   * `prisma.person`: Exposes CRUD operations for the **person** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Testables
-    * const testables = await prisma.testable.findMany()
+    * // Fetch zero or more People
+    * const people = await prisma.person.findMany()
     * ```
     */
-  get testable(): Prisma.testableDelegate<ExtArgs>;
+  get person(): Prisma.personDelegate<ExtArgs>;
 
   /**
    * `prisma.v8users`: Exposes CRUD operations for the **v8users** model.
@@ -635,7 +635,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    testable: 'testable',
+    person: 'person',
     v8users: 'v8users'
   };
 
@@ -653,73 +653,73 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'testable' | 'v8users'
+      modelProps: 'person' | 'v8users'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
-      testable: {
-        payload: Prisma.$testablePayload<ExtArgs>
-        fields: Prisma.testableFieldRefs
+      person: {
+        payload: Prisma.$personPayload<ExtArgs>
+        fields: Prisma.personFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.testableFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$testablePayload> | null
+            args: Prisma.personFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$personPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.testableFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$testablePayload>
+            args: Prisma.personFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$personPayload>
           }
           findFirst: {
-            args: Prisma.testableFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$testablePayload> | null
+            args: Prisma.personFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$personPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.testableFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$testablePayload>
+            args: Prisma.personFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$personPayload>
           }
           findMany: {
-            args: Prisma.testableFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$testablePayload>[]
+            args: Prisma.personFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$personPayload>[]
           }
           create: {
-            args: Prisma.testableCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$testablePayload>
+            args: Prisma.personCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$personPayload>
           }
           createMany: {
-            args: Prisma.testableCreateManyArgs<ExtArgs>,
+            args: Prisma.personCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           delete: {
-            args: Prisma.testableDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$testablePayload>
+            args: Prisma.personDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$personPayload>
           }
           update: {
-            args: Prisma.testableUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$testablePayload>
+            args: Prisma.personUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$personPayload>
           }
           deleteMany: {
-            args: Prisma.testableDeleteManyArgs<ExtArgs>,
+            args: Prisma.personDeleteManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           updateMany: {
-            args: Prisma.testableUpdateManyArgs<ExtArgs>,
+            args: Prisma.personUpdateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           upsert: {
-            args: Prisma.testableUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$testablePayload>
+            args: Prisma.personUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$personPayload>
           }
           aggregate: {
-            args: Prisma.TestableAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateTestable>
+            args: Prisma.PersonAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregatePerson>
           }
           groupBy: {
-            args: Prisma.testableGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<TestableGroupByOutputType>[]
+            args: Prisma.personGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<PersonGroupByOutputType>[]
           }
           count: {
-            args: Prisma.testableCountArgs<ExtArgs>,
-            result: $Utils.Optional<TestableCountAggregateOutputType> | number
+            args: Prisma.personCountArgs<ExtArgs>,
+            result: $Utils.Optional<PersonCountAggregateOutputType> | number
           }
         }
       }
@@ -939,347 +939,441 @@ export namespace Prisma {
    */
 
   /**
-   * Model testable
+   * Model person
    */
 
-  export type AggregateTestable = {
-    _count: TestableCountAggregateOutputType | null
-    _avg: TestableAvgAggregateOutputType | null
-    _sum: TestableSumAggregateOutputType | null
-    _min: TestableMinAggregateOutputType | null
-    _max: TestableMaxAggregateOutputType | null
+  export type AggregatePerson = {
+    _count: PersonCountAggregateOutputType | null
+    _avg: PersonAvgAggregateOutputType | null
+    _sum: PersonSumAggregateOutputType | null
+    _min: PersonMinAggregateOutputType | null
+    _max: PersonMaxAggregateOutputType | null
   }
 
-  export type TestableAvgAggregateOutputType = {
-    Id: number | null
+  export type PersonAvgAggregateOutputType = {
+    RoleID: number | null
+    UsSprH: number | null
   }
 
-  export type TestableSumAggregateOutputType = {
-    Id: number | null
+  export type PersonSumAggregateOutputType = {
+    RoleID: number | null
+    UsSprH: number | null
   }
 
-  export type TestableMinAggregateOutputType = {
-    Id: number | null
+  export type PersonMinAggregateOutputType = {
+    ID: Buffer | null
     Name: string | null
+    Descr: string | null
+    OSName: string | null
+    Changed: Date | null
+    RoleID: number | null
+    Show: Buffer | null
+    Data: Buffer | null
+    EAuth: Buffer | null
+    AdmRole: Buffer | null
+    UsSprH: number | null
   }
 
-  export type TestableMaxAggregateOutputType = {
-    Id: number | null
+  export type PersonMaxAggregateOutputType = {
+    ID: Buffer | null
     Name: string | null
+    Descr: string | null
+    OSName: string | null
+    Changed: Date | null
+    RoleID: number | null
+    Show: Buffer | null
+    Data: Buffer | null
+    EAuth: Buffer | null
+    AdmRole: Buffer | null
+    UsSprH: number | null
   }
 
-  export type TestableCountAggregateOutputType = {
-    Id: number
+  export type PersonCountAggregateOutputType = {
+    ID: number
     Name: number
+    Descr: number
+    OSName: number
+    Changed: number
+    RoleID: number
+    Show: number
+    Data: number
+    EAuth: number
+    AdmRole: number
+    UsSprH: number
     _all: number
   }
 
 
-  export type TestableAvgAggregateInputType = {
-    Id?: true
+  export type PersonAvgAggregateInputType = {
+    RoleID?: true
+    UsSprH?: true
   }
 
-  export type TestableSumAggregateInputType = {
-    Id?: true
+  export type PersonSumAggregateInputType = {
+    RoleID?: true
+    UsSprH?: true
   }
 
-  export type TestableMinAggregateInputType = {
-    Id?: true
+  export type PersonMinAggregateInputType = {
+    ID?: true
     Name?: true
+    Descr?: true
+    OSName?: true
+    Changed?: true
+    RoleID?: true
+    Show?: true
+    Data?: true
+    EAuth?: true
+    AdmRole?: true
+    UsSprH?: true
   }
 
-  export type TestableMaxAggregateInputType = {
-    Id?: true
+  export type PersonMaxAggregateInputType = {
+    ID?: true
     Name?: true
+    Descr?: true
+    OSName?: true
+    Changed?: true
+    RoleID?: true
+    Show?: true
+    Data?: true
+    EAuth?: true
+    AdmRole?: true
+    UsSprH?: true
   }
 
-  export type TestableCountAggregateInputType = {
-    Id?: true
+  export type PersonCountAggregateInputType = {
+    ID?: true
     Name?: true
+    Descr?: true
+    OSName?: true
+    Changed?: true
+    RoleID?: true
+    Show?: true
+    Data?: true
+    EAuth?: true
+    AdmRole?: true
+    UsSprH?: true
     _all?: true
   }
 
-  export type TestableAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PersonAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which testable to aggregate.
+     * Filter which person to aggregate.
      */
-    where?: testableWhereInput
+    where?: personWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of testables to fetch.
+     * Determine the order of people to fetch.
      */
-    orderBy?: testableOrderByWithRelationInput | testableOrderByWithRelationInput[]
+    orderBy?: personOrderByWithRelationInput | personOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: testableWhereUniqueInput
+    cursor?: personWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` testables from the position of the cursor.
+     * Take `±n` people from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` testables.
+     * Skip the first `n` people.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned testables
+     * Count returned people
     **/
-    _count?: true | TestableCountAggregateInputType
+    _count?: true | PersonCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: TestableAvgAggregateInputType
+    _avg?: PersonAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: TestableSumAggregateInputType
+    _sum?: PersonSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: TestableMinAggregateInputType
+    _min?: PersonMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: TestableMaxAggregateInputType
+    _max?: PersonMaxAggregateInputType
   }
 
-  export type GetTestableAggregateType<T extends TestableAggregateArgs> = {
-        [P in keyof T & keyof AggregateTestable]: P extends '_count' | 'count'
+  export type GetPersonAggregateType<T extends PersonAggregateArgs> = {
+        [P in keyof T & keyof AggregatePerson]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTestable[P]>
-      : GetScalarType<T[P], AggregateTestable[P]>
+        : GetScalarType<T[P], AggregatePerson[P]>
+      : GetScalarType<T[P], AggregatePerson[P]>
   }
 
 
 
 
-  export type testableGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: testableWhereInput
-    orderBy?: testableOrderByWithAggregationInput | testableOrderByWithAggregationInput[]
-    by: TestableScalarFieldEnum[] | TestableScalarFieldEnum
-    having?: testableScalarWhereWithAggregatesInput
+  export type personGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: personWhereInput
+    orderBy?: personOrderByWithAggregationInput | personOrderByWithAggregationInput[]
+    by: PersonScalarFieldEnum[] | PersonScalarFieldEnum
+    having?: personScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: TestableCountAggregateInputType | true
-    _avg?: TestableAvgAggregateInputType
-    _sum?: TestableSumAggregateInputType
-    _min?: TestableMinAggregateInputType
-    _max?: TestableMaxAggregateInputType
+    _count?: PersonCountAggregateInputType | true
+    _avg?: PersonAvgAggregateInputType
+    _sum?: PersonSumAggregateInputType
+    _min?: PersonMinAggregateInputType
+    _max?: PersonMaxAggregateInputType
   }
 
-  export type TestableGroupByOutputType = {
-    Id: number
+  export type PersonGroupByOutputType = {
+    ID: Buffer
     Name: string
-    _count: TestableCountAggregateOutputType | null
-    _avg: TestableAvgAggregateOutputType | null
-    _sum: TestableSumAggregateOutputType | null
-    _min: TestableMinAggregateOutputType | null
-    _max: TestableMaxAggregateOutputType | null
+    Descr: string
+    OSName: string
+    Changed: Date
+    RoleID: number
+    Show: Buffer
+    Data: Buffer
+    EAuth: Buffer
+    AdmRole: Buffer
+    UsSprH: number
+    _count: PersonCountAggregateOutputType | null
+    _avg: PersonAvgAggregateOutputType | null
+    _sum: PersonSumAggregateOutputType | null
+    _min: PersonMinAggregateOutputType | null
+    _max: PersonMaxAggregateOutputType | null
   }
 
-  type GetTestableGroupByPayload<T extends testableGroupByArgs> = Prisma.PrismaPromise<
+  type GetPersonGroupByPayload<T extends personGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<TestableGroupByOutputType, T['by']> &
+      PickEnumerable<PersonGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof TestableGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof PersonGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], TestableGroupByOutputType[P]>
-            : GetScalarType<T[P], TestableGroupByOutputType[P]>
+              : GetScalarType<T[P], PersonGroupByOutputType[P]>
+            : GetScalarType<T[P], PersonGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type testableSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    Id?: boolean
+  export type personSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    ID?: boolean
     Name?: boolean
-  }, ExtArgs["result"]["testable"]>
+    Descr?: boolean
+    OSName?: boolean
+    Changed?: boolean
+    RoleID?: boolean
+    Show?: boolean
+    Data?: boolean
+    EAuth?: boolean
+    AdmRole?: boolean
+    UsSprH?: boolean
+  }, ExtArgs["result"]["person"]>
 
-  export type testableSelectScalar = {
-    Id?: boolean
+  export type personSelectScalar = {
+    ID?: boolean
     Name?: boolean
+    Descr?: boolean
+    OSName?: boolean
+    Changed?: boolean
+    RoleID?: boolean
+    Show?: boolean
+    Data?: boolean
+    EAuth?: boolean
+    AdmRole?: boolean
+    UsSprH?: boolean
   }
 
 
-  export type $testablePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "testable"
+  export type $personPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "person"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
-      Id: number
+      ID: Buffer
       Name: string
-    }, ExtArgs["result"]["testable"]>
+      Descr: string
+      OSName: string
+      Changed: Date
+      RoleID: number
+      Show: Buffer
+      Data: Buffer
+      EAuth: Buffer
+      AdmRole: Buffer
+      UsSprH: number
+    }, ExtArgs["result"]["person"]>
     composites: {}
   }
 
 
-  type testableGetPayload<S extends boolean | null | undefined | testableDefaultArgs> = $Result.GetResult<Prisma.$testablePayload, S>
+  type personGetPayload<S extends boolean | null | undefined | personDefaultArgs> = $Result.GetResult<Prisma.$personPayload, S>
 
-  type testableCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<testableFindManyArgs, 'select' | 'include' | 'distinct' > & {
-      select?: TestableCountAggregateInputType | true
+  type personCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<personFindManyArgs, 'select' | 'include' | 'distinct' > & {
+      select?: PersonCountAggregateInputType | true
     }
 
-  export interface testableDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['testable'], meta: { name: 'testable' } }
+  export interface personDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['person'], meta: { name: 'person' } }
     /**
-     * Find zero or one Testable that matches the filter.
-     * @param {testableFindUniqueArgs} args - Arguments to find a Testable
+     * Find zero or one Person that matches the filter.
+     * @param {personFindUniqueArgs} args - Arguments to find a Person
      * @example
-     * // Get one Testable
-     * const testable = await prisma.testable.findUnique({
+     * // Get one Person
+     * const person = await prisma.person.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends testableFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, testableFindUniqueArgs<ExtArgs>>
-    ): Prisma__testableClient<$Result.GetResult<Prisma.$testablePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    findUnique<T extends personFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, personFindUniqueArgs<ExtArgs>>
+    ): Prisma__personClient<$Result.GetResult<Prisma.$personPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Testable that matches the filter or throw an error  with `error.code='P2025'` 
+     * Find one Person that matches the filter or throw an error  with `error.code='P2025'` 
      *     if no matches were found.
-     * @param {testableFindUniqueOrThrowArgs} args - Arguments to find a Testable
+     * @param {personFindUniqueOrThrowArgs} args - Arguments to find a Person
      * @example
-     * // Get one Testable
-     * const testable = await prisma.testable.findUniqueOrThrow({
+     * // Get one Person
+     * const person = await prisma.person.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUniqueOrThrow<T extends testableFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, testableFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__testableClient<$Result.GetResult<Prisma.$testablePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    findUniqueOrThrow<T extends personFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, personFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__personClient<$Result.GetResult<Prisma.$personPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
 
     /**
-     * Find the first Testable that matches the filter.
+     * Find the first Person that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {testableFindFirstArgs} args - Arguments to find a Testable
+     * @param {personFindFirstArgs} args - Arguments to find a Person
      * @example
-     * // Get one Testable
-     * const testable = await prisma.testable.findFirst({
+     * // Get one Person
+     * const person = await prisma.person.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends testableFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, testableFindFirstArgs<ExtArgs>>
-    ): Prisma__testableClient<$Result.GetResult<Prisma.$testablePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    findFirst<T extends personFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, personFindFirstArgs<ExtArgs>>
+    ): Prisma__personClient<$Result.GetResult<Prisma.$personPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
 
     /**
-     * Find the first Testable that matches the filter or
+     * Find the first Person that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {testableFindFirstOrThrowArgs} args - Arguments to find a Testable
+     * @param {personFindFirstOrThrowArgs} args - Arguments to find a Person
      * @example
-     * // Get one Testable
-     * const testable = await prisma.testable.findFirstOrThrow({
+     * // Get one Person
+     * const person = await prisma.person.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirstOrThrow<T extends testableFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, testableFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__testableClient<$Result.GetResult<Prisma.$testablePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    findFirstOrThrow<T extends personFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, personFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__personClient<$Result.GetResult<Prisma.$personPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
 
     /**
-     * Find zero or more Testables that matches the filter.
+     * Find zero or more People that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {testableFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {personFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Testables
-     * const testables = await prisma.testable.findMany()
+     * // Get all People
+     * const people = await prisma.person.findMany()
      * 
-     * // Get first 10 Testables
-     * const testables = await prisma.testable.findMany({ take: 10 })
+     * // Get first 10 People
+     * const people = await prisma.person.findMany({ take: 10 })
      * 
-     * // Only select the `Id`
-     * const testableWithIdOnly = await prisma.testable.findMany({ select: { Id: true } })
+     * // Only select the `ID`
+     * const personWithIDOnly = await prisma.person.findMany({ select: { ID: true } })
      * 
     **/
-    findMany<T extends testableFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, testableFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$testablePayload<ExtArgs>, T, 'findMany'>>
+    findMany<T extends personFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, personFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$personPayload<ExtArgs>, T, 'findMany'>>
 
     /**
-     * Create a Testable.
-     * @param {testableCreateArgs} args - Arguments to create a Testable.
+     * Create a Person.
+     * @param {personCreateArgs} args - Arguments to create a Person.
      * @example
-     * // Create one Testable
-     * const Testable = await prisma.testable.create({
+     * // Create one Person
+     * const Person = await prisma.person.create({
      *   data: {
-     *     // ... data to create a Testable
+     *     // ... data to create a Person
      *   }
      * })
      * 
     **/
-    create<T extends testableCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, testableCreateArgs<ExtArgs>>
-    ): Prisma__testableClient<$Result.GetResult<Prisma.$testablePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    create<T extends personCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, personCreateArgs<ExtArgs>>
+    ): Prisma__personClient<$Result.GetResult<Prisma.$personPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
 
     /**
-     * Create many Testables.
-     *     @param {testableCreateManyArgs} args - Arguments to create many Testables.
+     * Create many People.
+     *     @param {personCreateManyArgs} args - Arguments to create many People.
      *     @example
-     *     // Create many Testables
-     *     const testable = await prisma.testable.createMany({
+     *     // Create many People
+     *     const person = await prisma.person.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends testableCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, testableCreateManyArgs<ExtArgs>>
+    createMany<T extends personCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, personCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Testable.
-     * @param {testableDeleteArgs} args - Arguments to delete one Testable.
+     * Delete a Person.
+     * @param {personDeleteArgs} args - Arguments to delete one Person.
      * @example
-     * // Delete one Testable
-     * const Testable = await prisma.testable.delete({
+     * // Delete one Person
+     * const Person = await prisma.person.delete({
      *   where: {
-     *     // ... filter to delete one Testable
+     *     // ... filter to delete one Person
      *   }
      * })
      * 
     **/
-    delete<T extends testableDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, testableDeleteArgs<ExtArgs>>
-    ): Prisma__testableClient<$Result.GetResult<Prisma.$testablePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    delete<T extends personDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, personDeleteArgs<ExtArgs>>
+    ): Prisma__personClient<$Result.GetResult<Prisma.$personPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
 
     /**
-     * Update one Testable.
-     * @param {testableUpdateArgs} args - Arguments to update one Testable.
+     * Update one Person.
+     * @param {personUpdateArgs} args - Arguments to update one Person.
      * @example
-     * // Update one Testable
-     * const testable = await prisma.testable.update({
+     * // Update one Person
+     * const person = await prisma.person.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1289,34 +1383,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends testableUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, testableUpdateArgs<ExtArgs>>
-    ): Prisma__testableClient<$Result.GetResult<Prisma.$testablePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    update<T extends personUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, personUpdateArgs<ExtArgs>>
+    ): Prisma__personClient<$Result.GetResult<Prisma.$personPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
 
     /**
-     * Delete zero or more Testables.
-     * @param {testableDeleteManyArgs} args - Arguments to filter Testables to delete.
+     * Delete zero or more People.
+     * @param {personDeleteManyArgs} args - Arguments to filter People to delete.
      * @example
-     * // Delete a few Testables
-     * const { count } = await prisma.testable.deleteMany({
+     * // Delete a few People
+     * const { count } = await prisma.person.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends testableDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, testableDeleteManyArgs<ExtArgs>>
+    deleteMany<T extends personDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, personDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Testables.
+     * Update zero or more People.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {testableUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {personUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Testables
-     * const testable = await prisma.testable.updateMany({
+     * // Update many People
+     * const person = await prisma.person.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1326,59 +1420,59 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends testableUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, testableUpdateManyArgs<ExtArgs>>
+    updateMany<T extends personUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, personUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Testable.
-     * @param {testableUpsertArgs} args - Arguments to update or create a Testable.
+     * Create or update one Person.
+     * @param {personUpsertArgs} args - Arguments to update or create a Person.
      * @example
-     * // Update or create a Testable
-     * const testable = await prisma.testable.upsert({
+     * // Update or create a Person
+     * const person = await prisma.person.upsert({
      *   create: {
-     *     // ... data to create a Testable
+     *     // ... data to create a Person
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Testable we want to update
+     *     // ... the filter for the Person we want to update
      *   }
      * })
     **/
-    upsert<T extends testableUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, testableUpsertArgs<ExtArgs>>
-    ): Prisma__testableClient<$Result.GetResult<Prisma.$testablePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    upsert<T extends personUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, personUpsertArgs<ExtArgs>>
+    ): Prisma__personClient<$Result.GetResult<Prisma.$personPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
 
     /**
-     * Count the number of Testables.
+     * Count the number of People.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {testableCountArgs} args - Arguments to filter Testables to count.
+     * @param {personCountArgs} args - Arguments to filter People to count.
      * @example
-     * // Count the number of Testables
-     * const count = await prisma.testable.count({
+     * // Count the number of People
+     * const count = await prisma.person.count({
      *   where: {
-     *     // ... the filter for the Testables we want to count
+     *     // ... the filter for the People we want to count
      *   }
      * })
     **/
-    count<T extends testableCountArgs>(
-      args?: Subset<T, testableCountArgs>,
+    count<T extends personCountArgs>(
+      args?: Subset<T, personCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], TestableCountAggregateOutputType>
+          : GetScalarType<T['select'], PersonCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Testable.
+     * Allows you to perform aggregations operations on a Person.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestableAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {PersonAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -1398,13 +1492,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends TestableAggregateArgs>(args: Subset<T, TestableAggregateArgs>): Prisma.PrismaPromise<GetTestableAggregateType<T>>
+    aggregate<T extends PersonAggregateArgs>(args: Subset<T, PersonAggregateArgs>): Prisma.PrismaPromise<GetPersonAggregateType<T>>
 
     /**
-     * Group by Testable.
+     * Group by Person.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {testableGroupByArgs} args - Group by arguments.
+     * @param {personGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -1419,14 +1513,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends testableGroupByArgs,
+      T extends personGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: testableGroupByArgs['orderBy'] }
-        : { orderBy?: testableGroupByArgs['orderBy'] },
+        ? { orderBy: personGroupByArgs['orderBy'] }
+        : { orderBy?: personGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -1475,20 +1569,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, testableGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTestableGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, personGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPersonGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the testable model
+   * Fields of the person model
    */
-  readonly fields: testableFieldRefs;
+  readonly fields: personFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for testable.
+   * The delegate class that acts as a "Promise-like" for person.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__testableClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__personClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
 
@@ -1517,293 +1611,302 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the testable model
+   * Fields of the person model
    */ 
-  interface testableFieldRefs {
-    readonly Id: FieldRef<"testable", 'Int'>
-    readonly Name: FieldRef<"testable", 'String'>
+  interface personFieldRefs {
+    readonly ID: FieldRef<"person", 'Bytes'>
+    readonly Name: FieldRef<"person", 'String'>
+    readonly Descr: FieldRef<"person", 'String'>
+    readonly OSName: FieldRef<"person", 'String'>
+    readonly Changed: FieldRef<"person", 'DateTime'>
+    readonly RoleID: FieldRef<"person", 'Int'>
+    readonly Show: FieldRef<"person", 'Bytes'>
+    readonly Data: FieldRef<"person", 'Bytes'>
+    readonly EAuth: FieldRef<"person", 'Bytes'>
+    readonly AdmRole: FieldRef<"person", 'Bytes'>
+    readonly UsSprH: FieldRef<"person", 'Int'>
   }
     
 
   // Custom InputTypes
 
   /**
-   * testable findUnique
+   * person findUnique
    */
-  export type testableFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the testable
+     * Select specific fields to fetch from the person
      */
-    select?: testableSelect<ExtArgs> | null
+    select?: personSelect<ExtArgs> | null
     /**
-     * Filter, which testable to fetch.
+     * Filter, which person to fetch.
      */
-    where: testableWhereUniqueInput
+    where: personWhereUniqueInput
   }
 
 
   /**
-   * testable findUniqueOrThrow
+   * person findUniqueOrThrow
    */
-  export type testableFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the testable
+     * Select specific fields to fetch from the person
      */
-    select?: testableSelect<ExtArgs> | null
+    select?: personSelect<ExtArgs> | null
     /**
-     * Filter, which testable to fetch.
+     * Filter, which person to fetch.
      */
-    where: testableWhereUniqueInput
+    where: personWhereUniqueInput
   }
 
 
   /**
-   * testable findFirst
+   * person findFirst
    */
-  export type testableFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the testable
+     * Select specific fields to fetch from the person
      */
-    select?: testableSelect<ExtArgs> | null
+    select?: personSelect<ExtArgs> | null
     /**
-     * Filter, which testable to fetch.
+     * Filter, which person to fetch.
      */
-    where?: testableWhereInput
+    where?: personWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of testables to fetch.
+     * Determine the order of people to fetch.
      */
-    orderBy?: testableOrderByWithRelationInput | testableOrderByWithRelationInput[]
+    orderBy?: personOrderByWithRelationInput | personOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for testables.
+     * Sets the position for searching for people.
      */
-    cursor?: testableWhereUniqueInput
+    cursor?: personWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` testables from the position of the cursor.
+     * Take `±n` people from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` testables.
+     * Skip the first `n` people.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of testables.
+     * Filter by unique combinations of people.
      */
-    distinct?: TestableScalarFieldEnum | TestableScalarFieldEnum[]
+    distinct?: PersonScalarFieldEnum | PersonScalarFieldEnum[]
   }
 
 
   /**
-   * testable findFirstOrThrow
+   * person findFirstOrThrow
    */
-  export type testableFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the testable
+     * Select specific fields to fetch from the person
      */
-    select?: testableSelect<ExtArgs> | null
+    select?: personSelect<ExtArgs> | null
     /**
-     * Filter, which testable to fetch.
+     * Filter, which person to fetch.
      */
-    where?: testableWhereInput
+    where?: personWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of testables to fetch.
+     * Determine the order of people to fetch.
      */
-    orderBy?: testableOrderByWithRelationInput | testableOrderByWithRelationInput[]
+    orderBy?: personOrderByWithRelationInput | personOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for testables.
+     * Sets the position for searching for people.
      */
-    cursor?: testableWhereUniqueInput
+    cursor?: personWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` testables from the position of the cursor.
+     * Take `±n` people from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` testables.
+     * Skip the first `n` people.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of testables.
+     * Filter by unique combinations of people.
      */
-    distinct?: TestableScalarFieldEnum | TestableScalarFieldEnum[]
+    distinct?: PersonScalarFieldEnum | PersonScalarFieldEnum[]
   }
 
 
   /**
-   * testable findMany
+   * person findMany
    */
-  export type testableFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the testable
+     * Select specific fields to fetch from the person
      */
-    select?: testableSelect<ExtArgs> | null
+    select?: personSelect<ExtArgs> | null
     /**
-     * Filter, which testables to fetch.
+     * Filter, which people to fetch.
      */
-    where?: testableWhereInput
+    where?: personWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of testables to fetch.
+     * Determine the order of people to fetch.
      */
-    orderBy?: testableOrderByWithRelationInput | testableOrderByWithRelationInput[]
+    orderBy?: personOrderByWithRelationInput | personOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing testables.
+     * Sets the position for listing people.
      */
-    cursor?: testableWhereUniqueInput
+    cursor?: personWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` testables from the position of the cursor.
+     * Take `±n` people from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` testables.
+     * Skip the first `n` people.
      */
     skip?: number
-    distinct?: TestableScalarFieldEnum | TestableScalarFieldEnum[]
+    distinct?: PersonScalarFieldEnum | PersonScalarFieldEnum[]
   }
 
 
   /**
-   * testable create
+   * person create
    */
-  export type testableCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the testable
+     * Select specific fields to fetch from the person
      */
-    select?: testableSelect<ExtArgs> | null
+    select?: personSelect<ExtArgs> | null
     /**
-     * The data needed to create a testable.
+     * The data needed to create a person.
      */
-    data: XOR<testableCreateInput, testableUncheckedCreateInput>
+    data: XOR<personCreateInput, personUncheckedCreateInput>
   }
 
 
   /**
-   * testable createMany
+   * person createMany
    */
-  export type testableCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many testables.
+     * The data used to create many people.
      */
-    data: testableCreateManyInput | testableCreateManyInput[]
+    data: personCreateManyInput | personCreateManyInput[]
   }
 
 
   /**
-   * testable update
+   * person update
    */
-  export type testableUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the testable
+     * Select specific fields to fetch from the person
      */
-    select?: testableSelect<ExtArgs> | null
+    select?: personSelect<ExtArgs> | null
     /**
-     * The data needed to update a testable.
+     * The data needed to update a person.
      */
-    data: XOR<testableUpdateInput, testableUncheckedUpdateInput>
+    data: XOR<personUpdateInput, personUncheckedUpdateInput>
     /**
-     * Choose, which testable to update.
+     * Choose, which person to update.
      */
-    where: testableWhereUniqueInput
+    where: personWhereUniqueInput
   }
 
 
   /**
-   * testable updateMany
+   * person updateMany
    */
-  export type testableUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update testables.
+     * The data used to update people.
      */
-    data: XOR<testableUpdateManyMutationInput, testableUncheckedUpdateManyInput>
+    data: XOR<personUpdateManyMutationInput, personUncheckedUpdateManyInput>
     /**
-     * Filter which testables to update
+     * Filter which people to update
      */
-    where?: testableWhereInput
+    where?: personWhereInput
   }
 
 
   /**
-   * testable upsert
+   * person upsert
    */
-  export type testableUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the testable
+     * Select specific fields to fetch from the person
      */
-    select?: testableSelect<ExtArgs> | null
+    select?: personSelect<ExtArgs> | null
     /**
-     * The filter to search for the testable to update in case it exists.
+     * The filter to search for the person to update in case it exists.
      */
-    where: testableWhereUniqueInput
+    where: personWhereUniqueInput
     /**
-     * In case the testable found by the `where` argument doesn't exist, create a new testable with this data.
+     * In case the person found by the `where` argument doesn't exist, create a new person with this data.
      */
-    create: XOR<testableCreateInput, testableUncheckedCreateInput>
+    create: XOR<personCreateInput, personUncheckedCreateInput>
     /**
-     * In case the testable was found with the provided `where` argument, update it with this data.
+     * In case the person was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<testableUpdateInput, testableUncheckedUpdateInput>
+    update: XOR<personUpdateInput, personUncheckedUpdateInput>
   }
 
 
   /**
-   * testable delete
+   * person delete
    */
-  export type testableDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the testable
+     * Select specific fields to fetch from the person
      */
-    select?: testableSelect<ExtArgs> | null
+    select?: personSelect<ExtArgs> | null
     /**
-     * Filter which testable to delete.
+     * Filter which person to delete.
      */
-    where: testableWhereUniqueInput
+    where: personWhereUniqueInput
   }
 
 
   /**
-   * testable deleteMany
+   * person deleteMany
    */
-  export type testableDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which testables to delete
+     * Filter which people to delete
      */
-    where?: testableWhereInput
+    where?: personWhereInput
   }
 
 
   /**
-   * testable without action
+   * person without action
    */
-  export type testableDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type personDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the testable
+     * Select specific fields to fetch from the person
      */
-    select?: testableSelect<ExtArgs> | null
+    select?: personSelect<ExtArgs> | null
   }
 
 
@@ -1814,40 +1917,88 @@ export namespace Prisma {
 
   export type AggregateV8users = {
     _count: V8usersCountAggregateOutputType | null
+    _avg: V8usersAvgAggregateOutputType | null
+    _sum: V8usersSumAggregateOutputType | null
     _min: V8usersMinAggregateOutputType | null
     _max: V8usersMaxAggregateOutputType | null
+  }
+
+  export type V8usersAvgAggregateOutputType = {
+    RolesID: number | null
+  }
+
+  export type V8usersSumAggregateOutputType = {
+    RolesID: number | null
   }
 
   export type V8usersMinAggregateOutputType = {
     ID: Buffer | null
     Name: string | null
+    Descr: string | null
+    Changed: Date | null
+    RolesID: number | null
+    Show: Buffer | null
+    Data: Buffer | null
   }
 
   export type V8usersMaxAggregateOutputType = {
     ID: Buffer | null
     Name: string | null
+    Descr: string | null
+    Changed: Date | null
+    RolesID: number | null
+    Show: Buffer | null
+    Data: Buffer | null
   }
 
   export type V8usersCountAggregateOutputType = {
     ID: number
     Name: number
+    Descr: number
+    Changed: number
+    RolesID: number
+    Show: number
+    Data: number
     _all: number
   }
 
 
+  export type V8usersAvgAggregateInputType = {
+    RolesID?: true
+  }
+
+  export type V8usersSumAggregateInputType = {
+    RolesID?: true
+  }
+
   export type V8usersMinAggregateInputType = {
     ID?: true
     Name?: true
+    Descr?: true
+    Changed?: true
+    RolesID?: true
+    Show?: true
+    Data?: true
   }
 
   export type V8usersMaxAggregateInputType = {
     ID?: true
     Name?: true
+    Descr?: true
+    Changed?: true
+    RolesID?: true
+    Show?: true
+    Data?: true
   }
 
   export type V8usersCountAggregateInputType = {
     ID?: true
     Name?: true
+    Descr?: true
+    Changed?: true
+    RolesID?: true
+    Show?: true
+    Data?: true
     _all?: true
   }
 
@@ -1889,6 +2040,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: V8usersAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: V8usersSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: V8usersMinAggregateInputType
@@ -1919,6 +2082,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: V8usersCountAggregateInputType | true
+    _avg?: V8usersAvgAggregateInputType
+    _sum?: V8usersSumAggregateInputType
     _min?: V8usersMinAggregateInputType
     _max?: V8usersMaxAggregateInputType
   }
@@ -1926,7 +2091,14 @@ export namespace Prisma {
   export type V8usersGroupByOutputType = {
     ID: Buffer
     Name: string
+    Descr: string
+    Changed: Date
+    RolesID: number
+    Show: Buffer | null
+    Data: Buffer | null
     _count: V8usersCountAggregateOutputType | null
+    _avg: V8usersAvgAggregateOutputType | null
+    _sum: V8usersSumAggregateOutputType | null
     _min: V8usersMinAggregateOutputType | null
     _max: V8usersMaxAggregateOutputType | null
   }
@@ -1948,11 +2120,21 @@ export namespace Prisma {
   export type v8usersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     ID?: boolean
     Name?: boolean
+    Descr?: boolean
+    Changed?: boolean
+    RolesID?: boolean
+    Show?: boolean
+    Data?: boolean
   }, ExtArgs["result"]["v8users"]>
 
   export type v8usersSelectScalar = {
     ID?: boolean
     Name?: boolean
+    Descr?: boolean
+    Changed?: boolean
+    RolesID?: boolean
+    Show?: boolean
+    Data?: boolean
   }
 
 
@@ -1962,6 +2144,11 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       ID: Buffer
       Name: string
+      Descr: string
+      Changed: Date
+      RolesID: number
+      Show: Buffer | null
+      Data: Buffer | null
     }, ExtArgs["result"]["v8users"]>
     composites: {}
   }
@@ -2358,6 +2545,11 @@ export namespace Prisma {
   interface v8usersFieldRefs {
     readonly ID: FieldRef<"v8users", 'Bytes'>
     readonly Name: FieldRef<"v8users", 'String'>
+    readonly Descr: FieldRef<"v8users", 'String'>
+    readonly Changed: FieldRef<"v8users", 'DateTime'>
+    readonly RolesID: FieldRef<"v8users", 'Int'>
+    readonly Show: FieldRef<"v8users", 'Bytes'>
+    readonly Data: FieldRef<"v8users", 'Bytes'>
   }
     
 
@@ -2659,17 +2851,31 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const TestableScalarFieldEnum: {
-    Id: 'Id',
-    Name: 'Name'
+  export const PersonScalarFieldEnum: {
+    ID: 'ID',
+    Name: 'Name',
+    Descr: 'Descr',
+    OSName: 'OSName',
+    Changed: 'Changed',
+    RoleID: 'RoleID',
+    Show: 'Show',
+    Data: 'Data',
+    EAuth: 'EAuth',
+    AdmRole: 'AdmRole',
+    UsSprH: 'UsSprH'
   };
 
-  export type TestableScalarFieldEnum = (typeof TestableScalarFieldEnum)[keyof typeof TestableScalarFieldEnum]
+  export type PersonScalarFieldEnum = (typeof PersonScalarFieldEnum)[keyof typeof PersonScalarFieldEnum]
 
 
   export const V8usersScalarFieldEnum: {
     ID: 'ID',
-    Name: 'Name'
+    Name: 'Name',
+    Descr: 'Descr',
+    Changed: 'Changed',
+    RolesID: 'RolesID',
+    Show: 'Show',
+    Data: 'Data'
   };
 
   export type V8usersScalarFieldEnum = (typeof V8usersScalarFieldEnum)[keyof typeof V8usersScalarFieldEnum]
@@ -2683,15 +2889,23 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references 
    */
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Bytes'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
     
 
 
@@ -2703,9 +2917,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Bytes'
+   * Reference to a field of type 'DateTime'
    */
-  export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
@@ -2719,43 +2940,88 @@ export namespace Prisma {
    */
 
 
-  export type testableWhereInput = {
-    AND?: testableWhereInput | testableWhereInput[]
-    OR?: testableWhereInput[]
-    NOT?: testableWhereInput | testableWhereInput[]
-    Id?: IntFilter<"testable"> | number
-    Name?: StringFilter<"testable"> | string
+  export type personWhereInput = {
+    AND?: personWhereInput | personWhereInput[]
+    OR?: personWhereInput[]
+    NOT?: personWhereInput | personWhereInput[]
+    ID?: BytesFilter<"person"> | Buffer
+    Name?: StringFilter<"person"> | string
+    Descr?: StringFilter<"person"> | string
+    OSName?: StringFilter<"person"> | string
+    Changed?: DateTimeFilter<"person"> | Date | string
+    RoleID?: IntFilter<"person"> | number
+    Show?: BytesFilter<"person"> | Buffer
+    Data?: BytesFilter<"person"> | Buffer
+    EAuth?: BytesFilter<"person"> | Buffer
+    AdmRole?: BytesFilter<"person"> | Buffer
+    UsSprH?: IntFilter<"person"> | number
   }
 
-  export type testableOrderByWithRelationInput = {
-    Id?: SortOrder
+  export type personOrderByWithRelationInput = {
+    ID?: SortOrder
     Name?: SortOrder
+    Descr?: SortOrder
+    OSName?: SortOrder
+    Changed?: SortOrder
+    RoleID?: SortOrder
+    Show?: SortOrder
+    Data?: SortOrder
+    EAuth?: SortOrder
+    AdmRole?: SortOrder
+    UsSprH?: SortOrder
   }
 
-  export type testableWhereUniqueInput = Prisma.AtLeast<{
-    Id?: number
-    AND?: testableWhereInput | testableWhereInput[]
-    OR?: testableWhereInput[]
-    NOT?: testableWhereInput | testableWhereInput[]
-    Name?: StringFilter<"testable"> | string
-  }, "Id">
+  export type personWhereUniqueInput = Prisma.AtLeast<{
+    ID?: Buffer
+    AND?: personWhereInput | personWhereInput[]
+    OR?: personWhereInput[]
+    NOT?: personWhereInput | personWhereInput[]
+    Name?: StringFilter<"person"> | string
+    Descr?: StringFilter<"person"> | string
+    OSName?: StringFilter<"person"> | string
+    Changed?: DateTimeFilter<"person"> | Date | string
+    RoleID?: IntFilter<"person"> | number
+    Show?: BytesFilter<"person"> | Buffer
+    Data?: BytesFilter<"person"> | Buffer
+    EAuth?: BytesFilter<"person"> | Buffer
+    AdmRole?: BytesFilter<"person"> | Buffer
+    UsSprH?: IntFilter<"person"> | number
+  }, "ID">
 
-  export type testableOrderByWithAggregationInput = {
-    Id?: SortOrder
+  export type personOrderByWithAggregationInput = {
+    ID?: SortOrder
     Name?: SortOrder
-    _count?: testableCountOrderByAggregateInput
-    _avg?: testableAvgOrderByAggregateInput
-    _max?: testableMaxOrderByAggregateInput
-    _min?: testableMinOrderByAggregateInput
-    _sum?: testableSumOrderByAggregateInput
+    Descr?: SortOrder
+    OSName?: SortOrder
+    Changed?: SortOrder
+    RoleID?: SortOrder
+    Show?: SortOrder
+    Data?: SortOrder
+    EAuth?: SortOrder
+    AdmRole?: SortOrder
+    UsSprH?: SortOrder
+    _count?: personCountOrderByAggregateInput
+    _avg?: personAvgOrderByAggregateInput
+    _max?: personMaxOrderByAggregateInput
+    _min?: personMinOrderByAggregateInput
+    _sum?: personSumOrderByAggregateInput
   }
 
-  export type testableScalarWhereWithAggregatesInput = {
-    AND?: testableScalarWhereWithAggregatesInput | testableScalarWhereWithAggregatesInput[]
-    OR?: testableScalarWhereWithAggregatesInput[]
-    NOT?: testableScalarWhereWithAggregatesInput | testableScalarWhereWithAggregatesInput[]
-    Id?: IntWithAggregatesFilter<"testable"> | number
-    Name?: StringWithAggregatesFilter<"testable"> | string
+  export type personScalarWhereWithAggregatesInput = {
+    AND?: personScalarWhereWithAggregatesInput | personScalarWhereWithAggregatesInput[]
+    OR?: personScalarWhereWithAggregatesInput[]
+    NOT?: personScalarWhereWithAggregatesInput | personScalarWhereWithAggregatesInput[]
+    ID?: BytesWithAggregatesFilter<"person"> | Buffer
+    Name?: StringWithAggregatesFilter<"person"> | string
+    Descr?: StringWithAggregatesFilter<"person"> | string
+    OSName?: StringWithAggregatesFilter<"person"> | string
+    Changed?: DateTimeWithAggregatesFilter<"person"> | Date | string
+    RoleID?: IntWithAggregatesFilter<"person"> | number
+    Show?: BytesWithAggregatesFilter<"person"> | Buffer
+    Data?: BytesWithAggregatesFilter<"person"> | Buffer
+    EAuth?: BytesWithAggregatesFilter<"person"> | Buffer
+    AdmRole?: BytesWithAggregatesFilter<"person"> | Buffer
+    UsSprH?: IntWithAggregatesFilter<"person"> | number
   }
 
   export type v8usersWhereInput = {
@@ -2764,11 +3030,21 @@ export namespace Prisma {
     NOT?: v8usersWhereInput | v8usersWhereInput[]
     ID?: BytesFilter<"v8users"> | Buffer
     Name?: StringFilter<"v8users"> | string
+    Descr?: StringFilter<"v8users"> | string
+    Changed?: DateTimeFilter<"v8users"> | Date | string
+    RolesID?: IntFilter<"v8users"> | number
+    Show?: BytesNullableFilter<"v8users"> | Buffer | null
+    Data?: BytesNullableFilter<"v8users"> | Buffer | null
   }
 
   export type v8usersOrderByWithRelationInput = {
     ID?: SortOrder
     Name?: SortOrder
+    Descr?: SortOrder
+    Changed?: SortOrder
+    RolesID?: SortOrder
+    Show?: SortOrderInput | SortOrder
+    Data?: SortOrderInput | SortOrder
   }
 
   export type v8usersWhereUniqueInput = Prisma.AtLeast<{
@@ -2777,14 +3053,26 @@ export namespace Prisma {
     OR?: v8usersWhereInput[]
     NOT?: v8usersWhereInput | v8usersWhereInput[]
     Name?: StringFilter<"v8users"> | string
+    Descr?: StringFilter<"v8users"> | string
+    Changed?: DateTimeFilter<"v8users"> | Date | string
+    RolesID?: IntFilter<"v8users"> | number
+    Show?: BytesNullableFilter<"v8users"> | Buffer | null
+    Data?: BytesNullableFilter<"v8users"> | Buffer | null
   }, "ID">
 
   export type v8usersOrderByWithAggregationInput = {
     ID?: SortOrder
     Name?: SortOrder
+    Descr?: SortOrder
+    Changed?: SortOrder
+    RolesID?: SortOrder
+    Show?: SortOrderInput | SortOrder
+    Data?: SortOrderInput | SortOrder
     _count?: v8usersCountOrderByAggregateInput
+    _avg?: v8usersAvgOrderByAggregateInput
     _max?: v8usersMaxOrderByAggregateInput
     _min?: v8usersMinOrderByAggregateInput
+    _sum?: v8usersSumOrderByAggregateInput
   }
 
   export type v8usersScalarWhereWithAggregatesInput = {
@@ -2793,87 +3081,186 @@ export namespace Prisma {
     NOT?: v8usersScalarWhereWithAggregatesInput | v8usersScalarWhereWithAggregatesInput[]
     ID?: BytesWithAggregatesFilter<"v8users"> | Buffer
     Name?: StringWithAggregatesFilter<"v8users"> | string
+    Descr?: StringWithAggregatesFilter<"v8users"> | string
+    Changed?: DateTimeWithAggregatesFilter<"v8users"> | Date | string
+    RolesID?: IntWithAggregatesFilter<"v8users"> | number
+    Show?: BytesNullableWithAggregatesFilter<"v8users"> | Buffer | null
+    Data?: BytesNullableWithAggregatesFilter<"v8users"> | Buffer | null
   }
 
-  export type testableCreateInput = {
-    Id: number
+  export type personCreateInput = {
+    ID: Buffer
     Name: string
+    Descr: string
+    OSName: string
+    Changed: Date | string
+    RoleID: number
+    Show: Buffer
+    Data: Buffer
+    EAuth: Buffer
+    AdmRole: Buffer
+    UsSprH: number
   }
 
-  export type testableUncheckedCreateInput = {
-    Id: number
+  export type personUncheckedCreateInput = {
+    ID: Buffer
     Name: string
+    Descr: string
+    OSName: string
+    Changed: Date | string
+    RoleID: number
+    Show: Buffer
+    Data: Buffer
+    EAuth: Buffer
+    AdmRole: Buffer
+    UsSprH: number
   }
 
-  export type testableUpdateInput = {
-    Id?: IntFieldUpdateOperationsInput | number
+  export type personUpdateInput = {
+    ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
+    Descr?: StringFieldUpdateOperationsInput | string
+    OSName?: StringFieldUpdateOperationsInput | string
+    Changed?: DateTimeFieldUpdateOperationsInput | Date | string
+    RoleID?: IntFieldUpdateOperationsInput | number
+    Show?: BytesFieldUpdateOperationsInput | Buffer
+    Data?: BytesFieldUpdateOperationsInput | Buffer
+    EAuth?: BytesFieldUpdateOperationsInput | Buffer
+    AdmRole?: BytesFieldUpdateOperationsInput | Buffer
+    UsSprH?: IntFieldUpdateOperationsInput | number
   }
 
-  export type testableUncheckedUpdateInput = {
-    Id?: IntFieldUpdateOperationsInput | number
+  export type personUncheckedUpdateInput = {
+    ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
+    Descr?: StringFieldUpdateOperationsInput | string
+    OSName?: StringFieldUpdateOperationsInput | string
+    Changed?: DateTimeFieldUpdateOperationsInput | Date | string
+    RoleID?: IntFieldUpdateOperationsInput | number
+    Show?: BytesFieldUpdateOperationsInput | Buffer
+    Data?: BytesFieldUpdateOperationsInput | Buffer
+    EAuth?: BytesFieldUpdateOperationsInput | Buffer
+    AdmRole?: BytesFieldUpdateOperationsInput | Buffer
+    UsSprH?: IntFieldUpdateOperationsInput | number
   }
 
-  export type testableCreateManyInput = {
-    Id: number
+  export type personCreateManyInput = {
+    ID: Buffer
     Name: string
+    Descr: string
+    OSName: string
+    Changed: Date | string
+    RoleID: number
+    Show: Buffer
+    Data: Buffer
+    EAuth: Buffer
+    AdmRole: Buffer
+    UsSprH: number
   }
 
-  export type testableUpdateManyMutationInput = {
-    Id?: IntFieldUpdateOperationsInput | number
+  export type personUpdateManyMutationInput = {
+    ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
+    Descr?: StringFieldUpdateOperationsInput | string
+    OSName?: StringFieldUpdateOperationsInput | string
+    Changed?: DateTimeFieldUpdateOperationsInput | Date | string
+    RoleID?: IntFieldUpdateOperationsInput | number
+    Show?: BytesFieldUpdateOperationsInput | Buffer
+    Data?: BytesFieldUpdateOperationsInput | Buffer
+    EAuth?: BytesFieldUpdateOperationsInput | Buffer
+    AdmRole?: BytesFieldUpdateOperationsInput | Buffer
+    UsSprH?: IntFieldUpdateOperationsInput | number
   }
 
-  export type testableUncheckedUpdateManyInput = {
-    Id?: IntFieldUpdateOperationsInput | number
+  export type personUncheckedUpdateManyInput = {
+    ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
+    Descr?: StringFieldUpdateOperationsInput | string
+    OSName?: StringFieldUpdateOperationsInput | string
+    Changed?: DateTimeFieldUpdateOperationsInput | Date | string
+    RoleID?: IntFieldUpdateOperationsInput | number
+    Show?: BytesFieldUpdateOperationsInput | Buffer
+    Data?: BytesFieldUpdateOperationsInput | Buffer
+    EAuth?: BytesFieldUpdateOperationsInput | Buffer
+    AdmRole?: BytesFieldUpdateOperationsInput | Buffer
+    UsSprH?: IntFieldUpdateOperationsInput | number
   }
 
   export type v8usersCreateInput = {
     ID: Buffer
     Name: string
+    Descr: string
+    Changed?: Date | string
+    RolesID?: number
+    Show?: Buffer | null
+    Data?: Buffer | null
   }
 
   export type v8usersUncheckedCreateInput = {
     ID: Buffer
     Name: string
+    Descr: string
+    Changed?: Date | string
+    RolesID?: number
+    Show?: Buffer | null
+    Data?: Buffer | null
   }
 
   export type v8usersUpdateInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
+    Descr?: StringFieldUpdateOperationsInput | string
+    Changed?: DateTimeFieldUpdateOperationsInput | Date | string
+    RolesID?: IntFieldUpdateOperationsInput | number
+    Show?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    Data?: NullableBytesFieldUpdateOperationsInput | Buffer | null
   }
 
   export type v8usersUncheckedUpdateInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
+    Descr?: StringFieldUpdateOperationsInput | string
+    Changed?: DateTimeFieldUpdateOperationsInput | Date | string
+    RolesID?: IntFieldUpdateOperationsInput | number
+    Show?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    Data?: NullableBytesFieldUpdateOperationsInput | Buffer | null
   }
 
   export type v8usersCreateManyInput = {
     ID: Buffer
     Name: string
+    Descr: string
+    Changed?: Date | string
+    RolesID?: number
+    Show?: Buffer | null
+    Data?: Buffer | null
   }
 
   export type v8usersUpdateManyMutationInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
+    Descr?: StringFieldUpdateOperationsInput | string
+    Changed?: DateTimeFieldUpdateOperationsInput | Date | string
+    RolesID?: IntFieldUpdateOperationsInput | number
+    Show?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    Data?: NullableBytesFieldUpdateOperationsInput | Buffer | null
   }
 
   export type v8usersUncheckedUpdateManyInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
+    Descr?: StringFieldUpdateOperationsInput | string
+    Changed?: DateTimeFieldUpdateOperationsInput | Date | string
+    RolesID?: IntFieldUpdateOperationsInput | number
+    Show?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    Data?: NullableBytesFieldUpdateOperationsInput | Buffer | null
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type BytesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesFilter<$PrismaModel> | Buffer
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2890,30 +3277,18 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type testableCountOrderByAggregateInput = {
-    Id?: SortOrder
-    Name?: SortOrder
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type testableAvgOrderByAggregateInput = {
-    Id?: SortOrder
-  }
-
-  export type testableMaxOrderByAggregateInput = {
-    Id?: SortOrder
-    Name?: SortOrder
-  }
-
-  export type testableMinOrderByAggregateInput = {
-    Id?: SortOrder
-    Name?: SortOrder
-  }
-
-  export type testableSumOrderByAggregateInput = {
-    Id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+  export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
     notIn?: number[]
@@ -2921,12 +3296,69 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type personCountOrderByAggregateInput = {
+    ID?: SortOrder
+    Name?: SortOrder
+    Descr?: SortOrder
+    OSName?: SortOrder
+    Changed?: SortOrder
+    RoleID?: SortOrder
+    Show?: SortOrder
+    Data?: SortOrder
+    EAuth?: SortOrder
+    AdmRole?: SortOrder
+    UsSprH?: SortOrder
+  }
+
+  export type personAvgOrderByAggregateInput = {
+    RoleID?: SortOrder
+    UsSprH?: SortOrder
+  }
+
+  export type personMaxOrderByAggregateInput = {
+    ID?: SortOrder
+    Name?: SortOrder
+    Descr?: SortOrder
+    OSName?: SortOrder
+    Changed?: SortOrder
+    RoleID?: SortOrder
+    Show?: SortOrder
+    Data?: SortOrder
+    EAuth?: SortOrder
+    AdmRole?: SortOrder
+    UsSprH?: SortOrder
+  }
+
+  export type personMinOrderByAggregateInput = {
+    ID?: SortOrder
+    Name?: SortOrder
+    Descr?: SortOrder
+    OSName?: SortOrder
+    Changed?: SortOrder
+    RoleID?: SortOrder
+    Show?: SortOrder
+    Data?: SortOrder
+    EAuth?: SortOrder
+    AdmRole?: SortOrder
+    UsSprH?: SortOrder
+  }
+
+  export type personSumOrderByAggregateInput = {
+    RoleID?: SortOrder
+    UsSprH?: SortOrder
+  }
+
+  export type BytesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBytesFilter<$PrismaModel>
+    _max?: NestedBytesFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2946,36 +3378,106 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type BytesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
-    in?: Buffer[]
-    notIn?: Buffer[]
-    not?: NestedBytesFilter<$PrismaModel> | Buffer
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type BytesNullableFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
+    in?: Buffer[] | null
+    notIn?: Buffer[] | null
+    not?: NestedBytesNullableFilter<$PrismaModel> | Buffer | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type v8usersCountOrderByAggregateInput = {
     ID?: SortOrder
     Name?: SortOrder
+    Descr?: SortOrder
+    Changed?: SortOrder
+    RolesID?: SortOrder
+    Show?: SortOrder
+    Data?: SortOrder
+  }
+
+  export type v8usersAvgOrderByAggregateInput = {
+    RolesID?: SortOrder
   }
 
   export type v8usersMaxOrderByAggregateInput = {
     ID?: SortOrder
     Name?: SortOrder
+    Descr?: SortOrder
+    Changed?: SortOrder
+    RolesID?: SortOrder
+    Show?: SortOrder
+    Data?: SortOrder
   }
 
   export type v8usersMinOrderByAggregateInput = {
     ID?: SortOrder
     Name?: SortOrder
+    Descr?: SortOrder
+    Changed?: SortOrder
+    RolesID?: SortOrder
+    Show?: SortOrder
+    Data?: SortOrder
   }
 
-  export type BytesWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
-    in?: Buffer[]
-    notIn?: Buffer[]
-    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBytesFilter<$PrismaModel>
-    _max?: NestedBytesFilter<$PrismaModel>
+  export type v8usersSumOrderByAggregateInput = {
+    RolesID?: SortOrder
+  }
+
+  export type BytesNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
+    in?: Buffer[] | null
+    notIn?: Buffer[] | null
+    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Buffer | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBytesNullableFilter<$PrismaModel>
+    _max?: NestedBytesNullableFilter<$PrismaModel>
+  }
+
+  export type BytesFieldUpdateOperationsInput = {
+    set?: Buffer
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -2986,23 +3488,15 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
+  export type NullableBytesFieldUpdateOperationsInput = {
+    set?: Buffer | null
   }
 
-  export type BytesFieldUpdateOperationsInput = {
-    set?: Buffer
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type NestedBytesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesFilter<$PrismaModel> | Buffer
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -3017,6 +3511,69 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedBytesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBytesFilter<$PrismaModel>
+    _max?: NestedBytesFilter<$PrismaModel>
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -3046,38 +3603,32 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
+  export type NestedBytesNullableFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
+    in?: Buffer[] | null
+    notIn?: Buffer[] | null
+    not?: NestedBytesNullableFilter<$PrismaModel> | Buffer | null
   }
 
-  export type NestedBytesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
-    in?: Buffer[]
-    notIn?: Buffer[]
-    not?: NestedBytesFilter<$PrismaModel> | Buffer
+  export type NestedBytesNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
+    in?: Buffer[] | null
+    notIn?: Buffer[] | null
+    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Buffer | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBytesNullableFilter<$PrismaModel>
+    _max?: NestedBytesNullableFilter<$PrismaModel>
   }
 
-  export type NestedBytesWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
-    in?: Buffer[]
-    notIn?: Buffer[]
-    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBytesFilter<$PrismaModel>
-    _max?: NestedBytesFilter<$PrismaModel>
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
 
@@ -3086,9 +3637,9 @@ export namespace Prisma {
    * Aliases for legacy arg types
    */
     /**
-     * @deprecated Use testableDefaultArgs instead
+     * @deprecated Use personDefaultArgs instead
      */
-    export type testableArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = testableDefaultArgs<ExtArgs>
+    export type personArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = personDefaultArgs<ExtArgs>
     /**
      * @deprecated Use v8usersDefaultArgs instead
      */

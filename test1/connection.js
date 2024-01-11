@@ -1,5 +1,10 @@
-// testConnection.js
-const { PrismaClient } = require("./generated/client"); // Укажите правильный путь
+import { PrismaClient } from "./generated/client/index.js"; // Укажите правильный путь
+import {
+	convertToBinaryArray,
+	convertToBinaryObject,
+	generateRandomHex,
+	generateTimestamp,
+} from "./utils/main.js";
 
 const prisma = new PrismaClient();
 
@@ -21,17 +26,35 @@ async function allRecords() {
 // allRecords();
 
 async function createRecord() {
+	const randomID = generateRandomHex(16);
+	const base64EncodedString = btoa(generateRandomHex(1));
+
 	try {
-		const createdRecord = await prisma.testable.create({
+		const createdRecord = await prisma.person.create({
 			data: {
-				Id: Math.random(),
-				Name: "createByPrisma",
+				ID: convertToBinaryArray(16),
+				Name: "testing",
+				Descr: convertToBinaryObject(128),
+				Show: convertToBinaryObject(1),
+				Data: convertToBinaryObject(100),
+				OSName: "testing",
+				Changed: Date.now(),
+				RoleID: 8,
+				EAuth: convertToBinaryObject(1),
+				AdmRole: convertToBinaryObject(1),
+				UsSprH: 8,
 			},
 		});
-		console.log("created");
+		console.log("created", createRecord);
 	} catch (error) {
-		console.error("error");
+		console.error("error", error);
 	}
 }
 
 createRecord();
+
+// const randomID = Math.random();
+// console.log(Buffer.from(randomID));
+// const timestamp = generateTimestamp();
+// console.log(timestamp);
+//

@@ -108,14 +108,28 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Snapshot: 'Snapshot'
 });
 
-exports.Prisma.TestableScalarFieldEnum = {
-  Id: 'Id',
-  Name: 'Name'
+exports.Prisma.PersonScalarFieldEnum = {
+  ID: 'ID',
+  Name: 'Name',
+  Descr: 'Descr',
+  OSName: 'OSName',
+  Changed: 'Changed',
+  RoleID: 'RoleID',
+  Show: 'Show',
+  Data: 'Data',
+  EAuth: 'EAuth',
+  AdmRole: 'AdmRole',
+  UsSprH: 'UsSprH'
 };
 
 exports.Prisma.V8usersScalarFieldEnum = {
   ID: 'ID',
-  Name: 'Name'
+  Name: 'Name',
+  Descr: 'Descr',
+  Changed: 'Changed',
+  RolesID: 'RolesID',
+  Show: 'Show',
+  Data: 'Data'
 };
 
 exports.Prisma.SortOrder = {
@@ -123,9 +137,14 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-  testable: 'testable',
+  person: 'person',
   v8users: 'v8users'
 };
 

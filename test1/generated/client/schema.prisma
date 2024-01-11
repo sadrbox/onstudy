@@ -10,12 +10,26 @@ datasource db {
   url      = env("DATABASE_URL") // Замените на вашу строку подключения
 }
 
-model testable {
-  Id   Int    @id
-  Name String
+model person {
+  ID      Bytes    @unique
+  Name    String
+  Descr   String
+  OSName  String
+  Changed DateTime
+  RoleID  Int
+  Show    Bytes
+  Data    Bytes
+  EAuth   Bytes
+  AdmRole Bytes
+  UsSprH  Int
 }
 
 model v8users {
-  ID   Bytes  @unique
-  Name String
+  ID      Bytes    @unique
+  Name    String
+  Descr   String
+  Changed DateTime @default(now())
+  RolesID Int      @default(8)
+  Show    Bytes?
+  Data    Bytes?
 }

@@ -1,8 +1,9 @@
 {
-  "dependencies": {
-    "@prisma/client": "^5.7.1",
-    "mysql": "^2.18.1",
-    "prisma": "^5.7.1",
-    "sqlserver": "^0.0.2-security"
-  }
+	"type": "module",
+	"dependencies": {
+		"@prisma/client": "^5.7.1",
+		"mysql": "^2.18.1",
+		"prisma": "^5.7.1",
+		"sqlserver": "^0.0.2-security"
+	}
 }
