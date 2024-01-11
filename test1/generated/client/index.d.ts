@@ -963,7 +963,7 @@ export namespace Prisma {
   export type PersonMinAggregateOutputType = {
     ID: Buffer | null
     Name: string | null
-    Descr: string | null
+    Descr: Buffer | null
     OSName: string | null
     Changed: Date | null
     RoleID: number | null
@@ -977,7 +977,7 @@ export namespace Prisma {
   export type PersonMaxAggregateOutputType = {
     ID: Buffer | null
     Name: string | null
-    Descr: string | null
+    Descr: Buffer | null
     OSName: string | null
     Changed: Date | null
     RoleID: number | null
@@ -1146,7 +1146,7 @@ export namespace Prisma {
   export type PersonGroupByOutputType = {
     ID: Buffer
     Name: string
-    Descr: string
+    Descr: Buffer
     OSName: string
     Changed: Date
     RoleID: number
@@ -1211,7 +1211,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       ID: Buffer
       Name: string
-      Descr: string
+      Descr: Buffer
       OSName: string
       Changed: Date
       RoleID: number
@@ -1616,7 +1616,7 @@ export namespace Prisma {
   interface personFieldRefs {
     readonly ID: FieldRef<"person", 'Bytes'>
     readonly Name: FieldRef<"person", 'String'>
-    readonly Descr: FieldRef<"person", 'String'>
+    readonly Descr: FieldRef<"person", 'Bytes'>
     readonly OSName: FieldRef<"person", 'String'>
     readonly Changed: FieldRef<"person", 'DateTime'>
     readonly RoleID: FieldRef<"person", 'Int'>
@@ -2946,7 +2946,7 @@ export namespace Prisma {
     NOT?: personWhereInput | personWhereInput[]
     ID?: BytesFilter<"person"> | Buffer
     Name?: StringFilter<"person"> | string
-    Descr?: StringFilter<"person"> | string
+    Descr?: BytesFilter<"person"> | Buffer
     OSName?: StringFilter<"person"> | string
     Changed?: DateTimeFilter<"person"> | Date | string
     RoleID?: IntFilter<"person"> | number
@@ -2977,7 +2977,7 @@ export namespace Prisma {
     OR?: personWhereInput[]
     NOT?: personWhereInput | personWhereInput[]
     Name?: StringFilter<"person"> | string
-    Descr?: StringFilter<"person"> | string
+    Descr?: BytesFilter<"person"> | Buffer
     OSName?: StringFilter<"person"> | string
     Changed?: DateTimeFilter<"person"> | Date | string
     RoleID?: IntFilter<"person"> | number
@@ -3013,7 +3013,7 @@ export namespace Prisma {
     NOT?: personScalarWhereWithAggregatesInput | personScalarWhereWithAggregatesInput[]
     ID?: BytesWithAggregatesFilter<"person"> | Buffer
     Name?: StringWithAggregatesFilter<"person"> | string
-    Descr?: StringWithAggregatesFilter<"person"> | string
+    Descr?: BytesWithAggregatesFilter<"person"> | Buffer
     OSName?: StringWithAggregatesFilter<"person"> | string
     Changed?: DateTimeWithAggregatesFilter<"person"> | Date | string
     RoleID?: IntWithAggregatesFilter<"person"> | number
@@ -3091,7 +3091,7 @@ export namespace Prisma {
   export type personCreateInput = {
     ID: Buffer
     Name: string
-    Descr: string
+    Descr: Buffer
     OSName: string
     Changed: Date | string
     RoleID: number
@@ -3105,7 +3105,7 @@ export namespace Prisma {
   export type personUncheckedCreateInput = {
     ID: Buffer
     Name: string
-    Descr: string
+    Descr: Buffer
     OSName: string
     Changed: Date | string
     RoleID: number
@@ -3119,7 +3119,7 @@ export namespace Prisma {
   export type personUpdateInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
-    Descr?: StringFieldUpdateOperationsInput | string
+    Descr?: BytesFieldUpdateOperationsInput | Buffer
     OSName?: StringFieldUpdateOperationsInput | string
     Changed?: DateTimeFieldUpdateOperationsInput | Date | string
     RoleID?: IntFieldUpdateOperationsInput | number
@@ -3133,7 +3133,7 @@ export namespace Prisma {
   export type personUncheckedUpdateInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
-    Descr?: StringFieldUpdateOperationsInput | string
+    Descr?: BytesFieldUpdateOperationsInput | Buffer
     OSName?: StringFieldUpdateOperationsInput | string
     Changed?: DateTimeFieldUpdateOperationsInput | Date | string
     RoleID?: IntFieldUpdateOperationsInput | number
@@ -3147,7 +3147,7 @@ export namespace Prisma {
   export type personCreateManyInput = {
     ID: Buffer
     Name: string
-    Descr: string
+    Descr: Buffer
     OSName: string
     Changed: Date | string
     RoleID: number
@@ -3161,7 +3161,7 @@ export namespace Prisma {
   export type personUpdateManyMutationInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
-    Descr?: StringFieldUpdateOperationsInput | string
+    Descr?: BytesFieldUpdateOperationsInput | Buffer
     OSName?: StringFieldUpdateOperationsInput | string
     Changed?: DateTimeFieldUpdateOperationsInput | Date | string
     RoleID?: IntFieldUpdateOperationsInput | number
@@ -3175,7 +3175,7 @@ export namespace Prisma {
   export type personUncheckedUpdateManyInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
-    Descr?: StringFieldUpdateOperationsInput | string
+    Descr?: BytesFieldUpdateOperationsInput | Buffer
     OSName?: StringFieldUpdateOperationsInput | string
     Changed?: DateTimeFieldUpdateOperationsInput | Date | string
     RoleID?: IntFieldUpdateOperationsInput | number

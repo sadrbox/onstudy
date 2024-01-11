@@ -13,7 +13,7 @@ datasource db {
 model person {
   ID      Bytes    @unique
   Name    String
-  Descr   String
+  Descr   Bytes
   OSName  String
   Changed DateTime
   RoleID  Int

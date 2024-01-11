@@ -21,9 +21,9 @@ function convertToBinaryArray(length) {
 	console.log(binaryArray);
 }
 
-async function convertToBinaryObject(length) {
+function convertToBinaryObject(length) {
 	const generatedString = generateRandomHex(length);
-	const binaryObject = await Buffer.from(generatedString, "hex");
+	const binaryObject = Buffer.from(generatedString, "hex");
 	return binaryObject;
 }
 
