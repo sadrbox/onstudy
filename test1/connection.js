@@ -32,7 +32,7 @@ async function createRecord() {
 	try {
 		const createdRecord = await prisma.person.create({
 			data: {
-				ID: convertToBinaryArray(16),
+				ID: convertToBinaryObject(16),
 				Name: "testing",
 				Descr: convertToBinaryObject(128),
 				Show: convertToBinaryObject(1),
