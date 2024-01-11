@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import Layout from "./layouts/Layout";
+import User from "components/User";
 
 function App() {
 	return (
 		<div className="h-screen">
-			<Layout />
+			<User />
 		</div>
 	);
 }

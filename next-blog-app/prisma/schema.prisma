@@ -3,9 +3,15 @@
 
 generator client {
   provider = "prisma-client-js"
+  output    = "./generated/client"
 }
 
 datasource db {
   provider = "sqlserver"
   url      = env("DATABASE_URL")
+}
+
+model V8Users {
+  ID String @id
+  Name String
 }

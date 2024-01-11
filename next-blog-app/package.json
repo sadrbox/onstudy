@@ -2,6 +2,7 @@
   "name": "next-blog-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,6 +20,7 @@
     "autoprefixer": "^10.4.16",
     "eslint": "8.53.0",
     "eslint-config-next": "14.0.1",
+    "mssql": "^10.0.1",
     "next": "14.0.1",
     "postcss": "^8.4.32",
     "react": "18.2.0",
