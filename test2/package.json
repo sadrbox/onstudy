@@ -1,0 +1,18 @@
+{
+	"type": "module",
+	"dependencies": {
+		"dotenv": "^16.3.1",
+		"node-gyp": "^10.0.1",
+		"winax": "^3.4.1"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.23.4",
+		"@babel/core": "^7.23.7",
+		"@babel/preset-env": "^7.23.8",
+		"babel-cli": "^6.26.0",
+		"babel-watch": "^7.8.1"
+	},
+	"scripts": {
+		"build": "babel src -d dist"
+	}
+}
