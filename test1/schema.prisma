@@ -13,10 +13,10 @@ datasource db {
 model person {
   ID      Bytes    @unique
   Name    String
-  Descr   Bytes
-  OSName  String
+  Descr   String
+  OSName  String?
   Changed DateTime
-  RoleID  Int
+  RolesID Int      @default(8)
   Show    Bytes
   Data    Bytes
   EAuth   Bytes
@@ -28,8 +28,12 @@ model v8users {
   ID      Bytes    @unique
   Name    String
   Descr   String
-  Changed DateTime @default(now())
+  OSName  String?
+  Changed DateTime
   RolesID Int      @default(8)
-  Show    Bytes?
-  Data    Bytes?
+  Show    Bytes
+  Data    Bytes
+  EAuth   Bytes
+  AdmRole Bytes
+  UsSprH  Int
 }

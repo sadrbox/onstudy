@@ -951,22 +951,22 @@ export namespace Prisma {
   }
 
   export type PersonAvgAggregateOutputType = {
-    RoleID: number | null
+    RolesID: number | null
     UsSprH: number | null
   }
 
   export type PersonSumAggregateOutputType = {
-    RoleID: number | null
+    RolesID: number | null
     UsSprH: number | null
   }
 
   export type PersonMinAggregateOutputType = {
     ID: Buffer | null
     Name: string | null
-    Descr: Buffer | null
+    Descr: string | null
     OSName: string | null
     Changed: Date | null
-    RoleID: number | null
+    RolesID: number | null
     Show: Buffer | null
     Data: Buffer | null
     EAuth: Buffer | null
@@ -977,10 +977,10 @@ export namespace Prisma {
   export type PersonMaxAggregateOutputType = {
     ID: Buffer | null
     Name: string | null
-    Descr: Buffer | null
+    Descr: string | null
     OSName: string | null
     Changed: Date | null
-    RoleID: number | null
+    RolesID: number | null
     Show: Buffer | null
     Data: Buffer | null
     EAuth: Buffer | null
@@ -994,7 +994,7 @@ export namespace Prisma {
     Descr: number
     OSName: number
     Changed: number
-    RoleID: number
+    RolesID: number
     Show: number
     Data: number
     EAuth: number
@@ -1005,12 +1005,12 @@ export namespace Prisma {
 
 
   export type PersonAvgAggregateInputType = {
-    RoleID?: true
+    RolesID?: true
     UsSprH?: true
   }
 
   export type PersonSumAggregateInputType = {
-    RoleID?: true
+    RolesID?: true
     UsSprH?: true
   }
 
@@ -1020,7 +1020,7 @@ export namespace Prisma {
     Descr?: true
     OSName?: true
     Changed?: true
-    RoleID?: true
+    RolesID?: true
     Show?: true
     Data?: true
     EAuth?: true
@@ -1034,7 +1034,7 @@ export namespace Prisma {
     Descr?: true
     OSName?: true
     Changed?: true
-    RoleID?: true
+    RolesID?: true
     Show?: true
     Data?: true
     EAuth?: true
@@ -1048,7 +1048,7 @@ export namespace Prisma {
     Descr?: true
     OSName?: true
     Changed?: true
-    RoleID?: true
+    RolesID?: true
     Show?: true
     Data?: true
     EAuth?: true
@@ -1146,10 +1146,10 @@ export namespace Prisma {
   export type PersonGroupByOutputType = {
     ID: Buffer
     Name: string
-    Descr: Buffer
-    OSName: string
+    Descr: string
+    OSName: string | null
     Changed: Date
-    RoleID: number
+    RolesID: number
     Show: Buffer
     Data: Buffer
     EAuth: Buffer
@@ -1182,7 +1182,7 @@ export namespace Prisma {
     Descr?: boolean
     OSName?: boolean
     Changed?: boolean
-    RoleID?: boolean
+    RolesID?: boolean
     Show?: boolean
     Data?: boolean
     EAuth?: boolean
@@ -1196,7 +1196,7 @@ export namespace Prisma {
     Descr?: boolean
     OSName?: boolean
     Changed?: boolean
-    RoleID?: boolean
+    RolesID?: boolean
     Show?: boolean
     Data?: boolean
     EAuth?: boolean
@@ -1211,10 +1211,10 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       ID: Buffer
       Name: string
-      Descr: Buffer
-      OSName: string
+      Descr: string
+      OSName: string | null
       Changed: Date
-      RoleID: number
+      RolesID: number
       Show: Buffer
       Data: Buffer
       EAuth: Buffer
@@ -1616,10 +1616,10 @@ export namespace Prisma {
   interface personFieldRefs {
     readonly ID: FieldRef<"person", 'Bytes'>
     readonly Name: FieldRef<"person", 'String'>
-    readonly Descr: FieldRef<"person", 'Bytes'>
+    readonly Descr: FieldRef<"person", 'String'>
     readonly OSName: FieldRef<"person", 'String'>
     readonly Changed: FieldRef<"person", 'DateTime'>
-    readonly RoleID: FieldRef<"person", 'Int'>
+    readonly RolesID: FieldRef<"person", 'Int'>
     readonly Show: FieldRef<"person", 'Bytes'>
     readonly Data: FieldRef<"person", 'Bytes'>
     readonly EAuth: FieldRef<"person", 'Bytes'>
@@ -1925,80 +1925,108 @@ export namespace Prisma {
 
   export type V8usersAvgAggregateOutputType = {
     RolesID: number | null
+    UsSprH: number | null
   }
 
   export type V8usersSumAggregateOutputType = {
     RolesID: number | null
+    UsSprH: number | null
   }
 
   export type V8usersMinAggregateOutputType = {
     ID: Buffer | null
     Name: string | null
     Descr: string | null
+    OSName: string | null
     Changed: Date | null
     RolesID: number | null
     Show: Buffer | null
     Data: Buffer | null
+    EAuth: Buffer | null
+    AdmRole: Buffer | null
+    UsSprH: number | null
   }
 
   export type V8usersMaxAggregateOutputType = {
     ID: Buffer | null
     Name: string | null
     Descr: string | null
+    OSName: string | null
     Changed: Date | null
     RolesID: number | null
     Show: Buffer | null
     Data: Buffer | null
+    EAuth: Buffer | null
+    AdmRole: Buffer | null
+    UsSprH: number | null
   }
 
   export type V8usersCountAggregateOutputType = {
     ID: number
     Name: number
     Descr: number
+    OSName: number
     Changed: number
     RolesID: number
     Show: number
     Data: number
+    EAuth: number
+    AdmRole: number
+    UsSprH: number
     _all: number
   }
 
 
   export type V8usersAvgAggregateInputType = {
     RolesID?: true
+    UsSprH?: true
   }
 
   export type V8usersSumAggregateInputType = {
     RolesID?: true
+    UsSprH?: true
   }
 
   export type V8usersMinAggregateInputType = {
     ID?: true
     Name?: true
     Descr?: true
+    OSName?: true
     Changed?: true
     RolesID?: true
     Show?: true
     Data?: true
+    EAuth?: true
+    AdmRole?: true
+    UsSprH?: true
   }
 
   export type V8usersMaxAggregateInputType = {
     ID?: true
     Name?: true
     Descr?: true
+    OSName?: true
     Changed?: true
     RolesID?: true
     Show?: true
     Data?: true
+    EAuth?: true
+    AdmRole?: true
+    UsSprH?: true
   }
 
   export type V8usersCountAggregateInputType = {
     ID?: true
     Name?: true
     Descr?: true
+    OSName?: true
     Changed?: true
     RolesID?: true
     Show?: true
     Data?: true
+    EAuth?: true
+    AdmRole?: true
+    UsSprH?: true
     _all?: true
   }
 
@@ -2092,10 +2120,14 @@ export namespace Prisma {
     ID: Buffer
     Name: string
     Descr: string
+    OSName: string | null
     Changed: Date
     RolesID: number
-    Show: Buffer | null
-    Data: Buffer | null
+    Show: Buffer
+    Data: Buffer
+    EAuth: Buffer
+    AdmRole: Buffer
+    UsSprH: number
     _count: V8usersCountAggregateOutputType | null
     _avg: V8usersAvgAggregateOutputType | null
     _sum: V8usersSumAggregateOutputType | null
@@ -2121,20 +2153,28 @@ export namespace Prisma {
     ID?: boolean
     Name?: boolean
     Descr?: boolean
+    OSName?: boolean
     Changed?: boolean
     RolesID?: boolean
     Show?: boolean
     Data?: boolean
+    EAuth?: boolean
+    AdmRole?: boolean
+    UsSprH?: boolean
   }, ExtArgs["result"]["v8users"]>
 
   export type v8usersSelectScalar = {
     ID?: boolean
     Name?: boolean
     Descr?: boolean
+    OSName?: boolean
     Changed?: boolean
     RolesID?: boolean
     Show?: boolean
     Data?: boolean
+    EAuth?: boolean
+    AdmRole?: boolean
+    UsSprH?: boolean
   }
 
 
@@ -2145,10 +2185,14 @@ export namespace Prisma {
       ID: Buffer
       Name: string
       Descr: string
+      OSName: string | null
       Changed: Date
       RolesID: number
-      Show: Buffer | null
-      Data: Buffer | null
+      Show: Buffer
+      Data: Buffer
+      EAuth: Buffer
+      AdmRole: Buffer
+      UsSprH: number
     }, ExtArgs["result"]["v8users"]>
     composites: {}
   }
@@ -2546,10 +2590,14 @@ export namespace Prisma {
     readonly ID: FieldRef<"v8users", 'Bytes'>
     readonly Name: FieldRef<"v8users", 'String'>
     readonly Descr: FieldRef<"v8users", 'String'>
+    readonly OSName: FieldRef<"v8users", 'String'>
     readonly Changed: FieldRef<"v8users", 'DateTime'>
     readonly RolesID: FieldRef<"v8users", 'Int'>
     readonly Show: FieldRef<"v8users", 'Bytes'>
     readonly Data: FieldRef<"v8users", 'Bytes'>
+    readonly EAuth: FieldRef<"v8users", 'Bytes'>
+    readonly AdmRole: FieldRef<"v8users", 'Bytes'>
+    readonly UsSprH: FieldRef<"v8users", 'Int'>
   }
     
 
@@ -2857,7 +2905,7 @@ export namespace Prisma {
     Descr: 'Descr',
     OSName: 'OSName',
     Changed: 'Changed',
-    RoleID: 'RoleID',
+    RolesID: 'RolesID',
     Show: 'Show',
     Data: 'Data',
     EAuth: 'EAuth',
@@ -2872,10 +2920,14 @@ export namespace Prisma {
     ID: 'ID',
     Name: 'Name',
     Descr: 'Descr',
+    OSName: 'OSName',
     Changed: 'Changed',
     RolesID: 'RolesID',
     Show: 'Show',
-    Data: 'Data'
+    Data: 'Data',
+    EAuth: 'EAuth',
+    AdmRole: 'AdmRole',
+    UsSprH: 'UsSprH'
   };
 
   export type V8usersScalarFieldEnum = (typeof V8usersScalarFieldEnum)[keyof typeof V8usersScalarFieldEnum]
@@ -2946,10 +2998,10 @@ export namespace Prisma {
     NOT?: personWhereInput | personWhereInput[]
     ID?: BytesFilter<"person"> | Buffer
     Name?: StringFilter<"person"> | string
-    Descr?: BytesFilter<"person"> | Buffer
-    OSName?: StringFilter<"person"> | string
+    Descr?: StringFilter<"person"> | string
+    OSName?: StringNullableFilter<"person"> | string | null
     Changed?: DateTimeFilter<"person"> | Date | string
-    RoleID?: IntFilter<"person"> | number
+    RolesID?: IntFilter<"person"> | number
     Show?: BytesFilter<"person"> | Buffer
     Data?: BytesFilter<"person"> | Buffer
     EAuth?: BytesFilter<"person"> | Buffer
@@ -2961,9 +3013,9 @@ export namespace Prisma {
     ID?: SortOrder
     Name?: SortOrder
     Descr?: SortOrder
-    OSName?: SortOrder
+    OSName?: SortOrderInput | SortOrder
     Changed?: SortOrder
-    RoleID?: SortOrder
+    RolesID?: SortOrder
     Show?: SortOrder
     Data?: SortOrder
     EAuth?: SortOrder
@@ -2977,10 +3029,10 @@ export namespace Prisma {
     OR?: personWhereInput[]
     NOT?: personWhereInput | personWhereInput[]
     Name?: StringFilter<"person"> | string
-    Descr?: BytesFilter<"person"> | Buffer
-    OSName?: StringFilter<"person"> | string
+    Descr?: StringFilter<"person"> | string
+    OSName?: StringNullableFilter<"person"> | string | null
     Changed?: DateTimeFilter<"person"> | Date | string
-    RoleID?: IntFilter<"person"> | number
+    RolesID?: IntFilter<"person"> | number
     Show?: BytesFilter<"person"> | Buffer
     Data?: BytesFilter<"person"> | Buffer
     EAuth?: BytesFilter<"person"> | Buffer
@@ -2992,9 +3044,9 @@ export namespace Prisma {
     ID?: SortOrder
     Name?: SortOrder
     Descr?: SortOrder
-    OSName?: SortOrder
+    OSName?: SortOrderInput | SortOrder
     Changed?: SortOrder
-    RoleID?: SortOrder
+    RolesID?: SortOrder
     Show?: SortOrder
     Data?: SortOrder
     EAuth?: SortOrder
@@ -3013,10 +3065,10 @@ export namespace Prisma {
     NOT?: personScalarWhereWithAggregatesInput | personScalarWhereWithAggregatesInput[]
     ID?: BytesWithAggregatesFilter<"person"> | Buffer
     Name?: StringWithAggregatesFilter<"person"> | string
-    Descr?: BytesWithAggregatesFilter<"person"> | Buffer
-    OSName?: StringWithAggregatesFilter<"person"> | string
+    Descr?: StringWithAggregatesFilter<"person"> | string
+    OSName?: StringNullableWithAggregatesFilter<"person"> | string | null
     Changed?: DateTimeWithAggregatesFilter<"person"> | Date | string
-    RoleID?: IntWithAggregatesFilter<"person"> | number
+    RolesID?: IntWithAggregatesFilter<"person"> | number
     Show?: BytesWithAggregatesFilter<"person"> | Buffer
     Data?: BytesWithAggregatesFilter<"person"> | Buffer
     EAuth?: BytesWithAggregatesFilter<"person"> | Buffer
@@ -3031,20 +3083,28 @@ export namespace Prisma {
     ID?: BytesFilter<"v8users"> | Buffer
     Name?: StringFilter<"v8users"> | string
     Descr?: StringFilter<"v8users"> | string
+    OSName?: StringNullableFilter<"v8users"> | string | null
     Changed?: DateTimeFilter<"v8users"> | Date | string
     RolesID?: IntFilter<"v8users"> | number
-    Show?: BytesNullableFilter<"v8users"> | Buffer | null
-    Data?: BytesNullableFilter<"v8users"> | Buffer | null
+    Show?: BytesFilter<"v8users"> | Buffer
+    Data?: BytesFilter<"v8users"> | Buffer
+    EAuth?: BytesFilter<"v8users"> | Buffer
+    AdmRole?: BytesFilter<"v8users"> | Buffer
+    UsSprH?: IntFilter<"v8users"> | number
   }
 
   export type v8usersOrderByWithRelationInput = {
     ID?: SortOrder
     Name?: SortOrder
     Descr?: SortOrder
+    OSName?: SortOrderInput | SortOrder
     Changed?: SortOrder
     RolesID?: SortOrder
-    Show?: SortOrderInput | SortOrder
-    Data?: SortOrderInput | SortOrder
+    Show?: SortOrder
+    Data?: SortOrder
+    EAuth?: SortOrder
+    AdmRole?: SortOrder
+    UsSprH?: SortOrder
   }
 
   export type v8usersWhereUniqueInput = Prisma.AtLeast<{
@@ -3054,20 +3114,28 @@ export namespace Prisma {
     NOT?: v8usersWhereInput | v8usersWhereInput[]
     Name?: StringFilter<"v8users"> | string
     Descr?: StringFilter<"v8users"> | string
+    OSName?: StringNullableFilter<"v8users"> | string | null
     Changed?: DateTimeFilter<"v8users"> | Date | string
     RolesID?: IntFilter<"v8users"> | number
-    Show?: BytesNullableFilter<"v8users"> | Buffer | null
-    Data?: BytesNullableFilter<"v8users"> | Buffer | null
+    Show?: BytesFilter<"v8users"> | Buffer
+    Data?: BytesFilter<"v8users"> | Buffer
+    EAuth?: BytesFilter<"v8users"> | Buffer
+    AdmRole?: BytesFilter<"v8users"> | Buffer
+    UsSprH?: IntFilter<"v8users"> | number
   }, "ID">
 
   export type v8usersOrderByWithAggregationInput = {
     ID?: SortOrder
     Name?: SortOrder
     Descr?: SortOrder
+    OSName?: SortOrderInput | SortOrder
     Changed?: SortOrder
     RolesID?: SortOrder
-    Show?: SortOrderInput | SortOrder
-    Data?: SortOrderInput | SortOrder
+    Show?: SortOrder
+    Data?: SortOrder
+    EAuth?: SortOrder
+    AdmRole?: SortOrder
+    UsSprH?: SortOrder
     _count?: v8usersCountOrderByAggregateInput
     _avg?: v8usersAvgOrderByAggregateInput
     _max?: v8usersMaxOrderByAggregateInput
@@ -3082,19 +3150,23 @@ export namespace Prisma {
     ID?: BytesWithAggregatesFilter<"v8users"> | Buffer
     Name?: StringWithAggregatesFilter<"v8users"> | string
     Descr?: StringWithAggregatesFilter<"v8users"> | string
+    OSName?: StringNullableWithAggregatesFilter<"v8users"> | string | null
     Changed?: DateTimeWithAggregatesFilter<"v8users"> | Date | string
     RolesID?: IntWithAggregatesFilter<"v8users"> | number
-    Show?: BytesNullableWithAggregatesFilter<"v8users"> | Buffer | null
-    Data?: BytesNullableWithAggregatesFilter<"v8users"> | Buffer | null
+    Show?: BytesWithAggregatesFilter<"v8users"> | Buffer
+    Data?: BytesWithAggregatesFilter<"v8users"> | Buffer
+    EAuth?: BytesWithAggregatesFilter<"v8users"> | Buffer
+    AdmRole?: BytesWithAggregatesFilter<"v8users"> | Buffer
+    UsSprH?: IntWithAggregatesFilter<"v8users"> | number
   }
 
   export type personCreateInput = {
     ID: Buffer
     Name: string
-    Descr: Buffer
-    OSName: string
+    Descr: string
+    OSName?: string | null
     Changed: Date | string
-    RoleID: number
+    RolesID?: number
     Show: Buffer
     Data: Buffer
     EAuth: Buffer
@@ -3105,10 +3177,10 @@ export namespace Prisma {
   export type personUncheckedCreateInput = {
     ID: Buffer
     Name: string
-    Descr: Buffer
-    OSName: string
+    Descr: string
+    OSName?: string | null
     Changed: Date | string
-    RoleID: number
+    RolesID?: number
     Show: Buffer
     Data: Buffer
     EAuth: Buffer
@@ -3119,10 +3191,10 @@ export namespace Prisma {
   export type personUpdateInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
-    Descr?: BytesFieldUpdateOperationsInput | Buffer
-    OSName?: StringFieldUpdateOperationsInput | string
+    Descr?: StringFieldUpdateOperationsInput | string
+    OSName?: NullableStringFieldUpdateOperationsInput | string | null
     Changed?: DateTimeFieldUpdateOperationsInput | Date | string
-    RoleID?: IntFieldUpdateOperationsInput | number
+    RolesID?: IntFieldUpdateOperationsInput | number
     Show?: BytesFieldUpdateOperationsInput | Buffer
     Data?: BytesFieldUpdateOperationsInput | Buffer
     EAuth?: BytesFieldUpdateOperationsInput | Buffer
@@ -3133,10 +3205,10 @@ export namespace Prisma {
   export type personUncheckedUpdateInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
-    Descr?: BytesFieldUpdateOperationsInput | Buffer
-    OSName?: StringFieldUpdateOperationsInput | string
+    Descr?: StringFieldUpdateOperationsInput | string
+    OSName?: NullableStringFieldUpdateOperationsInput | string | null
     Changed?: DateTimeFieldUpdateOperationsInput | Date | string
-    RoleID?: IntFieldUpdateOperationsInput | number
+    RolesID?: IntFieldUpdateOperationsInput | number
     Show?: BytesFieldUpdateOperationsInput | Buffer
     Data?: BytesFieldUpdateOperationsInput | Buffer
     EAuth?: BytesFieldUpdateOperationsInput | Buffer
@@ -3147,10 +3219,10 @@ export namespace Prisma {
   export type personCreateManyInput = {
     ID: Buffer
     Name: string
-    Descr: Buffer
-    OSName: string
+    Descr: string
+    OSName?: string | null
     Changed: Date | string
-    RoleID: number
+    RolesID?: number
     Show: Buffer
     Data: Buffer
     EAuth: Buffer
@@ -3161,10 +3233,10 @@ export namespace Prisma {
   export type personUpdateManyMutationInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
-    Descr?: BytesFieldUpdateOperationsInput | Buffer
-    OSName?: StringFieldUpdateOperationsInput | string
+    Descr?: StringFieldUpdateOperationsInput | string
+    OSName?: NullableStringFieldUpdateOperationsInput | string | null
     Changed?: DateTimeFieldUpdateOperationsInput | Date | string
-    RoleID?: IntFieldUpdateOperationsInput | number
+    RolesID?: IntFieldUpdateOperationsInput | number
     Show?: BytesFieldUpdateOperationsInput | Buffer
     Data?: BytesFieldUpdateOperationsInput | Buffer
     EAuth?: BytesFieldUpdateOperationsInput | Buffer
@@ -3175,10 +3247,10 @@ export namespace Prisma {
   export type personUncheckedUpdateManyInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
-    Descr?: BytesFieldUpdateOperationsInput | Buffer
-    OSName?: StringFieldUpdateOperationsInput | string
+    Descr?: StringFieldUpdateOperationsInput | string
+    OSName?: NullableStringFieldUpdateOperationsInput | string | null
     Changed?: DateTimeFieldUpdateOperationsInput | Date | string
-    RoleID?: IntFieldUpdateOperationsInput | number
+    RolesID?: IntFieldUpdateOperationsInput | number
     Show?: BytesFieldUpdateOperationsInput | Buffer
     Data?: BytesFieldUpdateOperationsInput | Buffer
     EAuth?: BytesFieldUpdateOperationsInput | Buffer
@@ -3190,70 +3262,98 @@ export namespace Prisma {
     ID: Buffer
     Name: string
     Descr: string
-    Changed?: Date | string
+    OSName?: string | null
+    Changed: Date | string
     RolesID?: number
-    Show?: Buffer | null
-    Data?: Buffer | null
+    Show: Buffer
+    Data: Buffer
+    EAuth: Buffer
+    AdmRole: Buffer
+    UsSprH: number
   }
 
   export type v8usersUncheckedCreateInput = {
     ID: Buffer
     Name: string
     Descr: string
-    Changed?: Date | string
+    OSName?: string | null
+    Changed: Date | string
     RolesID?: number
-    Show?: Buffer | null
-    Data?: Buffer | null
+    Show: Buffer
+    Data: Buffer
+    EAuth: Buffer
+    AdmRole: Buffer
+    UsSprH: number
   }
 
   export type v8usersUpdateInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
     Descr?: StringFieldUpdateOperationsInput | string
+    OSName?: NullableStringFieldUpdateOperationsInput | string | null
     Changed?: DateTimeFieldUpdateOperationsInput | Date | string
     RolesID?: IntFieldUpdateOperationsInput | number
-    Show?: NullableBytesFieldUpdateOperationsInput | Buffer | null
-    Data?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    Show?: BytesFieldUpdateOperationsInput | Buffer
+    Data?: BytesFieldUpdateOperationsInput | Buffer
+    EAuth?: BytesFieldUpdateOperationsInput | Buffer
+    AdmRole?: BytesFieldUpdateOperationsInput | Buffer
+    UsSprH?: IntFieldUpdateOperationsInput | number
   }
 
   export type v8usersUncheckedUpdateInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
     Descr?: StringFieldUpdateOperationsInput | string
+    OSName?: NullableStringFieldUpdateOperationsInput | string | null
     Changed?: DateTimeFieldUpdateOperationsInput | Date | string
     RolesID?: IntFieldUpdateOperationsInput | number
-    Show?: NullableBytesFieldUpdateOperationsInput | Buffer | null
-    Data?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    Show?: BytesFieldUpdateOperationsInput | Buffer
+    Data?: BytesFieldUpdateOperationsInput | Buffer
+    EAuth?: BytesFieldUpdateOperationsInput | Buffer
+    AdmRole?: BytesFieldUpdateOperationsInput | Buffer
+    UsSprH?: IntFieldUpdateOperationsInput | number
   }
 
   export type v8usersCreateManyInput = {
     ID: Buffer
     Name: string
     Descr: string
-    Changed?: Date | string
+    OSName?: string | null
+    Changed: Date | string
     RolesID?: number
-    Show?: Buffer | null
-    Data?: Buffer | null
+    Show: Buffer
+    Data: Buffer
+    EAuth: Buffer
+    AdmRole: Buffer
+    UsSprH: number
   }
 
   export type v8usersUpdateManyMutationInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
     Descr?: StringFieldUpdateOperationsInput | string
+    OSName?: NullableStringFieldUpdateOperationsInput | string | null
     Changed?: DateTimeFieldUpdateOperationsInput | Date | string
     RolesID?: IntFieldUpdateOperationsInput | number
-    Show?: NullableBytesFieldUpdateOperationsInput | Buffer | null
-    Data?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    Show?: BytesFieldUpdateOperationsInput | Buffer
+    Data?: BytesFieldUpdateOperationsInput | Buffer
+    EAuth?: BytesFieldUpdateOperationsInput | Buffer
+    AdmRole?: BytesFieldUpdateOperationsInput | Buffer
+    UsSprH?: IntFieldUpdateOperationsInput | number
   }
 
   export type v8usersUncheckedUpdateManyInput = {
     ID?: BytesFieldUpdateOperationsInput | Buffer
     Name?: StringFieldUpdateOperationsInput | string
     Descr?: StringFieldUpdateOperationsInput | string
+    OSName?: NullableStringFieldUpdateOperationsInput | string | null
     Changed?: DateTimeFieldUpdateOperationsInput | Date | string
     RolesID?: IntFieldUpdateOperationsInput | number
-    Show?: NullableBytesFieldUpdateOperationsInput | Buffer | null
-    Data?: NullableBytesFieldUpdateOperationsInput | Buffer | null
+    Show?: BytesFieldUpdateOperationsInput | Buffer
+    Data?: BytesFieldUpdateOperationsInput | Buffer
+    EAuth?: BytesFieldUpdateOperationsInput | Buffer
+    AdmRole?: BytesFieldUpdateOperationsInput | Buffer
+    UsSprH?: IntFieldUpdateOperationsInput | number
   }
 
   export type BytesFilter<$PrismaModel = never> = {
@@ -3275,6 +3375,20 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -3299,13 +3413,18 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type personCountOrderByAggregateInput = {
     ID?: SortOrder
     Name?: SortOrder
     Descr?: SortOrder
     OSName?: SortOrder
     Changed?: SortOrder
-    RoleID?: SortOrder
+    RolesID?: SortOrder
     Show?: SortOrder
     Data?: SortOrder
     EAuth?: SortOrder
@@ -3314,7 +3433,7 @@ export namespace Prisma {
   }
 
   export type personAvgOrderByAggregateInput = {
-    RoleID?: SortOrder
+    RolesID?: SortOrder
     UsSprH?: SortOrder
   }
 
@@ -3324,7 +3443,7 @@ export namespace Prisma {
     Descr?: SortOrder
     OSName?: SortOrder
     Changed?: SortOrder
-    RoleID?: SortOrder
+    RolesID?: SortOrder
     Show?: SortOrder
     Data?: SortOrder
     EAuth?: SortOrder
@@ -3338,7 +3457,7 @@ export namespace Prisma {
     Descr?: SortOrder
     OSName?: SortOrder
     Changed?: SortOrder
-    RoleID?: SortOrder
+    RolesID?: SortOrder
     Show?: SortOrder
     Data?: SortOrder
     EAuth?: SortOrder
@@ -3347,7 +3466,7 @@ export namespace Prisma {
   }
 
   export type personSumOrderByAggregateInput = {
-    RoleID?: SortOrder
+    RolesID?: SortOrder
     UsSprH?: SortOrder
   }
 
@@ -3376,6 +3495,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -3408,64 +3544,56 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type BytesNullableFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
-    in?: Buffer[] | null
-    notIn?: Buffer[] | null
-    not?: NestedBytesNullableFilter<$PrismaModel> | Buffer | null
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type v8usersCountOrderByAggregateInput = {
     ID?: SortOrder
     Name?: SortOrder
     Descr?: SortOrder
+    OSName?: SortOrder
     Changed?: SortOrder
     RolesID?: SortOrder
     Show?: SortOrder
     Data?: SortOrder
+    EAuth?: SortOrder
+    AdmRole?: SortOrder
+    UsSprH?: SortOrder
   }
 
   export type v8usersAvgOrderByAggregateInput = {
     RolesID?: SortOrder
+    UsSprH?: SortOrder
   }
 
   export type v8usersMaxOrderByAggregateInput = {
     ID?: SortOrder
     Name?: SortOrder
     Descr?: SortOrder
+    OSName?: SortOrder
     Changed?: SortOrder
     RolesID?: SortOrder
     Show?: SortOrder
     Data?: SortOrder
+    EAuth?: SortOrder
+    AdmRole?: SortOrder
+    UsSprH?: SortOrder
   }
 
   export type v8usersMinOrderByAggregateInput = {
     ID?: SortOrder
     Name?: SortOrder
     Descr?: SortOrder
+    OSName?: SortOrder
     Changed?: SortOrder
     RolesID?: SortOrder
     Show?: SortOrder
     Data?: SortOrder
+    EAuth?: SortOrder
+    AdmRole?: SortOrder
+    UsSprH?: SortOrder
   }
 
   export type v8usersSumOrderByAggregateInput = {
     RolesID?: SortOrder
-  }
-
-  export type BytesNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
-    in?: Buffer[] | null
-    notIn?: Buffer[] | null
-    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Buffer | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBytesNullableFilter<$PrismaModel>
-    _max?: NestedBytesNullableFilter<$PrismaModel>
+    UsSprH?: SortOrder
   }
 
   export type BytesFieldUpdateOperationsInput = {
@@ -3474,6 +3602,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -3486,10 +3618,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type NullableBytesFieldUpdateOperationsInput = {
-    set?: Buffer | null
   }
 
   export type NestedBytesFilter<$PrismaModel = never> = {
@@ -3511,6 +3639,20 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -3562,6 +3704,34 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -3601,34 +3771,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedBytesNullableFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
-    in?: Buffer[] | null
-    notIn?: Buffer[] | null
-    not?: NestedBytesNullableFilter<$PrismaModel> | Buffer | null
-  }
-
-  export type NestedBytesNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
-    in?: Buffer[] | null
-    notIn?: Buffer[] | null
-    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Buffer | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBytesNullableFilter<$PrismaModel>
-    _max?: NestedBytesNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
 

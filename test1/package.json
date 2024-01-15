@@ -1,9 +1,12 @@
 {
-	"type": "module",
+	"type": "commonjs",
 	"dependencies": {
 		"@prisma/client": "^5.7.1",
-		"mysql": "^2.18.1",
+		"edge-js": "^20.10.2",
 		"prisma": "^5.7.1",
 		"sqlserver": "^0.0.2-security"
+	},
+	"devDependencies": {
+		"typescript": "^5.3.3"
 	}
 }

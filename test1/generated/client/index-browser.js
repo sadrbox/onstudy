@@ -114,7 +114,7 @@ exports.Prisma.PersonScalarFieldEnum = {
   Descr: 'Descr',
   OSName: 'OSName',
   Changed: 'Changed',
-  RoleID: 'RoleID',
+  RolesID: 'RolesID',
   Show: 'Show',
   Data: 'Data',
   EAuth: 'EAuth',
@@ -126,10 +126,14 @@ exports.Prisma.V8usersScalarFieldEnum = {
   ID: 'ID',
   Name: 'Name',
   Descr: 'Descr',
+  OSName: 'OSName',
   Changed: 'Changed',
   RolesID: 'RolesID',
   Show: 'Show',
-  Data: 'Data'
+  Data: 'Data',
+  EAuth: 'EAuth',
+  AdmRole: 'AdmRole',
+  UsSprH: 'UsSprH'
 };
 
 exports.Prisma.SortOrder = {
