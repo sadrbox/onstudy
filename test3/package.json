@@ -1,0 +1,17 @@
+{
+	"name": "test3",
+	"type": "commonjs",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "node-gyp configure build"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"edge-js": "^20.10.2",
+		"node-gyp": "^10.0.1"
+	}
+}
