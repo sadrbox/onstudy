@@ -1,0 +1,13 @@
+{
+  "BracketHighlighter.enableExtension": false,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.hover.above": false,
+  "editor.autoClosingBrackets": "languageDefined",
+  "prettier.quoteProps": "preserve",
+  "css.lint.unknownAtRules": "warning",
+  "less.lint.unknownAtRules": "warning",
+  "scss.lint.unknownAtRules": "warning",
+  "files.associations": {
+    "*.scss": "tailwindcss"
+  }
+}
