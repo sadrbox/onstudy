@@ -1,31 +1,77 @@
 import axios from "axios";
+import DataTable from "@/components/_global/DataTable/index";
 // import "./style.scss";
-import Products from "@/components/objects/Products/Products";
+import { getInfobases } from "@/services/cluster";
+import Infobases from "@/components/cluster/Infobases";
+import { getClusterInfobases } from "@/utils/v83Com";
+// import Products from "@/components/objects/Products/Products";
 
-export interface IProduct {
-	id: number;
-	title: string;
-	price: number;
-	description: string;
-	category: string;
-	image: string;
-	rating: IProductRating;
+// export interface IProduct {
+// 	id: number;
+// 	title: string;
+// 	price: number;
+// 	description: string;
+// 	category: string;
+// 	image: string;
+// 	rating: IProductRating;
+// }
+
+// export interface IProductRating {
+// 	rate: number;
+// 	count: number;
+// }
+// const columns = [
+// 	{
+// 		name: "id",
+// 		header: "№",
+// 		cssprops: { flex: "0 0 80px" },
+// 	},
+// 	{
+// 		name: "title",
+async function getData() {
+	//  Загружаем данные с сервера
+	const res = getClusterInfobases();
+	// const data = await res.
+	const dataset = res
+		.then((data) => {
+			return data;
+		})
+		.catch((e) => {
+			throw new Error(e);
+		});
+
+	return dataset;
 }
-
-export interface IProductRating {
-	rate: number;
-	count: number;
-}
-
 export default async function Page() {
-	const response = await axios.get("https://fakestoreapi.com/products");
+	const columns = [
+		{
+			field: "id",
+			header: "№",
+			cssprops: { flex: "0 0 80px" },
+		},
+		{
+			field: "name",
+			header: "Идентификатор",
+			cssprops: { flex: 1 },
+		},
+		{ field: "desc", header: "Описание", cssprops: { flex: 3 } },
+	];
 
-	const data = response.data;
+	const data = await getData().then((res) => {
+		return res;
+	});
+	// console.log(response);
+	// const response = await getInfobases();
+	// console.log(data);
+
+	// const { data } = response;
 	// const data = await getInfobases();
 	return (
 		<div style={{ height: "100%" }}>
-			<Products data={data} />
-
+			{/* <Infobase /> */}
+			{/* <Products data={data} /> */}
+			{/* <DataTable */}
+			<DataTable columns={columns} data={data} />
 			{/* <div className="table-container">
 				<div className="flex-table">
 					<div className="flex-row header">

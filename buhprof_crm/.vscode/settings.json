@@ -9,5 +9,10 @@
   "scss.lint.unknownAtRules": "warning",
   "files.associations": {
     "*.scss": "tailwindcss"
+  },
+  "editor.suggest.snippetsPreventQuickSuggestions": true,
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": "on"
   }
 }

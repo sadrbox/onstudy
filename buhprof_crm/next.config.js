@@ -18,6 +18,25 @@ const nextConfig = {
 				},
 			],
 		});
+		// config.module.rules.push({
+		// 	test: /\.scss$/,
+		// 	use: [
+		// 		{
+		// 			loader: "sass-loader",
+		// 			options: {
+		// 				sourceMap: true, // Если требуется генерировать source map для отладки
+		// 				sassOptions: {
+		// 					includePaths: [path.join(__dirname, "src/**/*")],
+		// 				},
+		// 			},
+		// 		},
+		// 	],
+		// });
+
+		// config.resolve.alias["@components"] = path.join(
+		// 	__dirname,
+		// 	"src/components"
+		// );
 		return config;
 	},
 };

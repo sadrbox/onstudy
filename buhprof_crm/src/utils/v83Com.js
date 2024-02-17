@@ -1,15 +1,14 @@
-require("./config");
-import { getDateFromISO, getDurationSession } from "@/utils/functions";
-import { M_PLUS_1 } from "next/font/google";
+// require("./config");
+import { getDateFromISO } from "@/utils/functions";
 
-export const getCOMConnectionInstance = () => {
+export async function getCOMConnectionInstance() {
 	const winax = require("winax");
 	try {
 		const connector = new winax.Object("V83.COMConnector");
-		const agent = connector.ConnectAgent("tcp://server:1540"); // .env
+		const agent = await connector.ConnectAgent("tcp://server:1540"); // .env
 		// agent.AuthenticateAdmin("admin", "Qwe123");
 
-		const clusters = agent.GetClusters();
+		const clusters = await agent.GetClusters();
 		const cluster = clusters[0];
 		agent.Authenticate(
 			cluster,
@@ -22,7 +21,7 @@ export const getCOMConnectionInstance = () => {
 		console.log("Не удалось подлючить COM-объект. Ошибка : ", e);
 		return null;
 	}
-};
+}
 
 // export const getCOMConnectWorkingProcess = () => {
 // 	const winax = require("winax")
@@ -32,11 +31,11 @@ export const getCOMConnectionInstance = () => {
 // 	}
 // }
 
-export function getClusterInfobases() {
+export async function getClusterInfobases() {
 	const arrOfinfobases = [];
 	try {
-		const { agent, cluster } = getCOMConnectionInstance();
-		const infobases = agent.GetInfoBases(cluster);
+		const { agent, cluster } = await getCOMConnectionInstance();
+		const infobases = await agent.GetInfoBases(cluster);
 		// const sessionConnections = comInstance.GetConnections(clusters[0]);
 		infobases.map((base) => {
 			arrOfinfobases.push({ name: base.Name, desc: base.Descr });

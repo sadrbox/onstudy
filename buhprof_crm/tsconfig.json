@@ -33,9 +33,10 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "**/*.jsx",
     ".next/types/**/*.ts",
     "src/utils/v83Com.js",
-    "src/components/objects/Products/Products.jsx"
+    // "src/components/objects/Products/Products.jsx"
   ],
   "exclude": [
     "node_modules"

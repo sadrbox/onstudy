@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 // import { Manrope } from "next/font/google";
 import "./globals.css";
 import Provider from "@/components/Provider";
-import LayoutMain from "../components/layout/LayoutMain";
+import LayoutMain from "@/components/layout/LayoutMain";
 import LayoutNav from "@/components/layout/LayoutNav";
 import LayoutContent from "@/components/layout/LayoutContent";
 
