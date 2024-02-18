@@ -14,3 +14,37 @@ export function getDurationSession(seconds) {
 	var minutes = Math.floor(remainingSeconds / 60);
 	return `${hours}:${minutes}`;
 }
+
+// // Функция для загрузки данных из localStorage
+// async function getDataFromLocalStorage(key) {
+// 	return new Promise((resolve) => {
+// 		const data = localStorage.getItem(key);
+// 		resolve(data ? JSON.parse(data) : null);
+// 	});
+// }
+
+// // функция для сохранения данных в localStorage
+// async function saveDataToLocalStorage(key, data) {
+// 	return new Promise((resolve) => {
+// 		localStorage.setItem(key, JSON.stringify(data));
+// 		resolve();
+// 	});
+// }
+
+// // Асинхронная функция для получения данных с использыванием кэширования
+// export async function fetchDataWitCache(key, fetchDataFunction) {
+// 	try {
+// 		// Пытаемся сначала загрузить данные из localStorage
+// 		let cachedData = await getDataFromLocalStorage(key);
+// 		if (!cachedData) {
+// 			// Если данных нет в кеше, делаем асинхронных запрос к серверу
+// 			cachedData = await fetchDataFunction();
+// 			// Сохранаяем полученные данные в кеше localStorage
+// 			await saveDataToLocalStorage(key, cachedData);
+// 		}
+// 		return cachedData;
+// 	} catch (error) {
+// 		console.error("Ошибка при загрузки данных:", error);
+// 		throw error;
+// 	}
+// }

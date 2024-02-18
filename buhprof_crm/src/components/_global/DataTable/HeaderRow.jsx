@@ -1,8 +1,16 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import style from "./DataTable.module.scss";
-const HeaderRow = ({ props: { columns } }) => {
+const HeaderRow = ({ props: { columns, isScrolling } }) => {
 	return (
-		<div className={style.header_row}>
+		<div
+			id="header_row"
+			className={
+				isScrolling
+					? [style.header_row, style.header_row__scrolling].join(" ")
+					: style.header_row
+			}
+		>
 			{columns.map((column, headerRowIdx) => (
 				<div
 					key={headerRowIdx}

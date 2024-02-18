@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import style from "./DataTable.module.scss";
 
 const ContentRow = ({
-	props: { columns, element, contentRowIdx, focusOnCell, selectTextInCell },
+	props: { columns, element, countRow, focusOnCell, selectTextInCell },
 }) => {
 	return (
 		<div
-			data-row={contentRowIdx}
+			data-row={countRow}
 			className={style.content_row}
 			onClick={(e) => focusOnCell(e)}
 			onDoubleClick={(e) => selectTextInCell(e)}
@@ -19,7 +19,7 @@ const ContentRow = ({
 					className={style.content_cell}
 				>
 					{column.field === "id"
-						? contentRowIdx.toString().padStart(6, "0")
+						? countRow.toString().padStart(6, "0")
 						: element[column.field]}
 				</div>
 			))}

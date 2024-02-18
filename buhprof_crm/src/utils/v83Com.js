@@ -1,4 +1,5 @@
 // require("./config");
+import NodeCache from "node-cache";
 import { getDateFromISO } from "@/utils/functions";
 
 export async function getCOMConnectionInstance() {
@@ -38,7 +39,7 @@ export async function getClusterInfobases() {
 		const infobases = await agent.GetInfoBases(cluster);
 		// const sessionConnections = comInstance.GetConnections(clusters[0]);
 		infobases.map((base) => {
-			arrOfinfobases.push({ name: base.Name, desc: base.Descr });
+			arrOfinfobases.push({ identity: base.Name, desc: base.Descr });
 		});
 		return arrOfinfobases;
 	} catch (e) {
@@ -46,6 +47,7 @@ export async function getClusterInfobases() {
 	}
 }
 
+///////////
 export function getClusterSessions() {
 	const appid = {
 		"1CV8C": "Тонкий клиент",

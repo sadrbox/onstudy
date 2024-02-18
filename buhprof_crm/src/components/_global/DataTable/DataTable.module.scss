@@ -1,6 +1,6 @@
 .table_container {
 	display: flex;
-	flex: 1 1 100%;
+	/* flex: 1 1 100%; */
 	overflow-x: auto;
 	overflow-y: auto;
 	height: 100%;
@@ -8,6 +8,7 @@
 	background-color: #fff;
 	position: relative;
 	/* padding-bottom: 500px; */
+	flex-direction: column;
 }
 
 .flex_table {
@@ -22,12 +23,29 @@
 
 .header_row {
 	/* font-weight: bold; */
+	/* flex-direction: rows; */
 	background-color: #f2f2f2;
 	position: sticky;
 	top: 0;
 	z-index: 1;
 	border-bottom: 1px solid #a0a0a0;
+	&::after {
+		content: "";
+		content: "";
+		top: 29px;
+		position: absolute;
+		height: 5px;
+		width: 100%;
+		background-color: transparent;
+		transition: background-color 0.5s ease;
+	}
 }
+.header_row__scrolling {
+	&::after {
+		background-color: rgba(100, 100, 100, 0.3);
+	}
+}
+
 .footer_row {
 	margin-top: auto;
 	height: 28px;

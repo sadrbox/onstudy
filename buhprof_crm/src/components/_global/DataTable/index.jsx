@@ -6,9 +6,12 @@ import ContentRow from "@/components/_global/DataTable/ContentRow";
 import HeaderRow from "./HeaderRow";
 
 const DataTable = ({ columns, data }) => {
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoaded, setIsLoaded] = useState(true);
 	const [cellSelectedText, setCellSelectedText] = useState(null);
 	const [cellOnFocus, setCellOnFocus] = useState(null);
+	const [isScrolling, setIsScrolling] = useState(false);
+	const [scrollTimeout, setScrollTimeout] = useState(null);
+	const [elementOfHeader, setElementOfHeader] = useState(null);
 
 	useEffect(() => {
 		// console.log(columnConfig.id.cssprops);
@@ -19,7 +22,7 @@ const DataTable = ({ columns, data }) => {
 	}, []);
 
 	function focusOnCell(event) {
-		if (event.target.className === "content-row") return;
+		if (event.target.className === "content_row") return;
 
 		if (cellSelectedText) {
 			cellSelectedText.style.userSelect = "none";
@@ -48,6 +51,7 @@ const DataTable = ({ columns, data }) => {
 		cell.style.backgroundColor = "#b5e1ff";
 	}
 
+	///////////////////////
 	function selectTextInCell(event) {
 		if (cellSelectedText) {
 			cellSelectedText.style.userSelect = "none";
@@ -64,24 +68,56 @@ const DataTable = ({ columns, data }) => {
 		setCellSelectedText(cell);
 	}
 
-	return (
-		<div className={style.table_container}>
-			<div className={style.flex_table}>
-				<HeaderRow props={{ columns }} />
+	///////////
+	// useEffect(() => {
+	// 	const headerRow = document.querySelector(".header_row");
+	// 	console.log(headerRow);
+	// 	setElementOfHeader(headerRow);
+	// }, []);
 
-				{isLoading &&
-					data.map((element, contentRowIdx) => (
-						<ContentRow
-							key={contentRowIdx}
-							props={{
-								columns,
-								element,
-								contentRowIdx,
-								focusOnCell,
-								selectTextInCell,
-							}}
-						/>
-					))}
+	function scrollingTable(event) {
+		const headerRow = document.querySelector("#header_row");
+		// const headerRow = elementOfHeader;
+		// console.log(elementOfHeader);
+		if (headerRow) {
+			setIsScrolling(true);
+			// console.log(headerRow);
+			// headerRow.classList.add("header_row__scrolling");
+			if (scrollTimeout !== null) {
+				clearTimeout(scrollTimeout);
+			}
+
+			// const currentScrollTop = event.target.scrollTop;
+			setScrollTimeout(
+				setTimeout(() => {
+					setIsScrolling(false);
+					// console.log("Scrolling stoped");
+					// headerRow.classList.remove("header_row__scrolling");
+				}, 1000)
+			);
+		}
+	}
+
+	return (
+		<div className={style.table_container} onScroll={scrollingTable}>
+			<HeaderRow props={{ columns, isScrolling }} />
+			<div className={style.flex_table}>
+				{isLoaded &&
+					data.map((element, contentRowIdx) => {
+						const countRow = contentRowIdx + 1;
+						return (
+							<ContentRow
+								key={countRow}
+								props={{
+									columns,
+									element,
+									countRow,
+									focusOnCell,
+									selectTextInCell,
+								}}
+							/>
+						);
+					})}
 			</div>
 		</div>
 	);

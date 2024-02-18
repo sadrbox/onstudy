@@ -1,13 +1,13 @@
-import { getClusterInfobases } from "@/utils/v83Com";
+// import { getClusterInfobases } from "@/utils/v83Com";
+import { getInfobases } from "@/services/cluster.js";
 import { NextResponse } from "next/server";
 
 export async function GET() {
 	try {
-		const getData = getClusterInfobases();
-		const data = await getData.then((res) => {
-			return res;
-		});
-		const response = { status: 200, errors: [], data };
-		return NextResponse.json(response.data);
-	} catch (e) {}
+		const data = await getInfobases();
+		return NextResponse.json(data);
+	} catch (error) {
+		return NextResponse.json({ error });
+		// return NextResponse.json([{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]);
+	}
 }
