@@ -1,15 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import style from "./DataTable.module.scss";
 
 const ContentRow = ({
-	props: { columns, element, countRow, focusOnCell, selectTextInCell },
+	props: { columns, element, countRow, clickRow, selectTextInCell },
 }) => {
 	return (
 		<div
 			data-row={countRow}
 			className={style.content_row}
-			onClick={(e) => focusOnCell(e)}
+			onClick={(e) => clickRow(e)}
 			onDoubleClick={(e) => selectTextInCell(e)}
 		>
 			{columns.map((column, cellIdx) => (

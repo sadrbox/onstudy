@@ -31,13 +31,12 @@
 	border-bottom: 1px solid #a0a0a0;
 	&::after {
 		content: "";
-		content: "";
-		top: 29px;
+		top: 25px;
 		position: absolute;
 		height: 5px;
 		width: 100%;
 		background-color: transparent;
-		transition: background-color 0.5s ease;
+		transition: background-color 500ms ease;
 	}
 }
 .header_row__scrolling {
@@ -142,7 +141,7 @@
 	/* border-collapse: collapse; */
 	/* flex: 0; */
 	/* box-shadow: inset 0px 0px 1px 1px #fff; */
-	padding: 5px;
+	padding: 3px;
 	text-align: left;
 	text-overflow: ellipsis;
 	white-space: nowrap;

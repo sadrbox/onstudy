@@ -1,85 +1,65 @@
 import axios from "axios";
 // import "./style.scss";
 import Products from "@/components/objects/Products/Products";
+import DataTable from "@/components/_global/DataTable";
+
+export interface RootInterfaceOfProducts {
+	products: IProduct[];
+	total: number;
+	skip: number;
+	limit: number;
+}
 
 export interface IProduct {
 	id: number;
 	title: string;
-	price: number;
 	description: string;
+	price: number;
+	discountPercentage: number;
+	rating: number;
+	stock: number;
+	brand: string;
 	category: string;
-	image: string;
-	rating: IProductRating;
+	thumbnail: string;
+	images: string[];
 }
 
-export interface IProductRating {
-	rate: number;
-	count: number;
+async function getData() {
+	try {
+		const response = await axios.get(
+			"https://dummyjson.com/products?limit=100"
+		);
+		const data = response.data;
+		// const data = await getInfobases();	}
+		return data.products;
+	} catch (e) {
+		return null;
+	}
 }
-
 export default async function Page() {
-	const response = await axios.get("https://fakestoreapi.com/products");
+	const columns = [
+		{
+			field: "id",
+			header: "№",
+			cssprops: { flex: "0 0 80px" },
+		},
+		{
+			field: "title",
+			header: "Наименование",
+			cssprops: { flex: 3 },
+		},
+		{
+			field: "price",
+			header: "Цена",
+			cssprops: { flex: 1 },
+		},
+	];
 
-	const data = response.data;
-	// const data = await getInfobases();
+	const data = await getData();
+
 	return (
 		<div style={{ height: "100%" }}>
-			<Products data={data} />
-
-			{/* <div className="table-container">
-				<div className="flex-table">
-					<div className="flex-row header">
-						<div style={{ flex: 0 }} className="flex-cell min-w-min">
-							№
-						</div>
-						<div style={{ flex: 1 }} className="flex-cell">
-							Идентификатор
-						</div>
-						<div style={{ flex: 1 }} className="flex-cell">
-							Описание
-						</div>
-					</div>
-					{data &&
-						data.map((product: IProduct) => (
-							<div key={product.id} className="flex-row">
-								<div style={{ flex: 0 }} className="flex-cell min-w-min">
-									{product.id}
-								</div>
-								<div style={{ flex: 1 }} className="flex-cell">
-									{product.title}
-								</div>
-								<div style={{ flex: 1 }} className="flex-cell">
-									{product.description}
-								</div>
-							</div>
-						))}
-				</div>
-			</div> */}
-			{/* <table>
-				<thead>
-					<tr>
-						<th>№</th>
-						<th>Идентификатор</th>
-						<th>Описание</th>
-					</tr>
-				</thead>
-				<tbody>
-					{data &&
-						data.map((product: IProduct, idx: number) => (
-							<tr key={product.id}>
-								<td>
-									<div>{product.id}</div>
-								</td>
-								<td className="">
-									<div>{product.title}</div>
-								</td>
-								<td>
-									<div>{product.description}</div>
-								</td>
-							</tr>
-						))}
-				</tbody>
-			</table> */}
+			<DataTable columns={columns} data={data} />
 		</div>
 	);
 }
