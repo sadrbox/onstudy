@@ -18,38 +18,34 @@ const DataTable = ({ columns, data }) => {
 	const [isScrolling, setIsScrolling] = useState(false);
 
 	function clickRow(event) {
-		// if (!focusRow) {
-		// 	// event.target.row.target.contains("content_row");
-		// }
 		const row = event.target.parentNode;
 		const cell = event.target;
 
-		if (!onFocusing) {
-			setOnFocusing({ row, cell });
-		}
-		// console.log(row, cellParentRow);
-		if (row === cellParentRow) {
+		const rowId = row.dataset.row;
+		const cellId = cell.dataset.cell;
+
+		if (!!rowId || !!cellId) {
 			row.style.userSelect = "none";
 
 			row.style.backgroundColor = "#daf0ff";
-
 			cell.style.boxShadow = "inset 0px 0px 1px 1px #47B5FF";
 			cell.style.backgroundColor = "#b5e1ff";
 
 			if (onFocusing) {
-				onFocusing.cell.style.boxShadow = "none";
-				onFocusing.cell.style.backgroundColor = "transparent";
-
-				const prevRow = onFocusing.row;
-
-				if (row === prevRow) {
-					console.log(row, prevRow);
-					row.style.backgroundColor = "#daf0ff";
-				} else {
-					// prevRow.style.backgroundColor = "transparent";
-					console.log(prevRow);
+				const prevRowId = onFocusing.row.dataset.row;
+				const prevCellId = onFocusing.cell.dataset.cell;
+				if (+rowId !== +prevRowId) {
+					onFocusing.row.style.backgroundColor = "transparent";
+					onFocusing.cell.style.boxShadow = "none";
+					onFocusing.cell.style.backgroundColor = "transparent";
+				}
+				console.log({ rowId, prevRowId, cellId, prevCellId });
+				if (+rowId !== prevRowId && +cellId !== +prevCellId) {
+					onFocusing.cell.style.boxShadow = "none";
+					onFocusing.cell.style.backgroundColor = "transparent";
 				}
 			}
+			setOnFocusing({ row, cell });
 		}
 	}
 	///////////////////////
@@ -97,7 +93,7 @@ const DataTable = ({ columns, data }) => {
 						const countRow = contentRowIdx + 1;
 						return (
 							<ContentRow
-								useRef={contentRowRef}
+								// useRef={contentRowRef}
 								key={countRow}
 								props={{
 									columns,

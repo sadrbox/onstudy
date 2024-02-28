@@ -12,9 +12,10 @@ const ContentRow = ({
 			onClick={(e) => clickRow(e)}
 			onDoubleClick={(e) => selectTextInCell(e)}
 		>
-			{columns.map((column, cellIdx) => (
+			{columns.map((column, countCell) => (
 				<div
-					key={cellIdx}
+					key={countCell}
+					data-cell={countCell}
 					style={column.cssprops}
 					className={style.content_cell}
 				>
