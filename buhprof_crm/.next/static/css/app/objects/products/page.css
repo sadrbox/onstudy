@@ -1,0 +1,170 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[11].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[11].oneOf[9].use[5]!./src/components/_global/DataTable/DataTable.module.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.DataTable_table_container__6eZMI {
+  display: flex;
+  /* flex: 1 1 100%; */
+  overflow-x: auto;
+  overflow-y: auto;
+  height: 100%;
+  border: 1px solid #a0a0a0;
+  background-color: #fff;
+  position: relative;
+  /* padding-bottom: 500px; */
+  flex-direction: column;
+}
+
+.DataTable_flex_table__OOU1f {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  /* margin-bottom: 40px; */
+  /* border: 1px solid #a0a0a0; */
+  /* border-collapse: collaplse; */
+}
+
+.DataTable_header_row__H2fKt {
+  /* font-weight: bold; */
+  /* flex-direction: rows; */
+  background-color: #f2f2f2;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  border-bottom: 1px solid #a0a0a0;
+}
+.DataTable_header_row__H2fKt::after {
+  content: "";
+  top: 25px;
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  background-color: transparent;
+  transition: background-color 500ms ease;
+}
+
+.DataTable_header_row__scrolling__uU8ye::after {
+  background-color: rgba(100, 100, 100, 0.3);
+}
+
+.DataTable_footer_row__Zua_O {
+  margin-top: auto;
+  height: 28px;
+  background-color: #f2f2f2;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  border-top: 1px solid #a0a0a0;
+}
+
+.DataTable_header_row__H2fKt,
+.DataTable_content_row__pCUGQ,
+.DataTable_footer_row__Zua_O {
+  display: flex;
+  width: 100%;
+  /* border-collapse: collaplse; */
+  /* border-bottom: 1px solid #a0a0a0; */
+}
+
+.DataTable_content_row__pCUGQ {
+  border-bottom: 1px solid #a0a0a0;
+  /* flex-direction: column; */
+  /* border-top: 1px solid red; */
+  /* border-bottom: 1px solid #a0a0a0; */
+  /* margin-top: -1px; */
+  /* margin-bottom: -1px; */
+  background-color: #fff;
+}
+.DataTable_content_row__pCUGQ:not(:last-child) {
+  /* border: 1px solid #a0a0a0; */
+}
+.DataTable_content_row__pCUGQ:last-child {
+  /* border-bottom: 0px; */
+  /* margin-bottom: 50px; */
+}
+
+.DataTable_header_cell__5mDlY {
+  cursor: default;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  /* border-bottom: 1px solid transparent; */
+  /* border: 1px solid #a0a0a0; */
+  /* margin-left: -1px; */
+}
+.DataTable_header_cell__5mDlY:not(:last-child) {
+  /* border-left: 1px solid red; */
+  /* border-right: 1px solid red; */
+  /* border-bottom: 1px solid red; */
+  border-right: 1px solid #a0a0a0;
+}
+.DataTable_header_cell__5mDlY:first-child {
+  border-left: 1px solid #f2f2f2;
+  /* margin-left: 1px; */
+}
+.DataTable_header_cell__5mDlY:last-child {
+  border-right: 1px solid #f2f2f2;
+  /* border-left: 1px solid red; */
+  /* border-right: 1px solid red; */
+  /* border-bottom: 1px solid transparent; */
+}
+
+.DataTable_content_cell__nZA7J {
+  cursor: default;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  /* background-color: #fff; */
+  /* margin-left: -1px; */
+  /* margin-top: -1px; */
+  /* margin-bottom: -1px; */
+  /* border: 5px solid #fff; */
+  /* border: 1px solid #a0a0a0; */
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+.DataTable_content_cell__nZA7J:not(:last-child) {
+  /* border-left: 1px solid red; */
+  border-right: 1px solid #fff;
+  /* border-bottom: 1px solid #a0a0a0; */
+}
+.DataTable_content_cell__nZA7J:first-child {
+  /* margin-left: 1px; */
+  border-left: 1px solid #fff;
+}
+.DataTable_content_cell__nZA7J:last-child {
+  border-right: 1px solid #fff;
+  /* border-left: 1px solid red; */
+  /* border-right: 1px solid red; */
+  /* border-bottom: 1px solid red; */
+}
+
+.DataTable_header_cell__5mDlY,
+.DataTable_content_cell__nZA7J {
+  /* box-sizing: content-box; */
+  /* margin: 2px; */
+  /* padding-right: 1px; */
+  /* border-collapse: collapse; */
+  /* flex: 0; */
+  /* box-shadow: inset 0px 0px 1px 1px #fff; */
+  padding: 3px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* text-wrap: nowrap; */
+  overflow: hidden;
+  /* border: 1px solid #fff; */
+}
+.DataTable_header_cell__5mDlY:not(:last-child),
+.DataTable_content_cell__nZA7J:not(:last-child) {
+  /* border-top: 1px solid #ecca05; */
+  /* border-left: 1px solid #ecca05; */
+  /* border-right: 1px solid #ecca05; */
+}
+
+.DataTable_context_menu__WXXZO {
+  position: absolute;
+  height: 100px;
+  width: 80px;
+  background-color: #a0a0a0;
+}
