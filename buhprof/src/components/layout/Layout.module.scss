@@ -31,13 +31,17 @@
 }
 
 .content {
+	padding: 50px;
 	/* display: grid; */
+	/* grid-template-rows: 1fr; */
+	/* grid-template-columns: 1fr; */
 	/* flex: 1; */
-	flex-grow: 1;
+	/* flex-grow: 1; */
+	/* width: 100cqmax; */
 	/* height: 100px; */
 	/* overflow-y: scroll; */
 	/* margin: 200px; */
-	background-color: #ccc;
+	/* padding: 50px; */
 	/* color: red; */
 	/* font-weight: bold; */
 	/* @apply font-black; */

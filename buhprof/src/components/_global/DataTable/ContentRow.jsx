@@ -25,7 +25,7 @@ const ContentRow = ({
 						style={column.cssField}
 						onClick={(e) => clickRow(e, parentId)}
 					>
-						{getFormatValue(element, column, rowId)}
+						{getFormatValue(element, column)}
 						{/* {"test"} */}
 					</div>
 				</div>

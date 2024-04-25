@@ -42,19 +42,26 @@ export default async function Page() {
 			field: "id",
 			header: "№",
 			cssCell: { flex: "0 0 80px" },
-			format: "id",
+			// format: "id",
+			type: "id",
 		},
 		{
 			field: "title",
 			header: "Наименование",
 			cssCell: { flex: 3 },
+			type: "string",
 		},
 		{
 			field: "price",
 			header: "Цена",
+			type: "number",
 			cssCell: { flex: "0 0 100px" },
-			cssField: { textAlign: "right", paddingRight: "8px" },
-			format: "number",
+			cssField: { textAlign: "right" },
+			css: {
+				header: {},
+				content: {},
+				footer: { textAlign: "right", fontWeight: "bold" },
+			},
 		},
 	];
 

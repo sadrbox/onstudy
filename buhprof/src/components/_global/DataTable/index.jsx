@@ -4,6 +4,7 @@ import style from "./DataTable.module.scss";
 // import HeaderRow from "@/components/objects/Products/HeaderRow";
 import ContentRow from "@/components/_global/DataTable/ContentRow";
 import HeaderRow from "./HeaderRow";
+import FooterRow from "./FooterRow";
 
 const DataTable = ({ columns, data }) => {
 	const [isLoaded, setIsLoaded] = useState(true);
@@ -93,34 +94,39 @@ const DataTable = ({ columns, data }) => {
 	}
 
 	return (
-		<div className={style.table_wrapper}>
-			<div
-				className={style.table_container}
-				onScroll={scrollingTable}
-				// onContextMenu={contextMenu}
-			>
-				<HeaderRow props={{ columns, isScrolling }} />
-				<div className={style.flex_table}>
-					{isLoaded &&
-						data.map((element, idx) => {
-							const rowId = idx + 1;
-							return (
-								<ContentRow
-									// useRef={contentRowRef}
-									key={rowId}
-									props={{
-										columns,
-										element,
-										rowId,
-										clickRow,
-										selectTextInCell,
-									}}
-								/>
-							);
-						})}
+		<div className={style.table}>
+			<button type="button" className="m-4 h-5 w-10">
+				Кнопка
+			</button>
+			<div className={style.table_wrapper}>
+				<div
+					className={style.table_container}
+					onScroll={scrollingTable}
+					// onContextMenu={contextMenu}
+				>
+					<HeaderRow props={{ columns, isScrolling }} />
+					<div className={style.flex_table}>
+						{isLoaded &&
+							data.map((element, idx) => {
+								const rowId = idx + 1;
+								return (
+									<ContentRow
+										// useRef={contentRowRef}
+										key={rowId}
+										props={{
+											columns,
+											element,
+											rowId,
+											clickRow,
+											selectTextInCell,
+										}}
+									/>
+								);
+							})}
+					</div>
+					<FooterRow props={{ columns, data }} />
 				</div>
 			</div>
-			<div className={style.table_footer}></div>
 		</div>
 	);
 };

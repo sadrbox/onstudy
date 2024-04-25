@@ -1,25 +1,38 @@
+.table {
+	/* display: grid; */
+	/* padding: 50px; */
+	/* padding-bottom: 20px; */
+	/* height: 100cqmin; */
+	background-color: #eee;
+	padding: 4px;
+	border: 1px solid #6464640d;
+	border-radius: 3px;
+}
 .table_wrapper {
-	padding: 50px;
-	display: grid;
-	/* grid-template-rows: 100cap; */
-	height: 100cqmin;
+	/* padding: 5px; */
+	/* display: grid; */
+	/* grid-template-rows: 1fr; */
+	/* max-height: 100px; */
+	/* border: 5px solid #6464647d; */
 	/* flex: 1 1 100%; */
 	/* grid-template-columns: 100cap; */
 }
 .table_container {
+	max-height: 400px;
 	/* display: grid; */
-	/* grid-template-rows: 100cap; */
+	/* grid-template-rows: 100px; */
 	/* flex: 1 1 100%; */
 	/* grid-template-columns: 100cap; */
 	overflow-x: auto;
 	overflow-y: auto;
-	/* height: 100cap;
-	width: 100cap; */
-	border: 1px solid #a0a0a0;
+	/* height: 100cqmax; */
+	/*width: 100cap; */
+	/* border: 1px solid #a0a0a0; */
+	border: 1px solid #6464645d;
 	background-color: #fff;
 	position: relative;
 	/* padding-bottom: 500px; */
-	flex-direction: column;
+	/* flex-direction: column; */
 	/* width */
 	&::-webkit-scrollbar {
 		width: 8px;
@@ -32,13 +45,13 @@
 
 	/* Handle */
 	&::-webkit-scrollbar-thumb {
-		background: #6464644d;
-		border-radius: 2px;
+		background: #6464645d;
+		border-radius: 1px;
 	}
 
 	/* Handle on hover */
 	&::-webkit-scrollbar-thumb:hover {
-		background: #6464647d;
+		background: #6464645d;
 	}
 }
 
@@ -54,7 +67,7 @@
 
 .header_row {
 	display: grid;
-	grid-template-columns: 80px 1fr 100px;
+	/* grid-template-columns: 80px 1fr 100px; */
 	/* height: 30px; */
 	/* font-weight: bold; */
 	/* flex-direction: rows; */
@@ -62,7 +75,8 @@
 	position: sticky;
 	top: 0;
 	z-index: 1;
-	border-bottom: 1px solid #a0a0a0;
+	border-bottom: 1px solid #6464645d;
+	/* border-bottom: 1px solid #a0a0a0; */
 	&::after {
 		content: "";
 		top: 25px;
@@ -75,18 +89,24 @@
 }
 .header_row__scrolling {
 	&::after {
-		background-color: #6464644d;
+		background-color: #6464645d;
 	}
 }
 
 .footer_row {
-	margin-top: auto;
-	/* height: 28px; */
 	background-color: #f2f2f2;
-	position: absolute;
+	position: sticky;
 	bottom: 0;
 	z-index: 1;
-	border-top: 1px solid #a0a0a0;
+	/* border-bottom: 1px solid #a0a0a0; */
+	/* margin-top: auto; */
+	/* height: 28px; */
+	/* background-color: #f2f2f2; */
+	/* position: absolute; */
+	/* bottom: 0; */
+	/* z-index: 1; */
+	border-top: 1px solid #6464645d;
+	/* border-top: 1px solid #a0a0a0; */
 }
 
 .header_row,
@@ -94,6 +114,7 @@
 .footer_row {
 	display: grid;
 	width: 100%;
+	grid-template-columns: 80px 1fr 100px;
 	/* height: 30px; */
 	/* border-collapse: collaplse; */
 	/* border-bottom: 1px solid #a0a0a0; */
@@ -101,7 +122,7 @@
 
 .content_row {
 	display: grid;
-	grid-template-columns: 80px 1fr 100px;
+	/* grid-template-columns: 80px 1fr 100px; */
 	/* border-bottom: 1px solid #a0a0a0; */
 	/* flex-direction: column; */
 	/* border-top: 1px solid red; */
@@ -110,7 +131,8 @@
 	/* margin-bottom: -1px; */
 	background-color: #fff;
 	&:not(:last-child) {
-		border-bottom: 1px solid #a0a0a0;
+		border-bottom: 1px solid #6464645d;
+		/* border-bottom: 1px solid #a0a0a0; */
 	}
 	&:last-child {
 		/* border-bottom: 0px; */
@@ -122,7 +144,8 @@
 	/* display: grid; */
 	cursor: default;
 	user-select: none;
-	border-right: 1px solid #a0a0a0;
+	border-right: 1px solid #6464645d;
+	/* border-right: 1px solid #a0a0a0; */
 	/* align-content: center; */
 	/* align-self: center; */
 	/* padding: 0 4px; */
@@ -172,7 +195,8 @@
 	/* border: 1px solid #a0a0a0; */
 	/* border-top: 1px solid #fff;
 	border-bottom: 1px solid #fff; */
-	border-right: 1px solid #a0a0a0;
+	/* border-right: 1px solid #6464647d; */
+	/* border-right: 1px solid #a0a0a0; */
 	&:not(:last-child) {
 		/* border-left: 1px solid red; */
 		/* border-bottom: 1px solid #a0a0a0; */
@@ -198,7 +222,8 @@
 	}
 }
 .header_cell,
-.content_cell {
+.content_cell,
+.footer_cell {
 	/* box-sizing: content-box; */
 	/* margin: 2px; */
 	/* padding-right: 1px; */
@@ -215,6 +240,9 @@
 	white-space: nowrap;
 	/* text-wrap: nowrap; */
 	overflow: hidden;
+
+	/* border-right: 1px solid #6464647d; */
+	border-right: 1px solid #6464645d;
 	/* border: 1px solid #fff; */
 	&:not(:last-child) {
 		/* border-top: 1px solid #ecca05; */
@@ -225,4 +253,8 @@
 
 .field {
 	height: 26px;
+	display: grid;
+	padding: 0 4px;
+
+	align-content: center;
 }

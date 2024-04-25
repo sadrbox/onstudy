@@ -15,11 +15,11 @@ export function getDurationSession(seconds) {
 	return `${hours}:${minutes}`;
 }
 
-export function getFormatValue(element, column, rowId) {
+export function getFormatValue(element, column) {
 	// console.log(rowId);
-	if (column.format === "id") {
-		return rowId.toString().padStart(6, "0");
-	} else if (column.format === "number") {
+	if (column.field === "id") {
+		return element.id.toString().padStart(6, "0");
+	} else if (column.type === "number") {
 		const options = { style: "decimal", minimumFractionDigits: 2 };
 		const formater = new Intl.NumberFormat("ru-RU", options);
 		return formater.format(element[column.field]);
@@ -28,6 +28,15 @@ export function getFormatValue(element, column, rowId) {
 	}
 }
 
+export function getSumOfColumn(data, columnName) {
+	let sum = 0;
+	for (let i = 0; i < data.length; i++) {
+		sum += +data[i][columnName];
+	}
+	const options = { style: "decimal", minimumFractionDigits: 2 };
+	const formater = new Intl.NumberFormat("ru-RU", options);
+	return formater.format(sum);
+}
 // // Функция для загрузки данных из localStorage
 // async function getDataFromLocalStorage(key) {
 // 	return new Promise((resolve) => {
