@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState, useRef, createElement } from "react";
 import style from "./DataTable.module.scss";
+import { CiCirclePlus } from "react-icons/ci";
+import { FaRegSquarePlus } from "react-icons/fa6";
 // import HeaderRow from "@/components/objects/Products/HeaderRow";
 import ContentRow from "@/components/_global/DataTable/ContentRow";
 import HeaderRow from "./HeaderRow";
@@ -92,12 +94,14 @@ const DataTable = ({ columns, data }) => {
 			);
 		}
 	}
-
 	return (
 		<div className={style.table}>
-			<button type="button" className="m-4 h-5 w-10">
-				Кнопка
-			</button>
+			<div className={style.table_command_panel}>
+				<button type="button" className={style.btn}>
+					<FaRegSquarePlus style={{ fontSize: "1rem" }} />
+					<div style={{ marginLeft: "4px" }}>Добавить</div>
+				</button>
+			</div>
 			<div className={style.table_wrapper}>
 				<div
 					className={style.table_container}

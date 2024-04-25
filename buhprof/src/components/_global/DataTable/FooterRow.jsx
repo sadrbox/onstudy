@@ -13,8 +13,12 @@ const FooterRow = ({ props: { columns, data } }) => {
 		}
 	}
 	return (
-		<div id="footer_row" className={style.footer_row}>
-			{columns.map((column, rowIdx) => (
+		<div
+			id="footer_row"
+			className={style.footer_row}
+			style={{ gridTemplateColumns: columns.options.width }}
+		>
+			{columns.cols.map((column, rowIdx) => (
 				<div key={rowIdx} className={style.footer_cell} style={column?.cssCell}>
 					<div className={style.field} style={column?.css?.footer}>
 						{isSumColumn(column)}

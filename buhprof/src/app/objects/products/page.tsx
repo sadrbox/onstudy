@@ -37,33 +37,48 @@ async function getData() {
 	}
 }
 export default async function Page() {
-	const columns = [
-		{
-			field: "id",
-			header: "№",
-			cssCell: { flex: "0 0 80px" },
-			// format: "id",
-			type: "id",
+	const columns = {
+		options: {
+			width: "40px 80px 1fr 100px",
 		},
-		{
-			field: "title",
-			header: "Наименование",
-			cssCell: { flex: 3 },
-			type: "string",
-		},
-		{
-			field: "price",
-			header: "Цена",
-			type: "number",
-			cssCell: { flex: "0 0 100px" },
-			cssField: { textAlign: "right" },
-			css: {
-				header: {},
-				content: {},
-				footer: { textAlign: "right", fontWeight: "bold" },
+		cols: [
+			{
+				field: "check",
+				header: "",
+				// cssCell: { flex: "0 0 80px" },
+				// format: "id",
+				type: "checkbox",
+				css: {
+					header: {},
+				},
 			},
-		},
-	];
+			{
+				field: "id",
+				header: "№",
+				cssCell: { flex: "0 0 80px" },
+				// format: "id",
+				type: "id",
+			},
+			{
+				field: "title",
+				header: "Наименование",
+				cssCell: { flex: 3 },
+				type: "string",
+			},
+			{
+				field: "price",
+				header: "Цена",
+				type: "number",
+				cssCell: { flex: "0 0 100px" },
+				cssField: { textAlign: "right" },
+				css: {
+					header: {},
+					content: {},
+					footer: { textAlign: "right", fontWeight: "bold" },
+				},
+			},
+		],
+	};
 
 	const data = await getData();
 

@@ -11,9 +11,10 @@ const ContentRow = ({
 		<div
 			data-row={rowId}
 			className={style.content_row}
+			style={{ gridTemplateColumns: columns.options.width }}
 			// onDoubleClick={(e) => selectTextInCell(e)}
 		>
-			{columns.map((column, countCell) => (
+			{columns.cols.map((column, countCell) => (
 				<div
 					key={countCell}
 					data-cell={countCell}
