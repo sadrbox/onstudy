@@ -28,10 +28,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body>
 				<LayoutNav />
-				<Provider>
-					<LayoutMain>{children}</LayoutMain>
-				</Provider>
-				<LayoutContent />
+				<LayoutContent>{children}</LayoutContent>
 			</body>
 		</html>
 	);

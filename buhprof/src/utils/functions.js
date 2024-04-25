@@ -15,6 +15,19 @@ export function getDurationSession(seconds) {
 	return `${hours}:${minutes}`;
 }
 
+export function getFormatValue(element, column, rowId) {
+	// console.log(rowId);
+	if (column.format === "id") {
+		return rowId.toString().padStart(6, "0");
+	} else if (column.format === "number") {
+		const options = { style: "decimal", minimumFractionDigits: 2 };
+		const formater = new Intl.NumberFormat("ru-RU", options);
+		return formater.format(element[column.field]);
+	} else {
+		return element[column.field];
+	}
+}
+
 // // Функция для загрузки данных из localStorage
 // async function getDataFromLocalStorage(key) {
 // 	return new Promise((resolve) => {

@@ -1,9 +1,7 @@
 import React from "react";
 import style from "./Layout.module.scss";
-type Props = {};
-
-const LayoutContent = (props: Props) => {
-	return <div className={style.content}> Other contents</div>;
+const LayoutContent = ({ children }: { children: React.ReactNode }) => {
+	return <div className={style.content}>{children}</div>;
 };
 
 export default LayoutContent;

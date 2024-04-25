@@ -93,34 +93,31 @@ const DataTable = ({ columns, data }) => {
 	}
 
 	return (
-		<div className={style.table_wrapper}>
-			<div
-				className={style.table_container}
-				onScroll={scrollingTable}
-				// onContextMenu={contextMenu}
-			>
-				<HeaderRow props={{ columns, isScrolling }} />
-				<div className={style.flex_table}>
-					{isLoaded &&
-						data.map((element, idx) => {
-							const rowId = idx + 1;
-							return (
-								<ContentRow
-									// useRef={contentRowRef}
-									key={rowId}
-									props={{
-										columns,
-										element,
-										rowId,
-										clickRow,
-										selectTextInCell,
-									}}
-								/>
-							);
-						})}
-				</div>
+		<div
+			className={style.table_container}
+			onScroll={scrollingTable}
+			// onContextMenu={contextMenu}
+		>
+			<HeaderRow props={{ columns, isScrolling }} />
+			<div className={style.flex_table}>
+				{isLoaded &&
+					data.map((element, contentRowIdx) => {
+						const countRow = contentRowIdx + 1;
+						return (
+							<ContentRow
+								// useRef={contentRowRef}
+								key={countRow}
+								props={{
+									columns,
+									element,
+									countRow,
+									clickRow,
+									selectTextInCell,
+								}}
+							/>
+						);
+					})}
 			</div>
-			<div className={style.table_footer}></div>
 		</div>
 	);
 };

@@ -14,5 +14,6 @@
   "editor.quickSuggestions": {
     "comments": "on",
     "strings": "on"
-  }
+  },
+  "compile-hero.disable-compile-files-on-did-save-code": true
 }

@@ -17,7 +17,9 @@ const HeaderRow = ({ props: { columns, isScrolling } }) => {
 					className={style.header_cell}
 					style={column.cssCell}
 				>
-					<div className={style.field}>{column.header}</div>
+					<div className={style.field} style={column.cssField}>
+						{column.header}
+					</div>
 				</div>
 			))}
 		</div>

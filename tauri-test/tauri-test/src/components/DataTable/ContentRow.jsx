@@ -1,15 +1,14 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import style from "./DataTable.module.scss";
-import { getFormatValue } from "@/utils/functions";
 
 const ContentRow = ({
-	props: { columns, element, rowId, clickRow, selectTextInCell },
+	props: { columns, element, countRow, clickRow, selectTextInCell },
 }) => {
-	const parentId = `div[data-row="${rowId}"]`;
+	const parentId = `div[data-row="${countRow}"]`;
 	return (
 		<div
-			data-row={rowId}
+			data-row={countRow}
 			className={style.content_row}
 			// onDoubleClick={(e) => selectTextInCell(e)}
 		>
@@ -25,8 +24,9 @@ const ContentRow = ({
 						style={column.cssField}
 						onClick={(e) => clickRow(e, parentId)}
 					>
-						{getFormatValue(element, column, rowId)}
-						{/* {"test"} */}
+						{column.field === "id"
+							? countRow.toString().padStart(6, "0")
+							: element[column.field]}
 					</div>
 				</div>
 			))}

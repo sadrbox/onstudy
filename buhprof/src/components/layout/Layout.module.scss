@@ -18,26 +18,27 @@
 }
 
 .main {
-	flex: 1;
+	/* flex: 1;
 	flex-shrink: 0;
-	min-height: 100vh;
+	height: 100px;
 	overflow-y: scroll;
-	min-width: 900px; /* 800px */
-	max-width: 900px;
+	min-width: 900px; 
+	max-width: 900px; */
 
 	/* background-color: #31318a; */
-	padding: 10px;
+	/* padding: 10px; */
 	/* text-align: center; */
 }
 
 .content {
-	flex: 1;
+	/* display: grid; */
+	/* flex: 1; */
 	flex-grow: 1;
-	min-height: 100vh;
-	overflow-y: scroll;
-	padding: 20px;
-	background-color: #fff;
-	color: red;
-	font-weight: bold;
-	@apply font-black;
+	/* height: 100px; */
+	/* overflow-y: scroll; */
+	/* margin: 200px; */
+	background-color: #ccc;
+	/* color: red; */
+	/* font-weight: bold; */
+	/* @apply font-black; */
 }

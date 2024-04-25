@@ -41,24 +41,27 @@ export default async function Page() {
 		{
 			field: "id",
 			header: "№",
-			cssprops: { flex: "0 0 80px" },
+			cssCell: { flex: "0 0 80px" },
+			format: "id",
 		},
 		{
 			field: "title",
 			header: "Наименование",
-			cssprops: { flex: 3 },
+			cssCell: { flex: 3 },
 		},
 		{
 			field: "price",
 			header: "Цена",
-			cssprops: { flex: 1 },
+			cssCell: { flex: "0 0 100px" },
+			cssField: { textAlign: "right", paddingRight: "8px" },
+			format: "number",
 		},
 	];
 
 	const data = await getData();
 
 	return (
-		<div style={{ height: "100%" }}>
+		<div>
 			<DataTable columns={columns} data={data} />
 		</div>
 	);
