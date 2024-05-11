@@ -4,8 +4,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Provider from "@/components/Provider";
 import LayoutMain from "@/components/layout/LayoutMain";
-import LayoutNav from "@/components/layout/LayoutNav";
+import Navbar from "@/components/layout/Navbar";
 import LayoutContent from "@/components/layout/LayoutContent";
+import Tabs from "@/components/ui/Tabs";
 
 // const inter = Manrope({
 // 	weight: ["300", "400", "500", "700"],
@@ -27,7 +28,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				{/* <LayoutNav /> */}
+				{/* <Navbar /> */}
+				{/* <div>Layout.tsx</div> */}
+				<Tabs />
 				<LayoutContent>{children}</LayoutContent>
 
 				{/* <div style={{ paddingTop: "50px" }}>test</div> */}

@@ -1,0 +1,48 @@
+.tabs {
+	margin: 50px;
+	@apply flex flex-nowrap flex-row bg-[#eee];
+	perspective: 200px;
+	transform-style: preserve-3d;
+}
+
+.element {
+	/* border: 1px solid red;
+	max-width: 150px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative; */
+	/* box-shadow: 1px 1px 5px black; */
+	/* border-radius: 10px 10px 0 0; */
+	background-color: #999;
+	border-bottom: 100px solid red;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+
+	width: 100px;
+	/* border: 20px solid transparent;
+	border-right: 20px solid green;
+	border-bottom: 20px solid green; */
+	/* background: linear-gradient(135deg, transparent 20px, white 20px); */
+	/* border-radius: 10px; */
+	&:not(:first-child)::before {
+		/* position: absolute; */
+		/* z-index: -1; */
+		/* left: -10px;
+		content: ""; */
+		/* height: 50px; */
+		/* width: 100%; */
+		/* border-top: 30px solid red;
+		border-left: 30px solid red;
+		border-bottom: 30px solid transparent;
+		border-right: 30px solid transparent; */
+		/* border-top-left-radius: 5px; */
+	}
+}
+.title {
+	font-size: 100%;
+	padding: 0 10px 0 10px;
+	/* border: 1px solid blue; */
+	line-height: 100%;
+}
