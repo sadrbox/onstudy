@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import DataGrid from "./components/DataGrid/index.tsx";
+import Products from "./objects/Products";
+// import DataGrid from "./ui/DataGrid/index.tsx";
+import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
-		<DataGrid />
+		<Products />
 	</React.StrictMode>
 );
