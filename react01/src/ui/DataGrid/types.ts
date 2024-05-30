@@ -4,14 +4,14 @@ type TGridColumns = {
 	width: string | number;
 };
 
-type TJsonData = {
+export type TJsonData = {
 	id: string | number;
 	[key: string]: string | number;
 };
 
 export type TDataGridProps = {
 	columns: IColumns;
-	data: TJsonData;
+	data: TJsonData[];
 };
 
 export interface IColumns {
@@ -27,4 +27,9 @@ export interface ICol {
 	id: string;
 	title: string;
 	type: string;
+}
+
+export interface IElementData {
+	element: TJsonData;
+	idx: string;
 }
