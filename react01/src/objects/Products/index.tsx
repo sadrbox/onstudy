@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FC, HTMLAttributes } from "react";
 import DataGrid from "../../ui/DataGrid";
 import axios from "axios";
+import { IColumns, IProducts } from "@/ui/DataGrid/types";
 
 const columns = {
 	properties: {
-		width: "40px 80px 1fr 100px",
+		width: "80px 1fr 100px",
 	},
 	cols: [
 		{
@@ -25,24 +26,32 @@ const columns = {
 	],
 };
 
-async function getData() {
-	try {
-		const response = await axios.get(
-			"https://dummyjson.com/products?limit=100"
-		);
-		const data = response.data;
-		return data.products;
-	} catch (e) {
-		return null;
-	}
+interface IProductsProps extends HTMLAttributes<HTMLDivElement> {
+	columns: IColumns;
+	data: IProducts | null;
+	isLoading: boolean;
 }
-
-const Products = () => {
-	const [props, setProps] = useState({ columns, data: {} });
+const Products: FC = () => {
+	const [props, setProps] = useState<IProductsProps>({
+		columns,
+		data: null,
+		isLoading: true,
+	});
 
 	useEffect(() => {
-		const data = getData();
-		setProps({ columns, data });
+		(async () => {
+			try {
+				const response = await axios.get<IProducts>(
+					"https://dummyjson.com/products?limit=100"
+				);
+				if (response?.data) {
+					setProps({ columns, data: response.data, isLoading: false });
+				}
+			} catch (error) {
+				console.error("Ошибка при получении данных:", error);
+				setProps({ columns, data: null, isLoading: false });
+			}
+		})();
 	}, []);
 
 	return (

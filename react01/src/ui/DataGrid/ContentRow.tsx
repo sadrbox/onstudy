@@ -1,30 +1,43 @@
-import React, { useState, useRef, useEffect } from "react";
-import style from "./DataTable.module.scss";
-import { getFormatValue } from "@/utils/functions";
+import React, { useState, useRef, useEffect, FC, MouseEvent } from "react";
+import styles from "./DataGrid.module.scss";
+import { getFormatValue, getTextAlignByColType } from "@/utils/functions";
+import { IColumns, IProduct, ICol } from "./types";
 
-const ContentRow = ({ props: { columns, element, rowId } }) => {
-	const parentId = `div[data-row="${rowId}"]`;
+interface IContentRowProps {
+	props: {
+		columns: IColumns;
+		elementRow: IProduct;
+		idx: number;
+		clickRow: (event: React.MouseEvent, idx: number) => void;
+	};
+}
+
+const ContentRow: FC<IContentRowProps> = ({
+	props: { columns, elementRow, idx, clickRow },
+}) => {
+	// const parentId = `div[data-row="${idx}"]`;
+	// console.log(item);
 	return (
 		<div
-			data-row={rowId}
-			className={style.content_row}
+			data-row={idx}
+			className={styles.content_row}
 			style={{ gridTemplateColumns: columns.properties.width }}
 			// onDoubleClick={(e) => selectTextInCell(e)}
 		>
-			{columns.cols.map((column, countCell) => (
+			{columns.cols.map((column, colIdx) => (
 				<div
-					key={countCell}
-					data-cell={countCell}
-					style={column.cssCell}
-					className={style.content_cell}
+					key={colIdx}
+					data-cell={colIdx}
+					// style={column.cssCell}
+					className={styles.content_cell}
 				>
 					<div
-						className={style.field}
-						style={column.cssField}
-						onClick={(e) => clickRow(e, parentId)}
+						className={styles.field}
+						style={getTextAlignByColType(column)}
+						onClick={(e) => clickRow(e, idx)}
 					>
-						{getFormatValue(element, column)}
-						{/* {"test"} */}
+						{/* {tcva(column)} */}
+						{getFormatValue(elementRow, column)}
 					</div>
 				</div>
 			))}

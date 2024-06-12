@@ -5,6 +5,8 @@ import React, {
 	useRef,
 	createElement,
 	ReactNode,
+	ReactElement,
+	MouseEventHandler,
 } from "react";
 import styles from "./DataGrid.module.scss";
 // import { CiCirclePlus } from "react-icons/ci";
@@ -13,79 +15,95 @@ import styles from "./DataGrid.module.scss";
 import ContentRow from "./ContentRow";
 import HeaderRow from "./HeaderRow";
 // import FooterRow from "./FooterRow";
-import { IElementData, TDataGridProps, TJsonData } from "./types";
+import {
+	ContentRowProps,
+	IColumns,
+	IContentRowProps,
+	IElementData,
+	IProducts,
+	TDataGridProps,
+	TJsonData,
+} from "./types";
 
-const DataGrid: FC<TDataGridProps> = ({ columns, data }) => {
-	// {
+interface IDataGridProps {
+	columns: IColumns;
+	data: IProducts | null;
+	isLoading: boolean;
+}
+interface IFocusRow {
+	row: HTMLDivElement | null;
+	cell: HTMLDivElement | null;
+}
 
-	// 	columns, element, rowId, clickRow, selectTextInCell;
-	// }
-	// const [isLoaded, setIsLoaded] = useState(true);
-	// const [cellSelectedText, setCellSelectedText] = useState(null);
-	// const [onFocusing, setOnFocusing] = useState({});
-
-	// const [scrollTimeout, setScrollTimeout] = useState(null);
-	// const [elementOfHeader, setElementOfHeader] = useState(null);
+const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
+	// console.log(data);
+	const [onFocusRow, setFocusRow] = useState<IFocusRow>({
+		row: null,
+		cell: null,
+	});
 
 	const [isScrolling, setIsScrolling] = useState(false);
 
-	// function clickRow(event, parentId) {
-	// 	const row = event.target.closest(parentId);
-	// 	const rowId = +row.dataset.row;
-	// 	const prevRowId = !!onFocusing?.row
-	// 		? +onFocusing.row.dataset.row
-	// 		: undefined;
-	// 	row.style.userSelect = "none";
+	function clickRow(event: React.MouseEvent, idx: number): void {
+		const parentId = `div[data-row="${idx}"]`;
+		const rowTarget = event.target as HTMLElement;
+		const row = rowTarget.closest<HTMLDivElement>(parentId);
+		const rowDataset = row.dataset;
+		const rowId = +rowDataset.row;
+		const prevRowId = onFocusRow?.row ? +onFocusRow.row.dataset.row : undefined;
+		row.style.userSelect = "none";
 
-	// 	// console.log(row);
-	// 	const cell = event.target;
-	// 	const cellId = +cell.dataset.cell;
-	// 	const prevCellId = !!onFocusing?.cell
-	// 		? +onFocusing.cell.dataset.cell
-	// 		: undefined;
+		// console.log(row);
+		const cell = event.target as HTMLDivElement;
+		const cellId = +cell.dataset.cell;
+		const prevCellId = onFocusRow?.cell
+			? +onFocusRow.cell.dataset.cell
+			: undefined;
 
-	// 	if (prevRowId) {
-	// 		onFocusing.row.style.backgroundColor = "transparent";
-	// 		onFocusing.cell.style.backgroundColor = "transparent";
-	// 	}
-	// 	row.style.backgroundColor = "#daf0ff";
-	// 	cell.style.backgroundColor = "#b5e1ff";
+		if (prevRowId) {
+			onFocusRow.row.style.backgroundColor = "transparent";
+			onFocusRow.cell.style.backgroundColor = "transparent";
+		}
+		row.style.backgroundColor = "#daf0ff";
+		cell.style.backgroundColor = "#b5e1ff";
 
-	// 	if (!!rowId || !!cellId) {
-	// 		setOnFocusing({ row, cell });
-	// 	}
-	// }
-
+		if (!!rowId || !!cellId) {
+			setFocusRow({ row, cell });
+		}
+	}
+	// console.log(isLoading);
 	return (
 		<div className={styles.table}>
-			<div className={styles.table_command_panel}>
-				<button type="button" className={styles.btn}>
-					{/* <FaRegSquarePlus style={{ fontSize: "1rem" }} /> */}
-					<div style={{ marginLeft: "4px" }}>Добавить</div>
-				</button>
-			</div>
+			<div className={styles.table_command_panel}></div>
 			<div className={styles.table_wrapper}>
 				<div
 					className={styles.table_container}
 					// onScroll={scrollingTable}
+					// onContextMenu={contextMenu}
 				>
 					<HeaderRow props={{ columns, isScrolling }} />
-					<div className={styles.flex_table}>
-						{data.map((element: TJsonData, idx: number): ReactNode => {
-							const rowId = idx + 1;
-							return (
-								<ContentRow
-									// useRef={contentRowRef}
-									key={rowId}
-									props={{
-										columns,
-										element,
-										rowId,
-									}}
-								/>
-							);
-						})}
-					</div>
+					{isLoading ? (
+						<h1>Loading</h1>
+					) : (
+						<div className={styles.flex_table}>
+							{data &&
+								data?.products.map((elementRow, idx) => {
+									return (
+										<ContentRow
+											// useRef={contentRowRef}
+											key={++idx}
+											props={{
+												columns,
+												elementRow,
+												idx,
+												clickRow,
+												// selectTextInCell,
+											}}
+										/>
+									);
+								})}
+						</div>
+					)}
 					{/* <FooterRow props={{ columns, data }} /> */}
 				</div>
 			</div>
