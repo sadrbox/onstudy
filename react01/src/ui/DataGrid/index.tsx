@@ -31,34 +31,37 @@ interface IDataGridProps {
 	isLoading: boolean;
 }
 interface IFocusRow {
-	row: HTMLDivElement | null;
-	cell: HTMLDivElement | null;
+	row: HTMLElement | null;
+	cell: HTMLElement | null;
 }
 
 const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 	// console.log(data);
+	const [checkedRows, setCheckedRows] = useState([]);
 	const [onFocusRow, setFocusRow] = useState<IFocusRow>({
 		row: null,
 		cell: null,
 	});
+	// const contentRowRef = useRef();
 
 	const [isScrolling, setIsScrolling] = useState(false);
 
 	function clickRow(event: React.MouseEvent, idx: number): void {
+		console.log(idx);
 		const parentId = `div[data-row="${idx}"]`;
 		const rowTarget = event.target as HTMLElement;
-		const row = rowTarget.closest<HTMLDivElement>(parentId);
+		const row = rowTarget.closest<HTMLElement>(parentId);
 		const rowDataset = row.dataset;
 		const rowId = +rowDataset.row;
 		const prevRowId = onFocusRow?.row ? +onFocusRow.row.dataset.row : undefined;
-		row.style.userSelect = "none";
+		// row.style.userSelect = "none";
 
 		// console.log(row);
-		const cell = event.target as HTMLDivElement;
+		const cell = event.target as HTMLElement;
 		const cellId = +cell.dataset.cell;
-		const prevCellId = onFocusRow?.cell
-			? +onFocusRow.cell.dataset.cell
-			: undefined;
+		// const prevCellId = onFocusRow?.cell
+		// 	? +onFocusRow.cell.dataset.cell
+		// 	: undefined;
 
 		if (prevRowId) {
 			onFocusRow.row.style.backgroundColor = "transparent";
@@ -71,6 +74,25 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 			setFocusRow({ row, cell });
 		}
 	}
+
+	function clickOnCheckbox(event: React.MouseEvent, rowID: number): void {
+		// console.log(event.target.attributes.rowid.value);
+
+		// console.log(rowID);
+		setCheckedRows((prev) => {
+			let currentIDs = prev ? [...prev, rowID] : [rowID];
+			console.log(currentIDs);
+			if (currentIDs.length > 1) {
+				currentIDs = currentIDs.filter((i) => i !== rowID);
+				console.log(currentIDs);
+			}
+			// [...prev, rowID] : [rowID];
+			return currentIDs;
+		});
+		console.log(checkedRows);
+	}
+
+	function clickOnParentCheckbox(event: React.MouseEvent, checkedRows): void {}
 	// console.log(isLoading);
 	return (
 		<div className={styles.table}>
@@ -81,22 +103,24 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 					// onScroll={scrollingTable}
 					// onContextMenu={contextMenu}
 				>
-					<HeaderRow props={{ columns, isScrolling }} />
+					<HeaderRow props={{ columns, isScrolling, clickOnParentCheckbox }} />
 					{isLoading ? (
 						<h1>Loading</h1>
 					) : (
 						<div className={styles.flex_table}>
 							{data &&
 								data?.products.map((elementRow, idx) => {
+									const rowID: number = ++idx;
 									return (
 										<ContentRow
 											// useRef={contentRowRef}
-											key={++idx}
+											key={rowID}
 											props={{
 												columns,
 												elementRow,
-												idx,
+												rowID,
 												clickRow,
+												clickOnCheckbox,
 												// selectTextInCell,
 											}}
 										/>

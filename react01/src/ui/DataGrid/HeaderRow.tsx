@@ -1,32 +1,35 @@
 // import React, { useEffect } from "react";
 
-import classes from "./DataGrid.module.scss";
-const { header_row__scrolling, header_row, header_cell, field } = classes;
+import Checkbox from "antd/es/checkbox/Checkbox";
+import styles from "./DataGrid.module.scss";
+// const { header_row__scrolling, header_row, header_cell, field } = styles;
 
-const HeaderRow = ({ props: { columns, isScrolling } }) => {
+const HeaderRow = ({
+	props: { columns, isScrolling, clickOnParentCheckbox },
+}) => {
 	// const cls = isScrolling ? [header_row__scrolling] : [];
 	// cls.push(header_row);
-	// classes.push(columns.things);
+	// styles.push(columns.things);
 
 	// const clss = true
-	// 	? `${classes.header_row__scrolling} ${classes.header_row}`
+	// 	? `${styles.header_row__scrolling} ${styles.header_row}`
 	// 	: "";
 	// const t = true;
 	return (
 		<div
 			id="header_row"
-			className={
-				isScrolling ? classes.header_row__scrolling : classes.header_row
-			}
+			className={isScrolling ? styles.header_row__scrolling : styles.header_row}
 			style={{ gridTemplateColumns: columns.properties.width }}
 		>
 			{columns.cols.map((column, headerRowIdx) => (
-				<div
-					key={headerRowIdx}
-					className={classes.header_cell}
-					style={column?.cssCell}
-				>
-					<div className={classes.field}>{column.title}</div>
+				<div key={headerRowIdx} className={styles.header_cell}>
+					<div style={column?.field?.style} className={styles.field}>
+						{column.type === "checkbox" ? (
+							<Checkbox onClick={clickOnParentCheckbox} />
+						) : (
+							column.title
+						)}
+					</div>
 				</div>
 			))}
 		</div>

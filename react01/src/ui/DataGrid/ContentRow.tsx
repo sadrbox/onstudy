@@ -1,25 +1,39 @@
-import React, { useState, useRef, useEffect, FC, MouseEvent } from "react";
+import React, {
+	useState,
+	useRef,
+	useEffect,
+	FC,
+	MouseEvent,
+	HTMLAttributes,
+} from "react";
 import styles from "./DataGrid.module.scss";
 import { getFormatValue, getTextAlignByColType } from "@/utils/functions";
 import { IColumns, IProduct, ICol } from "./types";
+import { Checkbox } from "antd";
 
 interface IContentRowProps {
 	props: {
 		columns: IColumns;
 		elementRow: IProduct;
-		idx: number;
-		clickRow: (event: React.MouseEvent, idx: number) => void;
+		rowID: number;
+		clickRow: (event: React.MouseEvent, rowID: number) => void;
+		clickOnCheckbox: (event: React.MouseEvent, rowID: number) => void;
 	};
 }
 
 const ContentRow: FC<IContentRowProps> = ({
-	props: { columns, elementRow, idx, clickRow },
+	props: { columns, elementRow, rowID, clickRow, clickOnCheckbox },
 }) => {
+	// useEffect(() => {
+	// 	(() => {
+	// 		console.log(checkedRows);
+	// 	})();
+	// }, [checkedRows]);
 	// const parentId = `div[data-row="${idx}"]`;
 	// console.log(item);
 	return (
 		<div
-			data-row={idx}
+			data-row={rowID}
 			className={styles.content_row}
 			style={{ gridTemplateColumns: columns.properties.width }}
 			// onDoubleClick={(e) => selectTextInCell(e)}
@@ -31,14 +45,22 @@ const ContentRow: FC<IContentRowProps> = ({
 					// style={column.cssCell}
 					className={styles.content_cell}
 				>
-					<div
-						className={styles.field}
-						style={getTextAlignByColType(column)}
-						onClick={(e) => clickRow(e, idx)}
-					>
-						{/* {tcva(column)} */}
-						{getFormatValue(elementRow, column)}
-					</div>
+					{column?.type === "checkbox" ? (
+						<div className={styles.field} style={getTextAlignByColType(column)}>
+							<Checkbox
+								// ref={checkboxRef}
+								onClick={(event) => clickOnCheckbox(event, rowID)}
+							/>
+						</div>
+					) : (
+						<div
+							className={styles.field}
+							style={getTextAlignByColType(column)}
+							onClick={(e) => clickRow(e, rowID)}
+						>
+							{getFormatValue(elementRow, column)}
+						</div>
+					)}
 				</div>
 			))}
 		</div>

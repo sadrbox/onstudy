@@ -22,8 +22,10 @@ export function getFormatValue(item: IProduct, column: ICol): string {
 	if (column.id === "id") {
 		return item.id.toString().padStart(6, "0");
 	} else if (column.type === "number") {
-		const options = { style: "decimal", minimumFractionDigits: 2 };
-		const formater = new Intl.NumberFormat("ru-RU", options);
+		const formater = new Intl.NumberFormat("ru-RU", {
+			style: "decimal",
+			minimumFractionDigits: 2,
+		});
 		return formater.format(item[column.id]);
 	} else {
 		return item[column.id];
@@ -39,6 +41,8 @@ export function getTextAlignByColType(column: ICol): CSSProperties {
 			return { textAlign: "right" };
 		case "string":
 			return { textAlign: "left" };
+		case "checkbox":
+			return { textAlign: "center", display: "block" };
 		default:
 			return { textAlign: "left" };
 	}

@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 type TGridColumns = {
 	id: string;
 	title: string;
@@ -15,18 +17,19 @@ export type TDataGridProps = {
 };
 
 export interface IColumns {
-	properties: IProperties;
+	properties: {
+		width: string;
+	};
 	cols: ICol[];
-}
-
-export interface IProperties {
-	width: string;
 }
 
 export interface ICol {
 	id: string;
-	title: string;
+	title: string | React.JSX.Element;
 	type: string;
+	field?: {
+		style?: CSSProperties;
+	};
 }
 
 export interface IElementData {
