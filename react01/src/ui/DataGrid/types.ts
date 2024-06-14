@@ -25,7 +25,7 @@ export interface IColumns {
 
 export interface ICol {
 	id: string;
-	title: string | React.JSX.Element;
+	title?: string | React.JSX.Element;
 	type: string;
 	field?: {
 		style?: CSSProperties;

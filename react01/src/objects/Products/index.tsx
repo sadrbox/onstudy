@@ -11,7 +11,6 @@ const columns = {
 	cols: [
 		{
 			id: "checkbox",
-			title: <Checkbox />,
 			type: "checkbox",
 			field: {
 				style: { textAlign: "center", display: "block" } as React.CSSProperties,

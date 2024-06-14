@@ -37,7 +37,7 @@ interface IFocusRow {
 
 const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 	// console.log(data);
-	const [checkedRows, setCheckedRows] = useState([]);
+	const [checkedRows, setCheckedRows] = useState<number[]>([]);
 	const [onFocusRow, setFocusRow] = useState<IFocusRow>({
 		row: null,
 		cell: null,
@@ -75,7 +75,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 		}
 	}
 
-	function clickOnCheckbox(event: React.MouseEvent, rowID: number): void {
+	function toggleCheckbox(rowID: number): void {
 		// console.log(event.target.attributes.rowid.value);
 
 		// console.log(rowID);
@@ -87,11 +87,24 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 			} else {
 				currentIDs = [...prev, rowID];
 			}
+			// console.log(currentIDs);
 			return currentIDs;
 		});
 	}
 
-	function clickOnParentCheckbox(event: React.MouseEvent, checkedRows): void {}
+	function toggleParentCheckbox(): void {
+		setCheckedRows((prev: number[]) => {
+			let currentIDs: number[];
+			const onceChecked: boolean = prev.length > 0;
+			// const allRows = document.querySelector("data")
+			// console.log(onceChecked);
+			return currentIDs;
+		});
+	}
+
+	function isCheckedRow(rowID: number): boolean {
+		return checkedRows.includes(rowID);
+	}
 	// console.log(isLoading);
 	return (
 		<div className={styles.table}>
@@ -102,7 +115,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 					// onScroll={scrollingTable}
 					// onContextMenu={contextMenu}
 				>
-					<HeaderRow props={{ columns, isScrolling, clickOnParentCheckbox }} />
+					<HeaderRow props={{ columns, isScrolling, toggleParentCheckbox }} />
 					{isLoading ? (
 						<h1>Loading</h1>
 					) : (
@@ -119,8 +132,8 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 												elementRow,
 												rowID,
 												clickRow,
-												clickOnCheckbox,
-												// selectTextInCell,
+												toggleCheckbox,
+												isCheckedRow,
 											}}
 										/>
 									);
