@@ -79,17 +79,16 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 		// console.log(event.target.attributes.rowid.value);
 
 		// console.log(rowID);
-		setCheckedRows((prev) => {
-			let currentIDs = prev ? [...prev, rowID] : [rowID];
-			console.log(currentIDs);
-			if (currentIDs.length > 1) {
-				currentIDs = currentIDs.filter((i) => i !== rowID);
-				console.log(currentIDs);
+		setCheckedRows((prev: number[]) => {
+			let currentIDs: number[];
+			const present: boolean = prev.includes(rowID);
+			if (present) {
+				currentIDs = prev.filter((i) => i !== rowID);
+			} else {
+				currentIDs = [...prev, rowID];
 			}
-			// [...prev, rowID] : [rowID];
 			return currentIDs;
 		});
-		console.log(checkedRows);
 	}
 
 	function clickOnParentCheckbox(event: React.MouseEvent, checkedRows): void {}
