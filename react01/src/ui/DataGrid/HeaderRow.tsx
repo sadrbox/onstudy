@@ -6,7 +6,7 @@ import UICheckbox from "../UICheckbox";
 // const { header_row__scrolling, header_row, header_cell, field } = styles;
 
 const HeaderRow = ({
-	props: { columns, isScrolling, toggleParentCheckbox },
+	props: { columns, isScrolling, toggleParentCheckbox, parentChecked },
 }) => {
 	// const cls = isScrolling ? [header_row__scrolling] : [];
 	// cls.push(header_row);
@@ -26,7 +26,10 @@ const HeaderRow = ({
 				<div key={headerRowIdx} className={styles.header_cell}>
 					<div style={column?.field?.style} className={styles.field}>
 						{column.type === "checkbox" ? (
-							<UICheckbox onChange={() => toggleParentCheckbox()} />
+							<UICheckbox
+								onChange={() => toggleParentCheckbox()}
+								checked={parentChecked}
+							/>
 						) : (
 							column.title
 						)}

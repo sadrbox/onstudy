@@ -132,9 +132,9 @@
 	}
 
 	.field {
-		display: grid;
-		padding: 0 4px;
-		align-content: center;
+		// display: grid;
+		padding: 0 4px 0 5px;
+		// align-content: center;
 	}
 }
 
@@ -183,9 +183,18 @@
 }
 
 .field {
-	height: 26px;
+	height: 30px;
 	display: grid;
 	padding: 0 4px;
 
 	align-content: center;
+}
+
+input[type="checkbox"] {
+	height: 18px;
+	width: 18px;
+	// outline: 3px solid red;
+	// border-radius: 6px;
+	// border: 1px solid red;
+	// align-self: center;
 }

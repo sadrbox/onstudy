@@ -42,7 +42,7 @@ export function getTextAlignByColType(column: ICol): CSSProperties {
 		case "string":
 			return { textAlign: "left" };
 		case "checkbox":
-			return { textAlign: "center", display: "block" };
+			return { textAlign: "center" };
 		default:
 			return { textAlign: "left" };
 	}

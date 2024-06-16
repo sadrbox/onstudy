@@ -13,7 +13,7 @@ const columns = {
 			id: "checkbox",
 			type: "checkbox",
 			field: {
-				style: { textAlign: "center", display: "block" } as React.CSSProperties,
+				style: { textAlign: "center" } as React.CSSProperties,
 			},
 		},
 		{
