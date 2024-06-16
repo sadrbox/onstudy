@@ -24,12 +24,13 @@ const HeaderRow = ({
 		>
 			{columns.cols.map((column, headerRowIdx) => (
 				<div key={headerRowIdx} className={styles.header_cell}>
-					{/* <div style={column?.field?.style} className={styles.field}>
-						{column.type === "checkbox"
-							? // <UICheckbox onChange={() => toggleParentCheckbox()} />
-							  `asdfasd`
-							: column.title}
-					</div> */}
+					<div style={column?.field?.style} className={styles.field}>
+						{column.type === "checkbox" ? (
+							<UICheckbox onChange={() => toggleParentCheckbox()} />
+						) : (
+							column.title
+						)}
+					</div>
 				</div>
 			))}
 		</div>

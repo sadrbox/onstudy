@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from "react";
 
 interface CheckboxProps {
 	label?: string;
-	checked?:React.InputHTMLAttributes<HTMLInputElement>.checked?: boolean ;
+	checked?: boolean;
 	onChange: () => void;
 }
 

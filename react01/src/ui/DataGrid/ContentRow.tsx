@@ -27,13 +27,6 @@ interface IContentRowProps {
 const ContentRow: FC<IContentRowProps> = ({
 	props: { columns, elementRow, rowID, clickRow, toggleCheckbox, isCheckedRow },
 }) => {
-	// useEffect(() => {
-	// 	(() => {
-	// 		console.log(checkedRows);
-	// 	})();
-	// }, [checkedRows]);
-	// const parentId = `div[data-row="${idx}"]`;
-	// console.log(item);
 	return (
 		<div
 			data-row={rowID}

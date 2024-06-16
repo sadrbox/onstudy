@@ -38,26 +38,35 @@ interface IProductsProps extends HTMLAttributes<HTMLElement> {
 	columns: IColumns;
 	data: IProducts | undefined;
 	isLoading: boolean;
+	gridIDs: number[] | undefined;
 }
 const Products: FC = () => {
 	const [props, setProps] = useState<IProductsProps>({
 		columns,
 		data: undefined,
 		isLoading: true,
+		gridIDs: undefined,
 	});
 
 	useEffect(() => {
 		(async () => {
+			let gridIDs;
 			try {
 				const response = await axios.get<IProducts>(
 					"https://dummyjson.com/products?limit=100"
 				);
 				if (response?.data) {
-					setProps({ columns, data: response.data, isLoading: false });
+					const gridIDs: number[] = response.data?.products.map((e) => e.id);
+					setProps({ columns, data: response.data, isLoading: false, gridIDs });
 				}
 			} catch (error) {
 				console.error("Ошибка при получении данных:", error);
-				setProps({ columns, data: undefined, isLoading: false });
+				setProps({
+					columns,
+					data: undefined,
+					isLoading: false,
+					gridIDs: undefined,
+				});
 			}
 		})();
 	}, []);

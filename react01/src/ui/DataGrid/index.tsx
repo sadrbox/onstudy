@@ -35,16 +35,31 @@ interface IFocusRow {
 	cell: HTMLElement | null;
 }
 
-const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
-	// console.log(data);
+const DataGrid: FC<IDataGridProps> = ({
+	columns,
+	data,
+	isLoading,
+	gridIDs,
+}) => {
+	// const [gridIDs, setGridIDs] = useState<number[]>([]);
 	const [checkedRows, setCheckedRows] = useState<number[]>([]);
 	const [onFocusRow, setFocusRow] = useState<IFocusRow>({
 		row: null,
 		cell: null,
 	});
-	// const contentRowRef = useRef();
 
 	const [isScrolling, setIsScrolling] = useState(false);
+
+	useEffect(() => {
+		if (isLoading) {
+			// const countIDs: number[] = data?.products.map((e) => e.id);
+			// setGridIDs(countIDs);
+			// console.log(countIDs);
+		}
+		// const onChangeCheckedRows = () => {
+		// setCheckedRows([3, 5, 1, 8]);
+		// };
+	}, [checkedRows]);
 
 	function clickRow(event: React.MouseEvent, idx: number): void {
 		console.log(idx);
@@ -93,13 +108,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 	}
 
 	function toggleParentCheckbox(): void {
-		setCheckedRows((prev: number[]) => {
-			let currentIDs: number[];
-			const onceChecked: boolean = prev.length > 0;
-			// const allRows = document.querySelector("data")
-			// console.log(onceChecked);
-			return currentIDs;
-		});
+		setCheckedRows(gridIDs);
 	}
 
 	function isCheckedRow(rowID: number): boolean {
@@ -123,6 +132,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 							{data &&
 								data?.products.map((elementRow, idx) => {
 									const rowID: number = ++idx;
+									// setGridIDs([3, 5, 7]);
 									return (
 										<ContentRow
 											// useRef={contentRowRef}
