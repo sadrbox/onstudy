@@ -7,6 +7,7 @@ import React, {
 	ReactNode,
 	ReactElement,
 	MouseEventHandler,
+	memo,
 } from "react";
 import styles from "./DataGrid.module.scss";
 // import { CiCirclePlus } from "react-icons/ci";
@@ -21,28 +22,33 @@ import {
 	IContentRowProps,
 	IElementData,
 	IProducts,
+	IProduct,
 	TDataGridProps,
 	TJsonData,
 } from "./types";
 
 interface IDataGridProps {
 	columns: IColumns;
-	data: IProducts | null;
+	data?: {
+		gridRows: IProduct[] | undefined;
+		gridIDs: number[] | undefined;
+		// sortFn: (columnID: string, orderBy?: string) => void;
+		// sortDirection: "ASC" | "DESC";
+	};
 	isLoading: boolean;
-	gridIDs: number[];
 }
 interface IFocusRow {
 	row: HTMLElement | null;
 	cell: HTMLElement | null;
 }
 
-const DataGrid: FC<IDataGridProps> = ({
-	columns,
-	data,
-	isLoading,
-	gridIDs,
-}) => {
-	// const [gridIDs, setGridIDs] = useState<number[]>([]);
+type TSortFn = (columnID: string, orderBy?: string) => void;
+
+const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
+	const [reciveData, setReciveData] = useState<IProduct[] | undefined>(
+		data?.gridRows
+	);
+	const [sorting, setSorting] = useState({ columnID: "id", orderBy: "ASC" });
 	const [parentChecked, setParentChecked] = useState<boolean>(false);
 	const [checkedRows, setCheckedRows] = useState<number[]>([]);
 	const [onFocusRow, setFocusRow] = useState<IFocusRow>({
@@ -53,12 +59,32 @@ const DataGrid: FC<IDataGridProps> = ({
 	const [isScrolling, setIsScrolling] = useState(false);
 
 	useEffect(() => {
+		setReciveData(data?.gridRows);
+	});
+	// console.log(data?.gridIDs);
+	useEffect(() => {
+		const gridRows = reciveData ? reciveData : [];
+		// setReciveData(gridRows);
+		console.log(sorting);
+		setReciveData(
+			gridRows.sort((a, b) => {
+				const aV = a[sorting.columnID];
+				const bV = b[sorting.columnID];
+				const gridOrder = {
+					"ASC": aV - bV,
+					"DESC": bV - aV,
+				};
+				// console.log(sorting.orderBy);
+				return gridOrder[sorting.orderBy];
+			})
+		);
+	}, [sorting]);
+
+	useEffect(() => {
+		// console.log(data?.sortFn);
+		// console.log(data?.dataRows);
 		// const countIDs: number[] = data?.products.map((e) => e.id);
-		if (parentChecked) {
-			setCheckedRows(gridIDs);
-		} else {
-			setCheckedRows([]);
-		}
+		setCheckedRows(parentChecked && data?.gridIDs ? data.gridIDs : []);
 	}, [parentChecked]);
 
 	function clickRow(event: React.MouseEvent, idx: number): void {
@@ -115,7 +141,23 @@ const DataGrid: FC<IDataGridProps> = ({
 	function isCheckedRow(rowID: number): boolean {
 		return checkedRows.includes(rowID);
 	}
-	// console.log(isLoading);
+
+	function sortFnByColumn(columnID = "id", orderBy = "ASC"): void {
+		if (sorting.columnID === columnID && sorting.orderBy === "ASC") {
+			setSorting({
+				columnID,
+				orderBy: "DESC",
+			});
+		} else {
+			// console.log("first");
+			setSorting({
+				columnID,
+				orderBy,
+			});
+		}
+	}
+
+	console.log("index");
 	return (
 		<div className={styles.table}>
 			<div className={styles.table_command_panel}></div>
@@ -132,13 +174,14 @@ const DataGrid: FC<IDataGridProps> = ({
 							toggleParentCheckbox,
 							parentChecked,
 						}}
+						sortActions={sortFnByColumn}
 					/>
 					{isLoading ? (
 						<h1>Loading</h1>
 					) : (
 						<div className={styles.flex_table}>
-							{data &&
-								data?.products.map((elementRow, idx) => {
+							{reciveData &&
+								reciveData.map((elementRow, idx) => {
 									const rowID: number = ++idx;
 									// setGridIDs([3, 5, 7]);
 									return (

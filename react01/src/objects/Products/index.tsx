@@ -1,8 +1,8 @@
-import { useEffect, useState, FC, HTMLAttributes } from "react";
+import { useEffect, useState, FC, HTMLAttributes, createContext } from "react";
 import DataGrid from "../../ui/DataGrid";
 import axios from "axios";
 import { Checkbox } from "antd";
-import { IColumns, IProducts } from "@/ui/DataGrid/types";
+import { IColumns, IProduct, IProducts } from "@/ui/DataGrid/types";
 
 const columns = {
 	properties: {
@@ -36,40 +36,57 @@ const columns = {
 
 interface IProductsProps extends HTMLAttributes<HTMLElement> {
 	columns: IColumns;
-	data: IProducts | undefined;
+	data?: {
+		gridRows: IProduct[] | undefined;
+		gridIDs: number[] | undefined;
+		// sortFn: (columnID: string, orderBy?: string) => void;
+		// sortDirection: "ASC" | "DESC";
+	};
 	isLoading: boolean;
-	gridIDs: number[] | undefined;
 }
 const Products: FC = () => {
 	const [props, setProps] = useState<IProductsProps>({
 		columns,
-		data: undefined,
 		isLoading: true,
-		gridIDs: undefined,
 	});
+
+	// const GridContext = createContext()
+	// const [data, setData] = useState(undefined);
 
 	useEffect(() => {
 		(async () => {
-			let gridIDs;
 			try {
 				const response = await axios.get<IProducts>(
-					"https://dummyjson.com/products?limit=100"
+					"https://dummyjson.com/products"
 				);
+				// console.log("test");
 				if (response?.data) {
-					const gridIDs: number[] = response.data?.products.map((e) => e.id);
-					setProps({ columns, data: response.data, isLoading: false, gridIDs });
+					setProps({
+						columns,
+						data: {
+							gridRows: response?.data.products,
+							gridIDs: response.data?.products.map((e) => e.id),
+							// sortFn: sortFnByColumn,
+							// sortDirection: "ASC",
+						},
+						isLoading: false,
+					});
+					// console.log("DataGrid setProps");
+					// console.log(response.data.products);
 				}
 			} catch (error) {
 				console.error("Ошибка при получении данных:", error);
 				setProps({
 					columns,
-					data: undefined,
 					isLoading: false,
-					gridIDs: undefined,
 				});
 			}
 		})();
 	}, []);
+	// console.log("DataGrid Component");
+	// useEffect(()=> {
+
+	// },[data])
 
 	return (
 		<>
