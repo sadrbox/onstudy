@@ -25,7 +25,7 @@
 }
 
 .table_container {
-	max-height: 400px;
+	max-height: 435px;
 
 	overflow-x: auto;
 	overflow-y: auto;
@@ -132,16 +132,17 @@
 	}
 
 	.field {
-		display: grid;
-		padding: 0 4px;
-		align-content: center;
+		// display: grid;
+		padding: 0 4px 0 5px;
+		// align-content: center;
 	}
 }
 
 .content_cell {
 	cursor: default;
 	user-select: none;
-	align-self: center;
+	// align-self: center;
+	// align-items: end;
 
 	&:not(:last-child) {
 	}
@@ -153,10 +154,17 @@
 	}
 
 	.field {
-		display: grid;
+		// vertical-align: middle;
+		// display: flex;
+		// height: 26px; // display: grid;
+		// line-height: 16px;
 		padding: 0 4px;
-		align-content: center;
+		// justify-content: center;
+		// align-self: self-end;
+		// align-items: center;
+		// align-content: center;
 		border: 1px solid #fff;
+		// font-size: 0.9rem;
 	}
 }
 
@@ -175,9 +183,18 @@
 }
 
 .field {
-	height: 26px;
+	height: 30px;
 	display: grid;
 	padding: 0 4px;
 
 	align-content: center;
+}
+
+input[type="checkbox"] {
+	height: 18px;
+	width: 18px;
+	// outline: 3px solid red;
+	// border-radius: 6px;
+	// border: 1px solid red;
+	// align-self: center;
 }
