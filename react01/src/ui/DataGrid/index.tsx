@@ -160,6 +160,12 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 	console.log("index");
 	return (
 		<div className={styles.table}>
+			<div className={styles.table_command_panel}>
+				<button type="button" className={styles.btn}>
+					{/* <FaRegSquarePlus style={{ fontSize: "1rem" }} /> */}
+					<div style={{ marginLeft: "4px" }}>Добавить</div>
+				</button>
+			</div>
 			<div className={styles.table_command_panel}></div>
 			<div className={styles.table_wrapper}>
 				<div
@@ -167,6 +173,23 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 					// onScroll={scrollingTable}
 					// onContextMenu={contextMenu}
 				>
+					<HeaderRow props={{ columns, isScrolling }} />
+					<div className={styles.flex_table}>
+						{data.map((element, idx) => {
+							const rowId = idx + 1;
+							return (
+								<ContentRow
+									// useRef={contentRowRef}
+									key={rowId}
+									props={{
+										columns,
+										element,
+										rowId,
+									}}
+								/>
+							);
+						})}
+					</div>
 					<HeaderRow
 						props={{
 							columns,
