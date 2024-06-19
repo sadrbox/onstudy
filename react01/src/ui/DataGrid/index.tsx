@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import React, { useEffect, useState, useRef, createElement } from "react";
-=======
 import React, {
 	FC,
 	useEffect,
@@ -12,7 +9,6 @@ import React, {
 	MouseEventHandler,
 	memo,
 } from "react";
->>>>>>> 203a4c73bf3580f6e5e77177e182645d8670e225
 import styles from "./DataGrid.module.scss";
 // import { CiCirclePlus } from "react-icons/ci";
 // import { FaRegSquarePlus } from "react-icons/fa6";
@@ -164,23 +160,19 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 	console.log("index");
 	return (
 		<div className={styles.table}>
-<<<<<<< HEAD
 			<div className={styles.table_command_panel}>
 				<button type="button" className={styles.btn}>
 					{/* <FaRegSquarePlus style={{ fontSize: "1rem" }} /> */}
 					<div style={{ marginLeft: "4px" }}>Добавить</div>
 				</button>
 			</div>
-=======
 			<div className={styles.table_command_panel}></div>
->>>>>>> 203a4c73bf3580f6e5e77177e182645d8670e225
 			<div className={styles.table_wrapper}>
 				<div
 					className={styles.table_container}
 					// onScroll={scrollingTable}
 					// onContextMenu={contextMenu}
 				>
-<<<<<<< HEAD
 					<HeaderRow props={{ columns, isScrolling }} />
 					<div className={styles.flex_table}>
 						{data.map((element, idx) => {
@@ -198,7 +190,6 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 							);
 						})}
 					</div>
-=======
 					<HeaderRow
 						props={{
 							columns,
@@ -233,7 +224,6 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 								})}
 						</div>
 					)}
->>>>>>> 203a4c73bf3580f6e5e77177e182645d8670e225
 					{/* <FooterRow props={{ columns, data }} /> */}
 				</div>
 			</div>

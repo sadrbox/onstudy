@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-
-const ContentRow = ({ props: { columns, element, contentRowIdx } }) => {
-	return (
-		<div data-row={contentRowIdx} className="content-row">
-			{columns.map((column, cellIdx) => (
-				<div key={cellIdx} style={column.cssprops} className="content-cell">
-					{column.name === "id"
-						? element[column.name].toString().padStart(6, "0")
-						: element[column.name]}
-=======
 import React, {
 	useState,
 	useRef,
@@ -69,7 +57,6 @@ const ContentRow: FC<IContentRowProps> = ({
 							{getFormatValue(elementRow, column)}
 						</div>
 					)}
->>>>>>> 203a4c73bf3580f6e5e77177e182645d8670e225
 				</div>
 			))}
 		</div>
