@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef, createElement } from "react";
-import classes from "./DataGrid.module.scss";
+import styles from "./DataGrid.module.scss";
 // import { CiCirclePlus } from "react-icons/ci";
 // import { FaRegSquarePlus } from "react-icons/fa6";
 // import HeaderRow from "@/components/objects/Products/HeaderRow";
-// import ContentRow from "./ContentRow";
+import ContentRow from "./ContentRow";
 import HeaderRow from "./HeaderRow";
 // import FooterRow from "./FooterRow";
 // import { TDataGridProps } from "./types";
@@ -49,37 +49,34 @@ const DataGrid = ({ columns, data }) => {
 	// }
 
 	return (
-		<div className={classes.table}>
-			<div className={classes.table_command_panel}>
-				<button type="button" className={classes.btn}>
+		<div className={styles.table}>
+			<div className={styles.table_command_panel}>
+				<button type="button" className={styles.btn}>
 					{/* <FaRegSquarePlus style={{ fontSize: "1rem" }} /> */}
 					<div style={{ marginLeft: "4px" }}>Добавить</div>
 				</button>
 			</div>
-			<div className={classes.table_wrapper}>
+			<div className={styles.table_wrapper}>
 				<div
-					className={classes.table_container}
+					className={styles.table_container}
 					// onScroll={scrollingTable}
 				>
 					<HeaderRow props={{ columns, isScrolling }} />
-					<div className={classes.flex_table}>
-						{/* {isLoaded &&
-							data.map((element, idx) => {
-								const rowId = idx + 1;
-								return (
-									<ContentRow
-										// useRef={contentRowRef}
-										key={rowId}
-										props={{
-											columns,
-											element,
-											rowId,
-											clickRow,
-											selectTextInCell,
-										}}
-									/>
-								);
-							})} */}
+					<div className={styles.flex_table}>
+						{data.map((element, idx) => {
+							const rowId = idx + 1;
+							return (
+								<ContentRow
+									// useRef={contentRowRef}
+									key={rowId}
+									props={{
+										columns,
+										element,
+										rowId,
+									}}
+								/>
+							);
+						})}
 					</div>
 					{/* <FooterRow props={{ columns, data }} /> */}
 				</div>
