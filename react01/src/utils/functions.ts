@@ -38,13 +38,13 @@ export function getTextAlignByColType(column: ICol): CSSProperties {
 	// console.log(CSSProperties);
 	switch (column.type) {
 		case "number":
-			return { textAlign: "right" };
+			return { justifyContent: "right" };
 		case "string":
-			return { textAlign: "left" };
-		case "checkbox":
-			return { textAlign: "center" };
+			return { justifyContent: "left" };
+		case "tochange":
+			return { justifyContent: "center" };
 		default:
-			return { textAlign: "left" };
+			return {};
 	}
 }
 

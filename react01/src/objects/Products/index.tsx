@@ -4,7 +4,13 @@ import axios from "axios";
 import { atom, useAtom } from "jotai";
 import { storeGridData } from "@/utils/store.ts";
 import { Checkbox } from "antd";
-import { IColumns, IProduct, IProducts } from "@/ui/DataGrid/types";
+import {
+	IColumns,
+	IProduct,
+	IProducts,
+	IStoreGridData,
+	TStoreGridData,
+} from "@/ui/DataGrid/types";
 
 const columns = {
 	properties: {
@@ -14,9 +20,9 @@ const columns = {
 		{
 			id: "checkbox",
 			type: "checkbox",
-			field: {
-				style: { textAlign: "center" } as React.CSSProperties,
-			},
+			// field: {
+			// 	style: { textAlign: "center" } as React.CSSProperties,
+			// },
 		},
 		{
 			id: "id",
@@ -36,29 +42,35 @@ const columns = {
 	],
 };
 
-interface IProductsProps extends HTMLAttributes<HTMLElement> {
-	columns: IColumns;
-	data?: {
-		gridRows: IProduct[] | undefined;
-		gridIDs: number[] | undefined;
-		// sortFn: (columnID: string, orderBy?: string) => void;
-		// sortDirection: "ASC" | "DESC";
-	};
-	isLoading: boolean;
-}
+// interface IProductsProps extends HTMLAttributes<HTMLElement> {
+// 	// columns: IColumns;
+// 	data?: {
+// 		gridRows: IProduct[] | undefined;
+// 		gridIDs: number[] | undefined;
+// 		// sortFn: (columnID: string, orderBy?: string) => void;
+// 		// sortDirection: "ASC" | "DESC";
+// 	};
+// 	isLoading: boolean;
+// }
 const Products: FC = () => {
-	const [props, setProps] = useState<IProductsProps>({
-		columns,
-		isLoading: true,
+	// const [props, setProps] = useState<IProductsProps>({
+	// 	// columns,
+	// 	isLoading: true,
+	// });
+
+	const [gridData, setGridData] = useAtom<TStoreGridData>(storeGridData);
+	// const GridContext = createContext()
+	const [sorting, setSorting] = useState({
+		columnID: "id",
+		sortBy: "ASC",
 	});
 
-	const [gridData, setGridData] = useAtom<IProduct[] | undefined>(
-		storeGridData
-	);
-	// const GridContext = createContext()
-	const [data, setData] = useState<IProduct[] | undefined>(undefined);
-
-	// const increment = () => setCount((prev) => prev + 1);
+	function actionOrder(columnID: string = "id", sortBy: string = "ASC") {
+		// console.log({ columnID, orderBy });
+		// const previosGridData = { ...gridData };
+		// setGridData(previosGridData);
+		setSorting({ columnID, sortBy });
+	}
 	useEffect(() => {
 		(async () => {
 			try {
@@ -67,56 +79,66 @@ const Products: FC = () => {
 				);
 				// console.log("test");
 				if (response?.data) {
-					setProps({
-						columns,
-						data: {
-							gridRows: response?.data.products,
-							gridIDs: response.data?.products.map((e) => e.id),
-							// sortFn: sortFnByColumn,
-							// sortDirection: "ASC",
-						},
-						isLoading: false,
-					});
+					// setProps({
+					// 	// columns,
+					// 	data: {
+					// 		gridRows: response?.data.products,
+					// 		gridIDs: response.data?.products.map((e) => e.id),
+					// 		// sortFn: sortFnByColumn,
+					// 		// sortDirection: "ASC",
+					// 	},
+					// 	isLoading: false,
+					// });
 					// const d: IProduct[] = response.data?.products;
 					// console.log("DataGrid setProps");
 					// setGridData(45);
-					// setGridData(response.data.products);
+					// console.log(columns);
+					setGridData({
+						columns: columns,
+						IDs: response.data?.products.map((e) => e.id),
+						rows: response.data?.products,
+						order: {
+							action: actionOrder,
+							...sorting,
+						},
+					});
 					// console.log(gridData);
 				}
 			} catch (error) {
 				console.error("Ошибка при получении данных:", error);
-				setProps({
-					columns,
-					isLoading: false,
-				});
+				// setProps({
+				// 	// columns,
+				// 	isLoading: false,
+				// });
 			}
 		})();
-	});
+	}, [setGridData, sorting]);
 	// console.log("DataGrid Component");
-	useEffect(() => {
-		setGridData(props.data?.gridRows);
-	}, [data]);
+	// useEffect(() => {
+	// 	// setGridData(props.data?.gridRows);
+	// }, [data]);
 
-	function fn2() {
-		const d = props.data?.gridRows;
-		if (d) {
-			setData(d);
-			console.log(d?.length);
-		}
-		// console.log("asdf");
-		// alert("sdfa");
-	}
+	// function fn2() {
+	// 	const d = props.data?.gridRows;
+	// 	if (d) {
+	// 		setData(d);
+	// 		console.log(d?.length);
+	// 	}
+	// 	// console.log("asdf");
+	// 	// alert("sdfa");
+	// }
 	return (
 		<>
-			{/* <DataGrid {...props} /> */}
-			<button type="button" onClick={() => fn2()}>
-				Click Me
-			</button>
+			{gridData?.rows && <DataGrid />}
 
-			{gridData?.length &&
-				gridData.map((e) => {
+			{/* <button type="button" onClick={() => fn2()}>
+				Click Me
+			</button> */}
+
+			{/* {gridData?.gridRows &&
+				gridData?.gridRows.map((e) => {
 					return <p key={Math.random()}>{e.id}</p>;
-				})}
+				})} */}
 		</>
 	);
 };

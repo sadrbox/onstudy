@@ -1,5 +1,17 @@
 import { CSSProperties } from "react";
 
+export type IStoreGridData = {
+	columns: IColumns;
+	IDs: number[];
+	rows: IProduct[];
+	order: {
+		action: (columnID: string, orderBy: string) => void;
+		columnID: string;
+		sortBy: string;
+	};
+};
+export type TStoreGridData = IStoreGridData | undefined;
+
 type TGridColumns = {
 	id: string;
 	title: string;

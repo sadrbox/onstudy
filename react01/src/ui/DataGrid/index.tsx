@@ -8,9 +8,11 @@ import React, {
 	ReactElement,
 	MouseEventHandler,
 	memo,
+	HTMLAttributes,
 } from "react";
 import styles from "./DataGrid.module.scss";
 
+import { useAtom } from "jotai";
 import { storeGridData } from "@/utils/store";
 // import { CiCirclePlus } from "react-icons/ci";
 // import { FaRegSquarePlus } from "react-icons/fa6";
@@ -27,97 +29,110 @@ import {
 	IProduct,
 	TDataGridProps,
 	TJsonData,
+	IStoreGridData,
+	TStoreGridData,
 } from "./types";
-import { useAtom } from "jotai";
 
-interface IDataGridProps {
-	columns: IColumns;
-	data?: {
-		gridRows: IProduct[] | undefined;
-		gridIDs: number[] | undefined;
-		// sortFn: (columnID: string, orderBy?: string) => void;
-		// sortDirection: "ASC" | "DESC";
-	};
-	isLoading: boolean;
+// interface IDataGridProps {
+// 	columns: IColumns;
+// 	data?: {
+// 		gridRows: IProduct[] | undefined;
+// 		gridIDs: number[] | undefined;
+// 		// sortFn: (columnID: string, orderBy?: string) => void;
+// 		// sortDirection: "ASC" | "DESC";
+// 	};
+// 	isLoading: boolean;
+// }
+interface ISelectRow {
+	row: HTMLElement;
+	cell: HTMLElement;
 }
-interface IFocusRow {
-	row: HTMLElement | null;
-	cell: HTMLElement | null;
-}
 
-type TSortFn = (columnID: string, orderBy?: string) => void;
+// type TSortFn = (columnID: string, orderBy?: string) => void;
 
-const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
-	const [reciveData, setReciveData] = useState<IProduct[] | undefined>(
-		data?.gridRows
-	);
+const DataGrid: FC = () => {
+	const [gridData, setGridData] = useAtom<TStoreGridData>(storeGridData);
+
+	// const [reciveData, setReciveData] = useState<IProduct[] | undefined>(
+	// 	gridData?.rows
+	// );
 	const [sorting, setSorting] = useState({ columnID: "id", orderBy: "ASC" });
 	const [parentChecked, setParentChecked] = useState<boolean>(false);
 	const [checkedRows, setCheckedRows] = useState<number[]>([]);
-	const [onFocusRow, setFocusRow] = useState<IFocusRow>({
-		row: null,
-		cell: null,
-	});
+
+	const [selectRow, setSelectRow] = useState<ISelectRow | null>(null);
 
 	const [isScrolling, setIsScrolling] = useState(false);
-	const [gridData, setGridData] = useAtom(storeGridData);
+	// const [gridData, setGridData] = useAtom(storeGridData);
 
 	useEffect(() => {
-		setReciveData(data?.gridRows);
+		// setReciveData(gridData?.gridRows);
 	});
 	// console.log(data?.gridIDs);
-	useEffect(() => {
-		const gridRows = reciveData ? reciveData : [];
-		// setReciveData(gridRows);
-		console.log(sorting);
-		setReciveData(
-			gridRows.sort((a, b) => {
-				const aV = a[sorting.columnID];
-				const bV = b[sorting.columnID];
-				const gridOrder = {
-					"ASC": aV - bV,
-					"DESC": bV - aV,
-				};
-				// console.log(sorting.orderBy);
-				return gridOrder[sorting.orderBy];
-			})
-		);
-	}, [sorting]);
+	// useEffect(() => {
+	// 	const gridRows = gridData?.gridRows ? gridData?.gridRows : [];
+	// 	// setReciveData(gridRows);
+	// 	console.log(sorting);
+	// 	setReciveData(
+	// 		gridRows.sort((a, b) => {
+	// 			const aV = a[gridData?.gridOrder.id];
+	// 			const bV = b[sorting.columnID];
+	// 			const gridOrder = {
+	// 				"ASC": aV - bV,
+	// 				"DESC": bV - aV,
+	// 			};
+	// 			// console.log(sorting.orderBy);
+	// 			return gridOrder[sorting.orderBy];
+	// 		})
+	// 	);
+	// }, [sorting]);
 
-	useEffect(() => {
-		// console.log(data?.sortFn);
-		// console.log(data?.dataRows);
-		// const countIDs: number[] = data?.products.map((e) => e.id);
-		setCheckedRows(parentChecked && data?.gridIDs ? data.gridIDs : []);
-	}, [parentChecked]);
+	// useEffect(() => {
+	// 	// console.log(data?.sortFn);
+	// 	// console.log(data?.dataRows);
+	// 	// const countIDs: number[] = data?.products.map((e) => e.id);
+	// 	// setCheckedRows(parentChecked && data?.gridIDs ? data.gridIDs : []);
+	// }, [parentChecked]);
 
-	function clickRow(event: React.MouseEvent, idx: number): void {
-		console.log(idx);
-		const parentId = `div[data-row="${idx}"]`;
-		const rowTarget = event.target as HTMLElement;
-		const row = rowTarget.closest<HTMLElement>(parentId);
-		const rowDataset = row.dataset;
-		const rowId = +rowDataset.row;
-		const prevRowId = onFocusRow?.row ? +onFocusRow.row.dataset.row : undefined;
-		// row.style.userSelect = "none";
+	function clickRow(event: React.MouseEvent, currentRowId: number): void {
+		if (typeof currentRowId !== "number") return;
 
-		// console.log(row);
-		const cell = event.target as HTMLElement;
-		const cellId = +cell.dataset.cell;
-		// const prevCellId = onFocusRow?.cell
-		// 	? +onFocusRow.cell.dataset.cell
-		// 	: undefined;
+		const parentRow = `div[data-row="${currentRowId}"]`;
+		const currentCell = event.target as HTMLElement;
+		const currentRow: HTMLElement | null =
+			currentCell.closest<HTMLElement>(parentRow);
+		if (currentRow === null) return;
+		// const currentRowDataset = currentRow.dataset as DOMStringMap;
+		// if (currentRowDataset.row !== undefined) {
+		// const currentRowId: number = currentRowDataset.row
+		// 	? parseInt(currentRowDataset.row)
+		// 	: 0;
 
-		if (prevRowId) {
-			onFocusRow.row.style.backgroundColor = "transparent";
-			onFocusRow.cell.style.backgroundColor = "transparent";
+		// previos values
+		// const previosRowDataset = selectRow?.row.dataset as DOMStringMap;
+		// const previosRowId: number = previosRowDataset?.row
+		// ? parseInt(previosRowDataset?.row)
+		// : 0;
+		// const previosCellDataset = selectRow?.cell.dataset as DOMStringMap;
+
+		// current cell
+		const currentCellDataset = currentCell.dataset as DOMStringMap;
+		const currentCellId = currentCellDataset.cell
+			? parseInt(currentCellDataset.cell)
+			: 0;
+
+		if (selectRow) {
+			selectRow.row.style.backgroundColor = "transparent";
+			selectRow.cell.style.backgroundColor = "transparent";
 		}
-		row.style.backgroundColor = "#daf0ff";
-		cell.style.backgroundColor = "#b5e1ff";
+		currentRow.style.backgroundColor = "#daf0ff";
+		currentCell.style.backgroundColor = "#b5e1ff";
 
-		if (!!rowId || !!cellId) {
-			setFocusRow({ row, cell });
+		if (!!currentRowId || !!currentCellId) {
+			setSelectRow({ row: currentRow, cell: currentCell });
 		}
+		// }
+		// }
 	}
 
 	function toggleCheckbox(rowID: number): void {
@@ -160,7 +175,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 			});
 		}
 	}
-
+	// console.log(gridData?.columns);
 	// console.log("index");
 	return (
 		<div className={styles.table}>
@@ -172,20 +187,20 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 					// onContextMenu={contextMenu}
 				>
 					<HeaderRow
-						props={{
-							columns,
-							isScrolling,
-							toggleParentCheckbox,
-							parentChecked,
-						}}
-						sortActions={sortFnByColumn}
+					// props={{
+					// 	columns: gridData?.columns,
+					// 	isScrolling,
+					// 	toggleParentCheckbox,
+					// 	parentChecked,
+					// }}
+					// sortActions={sortFnByColumn}
 					/>
-					{isLoading ? (
+					{!gridData?.rows ? (
 						<h1>Loading</h1>
 					) : (
 						<div className={styles.flex_table}>
-							{gridData &&
-								gridData.map((elementRow, idx) => {
+							{gridData?.rows &&
+								gridData?.rows.map((elementRow, idx) => {
 									const rowID: number = ++idx;
 									// setGridIDs([3, 5, 7]);
 									return (
@@ -193,7 +208,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 											// useRef={contentRowRef}
 											key={rowID}
 											props={{
-												columns,
+												columns: gridData.columns,
 												elementRow,
 												rowID,
 												clickRow,
