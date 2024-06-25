@@ -10,6 +10,8 @@ import React, {
 	memo,
 } from "react";
 import styles from "./DataGrid.module.scss";
+
+import { storeGridData } from "@/utils/store";
 // import { CiCirclePlus } from "react-icons/ci";
 // import { FaRegSquarePlus } from "react-icons/fa6";
 // import HeaderRow from "@/components/objects/Products/HeaderRow";
@@ -26,6 +28,7 @@ import {
 	TDataGridProps,
 	TJsonData,
 } from "./types";
+import { useAtom } from "jotai";
 
 interface IDataGridProps {
 	columns: IColumns;
@@ -57,6 +60,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 	});
 
 	const [isScrolling, setIsScrolling] = useState(false);
+	const [gridData, setGridData] = useAtom(storeGridData);
 
 	useEffect(() => {
 		setReciveData(data?.gridRows);
@@ -157,7 +161,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 		}
 	}
 
-	console.log("index");
+	// console.log("index");
 	return (
 		<div className={styles.table}>
 			<div className={styles.table_command_panel}></div>
@@ -180,8 +184,8 @@ const DataGrid: FC<IDataGridProps> = ({ columns, data, isLoading }) => {
 						<h1>Loading</h1>
 					) : (
 						<div className={styles.flex_table}>
-							{reciveData &&
-								reciveData.map((elementRow, idx) => {
+							{gridData &&
+								gridData.map((elementRow, idx) => {
 									const rowID: number = ++idx;
 									// setGridIDs([3, 5, 7]);
 									return (

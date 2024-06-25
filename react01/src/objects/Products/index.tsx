@@ -1,6 +1,8 @@
 import { useEffect, useState, FC, HTMLAttributes, createContext } from "react";
 import DataGrid from "../../ui/DataGrid";
 import axios from "axios";
+import { atom, useAtom } from "jotai";
+import { storeGridData } from "@/utils/store.ts";
 import { Checkbox } from "antd";
 import { IColumns, IProduct, IProducts } from "@/ui/DataGrid/types";
 
@@ -50,9 +52,13 @@ const Products: FC = () => {
 		isLoading: true,
 	});
 
+	const [gridData, setGridData] = useAtom<IProduct[] | undefined>(
+		storeGridData
+	);
 	// const GridContext = createContext()
-	// const [data, setData] = useState(undefined);
+	const [data, setData] = useState<IProduct[] | undefined>(undefined);
 
+	// const increment = () => setCount((prev) => prev + 1);
 	useEffect(() => {
 		(async () => {
 			try {
@@ -71,8 +77,11 @@ const Products: FC = () => {
 						},
 						isLoading: false,
 					});
+					// const d: IProduct[] = response.data?.products;
 					// console.log("DataGrid setProps");
-					// console.log(response.data.products);
+					// setGridData(45);
+					// setGridData(response.data.products);
+					// console.log(gridData);
 				}
 			} catch (error) {
 				console.error("Ошибка при получении данных:", error);
@@ -82,15 +91,32 @@ const Products: FC = () => {
 				});
 			}
 		})();
-	}, []);
+	});
 	// console.log("DataGrid Component");
-	// useEffect(()=> {
+	useEffect(() => {
+		setGridData(props.data?.gridRows);
+	}, [data]);
 
-	// },[data])
-
+	function fn2() {
+		const d = props.data?.gridRows;
+		if (d) {
+			setData(d);
+			console.log(d?.length);
+		}
+		// console.log("asdf");
+		// alert("sdfa");
+	}
 	return (
 		<>
-			<DataGrid {...props} />
+			{/* <DataGrid {...props} /> */}
+			<button type="button" onClick={() => fn2()}>
+				Click Me
+			</button>
+
+			{gridData?.length &&
+				gridData.map((e) => {
+					return <p key={Math.random()}>{e.id}</p>;
+				})}
 		</>
 	);
 };
