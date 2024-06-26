@@ -4,7 +4,7 @@ import { FaSortAmountDown } from "react-icons/fa";
 import Checkbox from "antd/es/checkbox/Checkbox";
 import styles from "./DataGrid.module.scss";
 import UICheckbox from "../UICheckbox";
-import { ICol, IColumns, TJsonData, TStoreGridData } from "./types";
+import { ICol, IColumns, IProduct, TJsonData, TStoreGridData } from "./types";
 import { FC } from "react";
 import { useAtom } from "jotai";
 import { storeGridData } from "@/utils/store";
@@ -37,6 +37,16 @@ const HeaderRow: FC = () => {
 	// 	: "";
 	// const t = true;
 	// console.log(sortActions);
+	const handleSort = (columnID: keyof IProduct | string): void => {
+		const params = gridData?.order as {
+			action: (columnID: keyof IProduct, orderBy: "ASC" | "DESC") => void;
+			columnID: keyof IProduct;
+		};
+		const actionSort = params?.action;
+		if (params?.columnID === columnID) {
+			actionSort(columnID, "DESC");
+		}
+	};
 	return (
 		<div
 			id="header_row"
@@ -56,9 +66,7 @@ const HeaderRow: FC = () => {
 								<>{column.title}</>
 								<FaSortAmountDown
 									style={{ marginLeft: 5 }}
-									onClick={() =>
-										gridData.order.action(column.id, gridData?.order.sortBy)
-									}
+									onClick={() => handleSort(column.id)}
 								/>
 							</>
 						)}

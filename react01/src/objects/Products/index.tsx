@@ -42,6 +42,17 @@ const columns = {
 	],
 };
 
+type TSortingState = {
+	columnID: keyof IProduct;
+	sortBy: "ASC" | "DESC";
+};
+type IProductKey = keyof IProduct;
+type TProductValue<K extends IProductKey> = IProduct[K];
+type TSortingGridDataRows = <K extends IProductKey>(
+	gridDataRows: IProduct[],
+	columnID: K,
+	orderBy: "ASC" | "DESC"
+) => IProduct[];
 // interface IProductsProps extends HTMLAttributes<HTMLElement> {
 // 	// columns: IColumns;
 // 	data?: {
@@ -60,16 +71,54 @@ const Products: FC = () => {
 
 	const [gridData, setGridData] = useAtom<TStoreGridData>(storeGridData);
 	// const GridContext = createContext()
-	const [sorting, setSorting] = useState({
+	const [sorting, setSorting] = useState<TSortingState>({
 		columnID: "id",
 		sortBy: "ASC",
 	});
 
-	function actionOrder(columnID: string = "id", sortBy: string = "ASC") {
+	const sortGridDataRows: TSortingGridDataRows = (
+		gridDataRows,
+		columnID,
+		orderBy
+	) => {
+		return gridDataRows.sort((a, b): number => {
+			const aValue: TProductValue<typeof columnID> = a[columnID];
+			const bValue: TProductValue<typeof columnID> = b[columnID];
+
+			if (typeof aValue === "string" && typeof bValue === "string") {
+				return orderBy === "ASC"
+					? aValue.localeCompare(bValue)
+					: bValue.localeCompare(aValue);
+			} else if (typeof aValue === "number" && typeof bValue === "number") {
+				if (aValue < bValue) {
+					return orderBy === "ASC" ? -1 : 1;
+				}
+				if (aValue > bValue) {
+					return orderBy === "ASC" ? 1 : -1;
+				}
+			}
+			return 0;
+		});
+	};
+
+	function actionOrder(
+		columnID: keyof IProduct = "id",
+		sortBy: string = "ASC"
+	) {
 		// console.log({ columnID, orderBy });
 		// const previosGridData = { ...gridData };
 		// setGridData(previosGridData);
-		setSorting({ columnID, sortBy });
+		setSorting((prev) => {
+			return {
+				columnID,
+				sortBy:
+					prev.columnID === columnID
+						? sortBy === "ASC"
+							? "DESC"
+							: "ASC"
+						: "ASC",
+			};
+		});
 	}
 	useEffect(() => {
 		(async () => {
@@ -79,68 +128,28 @@ const Products: FC = () => {
 				);
 				// console.log("test");
 				if (response?.data) {
-					// setProps({
-					// 	// columns,
-					// 	data: {
-					// 		gridRows: response?.data.products,
-					// 		gridIDs: response.data?.products.map((e) => e.id),
-					// 		// sortFn: sortFnByColumn,
-					// 		// sortDirection: "ASC",
-					// 	},
-					// 	isLoading: false,
-					// });
-					// const d: IProduct[] = response.data?.products;
-					// console.log("DataGrid setProps");
-					// setGridData(45);
-					// console.log(columns);
+					const sortedGridDataRows = sortGridDataRows(
+						response.data?.products,
+						sorting?.columnID,
+						sorting?.sortBy
+					);
 					setGridData({
 						columns: columns,
 						IDs: response.data?.products.map((e) => e.id),
-						rows: response.data?.products,
+						rows: sortedGridDataRows,
 						order: {
 							action: actionOrder,
 							...sorting,
 						},
 					});
-					// console.log(gridData);
 				}
 			} catch (error) {
 				console.error("Ошибка при получении данных:", error);
-				// setProps({
-				// 	// columns,
-				// 	isLoading: false,
-				// });
 			}
 		})();
-	}, [setGridData, sorting]);
-	// console.log("DataGrid Component");
-	// useEffect(() => {
-	// 	// setGridData(props.data?.gridRows);
-	// }, [data]);
+	}, [sorting]);
 
-	// function fn2() {
-	// 	const d = props.data?.gridRows;
-	// 	if (d) {
-	// 		setData(d);
-	// 		console.log(d?.length);
-	// 	}
-	// 	// console.log("asdf");
-	// 	// alert("sdfa");
-	// }
-	return (
-		<>
-			{gridData?.rows && <DataGrid />}
-
-			{/* <button type="button" onClick={() => fn2()}>
-				Click Me
-			</button> */}
-
-			{/* {gridData?.gridRows &&
-				gridData?.gridRows.map((e) => {
-					return <p key={Math.random()}>{e.id}</p>;
-				})} */}
-		</>
-	);
+	return <>{gridData?.rows && <DataGrid />}</>;
 };
 
 export default Products;
