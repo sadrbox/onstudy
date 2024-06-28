@@ -1,0 +1,22 @@
+{
+  "overrides": [
+    {
+      "files": "*.ts",
+      "options": {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false,
+        "semi": true,
+        "useTabs": false,
+        "arrowParens": "always",
+        "endOfLine": "auto",
+        "quoteProps": "as-needed",
+        "object-curly-newline": "never",
+        "typescript.singleQuote": false,
+        "typescript.trailingComma": "none",
+        "typescript.bracketSpacing": false
+      }
+    }
+  ]
+}

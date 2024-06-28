@@ -1,14 +1,10 @@
-import { PrimitiveAtom, SetStateAction } from "jotai";
-// import { IProduct } from "./../ui/DataGrid/types";
-import {
-	IProduct,
-	IColumns,
-	IStoreGridData,
-	TStoreGridData,
-} from "@/ui/DataGrid/types";
-import { atom, Atom } from "jotai";
-// type TStoreGridData = Atom<<IProduct[]>, SetStateAction<IProduct[]>> | null;
+import { TGridSorting, TStoreGridData } from '@/ui/DataGrid/types';
+import { atom } from 'jotai';
 
-const emptyStoreGridData = undefined;
+export const storeGridData = atom(undefined as TStoreGridData);
 
-export const storeGridData = atom(emptyStoreGridData as TStoreGridData);
+const initSorting: TGridSorting = {
+  columnID: 'id',
+  orderBy: 'ASC',
+};
+export const storeGridSorting = atom(initSorting);

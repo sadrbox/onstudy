@@ -1,121 +1,122 @@
-import { CSSProperties } from "react";
+import { CSSProperties } from 'react';
 export type TGridSorting = {
-	columnID: string;
-	sortBy: string;
+  columnID: keyof IProduct;
+  orderBy: 'ASC' | 'DESC';
 };
-export type IStoreGridData = {
-	columns: IColumns;
-	IDs: number[];
-	rows: IProduct[];
-	order: {
-		action: (columnID: string, orderBy: string) => void;
-		columnID: string;
-		sortBy: string;
-	};
-};
-export type TStoreGridData = IStoreGridData;
+export type TStoreGridData =
+  | {
+      columns: IColumns;
+      IDs: number[];
+      rows: IProduct[];
+      order: {
+        action: (columnID: keyof IProduct, orderBy: 'ASC' | 'DESC') => void;
+        columnID: string;
+        orderBy: 'ASC' | 'DESC';
+      };
+    }
+  | undefined;
 
 type TGridColumns = {
-	id: string;
-	title: string;
-	width: string | number;
+  id: string;
+  title: string;
+  width: string | number;
 };
-
+export type TGridDataRows = IProduct[] | undefined;
 export type TJsonData = {
-	id: string | number;
-	[key: string]: string | number;
+  id: string | number;
+  [key: string]: string | number;
 };
 
 export type TDataGridProps = {
-	columns: IColumns;
-	data: TJsonData[] | null;
+  columns: IColumns;
+  data: TJsonData[] | null;
 };
 
 export interface IColumns {
-	properties: {
-		width: string;
-	};
-	cols: ICol[];
+  properties: {
+    width: string;
+  };
+  cols: ICol[];
 }
 
 export interface ICol {
-	id: string;
-	title?: string | React.JSX.Element;
-	type: string;
-	field?: {
-		style?: CSSProperties;
-	};
+  id: string;
+  title?: string | React.JSX.Element;
+  type: string;
+  field?: {
+    style?: CSSProperties;
+  };
 }
 
 export interface IElementData {
-	element: TJsonData;
-	idx: string;
+  element: TJsonData;
+  idx: string;
 }
 export interface ContentRowProps {
-	props: {
-		columns: IColumns;
-		element: TJsonData;
-		idx: number;
-	};
+  props: {
+    columns: IColumns;
+    element: TJsonData;
+    idx: number;
+  };
 }
 export interface IContentRowProps {
-	key: number;
-	props: {
-		columns: IColumns;
-		element: TJsonData;
-		idx: number;
-	};
+  key: number;
+  props: {
+    columns: IColumns;
+    element: TJsonData;
+    idx: number;
+  };
 }
 
 export interface IProducts {
-	products: IProduct[];
-	total: number;
-	skip: number;
-	limit: number;
+  products: IProduct[];
+  total: number;
+  skip: number;
+  limit: number;
 }
 
 export interface IProduct {
-	id: number;
-	title: string;
-	description: string;
-	category: string;
-	price: number;
-	discountPercentage: number;
-	rating: number;
-	stock: number;
-	tags: string[];
-	brand?: string;
-	sku: string;
-	weight: number;
-	dimensions: Dimensions;
-	warrantyInformation: string;
-	shippingInformation: string;
-	availabilityStatus: string;
-	reviews: Review[];
-	returnPolicy: string;
-	minimumOrderQuantity: number;
-	meta: Meta;
-	images: string[];
-	thumbnail: string;
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  tags: string[];
+  brand?: string;
+  sku: string;
+  weight: number;
+  dimensions: Dimensions;
+  warrantyInformation: string;
+  shippingInformation: string;
+  availabilityStatus: string;
+  reviews: Review[];
+  returnPolicy: string;
+  minimumOrderQuantity: number;
+  meta: Meta;
+  images: string[];
+  thumbnail: string;
 }
 
 export interface Dimensions {
-	width: number;
-	height: number;
-	depth: number;
+  width: number;
+  height: number;
+  depth: number;
 }
 
 export interface Review {
-	rating: number;
-	comment: string;
-	date: string;
-	reviewerName: string;
-	reviewerEmail: string;
+  rating: number;
+  comment: string;
+  date: string;
+  reviewerName: string;
+  reviewerEmail: string;
 }
 
 export interface Meta {
-	createdAt: string;
-	updatedAt: string;
-	barcode: string;
-	qrCode: string;
+  createdAt: string;
+  updatedAt: string;
+  barcode: string;
+  qrCode: string;
 }

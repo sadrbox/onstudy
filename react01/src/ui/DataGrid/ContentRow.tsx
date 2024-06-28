@@ -1,66 +1,72 @@
 import React, {
-	useState,
-	useRef,
-	useEffect,
-	FC,
-	MouseEvent,
-	HTMLAttributes,
+  useState,
+  useRef,
+  useEffect,
+  FC,
+  MouseEvent,
+  HTMLAttributes,
+  RefObject,
 } from "react";
 import styles from "./DataGrid.module.scss";
-import { getFormatValue, getTextAlignByColType } from "@/utils/functions";
+import { getFormatValue, getAlignByColType } from "@/utils/functions";
 import { IColumns, IProduct, ICol } from "./types";
 // import { Checkbox } from "antd";
 // import UICheckbox from "../UICheckbox/index";
 import UICheckbox from "@/ui/UICheckbox/index";
 
 interface IContentRowProps {
-	props: {
-		columns: IColumns;
-		elementRow: IProduct;
-		rowID: number;
-		clickRow: (event: React.MouseEvent, rowID: number) => void;
-		toggleCheckbox: (rowID: number) => void;
-		isCheckedRow: (rowID: number) => boolean;
-	};
+  props: {
+    columns: IColumns;
+    elementRow: IProduct;
+    clickRow: (
+      event: React.MouseEvent,
+      rowRef: RefObject<HTMLDivElement>,
+    ) => void;
+    toggleCheckbox: (rowID: number) => void;
+    isCheckedRow: (rowID: number) => boolean;
+  };
 }
 
 const ContentRow: FC<IContentRowProps> = ({
-	props: { columns, elementRow, rowID, clickRow, toggleCheckbox, isCheckedRow },
+  props: { columns, elementRow, clickRow, toggleCheckbox, isCheckedRow },
 }) => {
-	return (
-		<div
-			data-row={rowID}
-			className={styles.content_row}
-			style={{ gridTemplateColumns: columns.properties.width }}
-			// onDoubleClick={(e) => selectTextInCell(e)}
-		>
-			{columns.cols.map((column, colIdx) => (
-				<div
-					key={colIdx}
-					data-cell={colIdx}
-					// style={column.cssCell}
-					className={styles.content_cell}
-				>
-					{column?.type === "checkbox" ? (
-						<div className={styles.field} style={getTextAlignByColType(column)}>
-							<UICheckbox
-								onChange={() => toggleCheckbox(rowID)}
-								checked={isCheckedRow(rowID)}
-							/>
-						</div>
-					) : (
-						<div
-							className={styles.field}
-							style={getTextAlignByColType(column)}
-							onClick={(e) => clickRow(e, rowID)}
-						>
-							{getFormatValue(elementRow, column)}
-						</div>
-					)}
-				</div>
-			))}
-		</div>
-	);
+  const rowRef = useRef<HTMLDivElement>(null);
+  // const cellRef = useRef<HTMLDivElement>(null);
+  return (
+    <div
+      ref={rowRef}
+      data-row={elementRow.id}
+      className={styles.content_row}
+      style={{ gridTemplateColumns: columns.properties.width }}
+    >
+      {columns.cols.map((column, colIdx) => (
+        <div
+          // ref={cellRef}
+          key={colIdx}
+          data-cell={colIdx}
+          data-field={column.type !== "checkbox" ? true : false}
+          className={styles.content_cell}
+        >
+          <div
+            className={styles.field}
+            onClick={(e) => clickRow(e, rowRef)}
+            style={getAlignByColType(column)}
+          >
+            {column?.type === "checkbox" ? (
+              <UICheckbox
+                onChange={() => toggleCheckbox(elementRow.id)}
+                checked={isCheckedRow(elementRow.id)}
+              />
+            ) : (
+              <span style={getAlignByColType(column)}>
+                {getFormatValue(elementRow, column)}
+              </span>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default ContentRow;
