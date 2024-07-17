@@ -5,7 +5,7 @@ import { TiArrowSortedUp } from "react-icons/ti";
 import { TiArrowSortedDown } from "react-icons/ti";
 
 import styles from "./DataGrid.module.scss";
-import UICheckbox from "../UICheckbox";
+import Checkbox from "./Checkbox";
 import {
   ICol,
   IColumns,
@@ -25,7 +25,7 @@ interface IHeaderDataGridProps {
   props: {
     columns: IColumns;
     isScrolling: boolean;
-    toggleParentCheckbox: () => void;
+    onChangeAllCheckbox: () => void;
     isAllChecked: boolean;
     // sorting: TGridSorting;
     handleGridSort: (columnID: keyof IProduct) => void;
@@ -35,7 +35,7 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
   props: {
     columns,
     isScrolling,
-    toggleParentCheckbox,
+    onChangeAllCheckbox,
     isAllChecked,
     handleGridSort,
   },
@@ -51,12 +51,16 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
   // 	? `${styles.header_row__scrolling} ${styles.header_row}`
   // 	: "";
   // const t = true;
-  // console.log(sorting.columnID);
+  // console.log(isScrolling);
 
+  const scrollingStyle = isScrolling
+    ? [styles.header_row__scrolling, styles.header_row].join(" ")
+    : styles.header_row;
   return (
     <div
       id="header_row"
-      className={isScrolling ? styles.header_row__scrolling : styles.header_row}
+      // className={isScrolling ? styles.header_row__scrolling : styles.header_row}
+      className={scrollingStyle}
       style={{ gridTemplateColumns: columns.properties.width }}
     >
       {columns.cols.map((column, headerRowIdx) => (
@@ -68,8 +72,9 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
             }
           >
             {column.type === "checkbox" ? (
-              <UICheckbox
-                onChange={() => toggleParentCheckbox()}
+              <Checkbox
+                tabIndex={0}
+                onChangeAllCheckbox={() => onChangeAllCheckbox()}
                 checked={isAllChecked}
               />
             ) : (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FC, useMemo, useCallback } from "react";
-import DataGrid from "../../ui/DataGrid";
+import DataGrid from "../../ui/GridDataTable";
 import axios from "axios";
 import { atom, useAtom } from "jotai";
 import { storeGridData, storeGridSorting } from "@/utils/store.ts";
@@ -11,7 +11,7 @@ import {
   TGridDataRows,
   TGridSorting,
   TStoreGridData,
-} from "@/ui/DataGrid/types";
+} from "@/ui/GridDataTable/types";
 
 const columns = {
   properties: {
