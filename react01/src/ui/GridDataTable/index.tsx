@@ -1,16 +1,4 @@
-import React, {
-  FC,
-  useEffect,
-  useState,
-  useRef,
-  createElement,
-  ReactNode,
-  ReactElement,
-  MouseEventHandler,
-  memo,
-  HTMLAttributes,
-  RefObject,
-} from "react";
+import React, { FC, useEffect, useState, useRef, RefObject } from "react";
 import styles from "./DataGrid.module.scss";
 
 import { useAtom } from "jotai";
@@ -21,6 +9,7 @@ import { storeGridData } from "@/utils/store";
 import ContentRow from "./ContentRow";
 import HeaderRow from "./HeaderRow";
 // import FooterRow from "./FooterRow";
+import ContextMenu from "./ContextMenu/index";
 import {
   IColumns,
   IProduct,
@@ -43,6 +32,15 @@ interface IDataGridProps {
     handleGridSort: (columnID: keyof IProduct) => void;
   };
 }
+
+export interface IContextMenuPosition {
+  x: number;
+  y: number;
+}
+export interface IContextMenuValue {
+  value: string;
+}
+
 const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
   // const [gridData, setGridData] = useAtom<TStoreGridData>(storeGridData);
   // const [gridData, setGridData] = useState<TGridDataRows>(undefined);
@@ -60,10 +58,11 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
   const [selectRow, setSelectRow] = useState<ISelectRow | null>(null);
 
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
-  const [contextMenuPosition, setContextMenuPosition] = useState<{
-    x: number;
-    y: number;
-  } | null>(null);
+  const [contextMenuValue, setContextMenuValue] = useState<string>("");
+  const [contextMenuPosition, setContextMenuPosition] =
+    useState<IContextMenuPosition | null>(null);
+  const [contextMenuVisible, setContextMenuVisible] = useState(false);
+
   const gridContainerRef = useRef<HTMLDivElement | null>(null);
   const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
   useEffect(() => {
@@ -71,6 +70,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
     const handleScroll = () => {
       if (timeoutIdRef.current) {
         clearTimeout(timeoutIdRef.current);
+        setIsScrolling(false);
       }
 
       setIsScrolling(true);
@@ -99,7 +99,13 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
   useEffect(() => {
     if (dataRows?.length) {
       setCheckedRows(() => {
-        return isAllChecked ? dataRows?.map((e) => e.id) : [];
+        // if (isAllChecked) {
+        //   return dataRows?.map((e) => e.id);
+        // } else {
+
+        //   return [];
+        // }
+        return isAllChecked ? dataRows?.map((e) => e.id) : [...checkedRows];
       });
     }
     // const countIDs: number[] = dataRows.map((e) => e.id);
@@ -150,6 +156,17 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
   };
 
   function onChangeCheckbox(rowID: number): void {
+    if (dataRows) {
+      // const rows = dataRows.map((e) => e.id);
+      if (isAllChecked) {
+        setIsAllChecked(false);
+      }
+      // setCheckedRows(checkedRows.filter((i) => i !== rowID));
+      // }
+      // if (dataRows.length > checkedRows.length) {
+      //   setIsAllChecked(false);
+      // }
+    }
     // console.log(event.target.attributes.rowid.value);
 
     // console.log(rowID);
@@ -181,9 +198,15 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
   function isCheckedRow(rowID: number): boolean {
     return checkedRows.includes(rowID);
   }
-  function contextMenuPositionHandle(position: { x: number; y: number }): void {
-    const { x, y } = position;
-    setContextMenuPosition({ x, y });
+  function contextMenuPositionHandle(
+    position: IContextMenuPosition,
+    value: string,
+  ): void {
+    // const { x, y } = position;
+    // console.log(value);
+    setContextMenuPosition(position);
+    setContextMenuValue(value);
+    setContextMenuVisible(true);
   }
 
   return (
@@ -194,7 +217,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
           ref={gridContainerRef}
           className={styles.table_container}
           // onScroll={() => setIsScrolling(true)}
-          onContextMenu={(event) => event.preventDefault()}
+          // onContextMenu={(event) => event.preventDefault()}
         >
           <HeaderRow
             props={{
@@ -235,16 +258,11 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
         </div>
       </div>
       {contextMenuPosition && (
-        <div
-          style={{
-            position: "absolute",
-            top: contextMenuPosition.y,
-            left: contextMenuPosition.x,
-            backgroundColor: "white",
-            border: "1px solid black",
-            padding: "10px",
-            // boxShadow: "0px 0px 5px rgba(0,0,0,0.5)",
-          }}
+        <ContextMenu
+          // onMouseLeave={() => setContextMenuVisible(false)}
+          position={contextMenuPosition}
+          value={contextMenuValue}
+          visible={{ contextMenuVisible, setContextMenuVisible }}
         />
       )}
     </div>

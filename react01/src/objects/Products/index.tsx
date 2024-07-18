@@ -15,7 +15,7 @@ import {
 
 const columns = {
   properties: {
-    width: "30px 80px 1fr 100px",
+    width: "27px 80px 1fr 100px",
   },
   cols: [
     {
@@ -85,7 +85,7 @@ const Products: FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const [sorting, setSorting] = useAtom<TGridSorting>(storeGridSorting);
-  const [gridDataRows, setGridDataRows] = useState<TGridDataRows>(undefined);
+  // const [gridDataRows, setGridDataRows] = useState<TGridDataRows>(undefined);
 
   const handleGridSort = (columnID: keyof IProduct = "id") => {
     setSorting((prev) => {
@@ -120,8 +120,9 @@ const Products: FC = () => {
         setLoading(false);
       }
     };
+    // console.log("sts");
     getHttpResponse();
-  }, [sorting]);
+  }, []);
 
   const sortedDataRows = useMemo(() => {
     return [...httpResponse.products].sort((a, b): number => {
@@ -144,7 +145,7 @@ const Products: FC = () => {
     });
   }, [httpResponse, sorting]);
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   return (
     <>

@@ -16,7 +16,7 @@ import { IColumns, IProduct, ICol } from "./types";
 // import { Checkbox } from "antd";
 // import Checkbox from "../Checkbox/index";
 import Checkbox, { ICheckboxHandle } from "./Checkbox/index";
-import { AnyObject } from "antd/es/_util/type";
+import { IContextMenuPosition, IContextMenuValue } from ".";
 
 interface IContentRowProps {
   tabIndex: number;
@@ -34,7 +34,10 @@ interface IContentRowProps {
       rowRef: RefObject<HTMLInputElement>,
     ) => void;
     isCheckedRow: (rowID: number) => boolean;
-    contextMenuPositionHandle: (position: { x: number; y: number }) => void;
+    contextMenuPositionHandle: (
+      position: IContextMenuPosition,
+      value: string,
+    ) => void;
   };
 }
 
@@ -71,11 +74,28 @@ const ContentRow: FC<IContentRowProps> = ({
     uicheckboxRef: RefObject<ICheckboxHandle>,
     event: React.MouseEvent,
     column: ICol,
+    value: string,
   ): void => {
     event.preventDefault();
     onclickcell(rowRef, uicheckboxRef, event);
+    // console.log(value);
     if (column?.type !== "checkbox") {
-      contextMenuPositionHandle({ x: event.clientX, y: event.clientY });
+      if (rowRef.current) {
+        const gridWidth = rowRef.current?.clientWidth - event.clientX;
+        let clientX = event.clientX;
+        // let clientY = 0;
+        if (gridWidth <= 150) {
+          clientX = event.clientX - 140;
+        }
+        console.log(clientX, gridWidth, {
+          x: event.clientX,
+          y: event.clientY,
+        });
+        contextMenuPositionHandle(
+          { x: clientX - 5, y: event.clientY - 5 },
+          value,
+        );
+      }
     }
   };
 
@@ -88,40 +108,41 @@ const ContentRow: FC<IContentRowProps> = ({
       style={{ gridTemplateColumns: columns.properties.width }}
       // onKeyDown={(e) => handleKeySpace(e)}
     >
-      {columns.cols.map((column, colIdx) => (
-        <div
-          // ref={cellRef}
-          key={colIdx}
-          data-cell={colIdx}
-          data-field={column.type !== "checkbox" ? true : false}
-          className={styles.content_cell}
-        >
+      {columns.cols.map((column, colIdx) => {
+        const value: string = getFormatValue(elementRow, column) as string;
+        return (
           <div
-            className={styles.field}
-            onClick={(event) => onclickcell(rowRef, uicheckboxRef, event)}
-            onContextMenu={(event) =>
-              contextMenuHandle(rowRef, uicheckboxRef, event, column)
-            }
-            style={getAlignByColType(column)}
+            // ref={cellRef}
+            key={colIdx}
+            data-cell={colIdx}
+            data-field={column.type !== "checkbox" ? true : false}
+            className={styles.content_cell}
           >
-            {column?.type === "checkbox" ? (
-              <Checkbox
-                ref={uicheckboxRef}
-                tabIndex={tabIndex}
-                checked={isCheckedRow(elementRow.id)}
-                onFocusCheckbox={(checkboxRef) =>
-                  onFocusCheckbox(checkboxRef, rowRef)
-                }
-                onChangeCheckbox={() => onChangeCheckbox(elementRow.id)}
-              />
-            ) : (
-              <span style={getAlignByColType(column)}>
-                {getFormatValue(elementRow, column)}
-              </span>
-            )}
+            <div
+              className={styles.field}
+              onClick={(event) => onclickcell(rowRef, uicheckboxRef, event)}
+              onContextMenu={(event) =>
+                contextMenuHandle(rowRef, uicheckboxRef, event, column, value)
+              }
+              style={getAlignByColType(column)}
+            >
+              {column?.type === "checkbox" ? (
+                <Checkbox
+                  ref={uicheckboxRef}
+                  tabIndex={tabIndex}
+                  checked={isCheckedRow(elementRow.id)}
+                  onFocusCheckbox={(checkboxRef) =>
+                    onFocusCheckbox(checkboxRef, rowRef)
+                  }
+                  onChangeCheckbox={() => onChangeCheckbox(elementRow.id)}
+                />
+              ) : (
+                <span style={getAlignByColType(column)}>{value}</span>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

@@ -82,13 +82,13 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
                 {column.title}
                 {sorting.columnID === column.id ? (
                   sorting.orderBy === "ASC" ? (
-                    <TiArrowSortedDown size={21} className={styles.sortIcon} />
+                    <TiArrowSortedDown size={16} className={styles.sortIcon} />
                   ) : (
-                    <TiArrowSortedUp size={21} className={styles.sortIcon} />
+                    <TiArrowSortedUp size={16} className={styles.sortIcon} />
                   )
                 ) : (
                   <TiArrowSortedDown
-                    size={21}
+                    size={16}
                     className={styles.sortIcon_hover}
                   />
                 )}
