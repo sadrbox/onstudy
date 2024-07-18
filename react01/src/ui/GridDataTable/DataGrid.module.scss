@@ -231,8 +231,11 @@ input[type="checkbox"] {
   height: 16px;
   width: 16px;
   accent-color: $colorTheme;
+  // appearance: none;
+  // outline: none;
+  // border: none;
   // outline: 3px solid red;
-  border-radius: 0px;
+  // border-radius: 10px;
   // border: 1px solid red;
   // align-self: center;
 }

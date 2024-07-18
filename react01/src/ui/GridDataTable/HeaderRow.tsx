@@ -51,7 +51,7 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
   // 	? `${styles.header_row__scrolling} ${styles.header_row}`
   // 	: "";
   // const t = true;
-  console.log(isScrolling);
+  // console.log(isScrolling);
 
   const scrollingStyle = isScrolling
     ? [styles.header_row__scrolling, styles.header_row].join(" ")
