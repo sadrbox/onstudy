@@ -2,6 +2,8 @@ $color60: #ffffff;
 $color30: theme("colors.neutral.300");
 $color10: theme("colors.neutral.400");
 $color5: theme("colors.neutral.800"); // $color5: #aaaaaa;
+$colorTheme: theme("colors.blue.500");
+
 .table {
   background-color: $color60;
   padding: 4px;
@@ -76,7 +78,7 @@ $color5: theme("colors.neutral.800"); // $color5: #aaaaaa;
   position: sticky;
   top: 0;
   z-index: 1;
-  border-bottom: 1px solid $color10;
+  border-bottom: 1px solid $color5;
 
   &::after {
     content: "";
@@ -228,6 +230,7 @@ $color5: theme("colors.neutral.800"); // $color5: #aaaaaa;
 input[type="checkbox"] {
   height: 16px;
   width: 16px;
+  accent-color: $colorTheme;
   // outline: 3px solid red;
   border-radius: 0px;
   // border: 1px solid red;

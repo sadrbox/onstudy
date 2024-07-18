@@ -76,7 +76,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
       setIsScrolling(true);
       timeoutIdRef.current = setTimeout(() => {
         setIsScrolling(false);
-      }, 2000);
+      }, 1000);
     };
 
     const gridContainer = gridContainerRef.current;
@@ -87,9 +87,6 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
     return () => {
       if (gridContainer) {
         gridContainer.removeEventListener("scroll", handleScroll);
-      }
-      if (timeoutIdRef.current) {
-        clearTimeout(timeoutIdRef.current);
       }
     };
   });
@@ -102,10 +99,13 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
         // if (isAllChecked) {
         //   return dataRows?.map((e) => e.id);
         // } else {
-
         //   return [];
         // }
-        return isAllChecked ? dataRows?.map((e) => e.id) : [...checkedRows];
+        return isAllChecked
+          ? dataRows?.map((e) => e.id)
+          : dataRows.length === checkedRows.length
+            ? []
+            : [...checkedRows];
       });
     }
     // const countIDs: number[] = dataRows.map((e) => e.id);
