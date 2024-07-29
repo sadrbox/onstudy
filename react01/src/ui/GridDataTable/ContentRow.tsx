@@ -19,6 +19,7 @@ import Checkbox, { ICheckboxHandle } from "./Checkbox/index";
 import { IContextMenuPosition, IContextMenuValue } from ".";
 
 interface IContentRowProps {
+  // onContextMenu: () => void;
   tabIndex: number;
   props: {
     columns: IColumns;
@@ -102,6 +103,7 @@ const ContentRow: FC<IContentRowProps> = ({
   return (
     <div
       // tabIndex={tabIndex}
+      onContextMenu={(event) => event.preventDefault()}
       ref={rowRef}
       data-row={elementRow.id}
       className={styles.content_row}

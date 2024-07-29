@@ -1,11 +1,13 @@
 // import React, { useEffect } from "react";
-import { FaSortAmountDown } from "react-icons/fa";
+import Checkbox from "./Checkbox";
+// import { FaSortAmountDown } from "react-icons/fa";
 // import Checkbox from "antd/es/checkbox/Checkbox";
-import { TiArrowSortedUp } from "react-icons/ti";
-import { TiArrowSortedDown } from "react-icons/ti";
+// import { TiArrowSortedUp } from "react-icons/ti";
+// import { TiArrowSortedDown } from "react-icons/ti";
+import { PiCaretDownFilliCaretDownFill } from "react-icons/pi";
 
 import styles from "./DataGrid.module.scss";
-import Checkbox from "./Checkbox";
+
 import {
   ICol,
   IColumns,
@@ -82,12 +84,12 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
                 {column.title}
                 {sorting.columnID === column.id ? (
                   sorting.orderBy === "ASC" ? (
-                    <TiArrowSortedDown size={16} className={styles.sortIcon} />
+                    <PiCaretDownFill size={16} className={styles.sortIcon} />
                   ) : (
                     <TiArrowSortedUp size={16} className={styles.sortIcon} />
                   )
                 ) : (
-                  <TiArrowSortedDown
+                  <PiCaretDownFill
                     size={16}
                     className={styles.sortIcon_hover}
                   />

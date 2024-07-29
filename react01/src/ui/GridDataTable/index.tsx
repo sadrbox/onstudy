@@ -210,7 +210,10 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
   }
 
   return (
-    <div className={styles.table}>
+    <div
+      onContextMenu={(event) => event.preventDefault()}
+      className={styles.table}
+    >
       <div className={styles.table_command_panel}></div>
       <div className={styles.table_wrapper}>
         <div
