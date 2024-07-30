@@ -4,7 +4,7 @@ import Checkbox from "./Checkbox";
 // import Checkbox from "antd/es/checkbox/Checkbox";
 // import { TiArrowSortedUp } from "react-icons/ti";
 // import { TiArrowSortedDown } from "react-icons/ti";
-import { PiCaretDownFilliCaretDownFill } from "react-icons/pi";
+import { PiCaretDownFill, PiCaretUpFill } from "react-icons/pi";
 
 import styles from "./DataGrid.module.scss";
 
@@ -86,7 +86,7 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
                   sorting.orderBy === "ASC" ? (
                     <PiCaretDownFill size={16} className={styles.sortIcon} />
                   ) : (
-                    <TiArrowSortedUp size={16} className={styles.sortIcon} />
+                    <PiCaretUpFill size={16} className={styles.sortIcon} />
                   )
                 ) : (
                   <PiCaretDownFill

@@ -35,17 +35,28 @@ const ContextMenu = ({ position: { x, y }, value, visible }: Props) => {
           {/* {value} */}
           <ul className={styles.contextMenu_list}>
             <li>
-              <PiCopy size={16} />
-              <a href="#">Копировать</a>
+              <a href="#">
+                <PiCopy size={16} />
+                Копировать
+              </a>
             </li>
             <li>
-              <a href="#">Вставить</a>
+              <a href="#">
+                <PiCopy size={16} />
+                Вставить
+              </a>
             </li>
             <li>
-              <a href="#">Вырезать</a>
+              <a href="#">
+                <PiCopy size={16} />
+                Вырезать
+              </a>
             </li>
             <li>
-              <a href="#">Удалить</a>
+              <a href="#">
+                <PiCopy size={16} />
+                Удалить
+              </a>
             </li>
           </ul>
         </div>
