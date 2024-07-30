@@ -1,14 +1,14 @@
-import React, { useEffect, useState, FC, useMemo, useCallback } from "react";
-import DataGrid from "../../ui/GridDataTable";
+import React, { useEffect, useMemo, useState } from "react";
+// import DataGrid from "src/ui/GridDataTable";
+import DataGrid from "src/ui/GridDataTable";
+
 import axios from "axios";
 import { atom, useAtom } from "jotai";
-import { storeGridData, storeGridSorting } from "src/utils/store";
-// import { Checkbox } from "antd";
+import { storeGridData, storeGridSorting } from "@/utils/store";
 import {
   IColumns,
   IProduct,
   IProducts,
-  TGridDataRows,
   TGridSorting,
   TStoreGridData,
 } from "src/ui/GridDataTable/types";
@@ -21,86 +21,35 @@ const columns = {
     {
       id: "checkbox",
       type: "checkbox",
-      // field: {
-      // 	style: { textAlign: "center" } as React.CSSProperties,
-      // },
     },
     {
       id: "id",
       title: "№",
       type: "id",
     },
-    {
-      id: "title",
-      title: "Наименование",
-      type: "string",
-    },
-    {
-      id: "price",
-      title: "Цена",
-      type: "number",
-    },
+    { id: "title", title: "Заголовок", type: "string" },
+    { id: "comments", title: "Коментарии", type: "string" },
   ],
 };
-
-type TResponseData = {
-  products: IProduct[];
-  total: number;
-  skip: number;
-  limit: number;
+type Post = {
+  id: number;
+  title: string;
+  comments: number;
 };
-// type TSortingState = {
-//   columnID: keyof IProduct;
-//   orderBy: "ASC" | "DESC";
-// };
+type TResponseData = {
+  posts: Post[];
+};
 
-type IProductKey = keyof IProduct;
-type TProductValue<K extends IProductKey> = IProduct[K];
-type TSortingGridDataRows = <K extends IProductKey>(
-  gridDataRows: IProduct[],
-  columnID: K,
-  orderBy: "ASC" | "DESC",
-) => IProduct[];
-// interface IProductsProps extends HTMLAttributes<HTMLElement> {
-// 	// columns: IColumns;
-// 	data?: {
-// 		gridRows: IProduct[] | undefined;
-// 		gridIDs: number[] | undefined;
-// 		// sortFn: (columnID: string, orderBy?: string) => void;
-// 		// sortDirection: "ASC" | "DESC";
-// 	};
-// 	isLoading: boolean;
-// }
-const Products: FC = () => {
+const Post = () => {
   const initHttpResponse: TResponseData = {
-    products: [],
-    total: 0,
-    skip: 0,
-    limit: 0,
+    posts: [],
   };
-
   const [httpResponse, setHttpResponse] =
     useState<TResponseData>(initHttpResponse);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const [sorting, setSorting] = useAtom<TGridSorting>(storeGridSorting);
-  // const [gridDataRows, setGridDataRows] = useState<TGridDataRows>(undefined);
-
-  const handleGridSort = (columnID: keyof IProduct = "id") => {
-    setSorting((prev) => {
-      // console.log(columnID, { ...prev });
-      return {
-        columnID,
-        orderBy:
-          prev.columnID === columnID
-            ? prev.orderBy === "ASC"
-              ? "DESC"
-              : "ASC"
-            : "ASC",
-      };
-    });
-  };
 
   useEffect(() => {
     const getHttpResponse = async () => {
@@ -108,7 +57,7 @@ const Products: FC = () => {
       setError(null);
       try {
         const response = await axios.get<TResponseData>(
-          "https://dummyjson.com/products?limit=100",
+          "https://dummyjson.com/posts?limit=100",
         );
         if (response?.data) {
           // console.log(1);
@@ -125,9 +74,9 @@ const Products: FC = () => {
   }, []);
 
   const sortedDataRows = useMemo(() => {
-    return [...httpResponse.products].sort((a, b): number => {
-      const aValue = a[sorting.columnID];
-      const bValue = b[sorting.columnID];
+    return [...httpResponse.posts].sort((a, b): number => {
+      const aValue = a[sorting.columnID as keyof Post];
+      const bValue = b[sorting.columnID as keyof Post];
 
       if (typeof aValue === "string" && typeof bValue === "string") {
         return sorting.orderBy === "ASC"
@@ -145,15 +94,30 @@ const Products: FC = () => {
     });
   }, [httpResponse, sorting]);
 
-  // useEffect(() => {}, []);
+  const handleGridSort = (columnID: string = "id") => {
+    setSorting((prev) => {
+      // console.log(columnID, { ...prev });
+      return {
+        columnID,
+        orderBy:
+          prev.columnID === columnID
+            ? prev.orderBy === "ASC"
+              ? "DESC"
+              : "ASC"
+            : "ASC",
+      };
+    });
+  };
+  // console.log(sortedDataRows);
 
   return (
     <>
-      {httpResponse?.products && (
+      {httpResponse?.posts && (
         <>
           <DataGrid
             columns={columns}
             dataRows={sortedDataRows}
+            // typeOfRows={typeof sortedDataRows}
             actions={{ handleGridSort }}
           />
         </>
@@ -162,4 +126,4 @@ const Products: FC = () => {
   );
 };
 
-export default Products;
+export default Post;

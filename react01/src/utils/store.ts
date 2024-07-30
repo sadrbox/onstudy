@@ -1,4 +1,4 @@
-import { TGridSorting, TStoreGridData } from '@/ui/GridDataTable/types';
+import { TGridSorting, TStoreGridData } from 'src/ui/GridDataTable/types';
 import { atom } from 'jotai';
 
 export const storeGridData = atom(undefined as TStoreGridData);

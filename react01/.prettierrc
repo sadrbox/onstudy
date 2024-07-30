@@ -3,12 +3,12 @@
     {
       "files": "*.ts",
       "options": {
-        "singleQuote": true,
+        "singleQuote": false,
         "trailingComma": "all",
         "bracketSpacing": true,
         "jsxBracketSameLine": false,
         "semi": true,
-        "useTabs": false,
+        "useTabs": true,
         "arrowParens": "always",
         "endOfLine": "auto",
         "quoteProps": "as-needed",

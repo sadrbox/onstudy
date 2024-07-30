@@ -2,10 +2,10 @@ import React, { FC, useEffect, useState, useRef, RefObject } from "react";
 import styles from "./DataGrid.module.scss";
 
 import { useAtom } from "jotai";
-import { storeGridData } from "@/utils/store";
+import { storeGridData } from "src/utils/store";
 // import { CiCirclePlus } from "react-icons/ci";
 // import { FaRegSquarePlus } from "react-icons/fa6";
-// import HeaderRow from "@/components/objects/Products/HeaderRow";
+// import HeaderRow from "src/components/objects/Products/HeaderRow";
 import ContentRow from "./ContentRow";
 import HeaderRow from "./HeaderRow";
 // import FooterRow from "./FooterRow";
@@ -27,9 +27,9 @@ interface ISelectRow {
 
 interface IDataGridProps {
   columns: IColumns;
-  dataRows: TGridDataRows;
+  dataRows: unknown;
   actions: {
-    handleGridSort: (columnID: keyof IProduct) => void;
+    handleGridSort: (columnID: string) => void;
   };
 }
 
@@ -42,6 +42,7 @@ export interface IContextMenuValue {
 }
 
 const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
+  type typeRows = typeof dataRows;
   // const [gridData, setGridData] = useAtom<TStoreGridData>(storeGridData);
   // const [gridData, setGridData] = useState<TGridDataRows>(undefined);
 
@@ -102,7 +103,8 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
         //   return [];
         // }
         return isAllChecked
-          ? dataRows?.map((e) => e.id)
+          ? // ? dataRows?.map((e) => e.id)
+            []
           : dataRows.length === checkedRows.length
             ? []
             : [...checkedRows];
@@ -241,7 +243,8 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
                   const tabIndex = ++keyID;
                   return (
                     <ContentRow
-                      key={elementRow.id}
+                      // key={elementRow.id}
+                      key={tabIndex}
                       tabIndex={tabIndex}
                       props={{
                         columns,

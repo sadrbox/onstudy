@@ -11,7 +11,7 @@ import React, {
   MutableRefObject,
 } from "react";
 import styles from "./DataGrid.module.scss";
-import { getFormatValue, getAlignByColType } from "@/utils/functions";
+import { getFormatValue, getAlignByColType } from "src/utils/functions";
 import { IColumns, IProduct, ICol } from "./types";
 // import { Checkbox } from "antd";
 // import Checkbox from "../Checkbox/index";

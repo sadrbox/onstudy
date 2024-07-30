@@ -2,15 +2,12 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "moduleResolution": "bundler", // правильно import 
+
+    "moduleResolution": "bundler", // нужно для корректного импорта компонентов
     "esModuleInterop": true,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
@@ -18,24 +15,17 @@
     "noEmit": true,
     "jsx": "react",
     "strict": true,
+    "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    }
+      "src/*": ["./src/*"],
+      "@/*": ["./src/*"]
+    },
+    "composite": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "src/*",
-    "**/*.js",
-    "**/*.ts"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+  "include": ["src/*", "**/*.js", "**/*.ts", "**/*.tsx"] // нужно для корректного импорта компонентов
 }

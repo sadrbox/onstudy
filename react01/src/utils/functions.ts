@@ -1,4 +1,4 @@
-import { ICol, IProduct } from '@/ui/GridDataTable/types';
+import { ICol, IProduct } from 'src/ui/GridDataTable/types';
 import moment from 'moment';
 import {
   CSSProperties,

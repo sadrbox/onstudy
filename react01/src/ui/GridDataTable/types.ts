@@ -1,15 +1,16 @@
 import { CSSProperties } from 'react';
 export type TGridSorting = {
-  columnID: keyof IProduct;
+  columnID: string;
   orderBy: 'ASC' | 'DESC';
 };
 export type TStoreGridData =
   | {
       columns: IColumns;
       IDs: number[];
-      rows: IProduct[];
+      rows: [];
       order: {
-        action: (columnID: keyof IProduct, orderBy: 'ASC' | 'DESC') => void;
+        action: (columnID: string, orderBy: 'ASC' | 'DESC') => void;
+        // action: (columnID: keyof IProduct, orderBy: 'ASC' | 'DESC') => void;
         columnID: string;
         orderBy: 'ASC' | 'DESC';
       };
@@ -21,7 +22,7 @@ type TGridColumns = {
   title: string;
   width: string | number;
 };
-export type TGridDataRows = IProduct[] | undefined;
+export type TGridDataRows = [] | undefined;
 export type TJsonData = {
   id: string | number;
   [key: string]: string | number;

@@ -18,9 +18,9 @@ import {
 } from "./types";
 import { FC } from "react";
 import { useAtom } from "jotai";
-import { storeGridData, storeGridSorting } from "@/utils/store";
+import { storeGridData, storeGridSorting } from "src/utils/store";
 import React from "react";
-import { getAlignByColType } from "@/utils/functions";
+import { getAlignByColType } from "src/utils/functions";
 import { sortUserPlugins } from "vite";
 
 interface IHeaderDataGridProps {
