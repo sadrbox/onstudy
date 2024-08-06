@@ -36,8 +36,10 @@ model Comment {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String
-  password String
-  fullname String
+  id       Int     @id @default(autoincrement())
+  username String?
+  password String?
+  email    String?
+  name     String?
+  fullname String?
 }
