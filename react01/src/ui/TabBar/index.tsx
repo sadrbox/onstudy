@@ -4,7 +4,7 @@ import styles from "./TabBar.module.scss";
 
 // type Props = {};
 
-export const TabBar = () => {
+const TabBar = () => {
   return (
     <div className="rowGroup">
       <div id="London" className={styles.item}>
@@ -12,15 +12,17 @@ export const TabBar = () => {
         <p>London is the capital of England.</p>
       </div>
 
-      <div id="Paris" className="city">
+      <div id="Paris" className={styles.item}>
         <h2>Paris</h2>
         <p>Paris is the capital of France.</p>
       </div>
 
-      <div id="Tokyo" className="city">
+      <div id="Tokyo" className={styles.item}>
         <h2>Tokyo</h2>
         <p>Tokyo is the capital of Japan.</p>
       </div>
     </div>
   );
 };
+
+export default TabBar;

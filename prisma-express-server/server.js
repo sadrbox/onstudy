@@ -14,22 +14,17 @@ app.get("/users", async (req, res) => {
 	res.json(users);
 });
 
-// app.post("/users", async (req, res) => {
-// 	const { name, email } = req.body;
-// 	const newUser = await prisma.user.create({
-// 		data: { name, email },
-// 	});
-// 	res.json(newUser);
-// });
+app.get("/users/delete", async (req, res) => {
+	await prisma.user.deleteMany();
+});
 
 app.post("/users", async (req, res) => {
 	// console.log(req.body);
-	const { name, email } = req.body;
+	// const { name, email } = req.body;
 	try {
 		const newUser = await prisma.user.create({
 			data: {
-				name: name,
-				email: email,
+				...req.body,
 			},
 		});
 		res.status(201).json(newUser);
