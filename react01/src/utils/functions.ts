@@ -1,57 +1,66 @@
-import { ICol, IProduct } from 'src/ui/GridDataTable/types';
-import moment from 'moment';
+import { ICol, IProduct } from "src/ui/GridDataTable/types";
+import moment from "moment";
 import {
-  CSSProperties,
-  DetailedHTMLProps,
-  HTMLAttributes,
-  RefObject,
-} from 'react';
-import { ResolveFnOutput } from 'module';
+	CSSProperties,
+	DetailedHTMLProps,
+	HTMLAttributes,
+	RefObject,
+} from "react";
+import { ResolveFnOutput } from "module";
 
 export function getDateFromISO(dateString: string): string {
-  const date = moment(dateString);
-  // const dateUTC = date.add(24, "hours").utc();
-  return date.format('DD.MM.YYYY HH:mm:ss');
+	const date = moment(dateString);
+	// const dateUTC = date.add(24, "hours").utc();
+	return date.format("DD.MM.YYYY HH:mm:ss");
 }
 export function getDurationSession(seconds: number): string {
-  // Рассчитываем часы
-  const hours: number = Math.floor(seconds / 3600);
-  // Оставшиеся секунды после вычета часов
-  const remainingSeconds: number = seconds % 3600;
-  // Рассчитываем минуты
-  const minutes: number = Math.floor(remainingSeconds / 60);
-  return `${hours}:${minutes}`;
+	// Рассчитываем часы
+	const hours: number = Math.floor(seconds / 3600);
+	// Оставшиеся секунды после вычета часов
+	const remainingSeconds: number = seconds % 3600;
+	// Рассчитываем минуты
+	const minutes: number = Math.floor(remainingSeconds / 60);
+	return `${hours}:${minutes}`;
 }
 
 export function getFormatValue(item: IProduct, column: ICol): string {
-  // console.log(rowId);
-  if (column.id === 'id') {
-    return item.id.toString().padStart(6, '0');
-  } else if (column.type === 'number') {
-    const formater = new Intl.NumberFormat('ru-RU', {
-      style: 'decimal',
-      minimumFractionDigits: 2,
-    });
-    return formater.format(item[column.id]);
-  } else {
-    return item[column.id];
-  }
-  // return item.id;
+	// console.log(rowId);
+	if (column.id === "id") {
+		return item.id.toString().padStart(6, "0");
+	} else if (column.type === "number") {
+		const formater = new Intl.NumberFormat("ru-RU", {
+			style: "decimal",
+			minimumFractionDigits: 2,
+		});
+		return formater.format(item[column.id]);
+	} else {
+		return item[column.id];
+	}
+	// return item.id;
 }
 
 export function getAlignByColType(column: ICol): CSSProperties {
-  // Table content value align css style
-  // console.log(CSSProperties);
-  switch (column.type) {
-    case 'number':
-      return { justifyContent: 'right' };
-    case 'string':
-      return { justifyContent: 'left' };
-    case 'checkbox':
-      return { justifyContent: 'center' };
-    default:
-      return {};
-  }
+	// Table content value align css style
+	// console.log(CSSProperties);
+	switch (column.type) {
+		case "number":
+			return { justifyContent: "right" };
+		case "string":
+			return { justifyContent: "left" };
+		case "checkbox":
+			return { justifyContent: "center" };
+		default:
+			return {};
+	}
+}
+
+export function isValidEmail(email: string) {
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	return emailRegex.test(email);
+}
+
+export function stringJoin(...str: string[]) {
+	return str.join(" ");
 }
 
 // export function getSumOfColumn(data, columnName) {

@@ -1,4 +1,4 @@
-import path from "node:path";
+import path, { resolve } from "node:path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import tailwindcss from "tailwindcss";
@@ -9,6 +9,12 @@ export default defineConfig({
 	css: {
 		postcss: {
 			plugins: [tailwindcss()],
+		},
+		preprocessorOptions: {
+			scss: {
+				additionalData: `@import "@/commons/variables.scss";`,
+				includePaths: [resolve(__dirname, "src/commons")],
+			},
 		},
 	},
 	resolve: {
