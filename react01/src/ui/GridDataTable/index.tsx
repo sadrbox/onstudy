@@ -8,7 +8,7 @@ import React, {
   createContext,
 } from "react";
 import styles from "./DataGrid.module.scss";
-import { ContextProvider, TContextData } from "./ContextProvider";
+// import { ContextProvider, TContextData } from "./ContextProvider";
 
 // import { useAtom, Provider } from "jotai";
 // import { storeGridData } from "src/utils/store";
@@ -27,6 +27,7 @@ import {
   TGridSorting,
   TStoreGridData,
 } from "./types";
+import { ContextInstance } from "./ContextProvider";
 
 interface ISelectRow {
   row: HTMLElement;
@@ -57,10 +58,10 @@ const DataGrid: FC = () => {
   //   // type typeRows = typeof contextData;
 
   // }
-  const context = useContext(ContextProvider);
+  // const context = useContext(ContextProvider);
   // if (context) {
-  const dataRows = context?.contextData.dataRows;
-  const columns = context?.contextData.columns;
+  // const dataRows = context?.contextData.dataRows;
+  // const columns = context?.contextData.columns;
   // }
 
   // console.log(conts)
@@ -135,24 +136,25 @@ const DataGrid: FC = () => {
   //   }
   // });
 
-  useEffect(() => {
-    if (dataRows?.length) {
-      setCheckedRows(() => {
-        // if (isAllChecked) {
-        //   return dataRows?.map((e) => e.id);
-        // } else {
-        //   return [];
-        // }
-        return isAllChecked
-          ? // ? dataRows?.map((e) => e.id)
-          []
-          : dataRows.length === checkedRows.length
-            ? []
-            : [...checkedRows];
-      });
-    }
-    // const countIDs: number[] = dataRows.map((e) => e.id);
-  }, [dataRows, isAllChecked]);
+  // useEffect(() => {
+  //   if (dataRows?.length) {
+  //     setCheckedRows(() => {
+  //       // if (isAllChecked) {
+  //       //   return dataRows?.map((e) => e.id);
+  //       // } else {
+  //       //   return [];
+  //       // }
+  //       return isAllChecked
+  //         ? // ? dataRows?.map((e) => e.id)
+  //         []
+  //         : dataRows.length === checkedRows.length
+  //           ? []
+  //           : [...checkedRows];
+  //     });
+  //   }
+  //   // const countIDs: number[] = dataRows.map((e) => e.id);
+  // }, [dataRows, isAllChecked]);
+
   const gridSelectRow = (
     rowRef: RefObject<HTMLDivElement>,
     checkboxRef: RefObject<HTMLInputElement>,
@@ -272,7 +274,10 @@ const DataGrid: FC = () => {
 
   // console.log(dataRows)
 
+  const context = useContext(ContextInstance);
 
+  const { columns, dataRows } = context;
+  // console.log(columns, dataRows)
 
 
   return (
@@ -291,7 +296,6 @@ const DataGrid: FC = () => {
         >
           <HeaderRow
             props={{
-              columns,
               isScrolling,
               onChangeAllCheckbox,
               isAllChecked,

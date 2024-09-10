@@ -23,12 +23,13 @@ import { FC, useState } from "react";
 import React, { useContext } from "react";
 import { getAlignByColType } from "src/utils/functions";
 import { sortUserPlugins } from "vite";
-import { ContextProvider, IContextData } from "./ContextProvider";
+import { ContextInstance } from "./ContextProvider";
+// import { ContextProvider, IContextData } from "./ContextProvider";
 // import { ContextProvider } from "src/objects/Products";
 
 interface IHeaderDataGridProps {
   props: {
-    columns: IColumns;
+    // columns: IColumns;
     isScrolling: boolean;
     onChangeAllCheckbox: () => void;
     isAllChecked: boolean;
@@ -39,7 +40,7 @@ interface IHeaderDataGridProps {
 
 const HeaderRow: FC<IHeaderDataGridProps> = ({
   props: {
-    columns,
+    // columns,
     isScrolling,
     onChangeAllCheckbox,
     isAllChecked,
@@ -47,12 +48,14 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
   },
 }) => {
 
+  const context = useContext(ContextInstance);
+  const { columns } = context;
 
-  const context = useContext(ContextProvider);
-  if (context) {
-    //   const { contextData, setContextData } = context;
-    console.log(context)
-  }
+  // const context = useContext(ContextProvider);
+  // if (context) {
+  //   //   const { contextData, setContextData } = context;
+  //   console.log(context)
+  // }
 
 
 

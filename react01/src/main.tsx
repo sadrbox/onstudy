@@ -13,11 +13,11 @@ import TabBar from "./ui/TabBar";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Post />,
+    element: <Products />,
   },
   {
-    path: "/products",
-    element: <Products />,
+    path: "/post",
+    element: <Post />,
   },
   {
     path: "/users/lst",

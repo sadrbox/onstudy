@@ -1,62 +1,59 @@
 import React, { createContext, Dispatch, FC, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { ICol, IColumns, IProduct } from './types';
-import { columns } from "src/objects/Products";
-import Products from '../../objects/Products/index';
+// import { columns } from "src/objects/Products";
+import Products, { columns } from '../../objects/Products/index';
+import { Provider } from 'jotai';
 
-type TContext = {
+type TContextProvider = {
   children: ReactNode;
-  dataRows: IProduct[],
-  columns: IColumns
 };
 
-export type TContextData = {
+export type TContextInstance = {
   columns: IColumns;
-  dataRows: IProduct[];
+  dataRows: IProduct[] | null;
   sortByColumn?: string;
   orderBy?: string;
 }
 
 
-export interface IContextData {
-  contextData: TContextData; // Замените 'any' на конкретный тип, который вы используете
-  setContextData: Dispatch<SetStateAction<TContextData>>; // Замените 'any' на конкретный тип
+
+const ContextInstanceInit: TContextInstance = {
+  columns: columns,
+  dataRows: null
 }
 
-export const ContextProvider = createContext<IContextData | undefined>(undefined)
+const ContextInstance = createContext<TContextInstance>(ContextInstanceInit);
 
-// export const ContextProvider = createContext<IContextData>({
-//   contextData: {
-//     columns: columns, // Если у вас есть дефолтные значения для columns
-//     dataRows: [], // Если у вас есть дефолтные значения для dataRows
-//     sortByColumn: '',
-//     orderBy: '',
-//   },
-//   setContextData: () => { throw new Error("setContextData не инициализирован"); }
-// });
+const ContextProvider: React.FC<TContextProvider> = ({ children }) => {
+  const [contextData, setContextData] = useState<TContextInstance>(ContextInstanceInit);
 
-// const Context: FC<TContext> = ({
-//   children, dataRows, columns
-// }) => {
+  const getHttpResponse = async () => {
+    try {
+      const response = await fetch("https://dummyjson.com/products?limit=100");
+      const data = await response.json();
+      setContextData((prevState) => ({
+        ...prevState,
+        dataRows: data.products
+      }));
 
-// console.log(dataRows)
-// const contextInit = {
-//   dataRows,
-//   columns
-// }
+    } catch (e) {
+      // setError("Ошибка запроса данных JSON");
+    } finally {
+      // setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    getHttpResponse();
+    // console.log(contextData)
+  }, [])
 
-// useEffect(() => {
-//   console.log("first")
-//   setContextData(contextInit)
-// }, [])
-//   return (
-//     <ContextProvider.Provider value={{ contextData, setContextData }}>
-//       {children}
-//     </ContextProvider.Provider>
-//   );
-// };
+  const Provider = ContextInstance.Provider;
+  return (
+    <Provider value={contextData}>
+      {children}
+    </Provider>
+  );
+}
 
-// const useDataContext = () => React.useContext(ContextProvider);
-
-// eslint-disable-next-line react-refresh/only-export-components
-// export { Context, useDataContext };
+export { ContextProvider, ContextInstance }

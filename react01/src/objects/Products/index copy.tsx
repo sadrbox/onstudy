@@ -18,7 +18,7 @@ import { ContextProvider } from "src/ui/GridDataTable/ContextProvider";
 // import { Context,   } from "src/ui/GridDataTable/ContextProvider";
 
 
-export const columns = {
+const columns = {
   properties: {
     width: "27px 80px 1fr 100px",
   },
@@ -83,22 +83,22 @@ type TSortingGridDataRows = <K extends IProductKey>(
 
 
 const Products: FC = () => {
-  // const initHttpResponse: TResponseData = {
-  //   products: [],
-  //   total: 0,
-  //   skip: 0,
-  //   limit: 0,
-  // };
+  const initHttpResponse: TResponseData = {
+    products: [],
+    total: 0,
+    skip: 0,
+    limit: 0,
+  };
 
-  // const [httpResponse, setHttpResponse] =
-  //   useState<TResponseData>(initHttpResponse);
-  // const [loading, setLoading] = useState<boolean>(false);
-  // const [error, setError] = useState<string | null>(null);
+  const [httpResponse, setHttpResponse] =
+    useState<TResponseData>(initHttpResponse);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // const [sorting, setSorting] = useState<TGridSorting>({
-  //   columnID: 'id',
-  //   orderBy: 'ASC',
-  // });
+  const [sorting, setSorting] = useState<TGridSorting>({
+    columnID: 'id',
+    orderBy: 'ASC',
+  });
 
   // const [gridDataRows, setGridDataRows] = useState<TGridDataRows>(undefined);
 
@@ -117,57 +117,57 @@ const Products: FC = () => {
   //   });
   // };
 
-  // useEffect(() => {
-  //   const getHttpResponse = async () => {
-  //     setLoading(true);
-  //     setError(null);
-  //     try {
-  //       const response = await axios.get<TResponseData>(
-  //         "https://dummyjson.com/products?limit=100",
-  //       );
-  //       if (response?.data) {
-  //         // console.log(response?.data.products);
-  //         setHttpResponse(response?.data);
-  //       }
-  //     } catch (e) {
-  //       setError("Ошибка запроса данных JSON");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   // console.log("sts");
-  //   getHttpResponse();
-  // }, []);
+  useEffect(() => {
+    const getHttpResponse = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await axios.get<TResponseData>(
+          "https://dummyjson.com/products?limit=100",
+        );
+        if (response?.data) {
+          // console.log(response?.data.products);
+          setHttpResponse(response?.data);
+        }
+      } catch (e) {
+        setError("Ошибка запроса данных JSON");
+      } finally {
+        setLoading(false);
+      }
+    };
+    // console.log("sts");
+    getHttpResponse();
+  }, []);
 
-  // const sortedDataRows: IProduct[] = useMemo(() => {
-  //   return [...httpResponse.products].sort((a, b): number => {
-  //     const aValue = a[sorting.columnID as keyof IProduct];
-  //     const bValue = b[sorting.columnID as keyof IProduct];
+  const sortedDataRows: IProduct[] = useMemo(() => {
+    return [...httpResponse.products].sort((a, b): number => {
+      const aValue = a[sorting.columnID as keyof IProduct];
+      const bValue = b[sorting.columnID as keyof IProduct];
 
-  //     if (typeof aValue === "string" && typeof bValue === "string") {
-  //       return sorting.orderBy === "ASC"
-  //         ? aValue.localeCompare(bValue)
-  //         : bValue.localeCompare(aValue);
-  //     } else if (typeof aValue === "number" && typeof bValue === "number") {
-  //       // return sorting.orderBy === 'ASC' ? aValue > bValue : bValue < aValue;
-  //       if (sorting.orderBy === "ASC") {
-  //         return aValue - bValue;
-  //       } else if (sorting.orderBy === "DESC") {
-  //         return bValue - aValue;
-  //       }
-  //     }
-  //     return 0;
-  //   });
-  // }, [httpResponse, sorting]);
+      if (typeof aValue === "string" && typeof bValue === "string") {
+        return sorting.orderBy === "ASC"
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
+      } else if (typeof aValue === "number" && typeof bValue === "number") {
+        // return sorting.orderBy === 'ASC' ? aValue > bValue : bValue < aValue;
+        if (sorting.orderBy === "ASC") {
+          return aValue - bValue;
+        } else if (sorting.orderBy === "DESC") {
+          return bValue - aValue;
+        }
+      }
+      return 0;
+    });
+  }, [httpResponse, sorting]);
 
-  // const dataRows = sortedDataRows;
+  const dataRows = sortedDataRows;
 
-  // const contextInit = {
-  //   columns,
-  //   dataRows,
-  //   sortByColumn: '',
-  //   orderBy: '',
-  // }
+  const contextInit = {
+    columns,
+    dataRows,
+    sortByColumn: '',
+    orderBy: '',
+  }
 
   // console.log(contextInit.dataRows)
 
@@ -178,7 +178,16 @@ const Products: FC = () => {
   // console.log(contextData)
   return (
     <ContextProvider>
-      <DataGrid />
+      {dataRows && Array.isArray(dataRows) && (
+        <ContextProvider.Provider value={{ contextData, setContextData }}>
+          {httpResponse?.products && (
+            <DataGrid
+              columns={columns}
+              dataRows={sortedDataRows}
+            />
+          )}
+        </ContextProvider.Provider>
+      )}
     </ContextProvider>
   );
 };
