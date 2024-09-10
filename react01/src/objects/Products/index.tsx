@@ -1,10 +1,11 @@
-import React, { useEffect, useState, FC, useMemo, useCallback } from "react";
+import React, { useEffect, useState, FC, useMemo, useCallback, useContext, createContext, Dispatch, SetStateAction } from "react";
 import DataGrid from "../../ui/GridDataTable";
 import axios from "axios";
-import { atom, useAtom } from "jotai";
-import { storeGridData, storeGridSorting } from "src/utils/store";
+// import { atom, useAtom } from "jotai";
+// import { storeGridData, storeGridSorting } from "src/utils/store";
 // import { Checkbox } from "antd";
 import {
+  ICol,
   IColumns,
   IProduct,
   IProducts,
@@ -12,6 +13,9 @@ import {
   TGridSorting,
   TStoreGridData,
 } from "src/ui/GridDataTable/types";
+import { ContextProvider, TContextData } from "src/ui/GridDataTable/ContextProvider";
+// import { Context,   } from "src/ui/GridDataTable/ContextProvider";
+
 
 const columns = {
   properties: {
@@ -71,6 +75,12 @@ type TSortingGridDataRows = <K extends IProductKey>(
 // 	};
 // 	isLoading: boolean;
 // }
+
+
+
+
+
+
 const Products: FC = () => {
   const initHttpResponse: TResponseData = {
     products: [],
@@ -84,23 +94,27 @@ const Products: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [sorting, setSorting] = useAtom<TGridSorting>(storeGridSorting);
+  const [sorting, setSorting] = useState<TGridSorting>({
+    columnID: 'id',
+    orderBy: 'ASC',
+  });
+
   // const [gridDataRows, setGridDataRows] = useState<TGridDataRows>(undefined);
 
-  const handleGridSort = (columnID: keyof IProduct = "id") => {
-    setSorting((prev) => {
-      // console.log(columnID, { ...prev });
-      return {
-        columnID,
-        orderBy:
-          prev.columnID === columnID
-            ? prev.orderBy === "ASC"
-              ? "DESC"
-              : "ASC"
-            : "ASC",
-      };
-    });
-  };
+  // const handleGridSort = (columnID: keyof IProduct = "id") => {
+  //   setSorting((prev) => {
+  //     // console.log(columnID, { ...prev });
+  //     return {
+  //       columnID,
+  //       orderBy:
+  //         prev.columnID === columnID
+  //           ? prev.orderBy === "ASC"
+  //             ? "DESC"
+  //             : "ASC"
+  //           : "ASC",
+  //     };
+  //   });
+  // };
 
   useEffect(() => {
     const getHttpResponse = async () => {
@@ -111,7 +125,7 @@ const Products: FC = () => {
           "https://dummyjson.com/products?limit=100",
         );
         if (response?.data) {
-          // console.log(1);
+          // console.log(response?.data.products);
           setHttpResponse(response?.data);
         }
       } catch (e) {
@@ -124,10 +138,10 @@ const Products: FC = () => {
     getHttpResponse();
   }, []);
 
-  const sortedDataRows = useMemo(() => {
+  const sortedDataRows: IProduct[] = useMemo(() => {
     return [...httpResponse.products].sort((a, b): number => {
-      const aValue = a[sorting.columnID];
-      const bValue = b[sorting.columnID];
+      const aValue = a[sorting.columnID as keyof IProduct];
+      const bValue = b[sorting.columnID as keyof IProduct];
 
       if (typeof aValue === "string" && typeof bValue === "string") {
         return sorting.orderBy === "ASC"
@@ -145,18 +159,33 @@ const Products: FC = () => {
     });
   }, [httpResponse, sorting]);
 
-  // useEffect(() => {}, []);
+  const dataRows = sortedDataRows;
 
+  const contextInit = {
+    columns,
+    dataRows,
+    sortByColumn: '',
+    orderBy: '',
+  }
+
+  // console.log(contextInit.dataRows)
+
+  const [contextData, setContextData] = useState<TContextData>(contextInit);
+  // useEffect(() => {
+  //   setContextData(contextInit)
+  // }, [])
+  // console.log(contextData)
   return (
     <>
-      {httpResponse?.products && (
-        <>
-          <DataGrid
-            columns={columns}
-            dataRows={sortedDataRows}
-            actions={{ handleGridSort }}
-          />
-        </>
+      {dataRows && Array.isArray(dataRows) && (
+        <ContextProvider.Provider value={{ contextData, setContextData }}>
+          {httpResponse?.products && (
+            <DataGrid
+            // columns={columns}
+            // dataRows={sortedDataRows}
+            />
+          )}
+        </ContextProvider.Provider>
       )}
     </>
   );

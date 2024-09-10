@@ -1,8 +1,17 @@
-import React, { FC, useEffect, useState, useRef, RefObject } from "react";
+import React, {
+  FC,
+  useEffect,
+  useState,
+  useRef,
+  RefObject,
+  useContext,
+  createContext,
+} from "react";
 import styles from "./DataGrid.module.scss";
+import { ContextProvider, TContextData } from "./ContextProvider";
 
-import { useAtom } from "jotai";
-import { storeGridData } from "src/utils/store";
+// import { useAtom, Provider } from "jotai";
+// import { storeGridData } from "src/utils/store";
 // import { CiCirclePlus } from "react-icons/ci";
 // import { FaRegSquarePlus } from "react-icons/fa6";
 // import HeaderRow from "src/components/objects/Products/HeaderRow";
@@ -10,6 +19,7 @@ import ContentRow from "./ContentRow";
 import HeaderRow from "./HeaderRow";
 // import FooterRow from "./FooterRow";
 import ContextMenu from "./ContextMenu/index";
+
 import {
   IColumns,
   IProduct,
@@ -27,10 +37,10 @@ interface ISelectRow {
 
 interface IDataGridProps {
   columns: IColumns;
-  dataRows: unknown;
-  actions: {
-    handleGridSort: (columnID: string) => void;
-  };
+  dataRows: IProduct[];
+  // actions: {
+  //   handleGridSort: (columnID: string) => void;
+  // };
 }
 
 export interface IContextMenuPosition {
@@ -41,8 +51,19 @@ export interface IContextMenuValue {
   value: string;
 }
 
-const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
-  type typeRows = typeof dataRows;
+const DataGrid: FC = () => {
+  // if (ContextProvider) {
+
+  //   // type typeRows = typeof contextData;
+
+  // }
+  const context = useContext(ContextProvider);
+  // if (context) {
+  const dataRows = context?.contextData.dataRows;
+  const columns = context?.contextData.columns;
+  // }
+
+  // console.log(conts)
   // const [gridData, setGridData] = useAtom<TStoreGridData>(storeGridData);
   // const [gridData, setGridData] = useState<TGridDataRows>(undefined);
 
@@ -52,6 +73,17 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
   // const [sorting, setSorting] = useState<TGridSorting>({
   //   columnID: "id",
   //   orderBy: "ASC",
+  // });
+
+  // const ContextProvider = createContext<TContextProvider | undefined>(
+  //   undefined,
+  // );
+  // const [contextData, setContextData] = useState<TContextInit>("light");
+  // const contextProviderValues = useContext<TContextInit>(ContextProvider);
+  // console.log(ContextProvider);
+  // const [contextState, setContextState] = useState<TContextProvider>({
+  //   theme: "dark",
+  //   SetterContext: () => {},
   // });
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [checkedRows, setCheckedRows] = useState<number[]>([]);
@@ -66,6 +98,8 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
 
   const gridContainerRef = useRef<HTMLDivElement | null>(null);
   const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
+
+
   useEffect(() => {
     // grid scroll effect
     const handleScroll = () => {
@@ -92,7 +126,14 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
     };
   });
 
-  useEffect(() => {}, [selectRow]);
+
+
+  // useEffect(() => {
+  //   if (contextProviderValues) {
+  //     const { theme, toggleTheme } = contextProviderValues;
+  //     setContextState({ theme, toggleTheme });
+  //   }
+  // });
 
   useEffect(() => {
     if (dataRows?.length) {
@@ -104,7 +145,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
         // }
         return isAllChecked
           ? // ? dataRows?.map((e) => e.id)
-            []
+          []
           : dataRows.length === checkedRows.length
             ? []
             : [...checkedRows];
@@ -112,7 +153,6 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
     }
     // const countIDs: number[] = dataRows.map((e) => e.id);
   }, [dataRows, isAllChecked]);
-
   const gridSelectRow = (
     rowRef: RefObject<HTMLDivElement>,
     checkboxRef: RefObject<HTMLInputElement>,
@@ -156,7 +196,6 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
       setSelectRow({ row: currentRow, cell: currentCell });
     }
   };
-
   function onChangeCheckbox(rowID: number): void {
     if (dataRows) {
       // const rows = dataRows.map((e) => e.id);
@@ -184,7 +223,6 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
       return currentIDs;
     });
   }
-
   function onFocusCheckbox(
     checkboxRef: RefObject<HTMLInputElement>,
     rowRef: RefObject<HTMLInputElement>,
@@ -210,10 +248,37 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
     setContextMenuValue(value);
     setContextMenuVisible(true);
   }
+  // function getSortedGrid(columnID: keyof IProduct = "id") {
+  //   setSorting((prev) => {
+  //     // console.log(columnID, { ...prev });
+  //     return {
+  //       columnID,
+  //       orderBy:
+  //         prev.columnID === columnID
+  //           ? prev.orderBy === "ASC"
+  //             ? "DESC"
+  //             : "ASC"
+  //           : "ASC",
+  //     };
+  //   });
+  // }
+
+  // const [contextData, setContextData] = useState<TContextData>({
+  //   columns,
+  //   dataRows,
+  //   sortByColumn: 'id',
+  //   orderBy: 'DESC'
+  // });
+
+  // console.log(dataRows)
+
+
+
 
   return (
+    // <Context dataRows={dataRows} columns={columns}>
     <div
-      onContextMenu={(event) => event.preventDefault()}
+      // onContextMenu={(event) => event.preventDefault()}
       className={styles.table}
     >
       <div className={styles.table_command_panel}></div>
@@ -221,8 +286,8 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
         <div
           ref={gridContainerRef}
           className={styles.table_container}
-          // onScroll={() => setIsScrolling(true)}
-          // onContextMenu={(event) => event.preventDefault()}
+        // onScroll={() => setIsScrolling(true)}
+        // onContextMenu={(event) => event.preventDefault()}
         >
           <HeaderRow
             props={{
@@ -231,7 +296,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
               onChangeAllCheckbox,
               isAllChecked,
               // sorting,
-              handleGridSort: actions.handleGridSort,
+              // handleGridSort: actions.handleGridSort,
             }}
           />
           {!dataRows ? (
@@ -272,6 +337,7 @@ const DataGrid: FC<IDataGridProps> = ({ columns, dataRows, actions }) => {
         />
       )}
     </div>
+    // </Context>
   );
 };
 

@@ -16,12 +16,15 @@ import {
   TStoreGridData,
   TGridSorting,
 } from "./types";
-import { FC } from "react";
-import { useAtom } from "jotai";
-import { storeGridData, storeGridSorting } from "src/utils/store";
-import React from "react";
+import { FC, useState } from "react";
+// import { useAtom } from "jotai";
+// import { storeGridData, storeGridSorting } from "src/utils/store";
+
+import React, { useContext } from "react";
 import { getAlignByColType } from "src/utils/functions";
 import { sortUserPlugins } from "vite";
+import { ContextProvider, IContextData } from "./ContextProvider";
+// import { ContextProvider } from "src/objects/Products";
 
 interface IHeaderDataGridProps {
   props: {
@@ -30,36 +33,56 @@ interface IHeaderDataGridProps {
     onChangeAllCheckbox: () => void;
     isAllChecked: boolean;
     // sorting: TGridSorting;
-    handleGridSort: (columnID: keyof IProduct) => void;
+    // handleGridSort: (columnID: keyof IProduct) => void;
   };
 }
+
 const HeaderRow: FC<IHeaderDataGridProps> = ({
   props: {
     columns,
     isScrolling,
     onChangeAllCheckbox,
     isAllChecked,
-    handleGridSort,
+    // handleGridSort,
   },
 }) => {
-  const [sorting] = useAtom<TGridSorting>(storeGridSorting);
-  // const isScrolling = false;
-  // const
-  // const cls = isScrolling ? [header_row__scrolling] : [];
-  // cls.push(header_row);
-  // styles.push(columns.things);
 
-  // const clss = true
-  // 	? `${styles.header_row__scrolling} ${styles.header_row}`
-  // 	: "";
-  // const t = true;
-  // console.log(isScrolling);
 
+  const context = useContext(ContextProvider);
+  if (context) {
+    //   const { contextData, setContextData } = context;
+    console.log(context)
+  }
+
+
+
+  const [sorting] = useState<TGridSorting>({
+    columnID: 'id',
+    orderBy: 'ASC',
+  });
   const scrollingStyle = isScrolling
     ? [styles.header_row__scrolling, styles.header_row].join(" ")
     : styles.header_row;
+
+  // const handleGridSort = () => {};
+
+  // const context = React.useContext(ContextProvider);
+
+  // if (!context || !context.contextData) {
+  //   return <p>Loading...</p>; // Показываем загрузку, пока данные не установлены
+  // }
+
+  // const { contextData, setContextData } = context;
+
+  // console.log(contextData)
+
+  // function changeTheme() {
+  //   const { SetterContext } = inContext;
+  //   SetterContext("green");
+  // }
   return (
     <div
+      // onClick={() => changeTheme()}
       id="header_row"
       // className={isScrolling ? styles.header_row__scrolling : styles.header_row}
       className={scrollingStyle}
@@ -80,7 +103,7 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
                 checked={isAllChecked}
               />
             ) : (
-              <span onClick={() => handleGridSort(column.id as keyof IProduct)}>
+              <span onClick={() => { }}>
                 {column.title}
                 {sorting.columnID === column.id ? (
                   sorting.orderBy === "ASC" ? (
