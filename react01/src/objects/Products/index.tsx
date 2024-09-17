@@ -3,15 +3,14 @@ import DataGrid from "src/components/ui/GridData";
 import _, { reject } from "lodash";
 // import { ContextInstance, ContextProvider } from "src/components/ui/GridData/ContextProvider";
 import { IColumns, IProduct, IRootProduct } from "src/components/ui/GridData/types";
-import { ContextInstance, ContextInstanceInit, TContextInstance } from "src/components/ui/GridData/ContextProvider";
+import ContextProvider, { contextDataInit, TContextData, TOrdering } from "src/components/ui/GridData/ContextProvider";
 import { createColumnsConfigFromResponse, initialCols, initialConfig, TColumn, TConfig } from "src/components/ui/GridData/DataGrid.module";
 import { Testing } from "src/components/Testing";
 // import { ProductType } from './index';
 // import { TContextData } from 'src/ui/GridDataTable/ContextProvider';
+// import { contextDataInit } from '../../components/ui/GridData/ContextProvider';
 
-type TOrdering = {
-  columnID: string; orderBy: 'asc' | 'desc'
-}
+
 
 
 // const columns = {
@@ -57,29 +56,60 @@ const Products: FC = () => {
     return data;
   }
 
+
   type TDataType = Awaited<ReturnType<typeof getHttpResponse>>;
-  // const fetchDataAndDetermineType = async () => {
-  //   const data = await getType();
-
-  //   // Определяем тип данных с помощью typeof
-  //   type ResponseType = typeof data;
-
-  //   // Теперь ResponseType можно использовать для типизации
-  //   const typedData: ResponseType = data;
-
-  //   console.log(typedData);
-  // };
-
-  // fetchDataAndDetermineType();
 
   const [responseData, setResponseData] = useState<IRootProduct | undefined>(undefined)
-  const [dataRows, setDataRows] = useState<IProduct[] | undefined>(undefined);
-  const [config, setConfig] = useState<TConfig>(initialConfig)
-  const [contextData, setContextData] = useState<TContextInstance>(ContextInstanceInit);
+  // const [dataRows, setDataRows] = useState<unknown[]>([]);
+  // const [columns, setColumns] = useState<TGridItem[]>([])
+  // const [config, setConfig] = useState<TConfig>(initialConfig)
+  const [contextInit, setContextInit] = useState<TContextData>(contextDataInit);
   const [gridDataOrdering, setGridDataOrdering] = useState<TOrdering>({
     columnID: "id",
     orderBy: "asc",
+    setGridDataOrdering: () => { }
   });
+
+
+
+
+  function httpDataValidator<T>(data: T): T | null {
+    if (data !== null && typeof data === 'object') {
+      return data;
+    }
+    return null; // Возвращаем null, если данные не валидны
+  }
+
+  interface TGridItem {
+    [key: string]: unknown; // Замена на более конкретные свойства, если известны
+  }
+
+  interface Column {
+    id: string;
+    type: string; // Тип поля, например, "string", "number", "date" и т.д.
+  }
+
+  interface GridColumns {
+    [key: string]: Column;
+  }
+
+
+
+
+
+  const setStates = async () => {
+    try {
+      const data = await getHttpResponse();
+      const validatedData = httpDataValidator(data);
+      if (validatedData !== null) {
+        setResponseData(validatedData);
+        // return validatedData;
+      }
+    } catch (error) {
+      console.error("Error fetching or validating data:", error);
+      // return null;
+    }
+  };
 
 
 
@@ -87,69 +117,70 @@ const Products: FC = () => {
 
 
   useEffect(() => {
-    const { columnID, orderBy } = gridDataOrdering;
 
-    getHttpResponse().then(data => {
-      const ProductItem1 = data?.products[0];
-      if (data) {
-        setResponseData(data);
-      }
-      return ProductItem1;
-    })
-      .then((ProductItem1) => {
+    const createGridColumns = (GridItem: TGridItem): Column[] => {
+      const columns: Column[] = [];
 
-
-        async function gridConfig() {
-          return await createColumnsConfigFromResponse(ProductItem1);
-        }
-        gridConfig().then(data => {
-          // console.log(data)
-          setConfig(data);
-        })
-        // console.log(gridConfig)
-
-
-      })
-      .then(() => {
-        if (responseData) {
-          const sortedDataRows = _.orderBy(responseData.products, [columnID], orderBy);
-          setDataRows(sortedDataRows);
-          // return sortedDataRows;
-        }
-      })
-      .then(() => {
-        // console.log(data)
-        // if (dataRows && config) {
-
-        setContextData({
-          config,
-          dataRows,
-          ordering: {
-            columnID,
-            orderBy,
-            setGridDataOrdering
-          }
+      for (const [key, value] of Object.entries(GridItem)) {
+        columns.push({
+          id: key,
+          type: typeof value, // Определение типа значения
         });
-        // }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      }
+      // console.log(columns)
+      return columns;
+    };
+
+
+    if (responseData) {
+      const products = responseData.products;
+      if (Array.isArray(products)) {
+        const { columnID, orderBy } = gridDataOrdering;
+        const dataRows: unknown[] = _.orderBy(products, [columnID], orderBy);
+        // setDataRows(sortedDataRows)
+
+        const gridItem = products[0] as TGridItem;
+        const columns = createGridColumns(gridItem)
+        // console.log(columns)
+        // setColumns(columns)
+
+        if (dataRows && columns) {
+
+
+          setContextInit({
+            gridConfig: {
+              properties: {
+                width: "27px 80px 1fr 100px"
+              }
+            },
+            columns,
+            dataRows,
+            ordering: {
+              columnID,
+              orderBy,
+              setGridDataOrdering
+            }
+          })
+        }
+      }
+    }
+
+
   }, [gridDataOrdering]);
 
 
-  const Provider = ContextInstance.Provider;
 
-  if (config.cols) {
-    // console.log(dataRows)
-    return (
-      <Provider value={contextData}>
-        {/* {responseData && <h1>Loading...</h1>} */}
-        {/* {dataRows && <DataGrid />} */}
-        <Testing />
-      </Provider>
-    );
-  }
+
+
+
+  return (
+    <ContextProvider contextDataInit={contextInit}>
+      {/* {responseData && <h1>Loading...</h1>} */}
+      {/* {dataRows && <DataGrid />} */}
+      {gridDataOrdering && <Testing />}
+    </ContextProvider>
+  );
+
 };
 
 export default Products;

@@ -35,8 +35,8 @@ interface ISelectRow {
 // type TSortFn = (columnID: string, rderBy?: string) => void;
 
 interface IDataGridProps {
-  columns: IColumns;
-  dataRows: IProduct[];
+  columns: unknown[];
+  dataRows: unknown[];
   // actions: {
   //   handleGridSort: (columnID: string) => void;
   // };
@@ -53,8 +53,8 @@ export interface IContextMenuValue {
 const DataGrid: FC = () => {
 
 
-  const { config, dataRows, ordering } = useContextInstance();
-  const cols = config.cols;
+  // const { config, dataRows, ordering } = useContextInstance();
+  // const cols = config.cols;
 
   // if (ContextProvider) {
 
