@@ -57,7 +57,7 @@ export interface IContentRowProps {
 }
 
 export interface IRootProduct {
-	products: unknown[];
+	products: IProduct[];
 	total: number;
 	skip: number;
 	limit: number;

@@ -1,4 +1,5 @@
 // import { ProductType } from "../../../objects/Products/index";
+import { IProduct } from "./types";
 // Предположим, что ProductsType содержит тип данных продукта
 // type ProductsType = {
 //   id: number;
@@ -117,3 +118,31 @@ export const createColumnsConfigFromResponse = <T>(item: T): TConfig => {
 // const cols = createColumnsFromProduct(exampleProduct);
 
 // console.log(cols);
+
+export type TGridItem = {
+	id: string;
+	headerName: string;
+	type: string;
+};
+
+type TCol = TGridItem[];
+
+export const createGridColumns = (GridItem: IProduct): TCol => {
+	const columns = [
+		{
+			id: "00234",
+			headerName: "asdfasdf",
+			type: "number",
+		},
+	];
+
+	for (const [key, value] of Object.entries(GridItem)) {
+		columns.push({
+			id: key,
+			headerName: key.charAt(0).toUpperCase() + key.slice(1),
+			type: typeof value, // Определение типа значения
+		});
+	}
+	// console.log(columns)
+	return columns;
+};

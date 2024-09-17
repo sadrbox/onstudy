@@ -53,13 +53,16 @@ const Products: FC = () => {
   const getHttpResponse = async () => {
     const response = await fetch("https://dummyjson.com/products?limit=100");
     const data = await response.json();
-    return data;
+    const validatedData = httpDataValidator(data);
+    if (validatedData !== null) {
+      setResponseData(validatedData);
+    }
   }
 
 
   type TDataType = Awaited<ReturnType<typeof getHttpResponse>>;
 
-  const [responseData, setResponseData] = useState<IRootProduct | undefined>(undefined)
+  const [responseData, setResponseData] = useState<IRootProduct | null>(null)
   // const [dataRows, setDataRows] = useState<unknown[]>([]);
   // const [columns, setColumns] = useState<TGridItem[]>([])
   // const [config, setConfig] = useState<TConfig>(initialConfig)
@@ -97,89 +100,69 @@ const Products: FC = () => {
 
 
 
-  const setStates = async () => {
-    try {
-      const data = await getHttpResponse();
-      const validatedData = httpDataValidator(data);
-      if (validatedData !== null) {
-        setResponseData(validatedData);
-        // return validatedData;
-      }
-    } catch (error) {
-      console.error("Error fetching or validating data:", error);
-      // return null;
-    }
-  };
-
-
-
-
 
 
   useEffect(() => {
-
-    const createGridColumns = (GridItem: TGridItem): Column[] => {
-      const columns: Column[] = [];
-
-      for (const [key, value] of Object.entries(GridItem)) {
-        columns.push({
-          id: key,
-          type: typeof value, // Определение типа значения
-        });
-      }
-      // console.log(columns)
-      return columns;
-    };
-
-
-    if (responseData) {
-      const products = responseData.products;
-      if (Array.isArray(products)) {
-        const { columnID, orderBy } = gridDataOrdering;
-        const dataRows: unknown[] = _.orderBy(products, [columnID], orderBy);
-        // setDataRows(sortedDataRows)
-
-        const gridItem = products[0] as TGridItem;
-        const columns = createGridColumns(gridItem)
-        // console.log(columns)
-        // setColumns(columns)
-
-        if (dataRows && columns) {
-
-
-          setContextInit({
-            gridConfig: {
-              properties: {
-                width: "27px 80px 1fr 100px"
-              }
-            },
-            columns,
-            dataRows,
-            ordering: {
-              columnID,
-              orderBy,
-              setGridDataOrdering
-            }
-          })
-        }
-      }
-    }
-
-
-  }, [gridDataOrdering]);
+    getHttpResponse();
+  }, [])
 
 
 
 
 
+  // useEffect(() => {
 
-  return (
-    <ContextProvider contextDataInit={contextInit}>
-      {/* {responseData && <h1>Loading...</h1>} */}
-      {/* {dataRows && <DataGrid />} */}
-      {gridDataOrdering && <Testing />}
-    </ContextProvider>
-  );
+
+
+
+  //   if (responseData) {
+  //     const products = responseData.products;
+  //     if (Array.isArray(products)) {
+  //       const { columnID, orderBy } = gridDataOrdering;
+  //       const dataRows: unknown[] = _.orderBy(products, [columnID], orderBy);
+  // setDataRows(sortedDataRows)
+
+  // const gridItem = products[0] as TGridItem;
+  // const columns = createGridColumns(gridItem)
+  // console.log(columns)
+  // setColumns(columns)
+
+  // if (dataRows && columns) {
+
+
+  //   setContextInit({
+  //     gridConfig: {
+  //       properties: {
+  //         width: "27px 80px 1fr 100px"
+  //       }
+  //     },
+  //     columns,
+  //     dataRows,
+  //     ordering: {
+  //       columnID,
+  //       orderBy,
+  //       setGridDataOrdering
+  //     }
+  //   })
+  // }
+  // }
+  // }
+
+
+  // }, [responseData]);
+
+
+
+
+
+  if (responseData)
+    return (
+      <ContextProvider responseData={responseData}>
+        {/* {responseData && <h1>Loading...</h1>} */}
+        {/* {dataRows && <DataGrid />} */}
+        {responseData && <Testing />}
+      </ContextProvider>
+    );
 
 };
 

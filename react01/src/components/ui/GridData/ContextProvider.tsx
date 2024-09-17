@@ -1,15 +1,19 @@
-import React, { createContext, Dispatch, FC, ReactNode, SetStateAction, useContext, useState } from "react";
+import React, { createContext, Dispatch, FC, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
+import { createGridColumns } from "./DataGrid.module";
+import { IProduct, IRootProduct } from "./types";
 
 
-
+type UniversalData<T> = {
+	[key: string]: T | T[]; // Значение может быть массивом T или одиночным элементом T
+};
 
 type TContextProvider = {
 	contextData: TContextData,
 	setContextData: Dispatch<SetStateAction<TContextData>>
 }
 type TContextProps = {
-	children: ReactNode,
-	contextDataInit: TContextData
+	children: ReactNode;
+	responseData: IRootProduct;
 }
 
 export type TOrdering = {
@@ -66,8 +70,19 @@ export const useContextInstance = (): TContextProvider => {
 };
 
 
-const ContextProvider: FC<TContextProps> = ({ children, contextDataInit }) => {
+const ContextProvider: FC<TContextProps> = ({ children, responseData }) => {
 	const [contextData, setContextData] = useState<TContextData>(contextDataInit);
+
+	useEffect(() => {
+
+		if (responseData?.products) {
+			const GridItem: IProduct = responseData.products[0];
+			const cols = createGridColumns(GridItem);
+		}
+
+
+
+	}, [responseData])
 
 
 
