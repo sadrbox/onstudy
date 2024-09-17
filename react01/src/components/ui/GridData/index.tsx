@@ -23,11 +23,9 @@ import ContextMenu from "./ContextMenu/index";
 import {
   IColumns,
   IProduct,
-  TGridDataRows,
-  TGridSorting,
-  TStoreGridData,
 } from "./types";
-import { ContextInstance } from "./ContextProvider";
+import { ContextInstance, useContextInstance } from "./ContextProvider";
+// import { ContextInstance } from "./old/ContextProvider";
 
 interface ISelectRow {
   row: HTMLElement;
@@ -53,6 +51,11 @@ export interface IContextMenuValue {
 }
 
 const DataGrid: FC = () => {
+
+
+  const { config, dataRows, ordering } = useContextInstance();
+  const cols = config.cols;
+
   // if (ContextProvider) {
 
   //   // type typeRows = typeof contextData;
@@ -86,6 +89,7 @@ const DataGrid: FC = () => {
   //   theme: "dark",
   //   SetterContext: () => {},
   // });
+
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [checkedRows, setCheckedRows] = useState<number[]>([]);
 
@@ -250,20 +254,24 @@ const DataGrid: FC = () => {
     setContextMenuValue(value);
     setContextMenuVisible(true);
   }
-  // function getSortedGrid(columnID: keyof IProduct = "id") {
-  //   setSorting((prev) => {
-  //     // console.log(columnID, { ...prev });
-  //     return {
-  //       columnID,
-  //       orderBy:
-  //         prev.columnID === columnID
-  //           ? prev.orderBy === "ASC"
-  //             ? "DESC"
-  //             : "ASC"
-  //           : "ASC",
-  //     };
-  //   });
-  // }
+
+  function handleGridDataOrder(columnID: string = "id") {
+    console.log(columnID)
+    ordering.setGridDataOrdering({ columnID: columnID, orderBy: 'desc' })
+    // setSorting((prev) => {
+    //   // console.log(columnID, { ...prev });run dev
+
+    //   return {
+    //     columnID,
+    //     orderBy:
+    //       prev.columnID === columnID
+    //         ? prev.orderBy === "ASC"
+    //           ? "DESC"
+    //           : "ASC"
+    //         : "ASC",
+    //   };
+    // });
+  }
 
   // const [contextData, setContextData] = useState<TContextData>({
   //   columns,
@@ -272,13 +280,12 @@ const DataGrid: FC = () => {
   //   orderBy: 'DESC'
   // });
 
-  // console.log(dataRows)
 
-  const context = useContext(ContextInstance);
 
-  const { columns, dataRows } = context;
-  // console.log(columns, dataRows)
 
+
+  // const { columns, dataRows } = context;
+  // { console.log(dataRows) }
 
   return (
     // <Context dataRows={dataRows} columns={columns}>
@@ -294,21 +301,24 @@ const DataGrid: FC = () => {
         // onScroll={() => setIsScrolling(true)}
         // onContextMenu={(event) => event.preventDefault()}
         >
+
           <HeaderRow
-            props={{
-              isScrolling,
-              onChangeAllCheckbox,
-              isAllChecked,
-              // sorting,
-              // handleGridSort: actions.handleGridSort,
-            }}
+          // props={{
+          //   //   isScrolling,
+          //   //   // onChangeAllCheckbox,
+          //   //   // isAllChecked,
+          //   //   // sorting,
+          //   handleGridDataOrder,
+          // }}
           />
+
           {!dataRows ? (
             <h1>Loading</h1>
           ) : (
             <div className={styles.flex_table}>
               {dataRows &&
                 dataRows.map((elementRow, keyID: number) => {
+
                   const tabIndex = ++keyID;
                   return (
                     <ContentRow
@@ -316,7 +326,7 @@ const DataGrid: FC = () => {
                       key={tabIndex}
                       tabIndex={tabIndex}
                       props={{
-                        columns,
+                        // columns: cols,
                         elementRow,
                         gridSelectRow,
                         onChangeCheckbox,

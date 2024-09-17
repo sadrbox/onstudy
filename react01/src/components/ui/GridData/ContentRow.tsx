@@ -17,12 +17,13 @@ import { IColumns, IProduct, ICol } from "./types";
 // import Checkbox from "../Checkbox/index";
 import Checkbox, { ICheckboxHandle } from "./Checkbox/index";
 import { IContextMenuPosition, IContextMenuValue } from ".";
+import { useContextInstance } from './ContextProvider';
 
 interface IContentRowProps {
   // onContextMenu: () => void;
   tabIndex: number;
   props: {
-    columns: IColumns;
+    // columns: IColumns;
     elementRow: IProduct;
     gridSelectRow: (
       rowRef: RefObject<HTMLDivElement>,
@@ -45,7 +46,7 @@ interface IContentRowProps {
 const ContentRow: FC<IContentRowProps> = ({
   tabIndex,
   props: {
-    columns,
+    // columns,
     elementRow,
     gridSelectRow,
     onChangeCheckbox,
@@ -54,6 +55,11 @@ const ContentRow: FC<IContentRowProps> = ({
     contextMenuPositionHandle,
   },
 }) => {
+
+  const { config } = useContextInstance();
+  const cols = config.cols;
+  // console.log(cols);
+
   const rowRef = useRef<HTMLDivElement & HTMLInputElement>(null);
   const uicheckboxRef = useRef<ICheckboxHandle | null>(null);
 
@@ -107,10 +113,10 @@ const ContentRow: FC<IContentRowProps> = ({
       ref={rowRef}
       data-row={elementRow.id}
       className={styles.content_row}
-      style={{ gridTemplateColumns: columns.properties.width }}
-      // onKeyDown={(e) => handleKeySpace(e)}
+      style={{ gridTemplateColumns: config.properties.width }}
+    // onKeyDown={(e) => handleKeySpace(e)}
     >
-      {columns.cols.map((column, colIdx) => {
+      {cols.map((column: ICol, colIdx: React.Key | null | undefined) => {
         const value: string = getFormatValue(elementRow, column) as string;
         return (
           <div

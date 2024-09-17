@@ -1,55 +1,66 @@
 // import React, { useEffect } from "react";
-import Checkbox from "./Checkbox";
+import Checkbox from "../Checkbox";
 // import { FaSortAmountDown } from "react-icons/fa";
 // import Checkbox from "antd/es/checkbox/Checkbox";
 // import { TiArrowSortedUp } from "react-icons/ti";
 // import { TiArrowSortedDown } from "react-icons/ti";
 import { PiCaretDownFill, PiCaretUpFill } from "react-icons/pi";
 
-import styles from "./DataGrid.module.scss";
+import styles from "../DataGrid.module.scss";
 
 import {
   ICol,
   IColumns,
   IProduct,
   TJsonData,
-  TStoreGridData,
   TGridSorting,
-} from "./types";
+} from "../types";
 import { FC, useState } from "react";
 // import { useAtom } from "jotai";
 // import { storeGridData, storeGridSorting } from "src/utils/store";
 
 import React, { useContext } from "react";
 import { getAlignByColType } from "src/utils/functions";
-import { sortUserPlugins } from "vite";
-import { ContextInstance } from "./ContextProvider";
+import { useContextInstance } from "../ContextProvider";
+// import { sortUserPlugins } from "vite";
+// import { ContextInstance } from "./old/ContextProvider";
 // import { ContextProvider, IContextData } from "./ContextProvider";
 // import { ContextProvider } from "src/objects/Products";
+import { typeMapping } from '../DataGrid.module';
 
-interface IHeaderDataGridProps {
+type THeaderRowProps = {
   props: {
     // columns: IColumns;
-    isScrolling: boolean;
-    onChangeAllCheckbox: () => void;
-    isAllChecked: boolean;
+    // isScrolling: boolean;
+    // onChangeAllCheckbox: () => void;
+    // isAllChecked: boolean;
     // sorting: TGridSorting;
-    // handleGridSort: (columnID: keyof IProduct) => void;
+    handleGridDataOrder: (columnID: string) => void;
   };
 }
 
-const HeaderRow: FC<IHeaderDataGridProps> = ({
-  props: {
-    // columns,
-    isScrolling,
-    onChangeAllCheckbox,
-    isAllChecked,
-    // handleGridSort,
-  },
-}) => {
 
-  const context = useContext(ContextInstance);
-  const { columns } = context;
+// {
+//   props: {
+//     // columns,
+//     isScrolling,
+//     onChangeAllCheckbox,
+//     isAllChecked,
+//     // handleGridDataOrder,
+//   },
+// }
+
+const HeaderRow: FC = () => {
+
+  const { config, ordering } = useContextInstance();
+  const cols = config.cols;
+
+  // console.log(config)
+
+  const handleGridDataOrder = ordering.setGridDataOrdering;
+
+
+  // const { columns } = context;
 
   // const context = useContext(ContextProvider);
   // if (context) {
@@ -57,12 +68,12 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
   //   console.log(context)
   // }
 
+  const isScrolling = false;
 
-
-  const [sorting] = useState<TGridSorting>({
-    columnID: 'id',
-    orderBy: 'ASC',
-  });
+  // const [sorting] = useState<TGridSorting>({
+  //   columnID: 'id',
+  //   orderBy: 'ASC',
+  // });
   const scrollingStyle = isScrolling
     ? [styles.header_row__scrolling, styles.header_row].join(" ")
     : styles.header_row;
@@ -89,9 +100,9 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
       id="header_row"
       // className={isScrolling ? styles.header_row__scrolling : styles.header_row}
       className={scrollingStyle}
-      style={{ gridTemplateColumns: columns.properties.width }}
+      style={{ gridTemplateColumns: config.properties.width }}
     >
-      {columns.cols.map((column, headerRowIdx) => (
+      {cols.map((column, headerRowIdx) => (
         <div key={headerRowIdx} className={styles.header_cell}>
           <div
             className={styles.field}
@@ -99,17 +110,18 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
               column.type === "checkbox" ? { justifyContent: "center" } : {}
             }
           >
+
             {column.type === "checkbox" ? (
               <Checkbox
                 tabIndex={0}
-                onChangeAllCheckbox={() => onChangeAllCheckbox()}
-                checked={isAllChecked}
+              // onChangeAllCheckbox={() => onChangeAllCheckbox()}
+              // checked={isAllChecked}
               />
-            ) : (
-              <span onClick={() => { }}>
+            ) : ['string', 'number'].includes(column.type) ? (
+              <span onClick={() => handleGridDataOrder({ columnID: column.id, orderBy: ordering.columnID === column.id ? ordering.orderBy === 'asc' ? 'desc' : 'asc' : 'asc' })}>
                 {column.title}
-                {sorting.columnID === column.id ? (
-                  sorting.orderBy === "ASC" ? (
+                {ordering.columnID === column.id ? (
+                  ordering.orderBy === "asc" ? (
                     <PiCaretDownFill size={16} className={styles.sortIcon} />
                   ) : (
                     <PiCaretUpFill size={16} className={styles.sortIcon} />
@@ -121,7 +133,7 @@ const HeaderRow: FC<IHeaderDataGridProps> = ({
                   />
                 )}
               </span>
-            )}
+            ) : ''}
           </div>
         </div>
       ))}

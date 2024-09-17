@@ -2,23 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Post from "./objects/Post";
 // import DataGrid from "./ui/DataGrid/index.tsx";
-import "./index.css";
+import "@/styles/index.css";
 // import { Provider } from "jotai";
 import Products from "./objects/Products";
 import Users from "./objects/Users";
-import TabBar from "./ui/TabBar";
+// import TabBar from "@/components/ui/TabBar";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Products />,
   },
-  {
-    path: "/post",
-    element: <Post />,
-  },
+  // {
+  //   path: "/post",
+  //   element: <Post />,
+  // },
   {
     path: "/users/lst",
     element: <Users />,

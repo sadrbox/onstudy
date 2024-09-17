@@ -12,8 +12,8 @@ export default defineConfig({
 		},
 		preprocessorOptions: {
 			scss: {
-				additionalData: `@import "@/commons/variables.scss";`,
-				includePaths: [resolve(__dirname, "src/commons")],
+				additionalData: `@import "@/styles/variables.scss";`,
+				includePaths: [resolve(__dirname, "src/styles")],
 			},
 		},
 	},

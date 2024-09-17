@@ -1,8 +1,7 @@
 import React, { createContext, Dispatch, FC, ReactNode, SetStateAction, useEffect, useState } from "react";
-import { ICol, IColumns, IProduct } from './types';
-// import { columns } from "src/objects/Products";
-import Products, { columns } from '../../objects/Products/index';
-import { Provider } from 'jotai';
+import { ICol, IColumns, IProduct } from '../types';
+import { columns } from "@/objects/Products/config";
+// import Products from '@/objects/Products';
 
 type TContextProvider = {
   children: ReactNode;
