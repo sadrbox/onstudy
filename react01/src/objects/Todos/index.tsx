@@ -11,15 +11,44 @@ const getResponseData = () => {
     .then(response => response.json())
 }
 
+const createDataGridColumns = (DataItem1) => {
+  const columns = [];
+
+  const fields = Object.keys(DataItem1)
+
+  for (const field of fields) {
+    const col = {
+      field: field,
+      type: typeof DataItem1[field]
+    }
+    columns.push(col)
+    // console.log(field)
+
+  }
+
+  // console.log(DataItem1)
+  console.log(columns)
+}
+
 
 
 const Todos = () => {
 
+  const [responseData, setResponseData] = useState<IResponseData | undefined>(undefined);
   const [context, setContext] = useState<IResponseData | undefined>(undefined);
 
+
   useEffect(() => {
-    getResponseData().then(response => setContext(response as IResponseData))
+    getResponseData().then(response => setResponseData(response))
+
   }, [])
+
+  useEffect(() => {
+    if (responseData?.todos) {
+      const DataItem1 = responseData?.todos[0];
+      const columns = createDataGridColumns(DataItem1);
+    }
+  }, [responseData])
 
   const ContextWrapper = ContextInstance.Provider;
 

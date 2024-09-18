@@ -4,10 +4,10 @@ import { useContextTodo } from 'src/objects/Todos/Context';
 
 const DataGrid = () => {
 
-  // const context = useContextTodo()
-  // if (context) {
-  //   console.log(context)
-  // }
+  const context = useContextTodo()
+  if (context) {
+    console.log(context)
+  }
   return (
     <div>DataGrid</div>
   )
