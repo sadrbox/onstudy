@@ -7,12 +7,13 @@ import "@/styles/index.css";
 // import { Provider } from "jotai";
 import Products from "./objects/Products";
 import Users from "./objects/Users";
+import Todos from "./objects/Todos";
 // import TabBar from "@/components/ui/TabBar";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Products />,
+    element: <Todos />,
   },
   // {
   //   path: "/post",
@@ -26,8 +27,8 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  <>
     {/* <TabBar /> */}
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  </>,
 );
