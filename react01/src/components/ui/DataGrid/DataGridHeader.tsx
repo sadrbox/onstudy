@@ -33,7 +33,8 @@ const DataGridHeader = () => {
     <div
       id="header_row"
       className={styles.header_row}
-      style={{ gridTemplateColumns: "27px 80px 1fr 100px" }}>
+    // style={{ gridTemplateColumns: 'repeat(auto-fit, min-content)' }}
+    >
       {columns && columns.map((col: TColumn, keyID: number) => (
         <div
           key={keyID}

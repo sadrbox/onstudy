@@ -61,6 +61,8 @@ $colorTheme: #3b82f6;
 
 .header_row {
   display: grid;
+  grid-auto-flow: column; /* Размещение элементов в колонках */
+  grid-auto-columns: min-content;
 
   background-color: $color30;
   position: sticky;
