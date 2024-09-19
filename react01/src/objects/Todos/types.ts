@@ -1,5 +1,7 @@
+import { TDataItem } from "./index";
+
 export interface IResponseData {
-	todos?: ITodo[];
+	todos?: TDataItem[];
 	total?: number;
 	skip?: number;
 	limit?: number;

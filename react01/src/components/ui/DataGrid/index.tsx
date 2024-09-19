@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useContextTodo } from 'src/objects/Todos/Context';
+import DataGridHeader from './DataGridHeader';
 
 
 const DataGrid = () => {
-
-  const context = useContextTodo()
-  if (context) {
-    console.log(context)
-  }
+  // const [fields, setFields] = useState();
+  // const contextData = useContextTodo()
+  // if (contextData) {
+  //   // contextData.context
+  //   // setFields()
+  //   console.log(contextData)
+  // }
   return (
-    <div>DataGrid</div>
+    <div>
+      <DataGridHeader />
+    </div>
   )
 }
 export default DataGrid;
