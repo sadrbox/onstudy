@@ -86,7 +86,10 @@ const HeaderRow: FC = () => {
   //   return <p>Loading...</p>; // Показываем загрузку, пока данные не установлены
   // }
 
-  // const { contextData, setContextData } = context;
+  const context = useContextInstance();
+  if (context.contextData.columns) {
+    const cols = context.contextData
+  }
 
   // console.log(contextData)
 

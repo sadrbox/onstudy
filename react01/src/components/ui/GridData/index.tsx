@@ -53,7 +53,10 @@ export interface IContextMenuValue {
 const DataGrid: FC = () => {
 
 
-  // const { config, dataRows, ordering } = useContextInstance();
+  const context = useContextInstance();
+  const { dataRows } = context.contextData;
+  // console.log(context)
+  // return (<>sdf</>)
   // const cols = config.cols;
 
   // if (ContextProvider) {
@@ -255,23 +258,23 @@ const DataGrid: FC = () => {
     setContextMenuVisible(true);
   }
 
-  function handleGridDataOrder(columnID: string = "id") {
-    console.log(columnID)
-    ordering.setGridDataOrdering({ columnID: columnID, orderBy: 'desc' })
-    // setSorting((prev) => {
-    //   // console.log(columnID, { ...prev });run dev
+  // function handleGridDataOrder(columnID: string = "id") 
+  // console.log(columnID)
+  // ordering.setGridDataOrdering({ columnID: columnID, orderBy: 'desc' })
+  // setSorting((prev) => {
+  //   // console.log(columnID, { ...prev });run dev
 
-    //   return {
-    //     columnID,
-    //     orderBy:
-    //       prev.columnID === columnID
-    //         ? prev.orderBy === "ASC"
-    //           ? "DESC"
-    //           : "ASC"
-    //         : "ASC",
-    //   };
-    // });
-  }
+  //   return {
+  //     columnID,
+  //     orderBy:
+  //       prev.columnID === columnID
+  //         ? prev.orderBy === "ASC"
+  //           ? "DESC"
+  //           : "ASC"
+  //         : "ASC",
+  //   };
+  // });
+  // 
 
   // const [contextData, setContextData] = useState<TContextData>({
   //   columns,
@@ -302,17 +305,19 @@ const DataGrid: FC = () => {
         // onContextMenu={(event) => event.preventDefault()}
         >
 
-          <HeaderRow
-          // props={{
-          //   //   isScrolling,
-          //   //   // onChangeAllCheckbox,
-          //   //   // isAllChecked,
-          //   //   // sorting,
-          //   handleGridDataOrder,
-          // }}
-          />
+          {
+            <HeaderRow
+            // props={{
+            //   //   isScrolling,
+            //   //   // onChangeAllCheckbox,
+            //   //   // isAllChecked,
+            //   //   // sorting,
+            //   handleGridDataOrder,
+            // }}
+            />
+          }
 
-          {!dataRows ? (
+          {/* {!dataRows ? (
             <h1>Loading</h1>
           ) : (
             <div className={styles.flex_table}>
@@ -338,7 +343,7 @@ const DataGrid: FC = () => {
                   );
                 })}
             </div>
-          )}
+          )} */}
           {/* <FooterRow props={{ columns, data }} /> */}
         </div>
       </div>

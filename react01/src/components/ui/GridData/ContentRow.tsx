@@ -56,9 +56,12 @@ const ContentRow: FC<IContentRowProps> = ({
   },
 }) => {
 
-  const { config } = useContextInstance();
-  const cols = config.cols;
-  // console.log(cols);
+  const context = useContextInstance();
+  if (context?.contextData?.columns) {
+    const cols = context.contextData.columns;
+    console.log(cols);
+  }
+
 
   const rowRef = useRef<HTMLDivElement & HTMLInputElement>(null);
   const uicheckboxRef = useRef<ICheckboxHandle | null>(null);
@@ -113,10 +116,10 @@ const ContentRow: FC<IContentRowProps> = ({
       ref={rowRef}
       data-row={elementRow.id}
       className={styles.content_row}
-      style={{ gridTemplateColumns: config.properties.width }}
+    // style={{ gridTemplateColumns: config.properties.width }}
     // onKeyDown={(e) => handleKeySpace(e)}
     >
-      {cols.map((column: ICol, colIdx: React.Key | null | undefined) => {
+      {cols.map((column: ICol, colIdx) => {
         const value: string = getFormatValue(elementRow, column) as string;
         return (
           <div

@@ -159,8 +159,8 @@ const Products: FC = () => {
     return (
       <ContextProvider responseData={responseData}>
         {/* {responseData && <h1>Loading...</h1>} */}
-        {/* {dataRows && <DataGrid />} */}
-        {responseData && <Testing />}
+        {responseData && <DataGrid />}
+        {/* {responseData && <Testing />} */}
       </ContextProvider>
     );
 

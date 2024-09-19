@@ -75,10 +75,29 @@ const ContextProvider: FC<TContextProps> = ({ children, responseData }) => {
 
 	useEffect(() => {
 
-		if (responseData?.products) {
-			const GridItem: IProduct = responseData.products[0];
+		const products: IProduct[] = responseData?.products;
+		if (products) {
+			const GridItem: IProduct = products[0];
 			const cols = createGridColumns(GridItem);
+			// console.log(cols)
+			setContextData({
+				gridConfig: {
+					properties: {
+						width: "27px 80px 1fr 100px"
+					}
+				},
+				columns: cols,
+				dataRows: products,
+				ordering: {
+					columnID: "id",
+					orderBy: "asc",
+					setGridDataOrdering: function (): void {
+						throw new Error("Function not implemented.");
+					}
+				}
+			})
 		}
+
 
 
 
