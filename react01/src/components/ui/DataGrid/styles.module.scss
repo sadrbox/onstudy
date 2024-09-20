@@ -7,10 +7,18 @@ $colorTheme: #3b82f6;
 .tab {
   // display: contents;
   // width: 100%;
-  margin: 4px 4px 4px 4px;
-  padding: 4px;
+  // height: 100%; /* Или любую нужную высоту 100cqmin*/
+  // display: grid;
+  // grid-auto-flow: column;
+  // flex-direction: column;
+  margin: 100px 100px 0px 100px;
+  padding: 2px;
   border: 1px solid $color10;
   border-radius: 2px;
+}
+
+.tabPanel {
+  display: grid;
 }
 
 .tabWrapper {
@@ -21,7 +29,7 @@ $colorTheme: #3b82f6;
   // padding: 4px;
   // border: 1px solid $color30;
 
-  height: 200px; /* Высота контейнера */
+  height: 300px; /* Высота контейнера */
   overflow-y: auto; /* Прокрутка по вертикали */
   border-top: 1px solid $color10;
   border-bottom: 1px solid $color10;
@@ -119,7 +127,9 @@ thead {
     right: 0; /* Сдвиг от правого края, если нужно заполнить */
     // height: 10px; /* Задайте высоту, чтобы псевдоэлемент был видимым */
     // box-shadow: 0 0 1px 1px $color10;
-    border-bottom: 2px solid $color10;
+    // border-bottom: 2px solid $color10;
+    height: 2px;
+    background: rgb(163, 163, 163);
   }
 }
 
