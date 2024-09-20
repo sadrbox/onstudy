@@ -7,6 +7,7 @@ import {
 	RefObject,
 } from "react";
 import { ResolveFnOutput } from "module";
+import { TColumn } from "src/objects/Todos";
 
 export function getDateFromISO(dateString: string): string {
 	const date = moment(dateString);
@@ -38,8 +39,14 @@ export function getFormatValue(item: IProduct, column: ICol): string {
 	}
 	// return item.id;
 }
+//  type TDataItem = { [key: string]: string }
+//  type TColumn = {
+//   field: string;
+//   type: TFieldType;
+// }
+// type TFieldType = "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function";
 
-export function getAlignByColType(column: ICol): CSSProperties {
+export function getAlignByColType(column: ICol | TColumn): CSSProperties {
 	// Table content value align css style
 	// console.log(CSSProperties);
 	switch (column.type) {

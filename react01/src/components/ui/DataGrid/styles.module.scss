@@ -100,7 +100,11 @@ thead {
   tr {
     th {
       border-left: 1px solid $color10;
-      height: 27px;
+      div {
+        height: 27px;
+        text-align: left;
+        padding: 4px;
+      }
     }
   }
   &::before {
@@ -287,17 +291,18 @@ tbody {
 .tabCell {
   // flex: 1;
   height: 27px;
-  border: 1px solid red;
-  display: block; /* Для центрирования содержимого, если нужно */
+  border: 1px solid transparent;
+  // background-color: skyblue;
+  // display: flex; /* Для центрирования содержимого, если нужно */
   align-items: center; /* Вертикальное центрирование */
-  justify-content: center; /* Горизонтальное центрирование */
+  // justify-content: center; /* Горизонтальное центрирование */
   // display: flex;
   // flex-direction: row;
   // grid-auto-flow: row; /* Размещение элементов в колонках */
   // grid-auto-columns: min-content;
   // place-items: center;
   padding: 4px;
-  align-items: stretch;
+  // align-items: stretch;
 
   // align-items: center;
   // justify-self: center;
@@ -305,12 +310,14 @@ tbody {
   // align-content: center;
   // justify-content: center;
   span {
-    display: grid; // выравнивание по вертикали
+    display: flex; // выравнивание по вертикали
     align-items: center; // выравнивание по вертикали // display: inline-grid;
+    // justify-content: last baseline;
     // border: 1px solid red;
-    line-height: normal;
-    font-size: 12px;
+    // line-height: normal;
+    // font-size: 12px;
     color: $color5;
+    // vertical-align: middle;
     // font-weight: 600;
   }
 }

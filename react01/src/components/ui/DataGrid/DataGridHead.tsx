@@ -36,7 +36,9 @@ const DataGridHead = () => {
       <tr>
         {columns && columns.map((col: TColumn, keyID: number) => (
           <th key={keyID}>
-            <div>{col.field}</div>
+            <div>
+              <span>{col.field}</span>
+            </div>
           </th>
         ))}
       </tr>

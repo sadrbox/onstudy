@@ -8,8 +8,10 @@ import { TContextData } from 'src/objects/Todos/Context';
 
 export type TDataItem = { [key: string]: string }
 export type TColumn = {
-  field: string;
+  id: string;
   type: TFieldType;
+  name?: string;
+  hint?: string;
 }
 type TFieldType = "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function";
 
@@ -21,16 +23,20 @@ const getResponseData = () => {
 ///////////////////////////////////////////////////////////////////////////
 const createDataGridColumns = <T extends TDataItem>(DataItem1: T): TColumn[] => {
   const columns: TColumn[] = [];
-  const fields = Object.keys(DataItem1)
-  for (const field of fields) {
+  const fields = Object.keys(DataItem1);
+
+  for (const id of fields) {
     const col = {
-      field: field,
-      type: typeof DataItem1[field]
-    }
-    columns.push(col)
+      id,
+      type: typeof DataItem1[id],
+      name: id.charAt(0).toUpperCase() + id.slice(1), // Делаем name с заглавной буквы
+      hint: `This is the ${id} field` // Пример статического описания для hint
+    };
+    columns.push(col);
   }
+
   return columns;
-}
+};
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
