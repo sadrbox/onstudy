@@ -26,13 +26,12 @@ const DataGridBodyRow: FC<TProps> = ({ dataRow }) => {
   // console.log(dataRow)
 
   return (
-    <tr
-      className={styles.bodyRow}>
+    <tr>
       {columns.map((col: TColumn, keyID: number) => {
         return (
           <td key={keyID}>
             <div
-              className={styles.field}>
+              className={styles.tabCell}>
               <span>{dataRow[col.field]}</span>
             </div>
           </td>)

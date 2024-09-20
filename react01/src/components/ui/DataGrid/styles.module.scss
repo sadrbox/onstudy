@@ -284,6 +284,37 @@ tbody {
   }
 }
 
+.tabCell {
+  // flex: 1;
+  height: 27px;
+  border: 1px solid red;
+  display: block; /* Для центрирования содержимого, если нужно */
+  align-items: center; /* Вертикальное центрирование */
+  justify-content: center; /* Горизонтальное центрирование */
+  // display: flex;
+  // flex-direction: row;
+  // grid-auto-flow: row; /* Размещение элементов в колонках */
+  // grid-auto-columns: min-content;
+  // place-items: center;
+  padding: 4px;
+  align-items: stretch;
+
+  // align-items: center;
+  // justify-self: center;
+  // line-height: normal;
+  // align-content: center;
+  // justify-content: center;
+  span {
+    display: grid; // выравнивание по вертикали
+    align-items: center; // выравнивание по вертикали // display: inline-grid;
+    // border: 1px solid red;
+    line-height: normal;
+    font-size: 12px;
+    color: $color5;
+    // font-weight: 600;
+  }
+}
+
 .field {
   // height: 26px;
   display: flex;
