@@ -5,12 +5,13 @@ import { useContextTodo } from 'src/objects/Todos/Context'
 import styles from "./styles.module.scss";
 
 
+
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-const DataGridHeader = () => {
+const DataGridHead = () => {
   const [columns, setColumns] = useState<TColumn[]>()
   const contextData = useContextTodo()
 
@@ -30,21 +31,17 @@ const DataGridHeader = () => {
 
 
   return (
-    <div
-      id="header_row"
-      className={styles.header_row}
-    // style={{ gridTemplateColumns: 'repeat(auto-fit, min-content)' }}
-    >
-      {columns && columns.map((col: TColumn, keyID: number) => (
-        <div
-          key={keyID}
-          className={styles.header_cell}>
-          <div
-            className={styles.field}>{col.field}</div>
 
-        </div>
-      ))}
-    </div>
+    <thead>
+      <tr>
+        {columns && columns.map((col: TColumn, keyID: number) => (
+          <th key={keyID}>
+            <div>{col.field}</div>
+          </th>
+        ))}
+      </tr>
+    </thead>
+
   )
 }
-export default DataGridHeader;
+export default DataGridHead;

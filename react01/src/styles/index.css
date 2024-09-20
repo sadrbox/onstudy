@@ -28,7 +28,8 @@
 }
 
 html,
-body {
+body,
+root {
   font-size: 13px;
 }
 

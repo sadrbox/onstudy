@@ -6,7 +6,7 @@ import { ContextInstance } from './Context';
 import { TContextData } from 'src/objects/Todos/Context';
 
 
-export type TDataItem = { [key: string]: unknown }
+export type TDataItem = { [key: string]: string }
 export type TColumn = {
   field: string;
   type: TFieldType;

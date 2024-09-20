@@ -1,20 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import styles from "./styles.module.scss"
+
 import { useContextTodo } from 'src/objects/Todos/Context';
-import DataGridHeader from './DataGridHeader';
+import DataGridHead from './DataGridHead';
+import DataGridBody from './DataGridBody';
+
 
 
 const DataGrid = () => {
-  // const [fields, setFields] = useState();
+  // const [isDataLoaded, setIsDataLoaded] = useState(false);
   // const contextData = useContextTodo()
-  // if (contextData) {
-  //   // contextData.context
-  //   // setFields()
-  //   console.log(contextData)
-  // }
+
+  // useEffect(() => {
+  //   setIsDataLoaded(Array.isArray(contextData?.context?.dataRows))
+  // }, [contextData])
+
+
   return (
-    <div>
-      <DataGridHeader />
-    </div>
+    <div className={styles.tab}>
+      <div className={styles.tabWrapper}>
+        <table>
+          <DataGridHead />
+          <DataGridBody />
+        </table>
+      </div></div>
   )
 }
 export default DataGrid;
