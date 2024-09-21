@@ -11,6 +11,7 @@ export type TColumn = {
   id: string;
   type: TFieldType;
   name?: string;
+  fieldName?: string;
   hint?: string;
 }
 type TFieldType = "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function";
@@ -21,6 +22,7 @@ const getResponseData = () => {
     .then(response => response.json())
 }
 ///////////////////////////////////////////////////////////////////////////
+
 const createDataGridColumns = <T extends TDataItem>(DataItem1: T): TColumn[] => {
   const columns: TColumn[] = [];
   const fields = Object.keys(DataItem1);
@@ -30,6 +32,7 @@ const createDataGridColumns = <T extends TDataItem>(DataItem1: T): TColumn[] => 
       id,
       type: typeof DataItem1[id],
       name: id.charAt(0).toUpperCase() + id.slice(1), // Делаем name с заглавной буквы
+      fieldName: '',
       hint: `This is the ${id} field` // Пример статического описания для hint
     };
     columns.push(col);

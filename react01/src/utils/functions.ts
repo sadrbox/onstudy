@@ -1,4 +1,5 @@
-import { ICol, IProduct } from "src/ui/GridDataTable/types";
+import OpenAI from "openai";
+
 import moment from "moment";
 import {
 	CSSProperties,
@@ -8,6 +9,7 @@ import {
 } from "react";
 import { ResolveFnOutput } from "module";
 import { TColumn } from "src/objects/Todos";
+import { ICol, IProduct } from "src/components/ui/GridData/types";
 
 export function getDateFromISO(dateString: string): string {
 	const date = moment(dateString);
@@ -68,6 +70,40 @@ export function isValidEmail(email: string) {
 
 export function stringJoin(...str: string[]) {
 	return str.join(" ");
+}
+
+export async function getTranslateWord(
+	text: string,
+	targetLanguage: string = "ru",
+) {
+	// const openai = new OpenAI({
+	// 	apiKey:
+	// 		"sk-svcacct-qgOuc5DEPWcU5nLBqxFBZuajru_HPpkIxUebpeOTKyPV85rdjZwh384SZW8yihry3T3BlbkFJBrR2un80-Xib5PJ_m2AcUOSfiwnlhrlBgGRUqrRd8lYsgR9ZwpXGyrZHyBtbsuwAA",
+	// 	dangerouslyAllowBrowser: true,
+	// });
+	// let result: string = "";
+	// try {
+	// 	const response = await openai.chat.completions.create({
+	// 		model: "gpt-4o-mini",
+	// 		messages: [
+	// 			{
+	// 				role: "system",
+	// 				content: `You are a helpful assistant who translates text into ${targetLanguage}.`,
+	// 			},
+	// 			{
+	// 				role: "user",
+	// 				content: `Translate the following text to ${targetLanguage}: "${text}".`,
+	// 			},
+	// 		],
+	// 	});
+	// 	if (response.choices[0].message.content) {
+	// 		const translation = response.choices[0].message.content.trim();
+	// 		result = translation;
+	// 	}
+	// } catch (error) {
+	// 	console.error("Ошибка при переводе:", error);
+	// }
+	// console.log(result);
 }
 
 // export function getSumOfColumn(data, columnName) {

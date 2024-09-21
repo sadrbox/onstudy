@@ -21,15 +21,12 @@ const DataGridBodyRow: FC<TProps> = ({ dataRow }) => {
     if (contextData?.context?.columns) {
       setColumns(contextData?.context?.columns)
     }
-
-
-  }, [contextData])
-  // console.log(dataRow)
+  }, [contextData]);
 
   return (
     <tr>
       {columns.map((col: TColumn, keyID: number) => {
-        const value = (dataRow[col.field] ? (dataRow[col.field] === true ? 'Boolean true' : dataRow[col.field]) : 'Boolean false');
+        const value = dataRow[col.id] === true ? 'Boolean true' : dataRow[col.id] || 'Boolean false';
         return (
           <td key={keyID}>
             <div
