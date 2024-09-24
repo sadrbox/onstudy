@@ -1,0 +1,37 @@
+{
+  "columns": [
+    {
+      "id": "id",
+      "label": "ID",
+      "width": "50px",
+      "type": "number",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "id": "name",
+      "label": "Name",
+      "width": "150px",
+      "type": "string",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "id": "number",
+      "label": "Number",
+      "width": "100px",
+      "type": "number",
+      "sortable": false,
+      "visible": true
+    },
+    {
+      "id": "date",
+      "label": "Date",
+      "width": "120px",
+      "type": "date",
+      "sortable": true,
+      "visible": true,
+      "format": "YYYY-MM-DD"
+    }
+  ]
+}

@@ -1,10 +1,12 @@
 $color60: #ffffff;
-$color30: #d4d4d4;
+$color30: #ebebeb;
 $color10: #a3a3a3;
 $color5: #262626; // $color5: #aaaaaa;
 $colorTheme: #3b82f6;
 
 .tab {
+  background-color: $color30;
+
   // display: contents;
   // width: 100%;
   // height: 100%; /* Или любую нужную высоту 100cqmin*/
@@ -12,13 +14,20 @@ $colorTheme: #3b82f6;
   // grid-auto-flow: column;
   // flex-direction: column;
   margin: 100px 100px 0px 100px;
-  padding: 2px;
+  padding: 4px;
   border: 1px solid $color10;
   border-radius: 2px;
 }
 
 .tabPanel {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30px, 30px));
+  grid-auto-flow: column;
+  // flex-direction: row;
+  align-items: center;
+  padding: 4px;
+  margin-bottom: 4px;
+  // justify-content: flex-end;
 }
 
 .tabWrapper {
@@ -101,24 +110,27 @@ thead {
     th {
       border-left: 1px solid $color10;
       div {
-        height: 27px;
+        // height: 27px;
         text-align: left;
-        padding: 4px;
+        padding: 4px 4px;
       }
     }
+
+    box-shadow: 0px 0px 20px rgba(100, 100, 100, 0.5); /* Внутренняя тень */
   }
   &::before {
-    // border-top: 1px solid $color10;
-    // background-color: red; /* Цвет фона */
-    content: " "; /* Псевдоэлемент нуждается в содержимом */
-    // padding: 2px; /* Отступы */
-    display: block; /* Отображение блока, чтобы отступы работали */
-    position: absolute; /* Позиционирование относительно родителя */
-    top: 0; /* Например, расположение внизу */
-    left: 0; /* Сдвиг от левого края */
-    right: 0; /* Сдвиг от правого края, если нужно заполнить */
-    // height: 10px; /* Задайте высоту, чтобы псевдоэлемент был видимым */
-    // box-shadow: 0 0 1px 1px $color10;
+    // // border-radius: 5px;
+    // // border-top: 1px solid $color10;
+    // // background-color: red; /* Цвет фона */
+    // content: " "; /* Псевдоэлемент нуждается в содержимом */
+    // // padding: 2px; /* Отступы */
+    // display: block; /* Отображение блока, чтобы отступы работали */
+    // position: absolute; /* Позиционирование относительно родителя */
+    // top: 0; /* Например, расположение внизу */
+    // left: 0; /* Сдвиг от левого края */
+    // right: 0; /* Сдвиг от правого края, если нужно заполнить */
+    // // height: 10px; /* Задайте высоту, чтобы псевдоэлемент был видимым */
+    // // box-shadow: 0 0 1px 1px $color10;
   }
   &::after {
     // background-color: red; /* Цвет фона */
@@ -132,8 +144,66 @@ thead {
     // height: 10px; /* Задайте высоту, чтобы псевдоэлемент был видимым */
     // box-shadow: 0 0 1px 1px $color10;
     // border-bottom: 2px solid $color10;
-    height: 2px;
-    background: rgb(163, 163, 163);
+    height: 1px;
+    background: $color10;
+  }
+}
+
+tbody {
+  // grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  // grid-auto-flow: column; /* Размещение элементов в колонках */
+  // grid-auto-columns: min-content;
+  background-color: $color60;
+  tr {
+    td {
+      border-left: 1px solid $color10;
+      border-right: 1px solid $color10;
+      div {
+        align-items: center;
+        padding: 2px 4px;
+      }
+    }
+    &:not(:last-child) {
+      border-bottom: 1px solid $color10;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.tabCell {
+  // flex: 1;
+  // height: 27px;
+  border: 1px solid transparent;
+  // background-color: skyblue;
+  // display: flex; /* Для центрирования содержимого, если нужно */
+  /* Вертикальное центрирование */
+  // justify-content: center; /* Горизонтальное центрирование */
+  // display: flex;
+  // flex-direction: row;
+  // grid-auto-flow: row; /* Размещение элементов в колонках */
+  // grid-auto-columns: min-content;
+  // place-items: center;
+
+  // align-items: stretch;
+
+  // align-items: center;
+  // justify-self: center;
+  // line-height: normal;
+  // align-content: center;
+  // justify-content: center;
+  span {
+    display: flex; // выравнивание по вертикали
+    align-items: center; // выравнивание по вертикали // display: inline-grid;
+    // justify-content: last baseline;
+    // border: 1px solid red;
+    // line-height: normal;
+    // font-size: 12px;
+    color: $color5;
+    // vertical-align: middle;
+    // font-weight: 600;
   }
 }
 
@@ -180,26 +250,6 @@ thead {
   // display: contents;
 }
 
-tbody {
-  // grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  // grid-auto-flow: column; /* Размещение элементов в колонках */
-  // grid-auto-columns: min-content;
-  background-color: $color60;
-  tr {
-    td {
-      border-left: 1px solid $color10;
-      border-right: 1px solid $color10;
-    }
-    &:not(:last-child) {
-      border-bottom: 1px solid $color10;
-    }
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-}
-
 .header_cell,
 .content_cell,
 .footer_cell {
@@ -219,7 +269,7 @@ tbody {
 }
 
 .header_cell {
-  display: table-cell;
+  // display: table-cell;
   cursor: default;
   user-select: none;
   // border-right: 5px solid red;
@@ -258,7 +308,7 @@ tbody {
 }
 
 .content_cell {
-  display: table-cell;
+  // display: table-cell;
   cursor: default;
   user-select: none;
   // align-self: center;
@@ -285,40 +335,6 @@ tbody {
     // align-content: center;
     border: 1px solid $color60;
     font-weight: 500;
-  }
-}
-
-.tabCell {
-  // flex: 1;
-  height: 27px;
-  border: 1px solid transparent;
-  // background-color: skyblue;
-  // display: flex; /* Для центрирования содержимого, если нужно */
-  align-items: center; /* Вертикальное центрирование */
-  // justify-content: center; /* Горизонтальное центрирование */
-  // display: flex;
-  // flex-direction: row;
-  // grid-auto-flow: row; /* Размещение элементов в колонках */
-  // grid-auto-columns: min-content;
-  // place-items: center;
-  padding: 4px;
-  // align-items: stretch;
-
-  // align-items: center;
-  // justify-self: center;
-  // line-height: normal;
-  // align-content: center;
-  // justify-content: center;
-  span {
-    display: flex; // выравнивание по вертикали
-    align-items: center; // выравнивание по вертикали // display: inline-grid;
-    // justify-content: last baseline;
-    // border: 1px solid red;
-    // line-height: normal;
-    // font-size: 12px;
-    color: $color5;
-    // vertical-align: middle;
-    // font-weight: 600;
   }
 }
 

@@ -4,6 +4,7 @@ import DataGrid from 'src/components/ui/DataGrid';
 import { ContextInstance } from './Context';
 // import { useContextInstance } from 'src/components/ui/GridData/ContextProvider';
 import { TContextData } from 'src/objects/Todos/Context';
+import { translateWord } from 'src/i18';
 
 
 export type TDataItem = { [key: string]: string }
@@ -28,12 +29,13 @@ const createDataGridColumns = <T extends TDataItem>(DataItem1: T): TColumn[] => 
   const fields = Object.keys(DataItem1);
 
   for (const id of fields) {
+    const fieldName = translateWord(id)
     const col = {
       id,
       type: typeof DataItem1[id],
-      name: id.charAt(0).toUpperCase() + id.slice(1), // Делаем name с заглавной буквы
-      fieldName: '',
-      hint: `This is the ${id} field` // Пример статического описания для hint
+      name: fieldName.charAt(0).toUpperCase() + fieldName.slice(1), // Делаем name с заглавной буквы
+      // fieldName: '',
+      hint: '' // Пример статического описания для hint
     };
     columns.push(col);
   }

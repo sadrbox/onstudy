@@ -19,7 +19,9 @@ const DataGrid = () => {
   return (
     <div className={styles.tab}>
       <div className={styles.tabPanel}>
-        <button><PiDotsThreeCircleLight size={26} /></button>
+        <button style={{ textAlign: 'left' }}><PiDotsThreeCircleLight size={26} /></button>
+        <button style={{ textAlign: 'left' }}><PiDotsThreeCircleLight size={26} /></button>
+        <button style={{ textAlign: 'right' }}><PiDotsThreeCircleLight size={26} /></button>
       </div>
       <div className={styles.tabWrapper}>
         <table>

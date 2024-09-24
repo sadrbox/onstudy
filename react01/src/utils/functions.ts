@@ -1,6 +1,5 @@
-import OpenAI from "openai";
-
 import moment from "moment";
+
 import {
 	CSSProperties,
 	DetailedHTMLProps,
@@ -8,8 +7,9 @@ import {
 	RefObject,
 } from "react";
 import { ResolveFnOutput } from "module";
-import { TColumn } from "src/objects/Todos";
+import { TColumn, TDataItem } from "src/objects/Todos";
 import { ICol, IProduct } from "src/components/ui/GridData/types";
+import { translateWord } from "src/i18";
 
 export function getDateFromISO(dateString: string): string {
 	const date = moment(dateString);
@@ -26,7 +26,7 @@ export function getDurationSession(seconds: number): string {
 	return `${hours}:${minutes}`;
 }
 
-export function getFormatValue(item: IProduct, column: ICol): string {
+export function getFormatValue(item: TDataItem, column: ICol): string {
 	// console.log(rowId);
 	if (column.id === "id") {
 		return item.id.toString().padStart(6, "0");
@@ -35,7 +35,7 @@ export function getFormatValue(item: IProduct, column: ICol): string {
 			style: "decimal",
 			minimumFractionDigits: 2,
 		});
-		return formater.format(item[column.id]);
+		return formater.format(+item[column.id]);
 	} else {
 		return item[column.id];
 	}
@@ -72,40 +72,29 @@ export function stringJoin(...str: string[]) {
 	return str.join(" ");
 }
 
-export async function getTranslateWord(
-	text: string,
-	targetLanguage: string = "ru",
+export function getViewValue(
+	value: string | number | boolean,
+	columnID: string,
 ) {
-	// const openai = new OpenAI({
-	// 	apiKey:
-	// 		"sk-svcacct-qgOuc5DEPWcU5nLBqxFBZuajru_HPpkIxUebpeOTKyPV85rdjZwh384SZW8yihry3T3BlbkFJBrR2un80-Xib5PJ_m2AcUOSfiwnlhrlBgGRUqrRd8lYsgR9ZwpXGyrZHyBtbsuwAA",
-	// 	dangerouslyAllowBrowser: true,
-	// });
-	// let result: string = "";
-	// try {
-	// 	const response = await openai.chat.completions.create({
-	// 		model: "gpt-4o-mini",
-	// 		messages: [
-	// 			{
-	// 				role: "system",
-	// 				content: `You are a helpful assistant who translates text into ${targetLanguage}.`,
-	// 			},
-	// 			{
-	// 				role: "user",
-	// 				content: `Translate the following text to ${targetLanguage}: "${text}".`,
-	// 			},
-	// 		],
-	// 	});
-	// 	if (response.choices[0].message.content) {
-	// 		const translation = response.choices[0].message.content.trim();
-	// 		result = translation;
-	// 	}
-	// } catch (error) {
-	// 	console.error("Ошибка при переводе:", error);
-	// }
-	// console.log(result);
-}
+	const formater = new Intl.NumberFormat("ru-RU", {
+		style: "decimal",
+		minimumFractionDigits: 2,
+	});
 
+	const result =
+		typeof value === "string"
+			? value
+			: typeof value === "number"
+				? columnID === "id"
+					? value.toString().padStart(6, "0")
+					: formater.format(+value)
+				: typeof value === "boolean"
+					? Boolean(value) === true
+						? translateWord("completed")
+						: translateWord("inprogress")
+					: value; // Если тип не string, number или boolean
+	return result;
+}
 // export function getSumOfColumn(data, columnName) {
 // 	let sum = 0;
 // 	for (let i = 0; i < data.length; i++) {

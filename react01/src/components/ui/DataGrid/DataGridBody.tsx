@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import styles from "./styles.module.scss";
+// import styles from "./styles.module.scss";
 import { useContextTodo } from 'src/objects/Todos/Context';
 import { TColumn, TDataItem } from 'src/objects/Todos';
-import { ITodo } from 'src/objects/Todos/types';
+// import { ITodo } from 'src/objects/Todos/types';
 import DataGridBodyRow from './DataGridBodyRow';
 
 
