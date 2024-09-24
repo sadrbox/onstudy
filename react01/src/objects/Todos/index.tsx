@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { IResponseData, ITodo } from './types';
 import DataGrid from 'src/components/ui/DataGrid';
-import { ContextInstance } from './Context';
+// import { ContextInstance } from './Context';
 // import { useContextInstance } from 'src/components/ui/GridData/ContextProvider';
-import { TContextData } from 'src/objects/Todos/Context';
+// import { TContextData } from 'src/objects/Todos/Context';
 import { translateWord } from 'src/i18';
+import ContextWrapper, { TDataGrid } from 'src/components/ui/DataGrid/DataGridContext';
 
 
 export type TDataItem = { [key: string]: string }
@@ -18,10 +19,7 @@ export type TColumn = {
 type TFieldType = "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function";
 
 ///////////////////////////////////////////////////////////////////////////
-const getResponseData = () => {
-  return fetch('https://dummyjson.com/todos')
-    .then(response => response.json())
-}
+
 ///////////////////////////////////////////////////////////////////////////
 
 const createDataGridColumns = <T extends TDataItem>(DataItem1: T): TColumn[] => {
@@ -54,11 +52,12 @@ const createDataGridColumns = <T extends TDataItem>(DataItem1: T): TColumn[] => 
 const Todos = () => {
 
   const [responseData, setResponseData] = useState<IResponseData | undefined>(undefined);
-  const [context, setContext] = useState<TContextData | undefined>(undefined);
+  const [dataGrid, setDataGrid] = useState<TDataGrid | undefined>(undefined);
 
 
   useEffect(() => {
-    getResponseData().then(response => setResponseData(response))
+
+    loadDataGrid();
   }, [])
 
   useEffect(() => {
@@ -66,21 +65,28 @@ const Todos = () => {
       const dataRows = responseData?.todos;
       const DataItem1 = responseData?.todos[0];
       const columns = createDataGridColumns(DataItem1);
-
-      setContext({
+      setDataGrid({
         dataRows,
-        columns
+        columns,
+        loadDataGrid
       })
-
+    } else {
+      setDataGrid(undefined)
     }
   }, [responseData])
 
-  const ContextWrapper = ContextInstance.Provider;
+  const loadDataGrid = async () => {
+    setDataGrid(undefined)
+    return await fetch('https://dummyjson.com/todos')
+      .then(response => response.json())
+      .then(data => setResponseData(data))
+  }
+
 
   return (
     <>
-      <ContextWrapper value={{ context, setContext }}>
-        {context ? (
+      <ContextWrapper dataGrid={dataGrid}>
+        {dataGrid ? (
           <DataGrid />) : (<h1>Loading...</h1>)}
       </ContextWrapper>
     </>

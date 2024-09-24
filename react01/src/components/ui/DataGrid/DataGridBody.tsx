@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from 'react'
 // import styles from "./styles.module.scss";
-import { useContextTodo } from 'src/objects/Todos/Context';
+// import { useContextTodo } from 'src/objects/Todos/Context';
 import { TColumn, TDataItem } from 'src/objects/Todos';
 // import { ITodo } from 'src/objects/Todos/types';
 import DataGridBodyRow from './DataGridBodyRow';
+import { useContextDataGrid } from './DataGridContext';
 
 
 
 const DataGridBody = () => {
 
-  const [columns, setColumns] = useState<TColumn[] | []>([])
+  // const [columns, setColumns] = useState<TColumn[] | []>([])
   const [dataRows, setDataRows] = useState<TDataItem[] | []>([])
-  const contextData = useContextTodo()
+  const dataGrid = useContextDataGrid()
 
   useEffect(() => {
-    if (contextData?.context?.columns) {
-      setColumns(contextData?.context?.columns)
-    }
-    if (contextData?.context?.dataRows) {
-      setDataRows(contextData?.context?.dataRows)
+    // if (dataGrid?.contextDataGrid?.columns) {
+    //   setColumns(dataGrid?.contextDataGrid?.columns)
+    // }
+    if (dataGrid?.contextDataGrid?.dataRows) {
+
+      setDataRows(dataGrid?.contextDataGrid?.dataRows)
     }
 
 
-  }, [contextData])
+  }, [dataGrid])
 
   return (
     <tbody>

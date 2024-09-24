@@ -1,12 +1,11 @@
-
-import React, { useEffect, useState } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 // import { translateWord } from 'src/i18'
 import settings from "./settings.json" assert { type: "json" };
 import { TColumn } from 'src/objects/Todos'
-import { useContextTodo } from 'src/objects/Todos/Context'
 import { getColumnWidthById } from './services';
+import { useContextDataGrid } from './DataGridContext';
 // import styles from "./styles.module.scss";
-
+import _ from 'lodash';
 
 
 
@@ -17,26 +16,19 @@ import { getColumnWidthById } from './services';
 ///////////////////////////////////////////////////////////////////////////
 const DataGridHead = () => {
   const [columns, setColumns] = useState<TColumn[]>()
-  const contextData = useContextTodo()
+  const dataGrid = useContextDataGrid()
 
-  ///////////////////////////////////////////////////////////////////////////
-  const createHeaderColumns = () => {
-    if (contextData?.context?.columns) {
-      // contextData.context
-      setColumns(contextData?.context.columns)
-      // console.log(contextData)
-    }
-  }
   ///////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
-    createHeaderColumns();
-
-  }, [columns])
+    const dataGridColumns = dataGrid?.contextDataGrid?.columns;
+    if (!_.isEqual(dataGridColumns, columns)) {
+      setColumns(dataGridColumns)
+    }
+  }, [dataGrid?.contextDataGrid?.columns, columns])
 
 
   return (
-
     <thead>
       <tr>
         {columns && columns.map((col: TColumn, keyID: number) => (
@@ -48,9 +40,10 @@ const DataGridHead = () => {
         ))}
       </tr>
     </thead>
-
   )
 }
 export default DataGridHead;
+
+
 
 
