@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { TColumn, TDataItem } from 'src/objects/Todos';
 // import { ITodo } from 'src/objects/Todos/types';
 import DataGridBodyRow from './DataGridBodyRow';
-import { useContextDataGrid } from './DataGridContext';
+import ContextWrapper, { useContextDataGrid } from './DataGridContext';
 
 
 
@@ -12,6 +12,12 @@ const DataGridBody = () => {
 
   // const [columns, setColumns] = useState<TColumn[] | []>([])
   const [dataRows, setDataRows] = useState<TDataItem[] | []>([])
+  const [activeRow, setActiveRow] = useState<number | null>(null)
+
+  const actions = {
+    activeRow,
+    setActiveRow
+  }
   const dataGrid = useContextDataGrid()
 
   useEffect(() => {
@@ -19,19 +25,16 @@ const DataGridBody = () => {
     //   setColumns(dataGrid?.contextDataGrid?.columns)
     // }
     if (dataGrid?.contextDataGrid?.dataRows) {
-
       setDataRows(dataGrid?.contextDataGrid?.dataRows)
     }
-
-
-  }, [dataGrid])
+  }, [dataGrid]);
 
   return (
     <tbody>
       {dataRows && dataRows.map((dataRow: TDataItem, keyID: number) =>
-        <DataGridBodyRow key={keyID} dataRow={dataRow} />)}
-    </tbody >
+        <DataGridBodyRow key={keyID} rowID={keyID} dataRow={dataRow} actions={{ ...actions }} />)}
+    </tbody>
   )
 }
 
-export default DataGridBody
+export default DataGridBody;

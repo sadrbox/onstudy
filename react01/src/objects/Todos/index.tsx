@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { IResponseData, ITodo } from './types';
 import DataGrid from 'src/components/ui/DataGrid';
+// import co
+
 // import { ContextInstance } from './Context';
 // import { useContextInstance } from 'src/components/ui/GridData/ContextProvider';
 // import { TContextData } from 'src/objects/Todos/Context';
@@ -13,7 +15,7 @@ export type TColumn = {
   id: string;
   type: TFieldType;
   name?: string;
-  fieldName?: string;
+  width?: string;
   hint?: string;
 }
 type TFieldType = "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function";
@@ -23,7 +25,10 @@ type TFieldType = "string" | "number" | "bigint" | "boolean" | "symbol" | "undef
 ///////////////////////////////////////////////////////////////////////////
 
 const createDataGridColumns = <T extends TDataItem>(DataItem1: T): TColumn[] => {
-  const columns: TColumn[] = [];
+  const columns: TColumn[] = [{
+    id: 'selectOption',
+    type: 'boolean'
+  }];
   const fields = Object.keys(DataItem1);
 
   for (const id of fields) {
@@ -32,7 +37,7 @@ const createDataGridColumns = <T extends TDataItem>(DataItem1: T): TColumn[] => 
       id,
       type: typeof DataItem1[id],
       name: fieldName.charAt(0).toUpperCase() + fieldName.slice(1), // Делаем name с заглавной буквы
-      // fieldName: '',
+      width: '',
       hint: '' // Пример статического описания для hint
     };
     columns.push(col);
@@ -54,9 +59,7 @@ const Todos = () => {
   const [responseData, setResponseData] = useState<IResponseData | undefined>(undefined);
   const [dataGrid, setDataGrid] = useState<TDataGrid | undefined>(undefined);
 
-
   useEffect(() => {
-
     loadDataGrid();
   }, [])
 
@@ -81,7 +84,6 @@ const Todos = () => {
       .then(response => response.json())
       .then(data => setResponseData(data))
   }
-
 
   return (
     <>

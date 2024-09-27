@@ -56,10 +56,10 @@ export function getAlignByColType(column: ICol | TColumn): CSSProperties {
 			return { justifyContent: "right" };
 		case "string":
 			return { justifyContent: "left" };
-		case "checkbox":
+		case "selectOption":
 			return { justifyContent: "center" };
 		default:
-			return {};
+			return { justifyContent: "left" };
 	}
 }
 

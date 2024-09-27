@@ -1,9 +1,17 @@
 {
   "columns": [
     {
+      "id": "selectOption",
+      "label": "",
+      "width": "30px",
+      "type": "boolean",
+      "sortable": false,
+      "visible": true
+    },
+    {
       "id": "id",
       "label": "ID",
-      "width": "50px",
+      "width": "60px",
       "type": "number",
       "sortable": true,
       "visible": true
