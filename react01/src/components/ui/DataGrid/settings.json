@@ -3,7 +3,7 @@
     {
       "id": "selectOption",
       "label": "",
-      "width": "30px",
+      "width": "32px",
       "type": "boolean",
       "sortable": false,
       "visible": true

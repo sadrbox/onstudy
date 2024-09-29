@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 // import { useContextTodo } from 'src/objects/Todos/Context';
 import { TColumn, TDataItem } from 'src/objects/Todos';
 import { ITodo } from 'src/objects/Todos/types';
-import { getAlignByColType, getViewValue } from '../../../utils/functions';
+import { getTextAlignByColumnType, getViewValue } from '../../../utils/functions';
 import { translateWord } from 'src/i18';
 import { useContextDataGrid } from './DataGridContext';
 import { SetStateAction } from 'react';
@@ -34,7 +34,7 @@ const DataGridBodyRow: FC<TProps> = ({ dataRow, rowID, actions }) => {
         if (col.id === 'selectOption') {
           return (
             <td key={keyID} onClick={() => actions.setActiveRow(rowID)}>
-              <div style={{ justifyContent: 'center' }} className={(actions?.activeRow === rowID) ? styles.TabFieldActive : styles.TabField}>
+              <div style={{ justifyItems: 'center' }} className={(actions?.activeRow === rowID) ? styles.TabFieldActive : styles.TabField}>
                 <span><DataGridCheckbox rowID={rowID} /></span>
               </div>
             </td>)
@@ -43,7 +43,7 @@ const DataGridBodyRow: FC<TProps> = ({ dataRow, rowID, actions }) => {
 
           return (
             <td key={keyID} onClick={() => actions.setActiveRow(rowID)}>
-              <div style={getAlignByColType(col)} className={(actions?.activeRow === rowID) ? styles.TabFieldActive : styles.TabField}>
+              <div style={getTextAlignByColumnType(col)} className={(actions?.activeRow === rowID) ? styles.TabFieldActive : styles.TabField}>
                 <span>{value}</span>
               </div>
             </td>)

@@ -68,7 +68,8 @@ $colorTheme: #3b82f6;
 }
 
 table {
-  // background-color: yellowgreen;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 .table_command_panel {
@@ -160,7 +161,6 @@ tbody {
       border-right: 1px solid $color10;
       div {
         align-items: center;
-        padding: 2px 2px 2px 4px;
         user-select: none;
       }
     }
@@ -181,7 +181,9 @@ tbody {
 }
 .TabField {
   display: grid;
-  grid-template-rows: 20px;
+  grid-template-rows: 26px;
+  grid-template-columns: 1fr;
+
   // overflow: hidden;
   // // background-color: red;
   // white-space: nowrap;
@@ -197,12 +199,16 @@ tbody {
   // max-width: 150px;
   // text-overflow: ellipsis;
   span {
+    padding: 0 5px;
+    // align-self: center;
+    // vertical-align: top;
     display: grid;
     overflow: hidden;
     // background-color: red;
     white-space: nowrap;
     text-overflow: ellipsis;
     // font-size: 14px;
+    // margin: auto 0;
   }
 }
 

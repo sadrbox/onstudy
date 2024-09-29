@@ -48,18 +48,20 @@ export function getFormatValue(item: TDataItem, column: ICol): string {
 // }
 // type TFieldType = "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function";
 
-export function getAlignByColType(column: ICol | TColumn): CSSProperties {
+export function getTextAlignByColumnType(
+	column: ICol | TColumn,
+): CSSProperties {
 	// Table content value align css style
 	// console.log(CSSProperties);
 	switch (column.type) {
 		case "number":
-			return { justifyContent: "right" };
+			return { textAlign: "right" };
 		case "string":
-			return { justifyContent: "left" };
+			return { textAlign: "left" };
 		case "selectOption":
-			return { justifyContent: "center" };
+			return { textAlign: "center" };
 		default:
-			return { justifyContent: "left" };
+			return { textAlign: "left" };
 	}
 }
 

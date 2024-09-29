@@ -3,22 +3,31 @@ import { createContext, useContext } from "react";
 // import { IResponseData } from "./types";
 // import { TColumn, TDataItem } from "./index";
 import React from "react";
-import { TColumn, TDataItem } from "src/objects/Todos";
+import { TColumn, TDataItem } from "./services";
+import { TSorting } from ".";
+// import { TColumn, TDataItem } from "src/objects/Todos";
 
-export type TDataGrid = {
-  dataRows: TDataItem[];
-  columns: TColumn[];
-  loadDataGrid: () => void;
+export type TContextData = {
+  dataGridRows: TDataItem[];
+  columns?: TColumn[];
+  actions: {
+    loadDataGrid?: () => void;
+  }
+  states: {
+    currentSorting: TSorting;
+    setCurrentSorting: Dispatch<SetStateAction<TSorting>>;
+  }
+
 };
 
 type TDataGridProps = {
-  dataGrid: TDataGrid | undefined;
+  contextData: TContextData | undefined;
 }
 
 type TContextInstance = {
 
-  contextDataGrid: TDataGrid | undefined;
-  setContextDataGrid: Dispatch<SetStateAction<TDataGrid | undefined>>;
+  contextDataGrid: TContextData | undefined;
+  setContextDataGrid: Dispatch<SetStateAction<TContextData | undefined>>;
 };
 
 export const ContextInstance = createContext<TContextInstance>({
@@ -29,19 +38,19 @@ export const ContextInstance = createContext<TContextInstance>({
 // eslint-disable-next-line react-refresh/only-export-components
 export const useContextDataGrid = () => useContext(ContextInstance);
 
-export default function ContextWrapper<T extends PropsWithChildren<TDataGridProps>>({ children, dataGrid }: T): JSX.Element {
+export default function ContextWrapper<T extends PropsWithChildren<TDataGridProps>>({ children, contextData }: T): JSX.Element {
 
-  const [contextDataGrid, setContextDataGrid] = useState<TDataGrid | undefined>(dataGrid);
+  const [contextDataGrid, setContextDataGrid] = useState<TContextData | undefined>(contextData);
 
   const contextValue: TContextInstance = useMemo(() => ({
     contextDataGrid, setContextDataGrid
   }), [contextDataGrid]);
 
   useEffect(() => {
-    if (dataGrid !== undefined) {
-      setContextDataGrid(dataGrid)
+    if (contextData !== undefined) {
+      setContextDataGrid(contextData)
     }
-  }, [dataGrid])
+  }, [contextData])
   return (
     <ContextInstance.Provider value={contextValue}>
       {children}

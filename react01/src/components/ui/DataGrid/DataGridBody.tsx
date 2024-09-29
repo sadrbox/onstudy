@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 // import styles from "./styles.module.scss";
 // import { useContextTodo } from 'src/objects/Todos/Context';
-import { TColumn, TDataItem } from 'src/objects/Todos';
+// import { TColumn, TDataItem } from 'src/objects/Todos';
 // import { ITodo } from 'src/objects/Todos/types';
 import DataGridBodyRow from './DataGridBodyRow';
 import ContextWrapper, { useContextDataGrid } from './DataGridContext';
+import { TDataItem } from './services';
 
 
 
@@ -18,16 +19,16 @@ const DataGridBody = () => {
     activeRow,
     setActiveRow
   }
-  const dataGrid = useContextDataGrid()
+  const { contextDataGrid } = useContextDataGrid()
 
   useEffect(() => {
     // if (dataGrid?.contextDataGrid?.columns) {
     //   setColumns(dataGrid?.contextDataGrid?.columns)
     // }
-    if (dataGrid?.contextDataGrid?.dataRows) {
-      setDataRows(dataGrid?.contextDataGrid?.dataRows)
+    if (contextDataGrid?.dataGridRows) {
+      setDataRows(contextDataGrid?.dataGridRows)
     }
-  }, [dataGrid]);
+  }, [contextDataGrid]);
 
   return (
     <tbody>

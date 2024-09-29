@@ -1,6 +1,6 @@
 import { TDataItem } from "./index";
 
-export interface IResponseData {
+export interface ITodosResponse {
 	todos?: TDataItem[];
 	total?: number;
 	skip?: number;
