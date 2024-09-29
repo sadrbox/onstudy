@@ -7,7 +7,7 @@ import { IoEllipsisHorizontalCircle } from "react-icons/io5";
 import DataGridHead from './DataGridHead';
 import DataGridBody from './DataGridBody';
 import ContextWrapper, { TContextData, } from './DataGridContext';
-import { createDataGridColumns, TDataItem } from './services';
+import { createDataGridColumns, TColumn, TDataItem } from './services';
 // import { TDataItem } from '../../../objects/Todos/index';
 
 type TDataGridProps = {
@@ -19,30 +19,39 @@ type TDataGridProps = {
 
 export type TSorting = {
   id: string;
-  sortBy: string;
+  order: string;
 }
 
 
 const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } }) => {
 
-
+  const [contextData, setContextData] = useState<TContextData | undefined>(undefined);
+  const [sortedDataGrid, setSortedDataGrid] = useState<TDataItem[] | undefined>(undefined);
+  // const [columns, setColumns] = useState<TColumn[] | undefined>(undefined)
   const [currentSorting, setCurrentSorting] = useState<TSorting>({
     id: 'id',
-    sortBy: 'asc'
+    order: 'asc'
   });
 
+  function sortMixedArray(arr: TDataItem[], columnID: string, order: string, locale = 'default') {
+    return arr.sort((a, b) => {
+      const aValue = order === "asc" ? a[columnID] : b[columnID];
+      const bValue = order === "asc" ? b[columnID] : a[columnID];
 
-  const [contextData, setContextData] = useState<TContextData | undefined>(undefined);
-
+      return typeof aValue === 'number' && typeof bValue === 'number'
+        ? aValue - bValue
+        : aValue.toString().localeCompare(bValue.toString(), locale, { numeric: true });
+    });
+  }
 
 
   useEffect(() => {
-    if (dataGridRows.length) {
-      const DataItem1 = dataGridRows[0];
-      // type TDataItem = typeof DataItem1;
-      const columns = createDataGridColumns(DataItem1);
+    if (sortedDataGrid?.length) {
+      const DataItem1 = sortedDataGrid[0];
+      const columns = createDataGridColumns(DataItem1)
+      const dataGrid = sortMixedArray(sortedDataGrid, currentSorting.id, currentSorting.order) || [];
       setContextData({
-        dataGridRows,
+        dataGrid,
         columns,
         actions: {
           loadDataGrid,
@@ -51,10 +60,16 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
           currentSorting,
           setCurrentSorting
         }
-
       })
     } else {
       setContextData(undefined)
+    }
+  }, [sortedDataGrid, currentSorting.id, currentSorting.order]);
+
+
+  useEffect(() => {
+    if (dataGridRows.length) {
+      setSortedDataGrid(dataGridRows)
     }
   }, [dataGridRows])
 
@@ -79,5 +94,4 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
   )
 }
 export default DataGrid;
-
 

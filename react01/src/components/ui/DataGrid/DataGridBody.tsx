@@ -25,8 +25,9 @@ const DataGridBody = () => {
     // if (dataGrid?.contextDataGrid?.columns) {
     //   setColumns(dataGrid?.contextDataGrid?.columns)
     // }
-    if (contextDataGrid?.dataGridRows) {
-      setDataRows(contextDataGrid?.dataGridRows)
+    if (contextDataGrid?.dataGrid) {
+      // contextDataGrid.states.currentSorting
+      setDataRows(contextDataGrid?.dataGrid)
     }
   }, [contextDataGrid]);
 

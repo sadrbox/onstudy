@@ -5,6 +5,7 @@ import settings from "./settings.json" assert { type: "json" };
 import { getColumnWidthById, TColumn } from './services';
 import { useContextDataGrid } from './DataGridContext';
 // import styles from "./styles.module.scss";
+import { FaSortAmountDown, FaSortAmountDownAlt } from "react-icons/fa";
 import _ from 'lodash';
 import { columns } from '../../../objects/Products/config';
 
@@ -29,14 +30,22 @@ const DataGridHead = () => {
     }
   }, [contextDataGrid?.columns, columns])
 
-  // onClick={() => setSorting(col.id)
+  function handleSorting(columnID: string) {
+    return contextDataGrid?.states.setCurrentSorting(prev => ({
+      id: columnID,
+      order: prev.id === columnID && prev.order === 'asc' ? 'desc' : 'asc'
+    }));
+  }
+
+  const { id: orderID, order: orderType } = { ...contextDataGrid?.states.currentSorting };
   return (
     <thead>
       <tr>
         {columns && columns.map((col: TColumn, keyID: number) => (
-          <th key={keyID} style={{ width: getColumnWidthById(settings, col.id) }}>
+          <th key={keyID} style={{ width: getColumnWidthById(settings, col.id) }} onClick={() => handleSorting(col.id)}>
             <div>
               <span>{col.name}</span>
+              {orderID === col.id && orderType === 'asc' ? <FaSortAmountDownAlt size={13} style={{ justifySelf: 'end', marginLeft: '10px', color: (orderID === col.id ? '#333' : 'transparent') }} /> : <FaSortAmountDown size={13} style={{ justifySelf: 'end', marginLeft: '10px', color: (orderID === col.id ? '#333' : 'transparent') }} />}
             </div>
           </th>
         ))}
@@ -46,6 +55,7 @@ const DataGridHead = () => {
 }
 export default DataGridHead;
 
+// 686D76
 
 
 

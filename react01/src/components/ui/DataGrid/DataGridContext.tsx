@@ -8,7 +8,7 @@ import { TSorting } from ".";
 // import { TColumn, TDataItem } from "src/objects/Todos";
 
 export type TContextData = {
-  dataGridRows: TDataItem[];
+  dataGrid: TDataItem[];
   columns?: TColumn[];
   actions: {
     loadDataGrid?: () => void;
