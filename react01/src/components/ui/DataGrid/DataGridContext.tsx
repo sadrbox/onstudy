@@ -10,12 +10,14 @@ import { TSorting } from ".";
 export type TContextData = {
   dataGrid: TDataItem[];
   columns?: TColumn[];
+  IDs: number[];
   actions: {
     loadDataGrid?: () => void;
   }
   states: {
-    currentSorting: TSorting;
-    setCurrentSorting: Dispatch<SetStateAction<TSorting>>;
+    currentSorting: TSorting, setCurrentSorting: Dispatch<SetStateAction<TSorting>>
+    checkedRows: number[], setCheckedRows: Dispatch<SetStateAction<number[]>>
+    isAllChecked: boolean, setIsAllChecked: Dispatch<SetStateAction<boolean>>
   }
 
 };

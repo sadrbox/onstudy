@@ -3,6 +3,8 @@ $color30: #ebebeb;
 $color10: #a3a3a3;
 $color5: #262626; // $color5: #aaaaaa;
 $colorTheme: #3b82f6;
+$color1: #87a2ff;
+$color2: #c4d7ff;
 
 .tab {
   background-color: $color30;
@@ -181,12 +183,12 @@ tbody {
 
 .TabFieldActive {
   @extend .TabField;
-  border: 1px solid #87a2ff !important;
-  background: #c4d7ff;
+  border: 1px solid $color1 !important;
+  background: $color2;
 }
 .TabField {
   display: grid;
-  grid-template-rows: 26px;
+  grid-template-rows: 22px;
   grid-template-columns: 1fr;
 
   // overflow: hidden;
@@ -207,6 +209,7 @@ tbody {
     padding: 0 5px;
     // align-self: center;
     // vertical-align: top;
+    // line-height: normal;
     display: grid;
     overflow: hidden;
     // background-color: red;
@@ -375,12 +378,22 @@ input[type="checkbox"] {
   height: 16px;
   width: 16px;
   accent-color: $colorTheme;
+  // border-radius: 100%;
   // appearance: none;
-  // outline: none;
+  &:focus {
+    outline: none;
+    border-radius: 100%;
+    // border: 1px solid red;
+    // box-shadow: 0px 0px 3px #262626;
+  }
+  &:focus-visible {
+    // outline: 1px solid black;
+  }
+  // border-radius: 100%;
   // border: none;
   // outline: 3px solid red;
   // border-radius: 10px;
-  // border: 1px solid red;
+
   // align-self: center;
 }
 

@@ -8,6 +8,8 @@ import { useContextDataGrid } from './DataGridContext';
 import { FaSortAmountDown, FaSortAmountDownAlt } from "react-icons/fa";
 import _ from 'lodash';
 import { columns } from '../../../objects/Products/config';
+import DataGridCheckbox from './UI/UICheckbox';
+import UICheckboxAll from './UI/UICheckboxAll';
 
 
 
@@ -41,21 +43,33 @@ const DataGridHead = () => {
   return (
     <thead>
       <tr>
-        {columns && columns.map((col: TColumn, keyID: number) => (
-          <th key={keyID} style={{ width: getColumnWidthById(settings, col.id) }} onClick={() => handleSorting(col.id)}>
-            <div>
-              <span>{col.name}</span>
-              {orderID === col.id && orderType === 'asc' ? <FaSortAmountDownAlt size={13} style={{ justifySelf: 'end', marginLeft: '10px', color: (orderID === col.id ? '#333' : 'transparent') }} /> : <FaSortAmountDown size={13} style={{ justifySelf: 'end', marginLeft: '10px', color: (orderID === col.id ? '#333' : 'transparent') }} />}
-            </div>
-          </th>
-        ))}
+        {columns && columns.map((col: TColumn, keyID: number) => {
+          if (col.id === 'selectOption') {
+            return (
+              <th key={keyID} style={{ width: getColumnWidthById(settings, col.id) }}>
+                <div style={{ justifyItems: 'center' }}>
+                  <span style={{ display: 'grid' }}><UICheckboxAll /></span>
+                </div>
+              </th>
+            )
+          } else {
+            return (
+              <th key={keyID} style={{ width: getColumnWidthById(settings, col.id) }} onClick={() => handleSorting(col.id)}>
+                <div>
+                  <span>{col.name}</span>
+                  {orderID === col.id && orderType === 'asc' ? <FaSortAmountDownAlt size={16} style={{ justifySelf: 'end', marginLeft: '10px', color: (orderID === col.id ? '#333' : 'transparent') }} /> : <FaSortAmountDown size={16} style={{ justifySelf: 'end', marginLeft: '10px', color: (orderID === col.id ? '#333' : 'transparent') }} />}
+                </div>
+              </th>
+            )
+          }
+        }
+        )}
       </tr>
     </thead >
   )
 }
 export default DataGridHead;
 
-// 686D76
 
 
 

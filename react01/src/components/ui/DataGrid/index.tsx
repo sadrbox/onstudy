@@ -9,6 +9,7 @@ import DataGridBody from './DataGridBody';
 import ContextWrapper, { TContextData, } from './DataGridContext';
 import { createDataGridColumns, TColumn, TDataItem } from './services';
 // import { TDataItem } from '../../../objects/Todos/index';
+// import { TDataItem } from 'src/components/ui/DataGrid/services';
 
 type TDataGridProps = {
   dataGridRows: TDataItem[],
@@ -27,7 +28,8 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
 
   const [contextData, setContextData] = useState<TContextData | undefined>(undefined);
   const [sortedDataGrid, setSortedDataGrid] = useState<TDataItem[] | undefined>(undefined);
-  // const [columns, setColumns] = useState<TColumn[] | undefined>(undefined)
+  const [checkedRows, setCheckedRows] = useState<number[]>([])
+  const [isAllChecked, setIsAllChecked] = useState<boolean>(false)
   const [currentSorting, setCurrentSorting] = useState<TSorting>({
     id: 'id',
     order: 'asc'
@@ -38,11 +40,15 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
       const aValue = order === "asc" ? a[columnID] : b[columnID];
       const bValue = order === "asc" ? b[columnID] : a[columnID];
 
-      return typeof aValue === 'number' && typeof bValue === 'number'
-        ? aValue - bValue
-        : aValue.toString().localeCompare(bValue.toString(), locale, { numeric: true });
-    });
+      if (typeof aValue === 'number' && typeof bValue === 'number') {
+        return aValue - bValue;
+      } else if (typeof aValue === 'string' && typeof bValue === 'string') {
+        return aValue.toString().localeCompare(bValue.toString(), locale, { numeric: true });
+      }
+      return 0;
+    })
   }
+
 
 
   useEffect(() => {
@@ -50,22 +56,77 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
       const DataItem1 = sortedDataGrid[0];
       const columns = createDataGridColumns(DataItem1)
       const dataGrid = sortMixedArray(sortedDataGrid, currentSorting.id, currentSorting.order) || [];
+      const IDs = sortedDataGrid.map(row => row.id as number) || [];
+
+
+
       setContextData({
         dataGrid,
         columns,
+        IDs,
         actions: {
           loadDataGrid,
         },
         states: {
-          currentSorting,
-          setCurrentSorting
+          currentSorting, setCurrentSorting,
+          checkedRows, setCheckedRows,
+          isAllChecked, setIsAllChecked
         }
       })
     } else {
       setContextData(undefined)
     }
-  }, [sortedDataGrid, currentSorting.id, currentSorting.order]);
+  }, [sortedDataGrid, currentSorting, checkedRows, isAllChecked]);
 
+  /////////////////////////////////////////////////////////
+
+  // useEffect(() => {
+  //   // console.log("useEffect")
+  //   if (checkedAllRows) {
+  //     if (sortedDataGrid) {
+  //       setCheckedRows(sortedDataGrid.map(row => row.id as number))
+  //     }
+  //   } else {
+  //     setCheckedAllRows(false)
+  //     // setCheckedRows((prev) => [...prev])
+  //   }
+  // }, [sortedDataGrid])
+
+  /////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    if (sortedDataGrid) {
+      const IDs = sortedDataGrid.map(row => row.id as number) || []
+      if (isAllChecked) {
+        setCheckedRows(IDs)
+      } else {
+
+        if (checkedRows.length < IDs.length) {
+          setCheckedRows((prev) => [...prev])
+        } else {
+          setCheckedRows([])
+        }
+      }
+    }
+  }, [isAllChecked])
+
+  /////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    if (sortedDataGrid) {
+      const IDs = sortedDataGrid.map(row => row.id as number) || []
+
+      if (checkedRows.length === IDs.length) {
+        // console.log({ checkedRows, IDs })
+        setIsAllChecked(true)
+        // setCheckedRows((prev) => [...prev])
+      } else {
+        setIsAllChecked(false)
+      }
+    }
+  }, [checkedRows])
+
+  /////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (dataGridRows.length) {

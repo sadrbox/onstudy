@@ -27,7 +27,7 @@ export function getColumnWidthById(
 	return column ? column.width : "auto"; // Возвращает ширину или undefined, если не найдено
 }
 
-export type TDataItem = { [key: string]: string };
+export type TDataItem = { [key: string | number]: string | number | boolean };
 export type TColumn = {
 	id: string;
 	type: TFieldType;
@@ -58,19 +58,22 @@ export const createDataGridColumns = <T extends TDataItem>(
 			type: "boolean",
 		},
 	];
-	const fields = Object.keys(DataItem1);
 
-	for (const id of fields) {
-		const fieldName = translateWord(id);
+	Object.entries(DataItem1).forEach(([key, value]) => {
+		if (typeof value === "object") {
+			return;
+		}
+
+		const fieldName = translateWord(key);
 		const col = {
-			id,
-			type: typeof DataItem1[id],
+			id: key,
+			type: typeof DataItem1[key],
 			name: fieldName.charAt(0).toUpperCase() + fieldName.slice(1), // Делаем name с заглавной буквы
 			width: "",
 			hint: "", // Пример статического описания для hint
 		};
 		columns.push(col);
-	}
-
+	});
+	// console.log(columns);
 	return columns;
 };

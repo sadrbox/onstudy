@@ -13,12 +13,12 @@ import Todos from "./objects/Todos";
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Products />,
+  },
+  {
+    path: "/todos",
     element: <Todos />,
   },
-  // {
-  //   path: "/post",
-  //   element: <Post />,
-  // },
   {
     path: "/users/lst",
     element: <Users />,
