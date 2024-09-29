@@ -190,7 +190,7 @@ tbody {
   display: grid;
   grid-template-rows: 22px;
   grid-template-columns: 1fr;
-
+  padding: 0 5px;
   // overflow: hidden;
   // // background-color: red;
   // white-space: nowrap;
@@ -206,7 +206,7 @@ tbody {
   // max-width: 150px;
   // text-overflow: ellipsis;
   span {
-    padding: 0 5px;
+    padding: 0px;
     // align-self: center;
     // vertical-align: top;
     // line-height: normal;
