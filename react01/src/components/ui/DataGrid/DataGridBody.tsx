@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 // import { TColumn, TDataItem } from 'src/objects/Todos';
 // import { ITodo } from 'src/objects/Todos/types';
 import DataGridBodyRow from './DataGridBodyRow';
-import ContextWrapper, { useContextDataGrid } from './DataGridContext';
+import { useContextDataGrid } from './DataGridContext';
 import { TDataItem } from './services';
 
 
@@ -26,6 +26,7 @@ const DataGridBody = () => {
   }, [contextDataGrid]);
 
   return (
+
     <tbody>
       {dataRows && dataRows.map((dataRow: TDataItem, keyID: number) =>
         <DataGridBodyRow key={keyID} dataRow={dataRow} actions={{ ...actions }} />)}

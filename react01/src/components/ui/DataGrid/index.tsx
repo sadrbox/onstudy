@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC } from 'react'
+import React, { useEffect, useState, FC, Suspense } from 'react'
 import styles from "./styles.module.scss"
 import { PiDotsThreeCircleLight } from "react-icons/pi";
 import { IoReloadCircleOutline } from "react-icons/io5";
@@ -7,7 +7,7 @@ import { IoEllipsisHorizontalCircle } from "react-icons/io5";
 import DataGridHead from './DataGridHead';
 import DataGridBody from './DataGridBody';
 import ContextWrapper, { TContextData, } from './DataGridContext';
-import { createDataGridColumns, TColumn, TDataItem } from './services';
+import { createDataGridColumns, TDataItem } from './services';
 // import { TDataItem } from '../../../objects/Todos/index';
 // import { TDataItem } from 'src/components/ui/DataGrid/services';
 
@@ -45,7 +45,8 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
       } else if (typeof aValue === 'string' && typeof bValue === 'string') {
         return aValue.toString().localeCompare(bValue.toString(), locale, { numeric: true });
       }
-      return 0;
+      return (aValue ? -1 : bValue ? +1 : 0)
+      // return -1;
     })
   }
 
@@ -78,19 +79,6 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
     }
   }, [sortedDataGrid, currentSorting, checkedRows, isAllChecked]);
 
-  /////////////////////////////////////////////////////////
-
-  // useEffect(() => {
-  //   // console.log("useEffect")
-  //   if (checkedAllRows) {
-  //     if (sortedDataGrid) {
-  //       setCheckedRows(sortedDataGrid.map(row => row.id as number))
-  //     }
-  //   } else {
-  //     setCheckedAllRows(false)
-  //     // setCheckedRows((prev) => [...prev])
-  //   }
-  // }, [sortedDataGrid])
 
   /////////////////////////////////////////////////////////
 
@@ -140,19 +128,29 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
     <ContextWrapper contextData={contextData}>
       <div className={styles.tab}>
         <div className={styles.tabPanel}>
-          <button style={{ textAlign: 'left' }}><PiDotsThreeCircleLight size={26} /></button>
-          <button style={{ textAlign: 'left' }}><IoEllipsisHorizontalCircle size={26} /></button>
-          <button onClick={() => loadDataGrid()} style={{ textAlign: 'right' }}><IoReloadCircleOutline size={26} /></button>
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left', gap: '5px' }}>
+            <button className={styles.Button}><span>Добавить</span></button>
+            <button className={styles.Button}><span>Удалить</span></button>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'right', gap: '5px' }}>
+            <button onClick={() => loadDataGrid()} className={[styles.Button, styles.ButtonImg].join(' ')}>
+              <div className={styles.ImgReload} ></div>
+            </button>
+            <button className={[styles.Button, styles.ButtonImg].join(' ')}>
+              <div className={styles.ImgSetting} ></div>
+            </button>
+          </div>
         </div>
         <div className={styles.tabWrapper}>
-          <table>
-            <DataGridHead />
-            <DataGridBody />
-          </table>
+          <Suspense fallback={<div>Loading...</div>}>
+            <table>
+              <DataGridHead />
+              <DataGridBody />
+            </table>
+          </Suspense>
         </div>
       </div>
-    </ContextWrapper>
+    </ContextWrapper >
   )
 }
 export default DataGrid;
-

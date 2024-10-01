@@ -62,5 +62,19 @@
   "id": "Номер",
   "todo": "Задача",
   "completed": "Завершено",
-  "inprogress": "В работе"
+  "inprogress": "В работе",
+  "description": "Описание",
+  "discountPercentage": "Процент скидки",
+  "rating": "Рейтинг",
+  "stock": "Запас",
+  "brand": "Бренд",
+  "sku": "Артикул",
+  "weight": "Вес",
+  "warrantyInformation": "Информация о гарантии",
+  "shippingInformation": "Информация о доставке",
+  "availabilityStatus": "Статус доступности",
+  "returnPolicy": "Политика возврата",
+  "minimumOrderQuantity": "Минимальное количество заказа",
+  "thumbnail": "Миниатюра",
+  "title": "Наименование"
 }

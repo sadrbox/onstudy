@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { translateWord } from 'src/i18'
 import settings from "./settings.json" assert { type: "json" };
 // import { TColumn } from 'src/objects/Todos'
@@ -7,8 +7,8 @@ import { useContextDataGrid } from './DataGridContext';
 // import styles from "./styles.module.scss";
 import { FaSortAmountDown, FaSortAmountDownAlt } from "react-icons/fa";
 import _ from 'lodash';
-import { columns } from '../../../objects/Products/config';
-import DataGridCheckbox from './UI/UICheckbox';
+// import { columns } from '../../../objects/Products/config';
+// import DataGridCheckbox from './UI/UICheckbox';
 import UICheckboxAll from './UI/UICheckboxAll';
 
 
@@ -33,12 +33,12 @@ const DataGridHead = () => {
   }, [contextDataGrid?.columns, columns])
 
   function handleSorting(columnID: string) {
-    return contextDataGrid?.states.setCurrentSorting(prev => ({
+    return contextDataGrid?.states.setCurrentSorting((prev) => ({
       id: columnID,
       order: prev.id === columnID && prev.order === 'asc' ? 'desc' : 'asc'
     }));
   }
-
+  // console.log(columns)
   const { id: orderID, order: orderType } = { ...contextDataGrid?.states.currentSorting };
   return (
     <thead>

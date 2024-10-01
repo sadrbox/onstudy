@@ -1,11 +1,3 @@
-$color60: #ffffff;
-$color30: #ebebeb;
-$color10: #a3a3a3;
-$color5: #262626; // $color5: #aaaaaa;
-$colorTheme: #3b82f6;
-$color1: #87a2ff;
-$color2: #c4d7ff;
-
 .tab {
   background-color: $color30;
 
@@ -23,10 +15,11 @@ $color2: #c4d7ff;
 
 .tabPanel {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30px, 30px));
   grid-auto-flow: column;
+  grid-template-columns: repeat(1fr);
+  // grid-auto-flow: column;
   // flex-direction: row;
-  align-items: center;
+  // align-items: center;
   padding: 4px;
   margin-bottom: 4px;
   // justify-content: flex-end;
@@ -34,6 +27,8 @@ $color2: #c4d7ff;
 
 .tabWrapper {
   display: grid;
+  grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
+  background-color: #fff;
   // margin: 4px 4px 4px 4px;
   // width: auto;
   // background-color: red;
@@ -42,31 +37,33 @@ $color2: #c4d7ff;
 
   height: 500px; /* Высота контейнера */
   overflow-y: auto; /* Прокрутка по вертикали */
-  border-top: 1px solid $color10;
-  border-bottom: 1px solid $color10;
-  border-right: 1px solid $color10;
+  // border-top: 1px solid $color10;
+  // border-bottom: 1px solid $color10;
+  // border-right: 1px solid $color10;
+  border: 1px solid $color10;
 
-  // &::-webkit-scrollbar {
-  //   width: 8px;
-  // }
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
 
-  // /* Track */
-  // &::-webkit-scrollbar-track {
-  //   // padding-top: 30px;
-  //   background: $color60;
-  // }
+  /* Track */
+  &::-webkit-scrollbar-track {
+    // padding-top: 30px;
+    background: $color30;
+  }
 
-  // /* Handle */
-  // &::-webkit-scrollbar-thumb {
-  //   // margin-top: 30px;
-  //   background: $color30;
-  //   border-radius: 1px;
-  // }
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    // margin-top: 30px;
+    background: $color10;
+    border-radius: 2px;
+  }
 
-  // /* Handle on hover */
-  // &::-webkit-scrollbar-thumb:hover {
-  //   background: $color10;
-  // }
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: $color10;
+  }
 }
 
 table {
@@ -111,9 +108,17 @@ thead {
   // border-bottom: 1px solid red;
   tr {
     th {
+      &:first-child {
+        border-left: 0px;
+      }
+      &:last-child {
+        border-right: 0px;
+      }
       user-select: none;
       cursor: pointer;
-      border-left: 1px solid $color10;
+
+      border-right: 1px solid $color10;
+      border-bottom: 1px solid $color10;
       div {
         // height: 27px;
         display: grid;
@@ -124,7 +129,7 @@ thead {
       }
     }
 
-    box-shadow: 0px 0px 20px rgba(100, 100, 100, 0.5); /* Внутренняя тень */
+    box-shadow: 0px 0px 5px rgba(100, 100, 100, 0.5);
   }
   &::before {
     // // border-radius: 5px;
@@ -141,7 +146,6 @@ thead {
     // // box-shadow: 0 0 1px 1px $color10;
   }
   &::after {
-    // background-color: red; /* Цвет фона */
     content: " "; /* Псевдоэлемент нуждается в содержимом */
     // padding: 2px; /* Отступы */
     display: block; /* Отображение блока, чтобы отступы работали */
@@ -149,23 +153,26 @@ thead {
     bottom: 0; /* Например, расположение внизу */
     left: 0; /* Сдвиг от левого края */
     right: 0; /* Сдвиг от правого края, если нужно заполнить */
-    // height: 10px; /* Задайте высоту, чтобы псевдоэлемент был видимым */
     // box-shadow: 0 0 1px 1px $color10;
-    // border-bottom: 2px solid $color10;
-    height: 1px;
+    // border-bottom: 22x solid $color10;
+    height: 2px;
     background: $color10;
   }
 }
 
 tbody {
-  // grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  // grid-auto-flow: column; /* Размещение элементов в колонках */
-  // grid-auto-columns: min-content;
   background-color: $color60;
   tr {
     td {
-      border-left: 1px solid $color10;
+      &:first-child {
+        border-left: 0px;
+      }
+      &:last-child {
+        border-right: 0px;
+      }
       border-right: 1px solid $color10;
+      border-bottom: 1px solid $color10;
+
       div {
         align-items: center;
         user-select: none;
@@ -174,11 +181,60 @@ tbody {
     &:not(:last-child) {
       border-bottom: 1px solid $color10;
     }
-
     &:last-child {
       border-bottom: none;
     }
   }
+}
+
+.Button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  height: 30px;
+  border: 1px solid $color10;
+  border-radius: 3px;
+  // padding-left: 5px;
+  span {
+    font-weight: bold;
+    color: #333; /* Основной цвет текста */
+    text-shadow: 1px 1px 5px #fff; /* Тонкая тень с мягким размытием */
+    // background-color: #ebebeb; /* Фон блока */
+    // padding: 20px; /* Дополнительное пространство вокруг текста */
+    padding: 0px 6px;
+    align-self: center;
+    // vertical-align: top;
+    // line-height: normal;
+    display: grid;
+    // overflow: hidden;
+    // background-color: red;
+    white-space: nowrap;
+    // text-overflow: ellipsis;
+  }
+  box-shadow:
+    inset 0px -1px 0px rgba(0, 0, 0, 0.3),
+    0px 0px 1px rgba(0, 0, 0, 0.3);
+  &:hover {
+    box-shadow:
+      inset 0px -1px 1px rgba(0, 0, 0, 0.3),
+      0px 1px 1px rgba(0, 0, 0, 0.3);
+  }
+  &:active {
+    border: 1px solid $color5;
+    box-shadow:
+      inset 0px -1px 0px rgba(0, 0, 0, 0.3),
+      0px 0px 0px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.ButtonImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  border-radius: 8px;
+  // padding: 10px;
 }
 
 .TabFieldActive {
@@ -190,7 +246,6 @@ tbody {
   display: grid;
   grid-template-rows: 22px;
   grid-template-columns: 1fr;
-  padding: 0 5px;
   // overflow: hidden;
   // // background-color: red;
   // white-space: nowrap;
@@ -206,7 +261,8 @@ tbody {
   // max-width: 150px;
   // text-overflow: ellipsis;
   span {
-    padding: 0px;
+    padding: 0 5px;
+
     // align-self: center;
     // vertical-align: top;
     // line-height: normal;
@@ -220,166 +276,24 @@ tbody {
   }
 }
 
-.header_row {
-  display: table-header-group;
-  // display: grid;
-  // grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  // grid-auto-flow: column; /* Размещение элементов в колонках */
-  // grid-auto-columns: min-content;
-  // overflow-x: auto;
-  background-color: $color30;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  border-bottom: 1px solid $color5;
-
-  &::after {
-    content: "";
-    top: 27px;
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    background-color: transparent;
-    transition: background-color 600ms ease;
-  }
-}
-
-.header_row__scrolling {
-  &::after {
-    background-color: #6464645d;
-  }
-}
-
-// .footer_row {
-//   background-color: $color30;
-//   position: sticky;
-//   bottom: 0;
-//   z-index: 1;
-//   border-top: 1px solid $color10;
-// }
-
-.header_row,
-.content_row {
-  // display: contents;
-}
-
-.header_cell,
-.content_cell,
-.footer_cell {
-  // display: grid;
-  width: 100%; // height: 30px;
-  text-align: left;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  // display: inline-grid; // выравнивание по вертикали
-  align-items: stretch; // выравнивание по вертикали
-  // justify-items: end;
-  border-right: 1px solid $color10;
-
-  &:not(:last-child) {
-  }
-}
-
-.header_cell {
-  // display: table-cell;
-  cursor: default;
-  user-select: none;
-  // border-right: 5px solid red;
-
-  &:not(:first-child) {
-  }
-
-  &:not(:last-child) {
-  }
-
-  &:first-child {
-  }
-
-  &:last-child {
-  }
-
-  .field {
-    border: 1px solid transparent;
-    span {
-      font-weight: 600;
-      &:hover {
-        .sortIcon_hover {
-          display: flex;
-        }
-      }
-      .sortIcon_hover {
-        color: $color10;
-        // visibility: none;
-        padding-top: 2px;
-      }
-    }
-    .sortIcon {
-      padding-top: 2px;
-    }
-  }
-}
-
-.content_cell {
-  // display: table-cell;
-  cursor: default;
-  user-select: none;
-  // align-self: center;
-  // align-items: end;
-
-  &:not(:last-child) {
-  }
-
-  &:first-child {
-  }
-
-  &:last-child {
-  }
-
-  .field {
-    // vertical-align: middle;
-    // display: flex;
-    // height: 26px; // display: grid;
-    // line-height: 16px;
-    // padding: 0 4px;
-    // justify-content: center;
-    // align-self: self-end;
-    // align-items: center;
-    // align-content: center;
-    border: 1px solid $color60;
-    font-weight: 500;
-  }
-}
-
-.field {
-  // height: 26px;
+.LabelForCheckbox {
   display: flex;
-  // place-items: center;
-  padding: 4px;
-  align-items: stretch;
-
+  justify-content: center;
   align-items: center;
-  // justify-self: center;
-  // line-height: normal;
-  // align-content: center;
-  // justify-content: center;
-  span {
-    display: flex; // выравнивание по вертикали
-    align-items: center; // выравнивание по вертикали // display: inline-grid;
-    // border: 1px solid red;
-    line-height: normal;
-    font-size: 12px;
-    color: $color5;
-    // font-weight: 600;
-  }
+  margin: 0px;
+  // background: red;
+  height: 22px;
+  width: 22px;
 }
 
 input[type="checkbox"] {
-  height: 16px;
-  width: 16px;
-  accent-color: $colorTheme;
-  // border-radius: 100%;
+  height: 18px;
+  width: 18px;
+  accent-color: $color60;
+  // transform: rotate(45deg);
+  border-radius: 100%;
   // appearance: none;
+  cursor: pointer;
   &:focus {
     outline: none;
     border-radius: 100%;

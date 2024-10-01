@@ -26,16 +26,3 @@ root {
   font-size: 13px;
   /* line-height: 1; */
 }
-
-.rowGroup {
-  /* горизонтально */
-  display: flex;
-  flex-direction: row;
-  /* padding: 10px; */
-}
-.colGroup {
-  /* вертикально */
-  display: flex;
-  flex-direction: column;
-  /* padding: 10px; */
-}

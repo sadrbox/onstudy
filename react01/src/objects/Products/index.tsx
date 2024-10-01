@@ -44,7 +44,7 @@ const Products: FC = () => {
 
   const loadDataGrid = async () => {
     setDataGridRows(undefined)
-    return await fetch('https://dummyjson.com/products')
+    return await fetch('https://dummyjson.com/products?limit=30')
       .then(response => response.json())
       .then(data => setResponseData(data))
   }

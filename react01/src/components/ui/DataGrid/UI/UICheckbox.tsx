@@ -1,7 +1,9 @@
-import React, { Dispatch, ForwardedRef, forwardRef, ForwardRefExoticComponent, MutableRefObject, ReactNode, RefAttributes, SetStateAction, useEffect } from 'react';
+import React, { FC, Dispatch, ForwardedRef, forwardRef, ForwardRefExoticComponent, MutableRefObject, ReactNode, RefAttributes, SetStateAction, useEffect, useImperativeHandle } from 'react';
 import { useContextDataGrid } from '../DataGridContext';
+import styles from "../styles.module.scss"
 
 interface TUICheckboxProps {
+  tabIndex: number;
   rowID: number;
   checked: boolean;
   actions: {
@@ -9,11 +11,12 @@ interface TUICheckboxProps {
   }
 }
 
-const UICheckbox = forwardRef<HTMLInputElement, TUICheckboxProps>(({ rowID, checked, actions }, ref) => {
+const UICheckbox: FC<TUICheckboxProps> = ({ tabIndex, rowID, checked, actions }) => {
   const { contextDataGrid } = useContextDataGrid();
 
 
-  function setCheckedRows(rowID: number) {
+
+  function OnChangeCheckbox(rowID: number) {
     if (contextDataGrid?.states) {
       const setCheckedRows = contextDataGrid?.states.setCheckedRows;
       setCheckedRows((prev) => {
@@ -26,15 +29,15 @@ const UICheckbox = forwardRef<HTMLInputElement, TUICheckboxProps>(({ rowID, chec
     }
   }
 
-  function onfocuscheckbox(rowID: number) {
+  function OnFocusCheckbox(rowID: number) {
     return actions.setActiveRow(rowID)
   }
 
   return (
-    <>
-      <input type="checkbox" onFocus={() => onfocuscheckbox(rowID)} name={`selectOption_${rowID}`} ref={ref} checked={checked} onChange={() => setCheckedRows(rowID)} tabIndex={rowID} />
-    </>
+    <label className={styles.LabelForCheckbox} htmlFor={`selectOption_${rowID}`} onClick={() => console.log('sdfasd')}>
+      <input type="checkbox" onFocus={() => OnFocusCheckbox(rowID)} id={`selectOption_${rowID}`} checked={checked} onChange={() => OnChangeCheckbox(rowID)} tabIndex={tabIndex} />
+    </label>
   );
-});
+};
 
 export default UICheckbox;
