@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC, Suspense } from 'react'
+import React, { useEffect, useState, FC, Suspense, useRef, MutableRefObject, RefObject } from 'react'
 import styles from "./styles.module.scss"
 import { PiDotsThreeCircleLight } from "react-icons/pi";
 import { IoReloadCircleOutline } from "react-icons/io5";
@@ -30,6 +30,7 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
   const [sortedDataGrid, setSortedDataGrid] = useState<TDataItem[] | undefined>(undefined);
   const [checkedRows, setCheckedRows] = useState<number[]>([])
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false)
+  let timeoutInstance: NodeJS.Timeout = setTimeout(() => { }, 0);
   const [currentSorting, setCurrentSorting] = useState<TSorting>({
     id: 'id',
     order: 'asc'
@@ -58,6 +59,7 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
       const columns = createDataGridColumns(DataItem1)
       const dataGrid = sortMixedArray(sortedDataGrid, currentSorting.id, currentSorting.order) || [];
       const IDs = sortedDataGrid.map(row => row.id as number) || [];
+
 
 
 
@@ -124,6 +126,25 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
 
 
 
+
+  function onScrollTab(e: React.UIEvent<HTMLDivElement>) {
+    const tabWrapper = e.currentTarget;
+    const theadTr: HTMLTableRowElement | null = tabWrapper.querySelector('thead tr');
+    if (theadTr !== null) {
+      theadTr?.classList.add(styles.onScrollTab)
+      clearTimeout(timeoutInstance)
+      timeoutInstance = setTimeout(() => {
+        // console.log(styles.onScrollTab)
+        if (theadTr.classList.contains(styles.onScrollTab)) {
+          theadTr?.classList.remove(styles.onScrollTab)
+        }
+      }, 500);
+
+    }
+  }
+
+
+
   return (
     <ContextWrapper contextData={contextData}>
       <div className={styles.Tab}>
@@ -141,7 +162,7 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
             </button>
           </div>
         </div>
-        <div className={styles.TabWrapper}>
+        <div className={styles.TabWrapper} onScrollCapture={(e) => onScrollTab(e)}>
           <Suspense fallback={<div>Loading...</div>}>
             <table>
               <DataGridHead />

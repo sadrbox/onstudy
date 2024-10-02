@@ -29,7 +29,7 @@ const DataGridBody = () => {
     <tbody>
       {dataRows && dataRows.map((dataRow: TDataItem, keyID: number) =>
         <DataGridBodyRow key={keyID} dataRow={dataRow} actions={{ ...actions }} />)}
-      <tr style={{ height: "100%", visibility: 'hidden' }}>5</tr>
+      <tr style={{ height: "100%", visibility: 'hidden' }}></tr>
     </tbody>
   )
   return render;
