@@ -1,4 +1,21 @@
-.tab {
+@keyframes borderFadeIn {
+  0% {
+    border-color: transparent; /* Прозрачный цвет границы */
+  }
+  100% {
+    border-color: $color10; /* Цвет границы по окончании анимации */
+  }
+}
+@keyframes fadeIn {
+  from {
+    visibility: hidden;
+  }
+  to {
+    visibility: visible;
+  }
+}
+
+.Tab {
   background-color: $color30;
 
   // display: contents;
@@ -13,10 +30,10 @@
   border-radius: 2px;
 }
 
-.tabPanel {
+.TabPanel {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: repeat(1fr);
+  // grid-template-columns: repeat(1fr);
   // grid-auto-flow: column;
   // flex-direction: row;
   // align-items: center;
@@ -25,7 +42,7 @@
   // justify-content: flex-end;
 }
 
-.tabWrapper {
+.TabWrapper {
   display: grid;
   grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
   background-color: #fff;
@@ -69,10 +86,8 @@
 table {
   border-collapse: collapse;
   width: 100%;
-}
-
-.table_command_panel {
-  padding: 0px 0 0px 0;
+  // table-layout: auto;
+  position: relative;
 }
 
 .table_container {
@@ -94,11 +109,6 @@ table {
   position: relative;
 }
 
-.table_footer {
-  width: 100cqmin;
-  height: 30px;
-}
-
 thead {
   // display: inline;
   background-color: $color30;
@@ -107,18 +117,19 @@ thead {
   z-index: 1;
   // border-bottom: 1px solid red;
   tr {
+    box-shadow: 0px 1px 4px $color6;
     th {
+      user-select: none;
+      cursor: pointer;
+
+      border-right: 1px solid $color10;
+      border-bottom: 0px;
       &:first-child {
         border-left: 0px;
       }
       &:last-child {
         border-right: 0px;
       }
-      user-select: none;
-      cursor: pointer;
-
-      border-right: 1px solid $color10;
-      border-bottom: 1px solid $color10;
       div {
         // height: 27px;
         display: grid;
@@ -128,23 +139,8 @@ thead {
         padding: 4px 4px;
       }
     }
+  }
 
-    box-shadow: 0px 0px 5px rgba(100, 100, 100, 0.5);
-  }
-  &::before {
-    // // border-radius: 5px;
-    // // border-top: 1px solid $color10;
-    // // background-color: red; /* Цвет фона */
-    // content: " "; /* Псевдоэлемент нуждается в содержимом */
-    // // padding: 2px; /* Отступы */
-    // display: block; /* Отображение блока, чтобы отступы работали */
-    // position: absolute; /* Позиционирование относительно родителя */
-    // top: 0; /* Например, расположение внизу */
-    // left: 0; /* Сдвиг от левого края */
-    // right: 0; /* Сдвиг от правого края, если нужно заполнить */
-    // // height: 10px; /* Задайте высоту, чтобы псевдоэлемент был видимым */
-    // // box-shadow: 0 0 1px 1px $color10;
-  }
   &::after {
     content: " "; /* Псевдоэлемент нуждается в содержимом */
     // padding: 2px; /* Отступы */
@@ -162,27 +158,23 @@ thead {
 
 tbody {
   background-color: $color60;
+
   tr {
     td {
+      border-right: 1px solid $color10;
+      border-top: 1px solid $color10;
+      border-bottom: 1px solid $color10;
       &:first-child {
         border-left: 0px;
       }
       &:last-child {
         border-right: 0px;
+        // border-bottom: 1px solid $color10;
       }
-      border-right: 1px solid $color10;
-      border-bottom: 1px solid $color10;
-
       div {
         align-items: center;
         user-select: none;
       }
-    }
-    &:not(:last-child) {
-      border-bottom: 1px solid $color10;
-    }
-    &:last-child {
-      border-bottom: none;
     }
   }
 }
@@ -213,18 +205,18 @@ tbody {
     // text-overflow: ellipsis;
   }
   box-shadow:
-    inset 0px -1px 0px rgba(0, 0, 0, 0.3),
-    0px 0px 1px rgba(0, 0, 0, 0.3);
+    inset 0px -1px 0px $color5,
+    0px 0px 1px $color5;
   &:hover {
     box-shadow:
-      inset 0px -1px 1px rgba(0, 0, 0, 0.3),
-      0px 1px 1px rgba(0, 0, 0, 0.3);
+      inset 0px -1px 1px $color5,
+      0px 1px 1px $color5;
   }
   &:active {
     border: 1px solid $color5;
     box-shadow:
-      inset 0px -1px 0px rgba(0, 0, 0, 0.3),
-      0px 0px 0px rgba(0, 0, 0, 0.3);
+      inset 0px -1px 0px $color5,
+      0px 0px 0px $color5;
   }
 }
 
@@ -289,26 +281,19 @@ tbody {
 input[type="checkbox"] {
   height: 18px;
   width: 18px;
-  accent-color: $color60;
+  // accent-color: $color10;
   // transform: rotate(45deg);
   border-radius: 100%;
   // appearance: none;
   cursor: pointer;
+  margin: 0px;
+
   &:focus {
     outline: none;
     border-radius: 100%;
     // border: 1px solid red;
     // box-shadow: 0px 0px 3px #262626;
   }
-  &:focus-visible {
-    // outline: 1px solid black;
-  }
-  // border-radius: 100%;
-  // border: none;
-  // outline: 3px solid red;
-  // border-radius: 10px;
-
-  // align-self: center;
 }
 
 .contextMenu {
@@ -337,27 +322,19 @@ input[type="checkbox"] {
     justify-content: left;
     padding: 5px;
 
-    // border: 1px solid #fff;
     &:not(:last-child) {
-      // border-top: 1px solid $colorTheme;
       border-bottom: 1px solid $color30;
     }
     &:first-child {
-      // border-top: 1px solid $color30;
     }
     a {
       display: grid;
       grid-template-columns: 22px 1fr;
       align-items: center;
-      // font-weight: 400;
-      // padding-left: 5px;
-      // background-color: red;
+
       font-size: 12px;
 
-      // line-height: normal;
-
       &:hover {
-        // text-decoration: underline;
         color: $colorTheme;
       }
     }

@@ -83,7 +83,7 @@ const Todos = () => {
 
   const loadDataGrid = async () => {
     setDataGridRows(undefined)
-    return await fetch('https://dummyjson.com/todos')
+    return await fetch('https://dummyjson.com/todos?limit=1')
       .then(response => response.json())
       .then(data => setResponseData(data))
   }

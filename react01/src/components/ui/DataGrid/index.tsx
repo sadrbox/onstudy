@@ -126,8 +126,8 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
 
   return (
     <ContextWrapper contextData={contextData}>
-      <div className={styles.tab}>
-        <div className={styles.tabPanel}>
+      <div className={styles.Tab}>
+        <div className={styles.TabPanel}>
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left', gap: '5px' }}>
             <button className={styles.Button}><span>Добавить</span></button>
             <button className={styles.Button}><span>Удалить</span></button>
@@ -141,7 +141,7 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
             </button>
           </div>
         </div>
-        <div className={styles.tabWrapper}>
+        <div className={styles.TabWrapper}>
           <Suspense fallback={<div>Loading...</div>}>
             <table>
               <DataGridHead />

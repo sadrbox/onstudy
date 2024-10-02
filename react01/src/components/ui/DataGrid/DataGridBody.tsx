@@ -25,13 +25,14 @@ const DataGridBody = () => {
     }
   }, [contextDataGrid]);
 
-  return (
-
+  const render = (
     <tbody>
       {dataRows && dataRows.map((dataRow: TDataItem, keyID: number) =>
         <DataGridBodyRow key={keyID} dataRow={dataRow} actions={{ ...actions }} />)}
+      <tr style={{ height: "100%", visibility: 'hidden' }}>5</tr>
     </tbody>
   )
+  return render;
 }
 
 export default DataGridBody;

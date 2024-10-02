@@ -69,12 +69,23 @@
   "stock": "Запас",
   "brand": "Бренд",
   "sku": "Артикул",
-  "weight": "Вес",
+
   "warrantyInformation": "Информация о гарантии",
   "shippingInformation": "Информация о доставке",
   "availabilityStatus": "Статус доступности",
   "returnPolicy": "Политика возврата",
   "minimumOrderQuantity": "Минимальное количество заказа",
   "thumbnail": "Миниатюра",
-  "title": "Наименование"
+  "title": "Наименование",
+  "firstName": "Имя",
+  "lastName": "Фамилия",
+  "maidenName": "Девичья фамилия",
+  "age": "Возраст",
+  "gender": "Пол",
+  "phone": "Телефон",
+  "birthDate": "Дата рождения",
+  "image": "Изображение",
+  "bloodGroup": "Группа крови",
+  "height": "Рост",
+  "weight": "Вес"
 }

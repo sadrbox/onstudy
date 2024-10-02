@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     element: <Todos />,
   },
   {
-    path: "/users/lst",
+    path: "/users",
     element: <Users />,
   },
   { path: "/users/elm", element: <Users /> },

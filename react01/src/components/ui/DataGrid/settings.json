@@ -11,7 +11,7 @@
     {
       "id": "id",
       "label": "ID",
-      "width": "60px",
+      "width": "80px",
       "type": "number",
       "sortable": true,
       "visible": true
@@ -20,6 +20,14 @@
       "id": "name",
       "label": "Name",
       "width": "150px",
+      "type": "string",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "id": "title",
+      "label": "Title",
+      "width": "200px",
       "type": "string",
       "sortable": true,
       "visible": true
@@ -40,6 +48,22 @@
       "sortable": true,
       "visible": true,
       "format": "YYYY-MM-DD"
+    },
+    {
+      "id": "email",
+      "label": "Email",
+      "width": "220px",
+      "type": "string",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "id": "username",
+      "label": "Username",
+      "width": "160px",
+      "type": "string",
+      "sortable": true,
+      "visible": true
     }
   ]
 }

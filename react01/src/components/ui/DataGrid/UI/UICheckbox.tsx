@@ -2,6 +2,7 @@ import React, { FC, Dispatch, ForwardedRef, forwardRef, ForwardRefExoticComponen
 import { useContextDataGrid } from '../DataGridContext';
 import styles from "../styles.module.scss"
 
+
 interface TUICheckboxProps {
   tabIndex: number;
   rowID: number;
@@ -32,7 +33,7 @@ const UICheckbox: FC<TUICheckboxProps> = ({ tabIndex, rowID, checked, actions })
   function OnFocusCheckbox(rowID: number) {
     return actions.setActiveRow(rowID)
   }
-
+  // console.log(__dirname)
   return (
     <label className={styles.LabelForCheckbox} htmlFor={`selectOption_${rowID}`} onClick={() => console.log('sdfasd')}>
       <input type="checkbox" onFocus={() => OnFocusCheckbox(rowID)} id={`selectOption_${rowID}`} checked={checked} onChange={() => OnChangeCheckbox(rowID)} tabIndex={tabIndex} />
