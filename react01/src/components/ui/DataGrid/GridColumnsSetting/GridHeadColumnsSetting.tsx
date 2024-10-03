@@ -7,6 +7,7 @@ import _ from 'lodash';
 
 // import { TColumnsHeader } from '../services';
 import { translateColumnLable, translateWord } from '../../../../i18/index';
+import UICheckbox from '../UI/UICheckbox';
 
 
 const GridHeadColumnsSetting: FC = () => {
@@ -28,8 +29,7 @@ const GridHeadColumnsSetting: FC = () => {
               <div title={column?.hint} style={{ justifyItems: column?.alignment }}>
                 <span>{translateColumnLable(column)}</span>
               </div>
-            </th>
-          )
+            </th>)
         }
         )}
       </tr>

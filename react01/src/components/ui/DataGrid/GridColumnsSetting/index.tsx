@@ -15,7 +15,7 @@ const GridColumnsSetting: FC<TColumnsGridSettingProps> = () => {
       <div className={styles.TabWrapper}>
         <table>
           <GridHeadColumnsSetting />
-          {/* <GridBodyColumnsSetting /> */}
+          <GridBodyColumnsSetting />
         </table>
       </div>
     </>

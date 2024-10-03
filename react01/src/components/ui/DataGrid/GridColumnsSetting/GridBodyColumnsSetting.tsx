@@ -1,23 +1,25 @@
 import React, { useState, useEffect, ReactNode, FC } from 'react';
+import { TDataItem } from '../services';
+import columns from "../columns.json"
+import GridBodyRowColumnsSetting from './GridBodyRowColumnsSetting';
 
-interface TGridBodyColumnsSettingProps {
-  // children: ReactNode
-}
 
 
-const GridBodyColumnsSetting: FC<TGridBodyColumnsSettingProps> = () => {
-  // const [argState, setArgState] = useState<TArgState | undefined>(undefined)
+const GridBodyColumnsSetting: FC = () => {
+  // const [columns, setColumns] = useState([])
 
-  // useEffect(() => {
-  //   if (arg1 && arg2) {
-  //     setArgState({ arg1, arg2 })
-  //   }
-  // }, [])
+  useEffect(() => {
+    // if (columns) {
+    // setColumns(columns)
+    // }
+  }, [])
 
   return (
-    <>
-      <h1>Hello</h1>
-    </>
+    <tbody>
+      {columns && columns.map((column, keyID: number) =>
+        <GridBodyRowColumnsSetting key={keyID} rowID={keyID} column={column} />)}
+      <tr style={{ height: "100%", visibility: 'hidden' }}></tr>
+    </tbody>
   );
 };
 
