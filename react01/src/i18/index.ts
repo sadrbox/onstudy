@@ -1,3 +1,4 @@
+import { TColumnsHeader } from "src/components/ui/DataGrid/services";
 import translations from "./translations.json" assert { type: "json" };
 
 type TTranslations = {
@@ -12,4 +13,12 @@ export function translateWord(word: string, language = "ru"): string {
 		return result;
 	}
 	return word;
+}
+
+export function translateColumnLable(column: TColumnsHeader) {
+	if (column.label) {
+		return translateWord(column.label.toString());
+	} else {
+		return translateWord(column.id.toString());
+	}
 }

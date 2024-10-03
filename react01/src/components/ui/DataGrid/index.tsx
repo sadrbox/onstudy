@@ -8,6 +8,7 @@ import DataGridHead from './DataGridHead';
 import DataGridBody from './DataGridBody';
 import ContextWrapper, { TContextData, } from './DataGridContext';
 import { createDataGridColumns, TDataItem } from './services';
+import GridColumnsSetting from './GridColumnsSetting';
 // import { TDataItem } from '../../../objects/Todos/index';
 // import { TDataItem } from 'src/components/ui/DataGrid/services';
 
@@ -30,6 +31,7 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
   const [sortedDataGrid, setSortedDataGrid] = useState<TDataItem[] | undefined>(undefined);
   const [checkedRows, setCheckedRows] = useState<number[]>([])
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false)
+  const [openTabSetting, setOpenTabSetting] = useState<boolean>(false)
   let timeoutInstance: NodeJS.Timeout = setTimeout(() => { }, 0);
   const [currentSorting, setCurrentSorting] = useState<TSorting>({
     id: 'id',
@@ -59,7 +61,7 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
       const columns = createDataGridColumns(DataItem1)
       const dataGrid = sortMixedArray(sortedDataGrid, currentSorting.id, currentSorting.order) || [];
       const IDs = sortedDataGrid.map(row => row.id as number) || [];
-
+      // console.log(JSON.stringify(columns))
 
 
 
@@ -134,13 +136,15 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
       theadTr?.classList.add(styles.onScrollTab)
       clearTimeout(timeoutInstance)
       timeoutInstance = setTimeout(() => {
-        // console.log(styles.onScrollTab)
         if (theadTr.classList.contains(styles.onScrollTab)) {
           theadTr?.classList.remove(styles.onScrollTab)
         }
       }, 500);
-
     }
+  }
+  function onClickButtonTabSetting(e: React.UIEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setOpenTabSetting((prev) => !prev)
   }
 
 
@@ -157,18 +161,17 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
             <button onClick={() => loadDataGrid()} className={[styles.Button, styles.ButtonImg].join(' ')}>
               <div className={styles.ImgReload} ></div>
             </button>
-            <button className={[styles.Button, styles.ButtonImg].join(' ')}>
+            <button className={[styles.Button, styles.ButtonImg].join(' ')} onClick={(e) => onClickButtonTabSetting(e)}>
               <div className={styles.ImgSetting} ></div>
             </button>
           </div>
         </div>
-        <div className={styles.TabWrapper} onScrollCapture={(e) => onScrollTab(e)}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <table>
+        <div className={styles.TabWrapper} onScroll={(e) => onScrollTab(e)}>
+          {openTabSetting ? (<GridColumnsSetting />) :
+            (<table>
               <DataGridHead />
               <DataGridBody />
-            </table>
-          </Suspense>
+            </table>)}
         </div>
       </div>
     </ContextWrapper >

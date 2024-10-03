@@ -2,6 +2,19 @@
 
 import { translateWord } from "src/i18";
 
+export type TColumnsHeader = {
+	id: string;
+	type: string | TFieldType;
+	visible: boolean;
+	label?: string | undefined;
+	width?: string | undefined;
+	alignment?: string;
+	sortable?: boolean;
+
+	hint?: string | undefined;
+	format?: string | undefined;
+};
+
 // Определение интерфейса для колонки
 interface Column {
 	id: string;
@@ -23,8 +36,40 @@ export function getColumnWidthById(
 	tableParams: TableParameters,
 	columnId: string,
 ): string | undefined {
+	// console.log(tableParams);
 	const column = tableParams.columns.find((col) => col.id === columnId);
 	return column ? column.width : "auto"; // Возвращает ширину или undefined, если не найдено
+}
+
+// Функция для поиска ширины колонки по id модификация
+export function getColumnWidthSetting(
+	columns: TColumnsHeader[],
+	columnID: string,
+): string | undefined {
+	const column = columns.find((col) => col.id === columnID);
+	return column ? column.width : "auto"; // Возвращает ширину или undefined, если не найдено
+}
+
+export function getColumnSettings<T extends TColumnsHeader>(
+	columns: T[],
+	columnID: string,
+): T | undefined {
+	return columns.find((column) => {
+		if (column.id === columnID) {
+			return column;
+		}
+	});
+}
+
+export function getColumnWidth<T extends TColumnsHeader>(
+	columns: T[],
+	columnID: keyof T | string,
+): T | undefined {
+	return columns.find((column) => {
+		if (column.id === columnID) {
+			return column;
+		}
+	});
 }
 
 export type TDataItem = { [key: string | number]: string | number | boolean };
