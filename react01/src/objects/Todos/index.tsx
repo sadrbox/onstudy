@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { TDataItem } from 'src/components/ui/GridData/types';
 // import { IResponseData, ITodo } from './types';
-import DataGrid from 'src/components/ui/DataGrid';
+// import DataGrid from 'src/components/ui/DataGrid';
 // import { TDataGrid } from 'src/components/ui/DataGrid/DataGridContext';
-import { TDataItem } from 'src/components/ui/DataGrid/services';
+// import { TDataItem } from 'src/components/ui/DataGrid/services';
 // import { TFieldType } from 'src/components/ui/DataGrid/types';
 // import co
 
@@ -90,7 +91,7 @@ const Todos = () => {
 
   return (
     <>
-      {dataGridRows ? (<DataGrid dataGridRows={dataGridRows} actions={{ loadDataGrid }} />) : (<h1>Loading...</h1>)}
+      {/* {dataGridRows ? (<DataGrid dataGridRows={dataGridRows} actions={{ loadDataGrid }} />) : (<h1>Loading...</h1>)} */}
     </>
   )
 }

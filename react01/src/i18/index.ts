@@ -1,24 +1,23 @@
-import { TColumnsHeader } from "src/components/ui/DataGrid/services";
 import translations from "./translations.json" assert { type: "json" };
+import { TColumn } from "src/components/ui/GridData/types";
 
-type TTranslations = {
-	[key: string]: string;
-};
-
-const typedTranslations: TTranslations = translations;
-
-export function translateWord(word: string, language = "ru"): string {
-	const result = typedTranslations[word];
-	if (result) {
-		return result;
-	}
-	return word;
+export function getTranslation(word: string): string {
+	const translate: [string, string] | undefined = Object.entries(
+		translations,
+	).find(([key, value]) =>
+		key.toLowerCase().replace(/\s/g, "") ===
+		word.toLowerCase().replace(/\s/g, "")
+			? value
+			: undefined,
+	);
+	return translate !== undefined ? translate?.[1] : word;
 }
 
-export function translateColumnLable(column: TColumnsHeader) {
-	if (column.label) {
-		return translateWord(column.label.toString());
-	} else {
-		return translateWord(column.id.toString());
+export function translateColumnLable(column: TColumn) {
+	if (column.column) {
+		return getTranslation(column.column.toString());
+	} else if (column.identifier) {
+		return getTranslation(column.identifier.toString());
 	}
+	return column.column || column.identifier;
 }

@@ -7,9 +7,12 @@ import {
 	RefObject,
 } from "react";
 import { ResolveFnOutput } from "module";
-import { TColumn, TDataItem } from "src/objects/Todos";
-import { ICol, IProduct } from "src/components/ui/GridData/types";
-import { translateWord } from "src/i18";
+// import { TColumn, TDataItem } from "src/components/ui/GridData/services";
+import { getTranslation } from "src/i18";
+import { TColumn, TDataItem } from "src/components/ui/GridData/types";
+// import { TColumn, TDataItem } from "src/objects/Todos";
+// import { ICol, IProduct } from "src/components/ui/GridData/types";
+// import { translateWord } from "src/i18";
 
 export function getDateFromISO(dateString: string): string {
 	const date = moment(dateString);
@@ -26,20 +29,33 @@ export function getDurationSession(seconds: number): string {
 	return `${hours}:${minutes}`;
 }
 
-export function getFormatValue(item: TDataItem, column: ICol): string {
+export function getFormatValue(item: TDataItem, column: TColumn) {
 	// console.log(rowId);
-	if (column.id === "id") {
+	if (column.identifier === "id") {
 		return item.id.toString().padStart(6, "0");
 	} else if (column.type === "number") {
 		const formater = new Intl.NumberFormat("ru-RU", {
 			style: "decimal",
 			minimumFractionDigits: 2,
 		});
-		return formater.format(+item[column.id]);
-	} else {
-		return item[column.id];
+		return formater.format(+item[column.identifier]);
 	}
-	// return item.id;
+	return item[column.identifier];
+}
+
+export function getFormatValue2(row: TDataItem, column: TColumn) {
+	if (column.identifier === "id" && column.type === "number") {
+		return row.id.toString().padStart(6, "0");
+	} else if (column.identifier !== "id" && column.type === "number") {
+		const formater = new Intl.NumberFormat("ru-RU", {
+			style: "decimal",
+			minimumFractionDigits: 2,
+		});
+		return formater.format(+row[column.identifier]);
+	} else if (column.type === "string") {
+		return row[column.identifier];
+	}
+	return row[column.identifier];
 }
 //  type TDataItem = { [key: string]: string }
 //  type TColumn = {
@@ -48,9 +64,7 @@ export function getFormatValue(item: TDataItem, column: ICol): string {
 // }
 // type TFieldType = "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function";
 
-export function getTextAlignByColumnType(
-	column: ICol | TColumn,
-): CSSProperties {
+export function getTextAlignByColumnType(column: TColumn): CSSProperties {
 	// Table content value align css style
 	// console.log(CSSProperties);
 	switch (column.type) {
@@ -92,8 +106,8 @@ export function getViewValue(
 					: formater.format(+value)
 				: typeof value === "boolean"
 					? Boolean(value) === true
-						? translateWord("completed")
-						: translateWord("inprogress")
+						? getTranslation("completed")
+						: getTranslation("inprogress")
 					: value; // Если тип не string, number или boolean
 	return result;
 }

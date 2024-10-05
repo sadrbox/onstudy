@@ -1,0 +1,92 @@
+{
+  "columns": [
+    {
+      "order": 1,
+      "identifier": "identifier",
+      "type": "string",
+      "column": "Identifier",
+      "width": "150px",
+      "alignment": "left",
+      "hint": "Идентификатор колонки",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "order": 2,
+      "identifier": "type",
+      "type": "string",
+      "column": "Type",
+      "width": "80px",
+      "alignment": "left",
+      "hint": "Тип данных в колонке (string, number, boolean и т.д.)",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "order": 3,
+      "identifier": "column",
+      "type": "string",
+      "column": "column",
+      "width": "180px",
+      "alignment": "left",
+      "hint": "Заголовок колонки в таблице",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "order": 4,
+      "identifier": "width",
+      "type": "string",
+      "column": "Width",
+      "width": "80px",
+      "alignment": "right",
+      "hint": "Ширина колонки в таблице",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "order": 5,
+      "identifier": "visible",
+      "type": "boolean",
+      "column": "Visible",
+      "width": "80px",
+      "alignment": "center",
+      "hint": "Отображение колонки в таблице",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "order": 6,
+      "identifier": "sortable",
+      "type": "boolean",
+      "column": "Sortable",
+      "width": "90px",
+      "alignment": "center",
+      "hint": "Возможность сортировки по этой колонке",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "order": 7,
+      "identifier": "alignment",
+      "type": "string",
+      "column": "Alignment",
+      "width": "100px",
+      "alignment": "center",
+      "hint": "Выравнивание содержимого колонки (left, center, right)",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "order": 8,
+      "identifier": "hint",
+      "type": "string",
+      "column": "Hint",
+      "width": "160px",
+      "alignment": "left",
+      "hint": "Описание или подсказка для колонки",
+      "sortable": true,
+      "visible": true
+    }
+  ]
+}

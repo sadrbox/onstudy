@@ -3,8 +3,8 @@ import { createContext, useContext } from "react";
 // import { IResponseData } from "./types";
 // import { TColumn, TDataItem } from "./index";
 import React from "react";
-import { TColumn, TDataItem } from "./services";
-import { TSorting } from ".";
+import { TColumn, TDataItem, TSorting } from "./types";
+// import { TSorting } from ".";
 // import { TColumn, TDataItem } from "src/objects/Todos";
 
 export type TContextData = {

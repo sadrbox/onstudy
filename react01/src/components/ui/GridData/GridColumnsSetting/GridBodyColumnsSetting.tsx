@@ -1,17 +1,21 @@
 import React, { useState, useEffect, ReactNode, FC } from 'react';
-import { TDataItem } from '../services';
-import columns from "../columns.json"
+// import { TColumn, TColumnsHeader, TDataItem } from '../services';
+// import columns from "../columns.json"
+// import settings from "./settings.json"
 import GridBodyRowColumnsSetting from './GridBodyRowColumnsSetting';
+import { useContextDataGrid } from '../GridDataContext';
+import { TColumn } from '../types';
 
 
 
 const GridBodyColumnsSetting: FC = () => {
-  // const [columns, setColumns] = useState([])
+  const { contextDataGrid } = useContextDataGrid()
+  const [columns, setColumns] = useState<TColumn[]>([])
 
   useEffect(() => {
-    // if (columns) {
-    // setColumns(columns)
-    // }
+    if (contextDataGrid?.columns) {
+      setColumns(contextDataGrid?.columns)
+    }
   }, [])
 
   return (

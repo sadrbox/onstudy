@@ -1,5 +1,5 @@
 import React, { BaseSyntheticEvent, ChangeEvent, SyntheticEvent, useEffect, useRef, useState } from 'react';
-import { useContextDataGrid } from '../DataGridContext';
+import { useContextDataGrid } from '../GridDataContext';
 
 
 const UICheckboxAll = () => {

@@ -4,28 +4,29 @@ import { PiDotsThreeCircleLight } from "react-icons/pi";
 import { IoReloadCircleOutline } from "react-icons/io5";
 import { IoEllipsisHorizontalCircle } from "react-icons/io5";
 // import { useContextTodo } from 'src/objects/Todos/Context';
-import DataGridHead from './DataGridHead';
-import DataGridBody from './DataGridBody';
-import ContextWrapper, { TContextData, } from './DataGridContext';
-import { createDataGridColumns, TDataItem } from './services';
+// import GridDataHead from './GridDataHead';
+// import GridDataHead from './GridDataBody';
+import ContextWrapper, { TContextData, } from './GridDataContext';
+import { TColumn, TDataItem } from './types';
 import GridColumnsSetting from './GridColumnsSetting';
-// import { TDataItem } from '../../../objects/Todos/index';
-// import { TDataItem } from 'src/components/ui/DataGrid/services';
+import DataGridHead from './GridDataHead';
+import DataGridBody from './GridDataBody';
+import { TSorting } from './types';
+import { sortGridRows } from './services';
+import { columns } from '../../../objects/Products/config';
 
-type TDataGridProps = {
-  dataGridRows: TDataItem[],
+type TProps = {
+  params: {
+    columns: TColumn[]
+    rows: TDataItem[]
+  }
   actions: {
     loadDataGrid: () => void
   }
 }
 
-export type TSorting = {
-  id: string;
-  order: string;
-}
 
-
-const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } }) => {
+const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGrid } }) => {
 
   const [contextData, setContextData] = useState<TContextData | undefined>(undefined);
   const [sortedDataGrid, setSortedDataGrid] = useState<TDataItem[] | undefined>(undefined);
@@ -38,33 +39,12 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
     order: 'asc'
   });
 
-  function sortMixedArray(arr: TDataItem[], columnID: string, order: string, locale = 'default') {
-    return arr.sort((a, b) => {
-      const aValue = order === "asc" ? a[columnID] : b[columnID];
-      const bValue = order === "asc" ? b[columnID] : a[columnID];
-
-      if (typeof aValue === 'number' && typeof bValue === 'number') {
-        return aValue - bValue;
-      } else if (typeof aValue === 'string' && typeof bValue === 'string') {
-        return aValue.toString().localeCompare(bValue.toString(), locale, { numeric: true });
-      }
-      return (aValue ? -1 : bValue ? +1 : 0)
-      // return -1;
-    })
-  }
-
 
 
   useEffect(() => {
     if (sortedDataGrid?.length) {
-      const DataItem1 = sortedDataGrid[0];
-      const columns = createDataGridColumns(DataItem1)
-      const dataGrid = sortMixedArray(sortedDataGrid, currentSorting.id, currentSorting.order) || [];
+      const dataGrid = sortGridRows(sortedDataGrid, currentSorting.id, currentSorting.order) || [];
       const IDs = sortedDataGrid.map(row => row.id as number) || [];
-      // console.log(JSON.stringify(columns))
-
-
-
       setContextData({
         dataGrid,
         columns,
@@ -82,7 +62,6 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
       setContextData(undefined)
     }
   }, [sortedDataGrid, currentSorting, checkedRows, isAllChecked]);
-
 
   /////////////////////////////////////////////////////////
 
@@ -121,13 +100,10 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
   /////////////////////////////////////////////////////////
 
   useEffect(() => {
-    if (dataGridRows.length) {
-      setSortedDataGrid(dataGridRows)
+    if (rows.length) {
+      setSortedDataGrid(rows)
     }
-  }, [dataGridRows])
-
-
-
+  }, [rows])
 
   function onScrollTab(e: React.UIEvent<HTMLDivElement>) {
     const tabWrapper = e.currentTarget;
@@ -147,34 +123,34 @@ const DataGrid: FC<TDataGridProps> = ({ dataGridRows, actions: { loadDataGrid } 
     setOpenTabSetting((prev) => !prev)
   }
 
-
-
   return (
     <ContextWrapper contextData={contextData}>
       <div className={styles.Tab}>
         <div className={styles.TabPanel}>
-          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left', gap: '5px' }}>
-            <button className={styles.Button}><span>Добавить</span></button>
-            <button className={styles.Button}><span>Удалить</span></button>
-          </div>
+          {openTabSetting &&
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left', gap: '5px' }}>
+              <button className={styles.Button}><span>Добавить</span></button>
+              <button className={styles.Button}><span>Удалить</span></button>
+            </div>
+          }
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'right', gap: '5px' }}>
             <button onClick={() => loadDataGrid()} className={[styles.Button, styles.ButtonImg].join(' ')}>
               <div className={styles.ImgReload} ></div>
             </button>
             <button className={[styles.Button, styles.ButtonImg].join(' ')} onClick={(e) => onClickButtonTabSetting(e)}>
-              <div className={styles.ImgSetting} ></div>
+              <div className={styles.ImgSetting}></div>
             </button>
           </div>
         </div>
         <div className={styles.TabWrapper} onScroll={(e) => onScrollTab(e)}>
-          {openTabSetting ? (<GridColumnsSetting />) :
+          {!openTabSetting ? (<GridColumnsSetting />) :
             (<table>
-              <DataGridHead />
-              <DataGridBody />
+              <DataGridHead columns={columns} />
+              <DataGridBody columns={columns} rows={rows} />
             </table>)}
         </div>
       </div>
     </ContextWrapper >
   )
 }
-export default DataGrid;
+export default GridData;

@@ -1,5 +1,5 @@
 import React, { FC, Dispatch, ForwardedRef, forwardRef, ForwardRefExoticComponent, MutableRefObject, ReactNode, RefAttributes, SetStateAction, useEffect, useImperativeHandle } from 'react';
-import { useContextDataGrid } from '../DataGridContext';
+import { useContextDataGrid } from '../GridDataContext';
 import styles from "../styles.module.scss"
 
 
@@ -35,7 +35,7 @@ const UICheckbox: FC<TUICheckboxProps> = ({ tabIndex, rowID, checked, actions })
   }
   // console.log(__dirname)
   return (
-    <label className={styles.LabelForCheckbox} htmlFor={`selectOption_${rowID}`} onClick={() => console.log('sdfasd')}>
+    <label className={styles.LabelForCheckbox} htmlFor={`selectOption_${rowID}`}>
       <input type="checkbox" onFocus={() => OnFocusCheckbox(rowID)} id={`selectOption_${rowID}`} checked={checked} onChange={() => OnChangeCheckbox(rowID)} tabIndex={tabIndex} />
     </label>
   );
