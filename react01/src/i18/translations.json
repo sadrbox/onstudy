@@ -88,8 +88,8 @@
   "bloodGroup": "Группа крови",
   "height": "Рост",
   "weight": "Вес",
+  "position": "Порядок",
   "switcher": "Переключатель",
-
   "identifier": "Идентификатор",
   "visible": "Видимость",
   "type": "Тип",

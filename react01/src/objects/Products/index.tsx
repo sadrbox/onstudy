@@ -32,22 +32,18 @@ const Products: FC = () => {
 
 
   const [responseData, setResponseData] = useState<TResponseData | undefined>(undefined);
-  // const [dataGridRows, setDataGridRows] = useState<TProduct[] | undefined>(undefined);
   const [params, setParams] = useState<TParams | undefined>(undefined)
+  const [sortedColumns, setSortedColumns] = useState<TColumn[]>([])
 
   useEffect(() => {
+    setSortedColumns(columns.sort((a, b) => a.position - b.position));
     loadDataGrid();
   }, [])
 
   useEffect(() => {
     if (responseData?.products) {
       const rows = responseData?.products;
-      // console.log(dataRows)
-      // const DataItem1 = responseData?.todos[0];
-      // const columns = createDataGridColumns(DataItem1);
-      setParams({ rows, columns })
-
-      // setDataGridRows(dataRows)
+      setParams({ rows, columns: sortedColumns })
     } else {
       setParams(undefined)
     }

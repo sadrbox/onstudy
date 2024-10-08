@@ -6,14 +6,6 @@
     border-color: $color10; /* Цвет границы по окончании анимации */
   }
 }
-@keyframes fadeIn {
-  from {
-    visibility: hidden;
-  }
-  to {
-    visibility: visible;
-  }
-}
 
 .Tab {
   background-color: $color30;
@@ -51,9 +43,9 @@
   // background-color: red;
   // padding: 4px;
   // border: 1px solid $color30;
-
+  scroll-behavior: smooth;
   height: 500px; /* Высота контейнера */
-  overflow-y: auto; /* Прокрутка по вертикали */
+  overflow: auto; /* Прокрутка по вертикали */
   // border-top: 1px solid $color10;
   // border-bottom: 1px solid $color10;
   // border-right: 1px solid $color10;
@@ -86,6 +78,7 @@
 table {
   border-collapse: collapse;
   width: 100%;
+  table-layout: fixed;
   // table-layout: auto;
   position: relative;
 }
@@ -93,8 +86,8 @@ table {
 .onScrollTab {
   box-shadow: 0px 1px 10px $color6;
   // box-shadow: 0px 0px 0px red;
-  // animation: fadeOut 2s forwards;
   // border: 3px solid red;
+  transition: box-shadow 1s ease-out;
 }
 
 thead {
@@ -104,9 +97,8 @@ thead {
   top: 0;
   z-index: 1;
   // border-bottom: 1px solid red;
+
   tr {
-    transition: box-shadow 1s ease-out;
-    box-shadow: 0px 1px 1px $color6;
     th {
       user-select: none;
       cursor: pointer;
@@ -129,8 +121,8 @@ thead {
       }
     }
   }
-
   &::after {
+    margin-bottom: 1px;
     content: " "; /* Псевдоэлемент нуждается в содержимом */
     // padding: 2px; /* Отступы */
     display: block; /* Отображение блока, чтобы отступы работали */
@@ -140,14 +132,15 @@ thead {
     right: 0; /* Сдвиг от правого края, если нужно заполнить */
     // box-shadow: 0 0 1px 1px $color10;
     // border-bottom: 22x solid $color10;
-    height: 2px;
-    background: $color10;
+    height: 1px;
+    background: $color5;
+    // transition: box-shadow 1s ease-out;
+    box-shadow: 0px 1px 1px $color6;
   }
 }
 
 tbody {
   background-color: $color60;
-
   tr {
     td {
       border-right: 1px solid $color10;
@@ -270,16 +263,25 @@ tbody {
 input[type="checkbox"] {
   height: 18px;
   width: 18px;
+  border: 9px solid #ccc;
   // accent-color: $color10;
   // transform: rotate(45deg);
-  border-radius: 100%;
+  // border-radius: 3px;
   // appearance: none;
-  cursor: pointer;
+  // cursor: pointer;
   margin: 0px;
-
+  // outline: 1px solid blue;
+  // border: 1px solid red;
+  // transition: all 0.3s ease;
+  &:checked {
+    // background-color: #007bff;
+    // border-color: #007bff;
+    // transform: scale(1.1);
+  }
   &:focus {
-    outline: none;
-    border-radius: 100%;
+    // box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+    // border: 1px solid $color1;
+    // box-shadow: 0 1px 3px $color5;
     // border: 1px solid red;
     // box-shadow: 0px 0px 3px #262626;
   }

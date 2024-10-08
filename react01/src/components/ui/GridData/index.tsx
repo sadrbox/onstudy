@@ -1,19 +1,20 @@
 import React, { useEffect, useState, FC, Suspense, useRef, MutableRefObject, RefObject } from 'react'
 import styles from "./styles.module.scss"
-import { PiDotsThreeCircleLight } from "react-icons/pi";
-import { IoReloadCircleOutline } from "react-icons/io5";
-import { IoEllipsisHorizontalCircle } from "react-icons/io5";
+// import { PiDotsThreeCircleLight } from "react-icons/pi";
+// import { IoReloadCircleOutline } from "react-icons/io5";
+// import { IoEllipsisHorizontalCircle } from "react-icons/io5";
 // import { useContextTodo } from 'src/objects/Todos/Context';
 // import GridDataHead from './GridDataHead';
 // import GridDataHead from './GridDataBody';
 import ContextWrapper, { TContextData, } from './GridDataContext';
 import { TColumn, TDataItem } from './types';
-import GridColumnsSetting from './GridColumnsSetting';
-import DataGridHead from './GridDataHead';
-import DataGridBody from './GridDataBody';
+// import GridColumnsSetting from './GridSetting';
+import GridDataTabHeader from './GridDataTabHeader';
+import GridDataTabBody from './GridDataTabBody';
 import { TSorting } from './types';
 import { sortGridRows } from './services';
-import { columns } from '../../../objects/Products/config';
+// import { columns } from '../../../objects/Products/config';
+import GridSetting from './GridSetting';
 
 type TProps = {
   params: {
@@ -28,13 +29,14 @@ type TProps = {
 
 const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGrid } }) => {
 
-  const [contextData, setContextData] = useState<TContextData | undefined>(undefined);
+  const [contextGridData, setContextGridData] = useState<TContextData | undefined>(undefined);
   const [sortedDataGrid, setSortedDataGrid] = useState<TDataItem[] | undefined>(undefined);
   const [checkedRows, setCheckedRows] = useState<number[]>([])
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false)
+  const [activeRow, setActiveRow] = useState<number | null>(null)
   const [openTabSetting, setOpenTabSetting] = useState<boolean>(false)
   let timeoutInstance: NodeJS.Timeout = setTimeout(() => { }, 0);
-  const [currentSorting, setCurrentSorting] = useState<TSorting>({
+  const [sortingRows, setSortingRows] = useState<TSorting>({
     id: 'id',
     order: 'asc'
   });
@@ -43,9 +45,9 @@ const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGr
 
   useEffect(() => {
     if (sortedDataGrid?.length) {
-      const dataGrid = sortGridRows(sortedDataGrid, currentSorting.id, currentSorting.order) || [];
+      const dataGrid = sortGridRows(sortedDataGrid, sortingRows.id, sortingRows.order) || [];
       const IDs = sortedDataGrid.map(row => row.id as number) || [];
-      setContextData({
+      setContextGridData({
         dataGrid,
         columns,
         IDs,
@@ -53,15 +55,16 @@ const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGr
           loadDataGrid,
         },
         states: {
-          currentSorting, setCurrentSorting,
+          activeRow, setActiveRow,
+          sortingRows, setSortingRows,
           checkedRows, setCheckedRows,
           isAllChecked, setIsAllChecked
         }
       })
     } else {
-      setContextData(undefined)
+      setContextGridData(undefined)
     }
-  }, [sortedDataGrid, currentSorting, checkedRows, isAllChecked]);
+  }, [sortedDataGrid, sortingRows, checkedRows, activeRow, isAllChecked]);
 
   /////////////////////////////////////////////////////////
 
@@ -115,7 +118,7 @@ const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGr
         if (theadTr.classList.contains(styles.onScrollTab)) {
           theadTr?.classList.remove(styles.onScrollTab)
         }
-      }, 500);
+      }, 3000);
     }
   }
   function onClickButtonTabSetting(e: React.UIEvent<HTMLButtonElement>) {
@@ -124,10 +127,10 @@ const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGr
   }
 
   return (
-    <ContextWrapper contextData={contextData}>
+    <ContextWrapper contextGridData={contextGridData}>
       <div className={styles.Tab}>
         <div className={styles.TabPanel}>
-          {openTabSetting &&
+          {!openTabSetting &&
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left', gap: '5px' }}>
               <button className={styles.Button}><span>Добавить</span></button>
               <button className={styles.Button}><span>Удалить</span></button>
@@ -143,10 +146,10 @@ const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGr
           </div>
         </div>
         <div className={styles.TabWrapper} onScroll={(e) => onScrollTab(e)}>
-          {!openTabSetting ? (<GridColumnsSetting />) :
+          {openTabSetting ? (<GridSetting rows={columns} />) :
             (<table>
-              <DataGridHead columns={columns} />
-              <DataGridBody columns={columns} rows={rows} />
+              <GridDataTabHeader columns={columns} />
+              <GridDataTabBody columns={columns} rows={rows} />
             </table>)}
         </div>
       </div>

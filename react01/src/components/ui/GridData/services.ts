@@ -1,7 +1,5 @@
-// import settings from "./settings.json" assert { type: "json" };
-
-import { getTranslation, translateColumnLable } from "src/i18";
-import { TColumn, TDataItem, TFieldType } from "./types";
+import { TColumn, TDataItem } from "./types";
+import { CSSProperties } from "react";
 
 export function sortGridRows(
 	arr: TDataItem[],
@@ -29,10 +27,10 @@ export function sortGridRows(
 export function getColumnWidthById(
 	columns: TColumn[],
 	columnId: string,
-): string | undefined {
+): string {
 	// console.log(tableParams);
 	const column = columns.find((col) => col.identifier === columnId);
-	return column ? column.width : "auto"; // Возвращает ширину или undefined, если не найдено
+	return column?.width ? column.width : "auto"; // Возвращает ширину или undefined, если не найдено
 }
 
 // Функция для поиска ширины колонки по id модификация
@@ -66,6 +64,55 @@ export function getColumnWidth<T extends TColumn>(
 	});
 }
 
-///////////////////////////////////////////////////////////////////////////
+export function getTextAlignByColumnType(column: TColumn): CSSProperties {
+	switch (column.type) {
+		case "number":
+			return { textAlign: "right" };
+		case "string":
+			return { textAlign: "left" };
+		case "switcher":
+			return { textAlign: "center" };
+		default:
+			return { textAlign: "left" };
+	}
+}
+export function getColumnSettingValue(row: TColumn, column: TColumn): string {
+	if (column.type === "string") {
+		return row[column.identifier as keyof TColumn] + "";
+	} else if (column.type === "number") {
+		return row[column.identifier as keyof TColumn] + "";
+	}
+	return row[column.identifier as keyof TColumn] + "";
+}
 
+export function getFormatColumnValue(row: TDataItem, column: TColumn): string {
+	if (column.identifier === "id" && column.type === "number") {
+		return getFormatNumericalID(+row.id);
+	} else if (
+		column.identifier !== "id" &&
+		column.identifier !== "position" &&
+		column.type === "number"
+	) {
+		return getFormatNumerical(+row[column.identifier]);
+	} else if (column.identifier === "position" && column.type === "position") {
+		return row[column.identifier] + "";
+	} else if (column.type === "string") {
+		return row[column.identifier] + "";
+	}
+	return row[column.identifier] + "";
+}
+
+// Формат числовой идентификатор /////////////////////////////////////////////////////////////////////////
+export function getFormatNumericalID(n: number | bigint): string {
+	return n.toString().padStart(5, "0");
+}
+
+// Формат числа /////////////////////////////////////////////////////////////////////////
+export function getFormatNumerical(n: number | bigint): string {
+	const formater = new Intl.NumberFormat("ru-RU", {
+		style: "decimal",
+		minimumFractionDigits: 1,
+	});
+	return formater.format(n);
+}
 ///////////////////////////////////////////////////////////////////////////

@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 // import { IResponseData } from "./types";
 // import { TColumn, TDataItem } from "./index";
 import React from "react";
-import { TColumn, TDataItem, TSorting } from "./types";
+import { TColumn, TDataItem, TGridStates, TSorting } from "./types";
 // import { TSorting } from ".";
 // import { TColumn, TDataItem } from "src/objects/Todos";
 
@@ -14,45 +14,49 @@ export type TContextData = {
   actions: {
     loadDataGrid?: () => void;
   }
-  states: {
-    currentSorting: TSorting, setCurrentSorting: Dispatch<SetStateAction<TSorting>>
-    checkedRows: number[], setCheckedRows: Dispatch<SetStateAction<number[]>>
-    isAllChecked: boolean, setIsAllChecked: Dispatch<SetStateAction<boolean>>
-  }
-
+  states: TGridStates
 };
 
-type TDataGridProps = {
-  contextData: TContextData | undefined;
+type TProps = {
+  contextGridData: TContextData | undefined;
 }
 
 type TContextInstance = {
-
-  contextDataGrid: TContextData | undefined;
-  setContextDataGrid: Dispatch<SetStateAction<TContextData | undefined>>;
+  context: TContextData | undefined;
+  setContext: Dispatch<SetStateAction<TContextData | undefined>>;
 };
 
 export const ContextInstance = createContext<TContextInstance>({
-  contextDataGrid: undefined,
-  setContextDataGrid: () => { },
+  context: undefined,
+  setContext: () => {
+    throw new Error("setContext must be used within a ContextWrapper");
+  },
 });
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useContextDataGrid = () => useContext(ContextInstance);
+export const useContextGridData = () => {
+  const context = useContext(ContextInstance);
+  if (context === undefined) {
+    throw new Error("setContext must be used within a ContextWrapper");
+  }
+  return context;
+}
 
-export default function ContextWrapper<T extends PropsWithChildren<TDataGridProps>>({ children, contextData }: T): JSX.Element {
 
-  const [contextDataGrid, setContextDataGrid] = useState<TContextData | undefined>(contextData);
+
+export default function ContextWrapper<T extends PropsWithChildren<TProps>>({ children, contextGridData }: T): JSX.Element {
+
+  const [context, setContext] = useState<TContextData | undefined>(contextGridData);
 
   const contextValue: TContextInstance = useMemo(() => ({
-    contextDataGrid, setContextDataGrid
-  }), [contextDataGrid]);
+    context, setContext
+  }), [context]);
 
   useEffect(() => {
-    if (contextData !== undefined) {
-      setContextDataGrid(contextData)
+    if (contextGridData !== undefined) {
+      setContext(contextGridData)
     }
-  }, [contextData])
+  }, [contextGridData])
   return (
     <ContextInstance.Provider value={contextValue}>
       {children}

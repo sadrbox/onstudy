@@ -8,7 +8,7 @@
     "hint": "Пометка",
     "sortable": false,
     "visible": true,
-    "order": 1
+    "position": 1
   },
   {
     "identifier": "id",
@@ -19,7 +19,7 @@
     "hint": "Идентификатор продукта",
     "sortable": true,
     "visible": true,
-    "order": 2
+    "position": 2
   },
   {
     "identifier": "title",
@@ -30,7 +30,7 @@
     "hint": "Название продукта",
     "sortable": true,
     "visible": true,
-    "order": 3
+    "position": 3
   },
   {
     "identifier": "description",
@@ -41,7 +41,7 @@
     "hint": "Описание продукта",
     "sortable": false,
     "visible": true,
-    "order": 4
+    "position": 4
   },
   {
     "identifier": "category",
@@ -52,7 +52,7 @@
     "hint": "Категория продукта",
     "sortable": true,
     "visible": true,
-    "order": 5
+    "position": 5
   },
   {
     "identifier": "price",
@@ -63,7 +63,7 @@
     "hint": "Цена продукта",
     "sortable": true,
     "visible": true,
-    "order": 6
+    "position": 6
   },
   {
     "identifier": "discountPercentage",
@@ -74,7 +74,7 @@
     "hint": "Процент скидки",
     "sortable": true,
     "visible": true,
-    "order": 7
+    "position": 7
   },
   {
     "identifier": "rating",
@@ -85,7 +85,7 @@
     "hint": "Рейтинг продукта",
     "sortable": true,
     "visible": true,
-    "order": 8
+    "position": 8
   },
   {
     "identifier": "stock",
@@ -96,7 +96,7 @@
     "hint": "Наличие на складе",
     "sortable": true,
     "visible": true,
-    "order": 9
+    "position": 9
   },
   {
     "identifier": "tags",
@@ -107,7 +107,7 @@
     "hint": "Теги продукта",
     "sortable": false,
     "visible": true,
-    "order": 10
+    "position": 10
   },
   {
     "identifier": "brand",
@@ -118,7 +118,7 @@
     "hint": "Бренд продукта",
     "sortable": true,
     "visible": true,
-    "order": 11
+    "position": 11
   },
   {
     "identifier": "sku",
@@ -129,7 +129,7 @@
     "hint": "Артикул",
     "sortable": true,
     "visible": true,
-    "order": 12
+    "position": 12
   },
   {
     "identifier": "weight",
@@ -140,7 +140,7 @@
     "hint": "Вес продукта",
     "sortable": true,
     "visible": true,
-    "order": 13
+    "position": 13
   },
   {
     "identifier": "dimensions",
@@ -151,7 +151,7 @@
     "hint": "Габариты продукта",
     "sortable": false,
     "visible": true,
-    "order": 14
+    "position": 14
   },
   {
     "identifier": "warrantyInformation",
@@ -162,7 +162,7 @@
     "hint": "Информация о гарантии",
     "sortable": false,
     "visible": true,
-    "order": 15
+    "position": 15
   },
   {
     "identifier": "shippingInformation",
@@ -173,7 +173,7 @@
     "hint": "Информация о доставке",
     "sortable": false,
     "visible": true,
-    "order": 16
+    "position": 16
   },
   {
     "identifier": "availabilityStatus",
@@ -184,7 +184,7 @@
     "hint": "Статус наличия",
     "sortable": true,
     "visible": true,
-    "order": 17
+    "position": 17
   },
   {
     "identifier": "reviews",
@@ -195,7 +195,7 @@
     "hint": "Отзывы о продукте",
     "sortable": false,
     "visible": true,
-    "order": 18
+    "position": 18
   },
   {
     "identifier": "returnPolicy",
@@ -206,18 +206,18 @@
     "hint": "Политика возврата",
     "sortable": false,
     "visible": true,
-    "order": 19
+    "position": 19
   },
   {
-    "identifier": "minimumOrderQuantity",
+    "identifier": "minimumpositionQuantity",
     "type": "number",
-    "column": "Minimum Order Quantity",
+    "column": "Minimum position Quantity",
     "width": "150px",
     "alignment": "right",
     "hint": "Минимальное количество для заказа",
     "sortable": true,
     "visible": true,
-    "order": 20
+    "position": 20
   },
   {
     "identifier": "meta",
@@ -228,7 +228,7 @@
     "hint": "Дополнительная информация",
     "sortable": false,
     "visible": true,
-    "order": 21
+    "position": 21
   },
   {
     "identifier": "images",
@@ -239,7 +239,7 @@
     "hint": "Изображения продукта",
     "sortable": false,
     "visible": true,
-    "order": 22
+    "position": 22
   },
   {
     "identifier": "thumbnail",
@@ -250,6 +250,6 @@
     "hint": "Миниатюра продукта",
     "sortable": false,
     "visible": true,
-    "order": 23
+    "position": 23
   }
 ]

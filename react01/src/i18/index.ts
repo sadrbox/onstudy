@@ -13,7 +13,7 @@ export function getTranslation(word: string): string {
 	return translate !== undefined ? translate?.[1] : word;
 }
 
-export function translateColumnLable(column: TColumn) {
+export function getTranslateColumn(column: TColumn) {
 	if (column.column) {
 		return getTranslation(column.column.toString());
 	} else if (column.identifier) {

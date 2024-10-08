@@ -29,55 +29,19 @@ export function getDurationSession(seconds: number): string {
 	return `${hours}:${minutes}`;
 }
 
-export function getFormatValue(item: TDataItem, column: TColumn) {
-	// console.log(rowId);
-	if (column.identifier === "id") {
-		return item.id.toString().padStart(6, "0");
-	} else if (column.type === "number") {
-		const formater = new Intl.NumberFormat("ru-RU", {
-			style: "decimal",
-			minimumFractionDigits: 2,
-		});
-		return formater.format(+item[column.identifier]);
-	}
-	return item[column.identifier];
-}
-
-export function getFormatValue2(row: TDataItem, column: TColumn) {
-	if (column.identifier === "id" && column.type === "number") {
-		return row.id.toString().padStart(6, "0");
-	} else if (column.identifier !== "id" && column.type === "number") {
-		const formater = new Intl.NumberFormat("ru-RU", {
-			style: "decimal",
-			minimumFractionDigits: 2,
-		});
-		return formater.format(+row[column.identifier]);
-	} else if (column.type === "string") {
-		return row[column.identifier];
-	}
-	return row[column.identifier];
-}
-//  type TDataItem = { [key: string]: string }
-//  type TColumn = {
-//   field: string;
-//   type: TFieldType;
+// export function getFormatValue(item: TDataItem, column: TColumn) {
+// 	// console.log(rowId);
+// 	if (column.identifier === "id") {
+// 		return item.id.toString().padStart(6, "0");
+// 	} else if (column.type === "number") {
+// 		const formater = new Intl.NumberFormat("ru-RU", {
+// 			style: "decimal",
+// 			minimumFractionDigits: 2,
+// 		});
+// 		return formater.format(+item[column.identifier]);
+// 	}
+// 	return item[column.identifier];
 // }
-// type TFieldType = "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function";
-
-export function getTextAlignByColumnType(column: TColumn): CSSProperties {
-	// Table content value align css style
-	// console.log(CSSProperties);
-	switch (column.type) {
-		case "number":
-			return { textAlign: "right" };
-		case "string":
-			return { textAlign: "left" };
-		case "selectOption":
-			return { textAlign: "center" };
-		default:
-			return { textAlign: "left" };
-	}
-}
 
 export function isValidEmail(email: string) {
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
