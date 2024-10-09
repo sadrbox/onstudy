@@ -1,12 +1,12 @@
 import React, { useState, useEffect, ReactNode, FC } from 'react';
-import { getColumnSettings, getColumnWidthById, getColumnWidthSetting } from '../services';
+import { getColumnSettings, getColumnWidthById, getColumnWidthSetting } from '../GridData/services';
 // import { useContextDataGrid } from '../GridContextData';
 import settings from "./settings.json"
-import UICheckboxAll from '../GridDataTabHeaderCheckbox';
+import UICheckboxAll from '../GridData/GridDataTabHeaderCheckbox';
 import _ from 'lodash';
 
 // import { TColumnsHeader } from '../services';
-import UICheckbox from '../GridDataTabBodyRowCheckbox';
+import UICheckbox from '../GridData/GridDataTabBodyRowCheckbox';
 import { getTranslateColumn } from 'src/i18';
 import { TColumn } from '../types';
 

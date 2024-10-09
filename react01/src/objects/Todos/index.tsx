@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { TDataItem } from 'src/components/ui/GridData/types';
+import { TDataItem } from 'src/components/ui/Grid/types';
 // import { IResponseData, ITodo } from './types';
 // import DataGrid from 'src/components/ui/DataGrid';
 // import { TDataGrid } from 'src/components/ui/DataGrid/DataGridContext';

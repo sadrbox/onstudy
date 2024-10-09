@@ -6,7 +6,7 @@ import styles from "../styles.module.scss";
 import settings from "./settings.json"
 // import { columns } from "./settings.json"
 import { TColumn, TGridStates } from '../types';
-import { getColumnSettingValue, getColumnWidthById, getFormatColumnValue, getTextAlignByColumnType } from '../services';
+import { getColumnSettingValue, getColumnWidthById, getFormatColumnValue, getTextAlignByColumnType } from '../GridData/services';
 import { getTranslateColumn, getTranslation } from 'src/i18';
 import { useContextGridSetting } from './GridSettingContext';
 import GridSettingTabBodyRowCheckboxVisible from './GridSettingTabBodyRowCheckboxVisible';
@@ -59,7 +59,7 @@ const GridSettingTabBodyRow: FC<TProps> = ({ row }) => {
           return (
             <td key={keyID} onClick={() => setActiveRow(rowID)}>
               <div style={getTextAlignByColumnType(column)} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
-                <span>{value}</span>
+                <span>{getTranslation(value)}</span>
               </div>
             </td>)
         } else if (column.type === 'boolean' && column.identifier === 'sortable') {
@@ -73,7 +73,7 @@ const GridSettingTabBodyRow: FC<TProps> = ({ row }) => {
           return (
             <td key={keyID} onClick={() => setActiveRow(rowID)}>
               <div style={getTextAlignByColumnType(column)} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
-                <span>{getTranslation(value)}</span>
+                <span>{value}</span>
               </div>
             </td>)
         }

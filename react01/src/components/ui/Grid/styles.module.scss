@@ -133,7 +133,7 @@ thead {
     // box-shadow: 0 0 1px 1px $color10;
     // border-bottom: 22x solid $color10;
     height: 1px;
-    background: $color5;
+    background: $color10;
     // transition: box-shadow 1s ease-out;
     box-shadow: 0px 1px 1px $color6;
   }
@@ -142,10 +142,15 @@ thead {
 tbody {
   background-color: $color60;
   tr {
+    border-bottom: 1px solid $color10;
+    // &:last-child {
+    //   border-bottom: 1px solid $color10;
+    // }
     td {
       border-right: 1px solid $color10;
-      border-top: 1px solid $color10;
-      border-bottom: 1px solid $color10;
+      // border-bottom: 1px solid $color10;
+      // border-top: 1px solid $color10;
+
       &:first-child {
         border-left: 0px;
       }
@@ -263,7 +268,7 @@ tbody {
 input[type="checkbox"] {
   height: 18px;
   width: 18px;
-  border: 9px solid #ccc;
+  // border: 9px solid #ccc;
   // accent-color: $color10;
   // transform: rotate(45deg);
   // border-radius: 3px;
@@ -279,7 +284,8 @@ input[type="checkbox"] {
     // transform: scale(1.1);
   }
   &:focus {
-    // box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+    outline: none;
+    // box-shadow: 0 0 2px $color6;
     // border: 1px solid $color1;
     // box-shadow: 0 1px 3px $color5;
     // border: 1px solid red;

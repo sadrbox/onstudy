@@ -6,6 +6,7 @@ import { TColumn, TDataItem, TGridStates, TSorting } from '../types';
 import GridHeadSetting from './GridSettingTabHeader';
 import GridBodySetting from './GridSettingTabBody';
 import ContextWrapper, { TContextGridSetting, useContextGridSetting } from './GridSettingContext';
+import styles from "../styles.module.scss"
 // import { sortGridRows } from '../services';
 // import { columns } from "./settings.json"
 // import { columns } from '../../../../objects/Products/config';
@@ -44,10 +45,12 @@ const GridSetting: FC<TProps> = ({ rows }) => {
 
   return (
     <ContextWrapper contextGridSetting={contextGridSetting}>
-      <table>
-        <GridHeadSetting />
-        <GridBodySetting rows={rows} />
-      </table>
+      <div className={styles.TabWrapper}>
+        <table>
+          <GridHeadSetting />
+          <GridBodySetting rows={rows} />
+        </table>
+      </div>
     </ContextWrapper>
   );
 };

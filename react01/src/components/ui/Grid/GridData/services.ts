@@ -1,4 +1,4 @@
-import { TColumn, TDataItem } from "./types";
+import { TColumn, TDataItem } from "../types";
 import { CSSProperties } from "react";
 
 export function sortGridRows(

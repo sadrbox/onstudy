@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 // import { translateWord } from 'src/i18'
 // import settings from "./settings.json" assert { type: "json" };
 // import { TColumn } from 'src/objects/Todos'
-import { TColumn, TGridStates } from './types';
+import { TColumn, TGridStates } from '../types';
 import { useContextGridData } from './GridDataContext';
 // import styles from "./styles.module.scss";
 import { FaSortAmountDown, FaSortAmountDownAlt } from "react-icons/fa";

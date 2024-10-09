@@ -1,5 +1,5 @@
 import React from 'react'
-import { useContextInstance } from './ui/GridData/ContextProvider'
+import { useContextInstance } from './ui/Grid/GridData/ContextProvider'
 
 
 

@@ -99,17 +99,6 @@
     "position": 9
   },
   {
-    "identifier": "tags",
-    "type": "array",
-    "column": "Tags",
-    "width": "150px",
-    "alignment": "left",
-    "hint": "Теги продукта",
-    "sortable": false,
-    "visible": true,
-    "position": 10
-  },
-  {
     "identifier": "brand",
     "type": "string",
     "column": "Brand",
@@ -143,94 +132,6 @@
     "position": 13
   },
   {
-    "identifier": "dimensions",
-    "type": "object",
-    "column": "Dimensions",
-    "width": "150px",
-    "alignment": "left",
-    "hint": "Габариты продукта",
-    "sortable": false,
-    "visible": true,
-    "position": 14
-  },
-  {
-    "identifier": "warrantyInformation",
-    "type": "string",
-    "column": "Warranty Information",
-    "width": "200px",
-    "alignment": "left",
-    "hint": "Информация о гарантии",
-    "sortable": false,
-    "visible": true,
-    "position": 15
-  },
-  {
-    "identifier": "shippingInformation",
-    "type": "string",
-    "column": "Shipping Information",
-    "width": "200px",
-    "alignment": "left",
-    "hint": "Информация о доставке",
-    "sortable": false,
-    "visible": true,
-    "position": 16
-  },
-  {
-    "identifier": "availabilityStatus",
-    "type": "string",
-    "column": "Availability Status",
-    "width": "150px",
-    "alignment": "left",
-    "hint": "Статус наличия",
-    "sortable": true,
-    "visible": true,
-    "position": 17
-  },
-  {
-    "identifier": "reviews",
-    "type": "array",
-    "column": "Reviews",
-    "width": "250px",
-    "alignment": "left",
-    "hint": "Отзывы о продукте",
-    "sortable": false,
-    "visible": true,
-    "position": 18
-  },
-  {
-    "identifier": "returnPolicy",
-    "type": "string",
-    "column": "Return Policy",
-    "width": "150px",
-    "alignment": "left",
-    "hint": "Политика возврата",
-    "sortable": false,
-    "visible": true,
-    "position": 19
-  },
-  {
-    "identifier": "minimumpositionQuantity",
-    "type": "number",
-    "column": "Minimum position Quantity",
-    "width": "150px",
-    "alignment": "right",
-    "hint": "Минимальное количество для заказа",
-    "sortable": true,
-    "visible": true,
-    "position": 20
-  },
-  {
-    "identifier": "meta",
-    "type": "object",
-    "column": "Meta Information",
-    "width": "150px",
-    "alignment": "left",
-    "hint": "Дополнительная информация",
-    "sortable": false,
-    "visible": true,
-    "position": 21
-  },
-  {
     "identifier": "images",
     "type": "array",
     "column": "Images",
@@ -240,16 +141,5 @@
     "sortable": false,
     "visible": true,
     "position": 22
-  },
-  {
-    "identifier": "thumbnail",
-    "type": "string",
-    "column": "Thumbnail",
-    "width": "150px",
-    "alignment": "left",
-    "hint": "Миниатюра продукта",
-    "sortable": false,
-    "visible": true,
-    "position": 23
   }
 ]

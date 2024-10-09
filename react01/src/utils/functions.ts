@@ -9,7 +9,7 @@ import {
 import { ResolveFnOutput } from "module";
 // import { TColumn, TDataItem } from "src/components/ui/GridData/services";
 import { getTranslation } from "src/i18";
-import { TColumn, TDataItem } from "src/components/ui/GridData/types";
+import { TColumn, TDataItem } from "src/components/ui/Grid/types";
 // import { TColumn, TDataItem } from "src/objects/Todos";
 // import { ICol, IProduct } from "src/components/ui/GridData/types";
 // import { translateWord } from "src/i18";

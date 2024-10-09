@@ -12,8 +12,9 @@ import _, { reject } from "lodash";
 // import { contextDataInit } from '../../components/ui/GridData/ContextProvider';
 
 import columns from "./columns.json"
-import GridData from "src/components/ui/GridData";
-import { TColumn, TDataItem } from "src/components/ui/GridData/types";
+import GridData from "src/components/ui/Grid/GridData";
+import { TColumn, TDataItem } from "src/components/ui/Grid/types";
+import Grid from "src/components/ui/Grid";
 // import { TProduct } from "./types";
 
 // type TColum = typeof columns;
@@ -51,14 +52,14 @@ const Products: FC = () => {
 
   const loadDataGrid = async () => {
     setParams(undefined)
-    await fetch('https://dummyjson.com/products?limit=25')
+    await fetch('https://dummyjson.com/products?limit=100')
       .then(response => response.json())
       .then(data => setResponseData(data))
   }
 
   return (
     <>
-      {params ? (<GridData params={params} actions={{ loadDataGrid }} />) : (<h1>Loading...</h1>)}
+      {params ? (<Grid params={params} actions={{ loadDataGrid }} />) : (<h1>Loading...</h1>)}
     </>
   )
 

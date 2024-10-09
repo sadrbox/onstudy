@@ -1,5 +1,5 @@
 import translations from "./translations.json" assert { type: "json" };
-import { TColumn } from "src/components/ui/GridData/types";
+import { TColumn } from "src/components/ui/Grid/types";
 
 export function getTranslation(word: string): string {
 	const translate: [string, string] | undefined = Object.entries(

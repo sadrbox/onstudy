@@ -1,6 +1,6 @@
 import React, { FC, Dispatch, ForwardedRef, forwardRef, ForwardRefExoticComponent, MutableRefObject, ReactNode, RefAttributes, SetStateAction, useEffect, useImperativeHandle } from 'react';
 import { useContextGridData } from './GridDataContext';
-import styles from "./styles.module.scss"
+import styles from "../styles.module.scss"
 
 
 type TProps = {

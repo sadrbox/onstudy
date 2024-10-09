@@ -5,7 +5,7 @@ import React, { FC, useEffect, useState } from 'react'
 // import { ITodo } from 'src/objects/Todos/types';
 // import DataGridBodyRow from './GridDataBodyRow';
 // import { useContextDataGrid } from './GridContextData';
-import { TColumn, TDataItem } from './types';
+import { TColumn, TDataItem } from '../types';
 // import { TDataItem } from './services';
 // import { columns } from '../../../objects/Products/config';
 import GridDataTabBodyRow from './GridDataTabBodyRow';
@@ -21,15 +21,13 @@ const GridDataTabBody: FC<TProps> = ({ columns, rows }) => {
   //   activeRow, setActiveRow
   // }
 
-  // console.log(rows)
-  console.log(columns)
-  const result = columns.find(column => column.identifier === 'switcher')
+
+
   return (
     <tbody>
       {rows && rows.map((row: TDataItem, key: number) =>
-        // if(columns.includes())
-
-        <GridDataTabBodyRow key={key} rowID={row.id} columns={columns} row={row} />)}
+        <GridDataTabBodyRow key={key} rowID={row.id} columns={columns} row={row} />
+      )}
       <tr style={{ height: "100%", visibility: 'hidden' }}></tr>
     </tbody>
   )
