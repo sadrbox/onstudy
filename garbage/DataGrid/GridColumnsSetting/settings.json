@@ -1,0 +1,95 @@
+{
+  "headers": {
+    "identifier": "string",
+    "type": "string",
+    "label": "string",
+    "width": "string",
+    "alignment": "string",
+    "hint": "string",
+    "sortable": "boolean",
+    "visible": "boolean"
+  },
+
+  "columns": [
+    {
+      "identifier": "visible",
+      "type": "boolean",
+      "label": "Visible",
+      "width": "80px",
+      "alignment": "center",
+      "hint": "Отображение колонки в таблице",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "identifier": "identifier",
+      "type": "string",
+      "label": "Column",
+      "width": "80px",
+      "alignment": "left",
+      "hint": "Идентификатор колонки",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "identifier": "type",
+      "type": "string",
+      "label": "Type",
+      "width": "80px",
+      "alignment": "left",
+      "hint": "Тип данных в колонке (string, number, boolean и т.д.)",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "identifier": "label",
+      "type": "string",
+      "label": "Label",
+      "width": "80px",
+      "alignment": "left",
+      "hint": "Название колонки",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "identifier": "width",
+      "type": "string",
+      "label": "Width",
+      "width": "80px",
+      "alignment": "left",
+      "hint": "Ширина колонки в таблице",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "identifier": "hint",
+      "type": "string",
+      "label": "Hint",
+      "width": "100px",
+      "alignment": "left",
+      "hint": "Описание или подсказка для колонки",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "identifier": "sortable",
+      "type": "boolean",
+      "label": "Sortable",
+      "width": "80px",
+      "alignment": "center",
+      "hint": "Возможность сортировки по этой колонке",
+      "sortable": true,
+      "visible": true
+    },
+    {
+      "identifier": "alignment",
+      "type": "string",
+      "label": "Alignment",
+      "width": "80px",
+      "alignment": "center",
+      "hint": "Выравнивание содержимого колонки (left, center, right)",
+      "sortable": true,
+      "visible": true
+    }
+  ]
+}
