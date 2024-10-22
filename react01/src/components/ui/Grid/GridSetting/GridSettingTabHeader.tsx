@@ -26,8 +26,9 @@ const GridSettingHeader: FC = () => {
     <thead>
       <tr>
         {columns && columns.map((column, keyID: number) => {
+          const styleWidth = (column.type === "string" ? { minWidth: column?.width } : { width: column?.width, minWidth: column?.width });
           return (
-            <th key={keyID} style={{ width: column?.width, minWidth: column?.width }}>
+            <th key={keyID} style={styleWidth}>
               <div title={column?.hint}>
                 <span>{getTranslateColumn(column)}</span>
               </div>

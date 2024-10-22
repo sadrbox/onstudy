@@ -11,19 +11,15 @@ import { useContextGridSetting } from './GridSettingContext';
 // import GridSettingContext from './GridSettingContext';
 
 type TProps = {
-  rows: TColumn[]
+  columns: TColumn[]
 }
 
-const GridSettingTabBody: FC<TProps> = ({ rows }) => {
-  // const [activeRow, setActiveRow] = useState<number | null>(null)
-  // const states = {
-  //   activeRow, setActiveRow
-  // }
+const GridSettingTabBody: FC<TProps> = ({ columns }) => {
 
   return (
     <tbody>
-      {rows && rows.map((row, key: number) =>
-        <GridSettingTabBodyRow key={key} row={row} />)}
+      {columns && columns.map((column, key: number) =>
+        <GridSettingTabBodyRow key={key} column={column} rowID={++key} />)}
       <tr style={{ height: "100%", visibility: 'hidden' }}></tr>
     </tbody>
   );

@@ -30,19 +30,12 @@ const GridDataTabBodyRow: FC<TProps> = ({ rowID, columns, row }) => {
     return (context?.states?.activeRow === rowID) || false
   }
 
-  // const rowID = +row.id;
-
-
-  // console.log(rows)
-  // console.log(columns)
-  // const result = columns.find(column => column.identifier === 'switcher')
-
 
 
 
   return (
     <tr data-row-id={rowID}>
-      {columns && columns.map((column: TColumn, columnIndex: number) => {
+      {columns && columns.filter(column => column.visible).map((column: TColumn, columnIndex: number) => {
         const rowsKey = Object.keys(row);
         if (columns.find(el => rowsKey.includes(el.identifier)))
           if (column.type === 'string' || column.type === "number" || column.type === 'boolean') {
@@ -67,7 +60,7 @@ const GridDataTabBodyRow: FC<TProps> = ({ rowID, columns, row }) => {
               return (
                 <td key={columnIndex} onClick={() => setActiveRow(rowID)}>
                   <div style={getTextAlignByColumnType(column)} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
-                    <span>{value || ""}</span>
+                    <span>{value}</span>
                   </div>
                 </td>)
             }

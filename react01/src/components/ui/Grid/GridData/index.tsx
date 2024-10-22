@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC, Suspense, useRef, MutableRefObject, RefObject } from 'react'
+import React, { useEffect, useState, FC, Suspense, useRef, MutableRefObject, RefObject, Dispatch, SetStateAction } from 'react'
 import styles from "../styles.module.scss"
 // import { PiDotsThreeCircleLight } from "react-icons/pi";
 // import { IoReloadCircleOutline } from "react-icons/io5";
@@ -23,11 +23,12 @@ type TProps = {
   }
   actions: {
     loadDataGrid: () => void
+    setShowTabSetting: Dispatch<SetStateAction<boolean>>
   }
 }
 
 
-const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGrid } }) => {
+const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGrid, setShowTabSetting } }) => {
 
   const [contextGridData, setContextGridData] = useState<TContextData | undefined>(undefined);
   const [sortedDataGrid, setSortedDataGrid] = useState<TDataItem[] | undefined>(undefined);
@@ -106,11 +107,44 @@ const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGr
     }
   }, [rows])
 
+  // useEffect(() => {
+  //   const getStoreSetting = localStorage.getItem("username_gridColumnsVisible_products")
+  //   if (!getStoreSetting) {
+  //     const visibleIDs = columns.filter(item => item.visible === true)
+  //       .map(item => item.position);
+  //     setVisibleRows(visibleIDs)
+  //     const sortableIDs = columns.filter(item => item.sortable === true)
+  //       .map(item => item.position);
+  //     setVisibleRows(sortableIDs)
+  //   } else {
+  //     const storeSettings = JSON.parse(getStoreSetting)
+  //     setVisibleRows(storeSettings?.visibleRows)
+  //     setSortableRows(storeSettings?.sortableRows)
+  //   }
+  // }, []);
+  function onClickButtonTabSetting(e: React.UIEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setShowTabSetting((prev) => !prev)
+  }
 
 
 
   return (
     <ContextWrapper contextGridData={contextGridData}>
+      <div className={styles.TabPanel}>
+        <div className={styles.rowGroup} style={{ justifyContent: 'left', gap: '5px' }}>
+          <button className={styles.Button}><span>Добавить</span></button>
+          <button className={styles.Button}><span>Удалить</span></button>
+        </div>  <h1></h1>
+        <div className={styles.rowGroup} style={{ justifyContent: 'right', gap: '5px' }}>
+          <button onClick={() => loadDataGrid()} className={[styles.Button, styles.ButtonImg].join(' ')}>
+            <div className={styles.ImgReload} ></div>
+          </button>
+          <button className={[styles.Button, styles.ButtonImg].join(' ')} onClick={(e) => onClickButtonTabSetting(e)}>
+            <div className={styles.ImgSetting}></div>
+          </button>
+        </div>
+      </div>
       <div className={styles.TabWrapper}>
         <table>
           <GridDataTabHeader columns={columns} />

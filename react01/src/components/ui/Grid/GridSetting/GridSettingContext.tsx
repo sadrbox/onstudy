@@ -16,8 +16,8 @@ export type TContextGridSetting = {
   states: {
     activeRow?: number | null;
     setActiveRow?: Dispatch<SetStateAction<number | null>>;
-    visibleRows: number[];
-    setVisibleRows: Dispatch<SetStateAction<number[]>>;
+    visibleIdentifiers: (keyof TColumn)[];
+    setVisibleIdentifiers: Dispatch<SetStateAction<(keyof TColumn)[]>>;
     sortableRows: number[];
     setSortableRows: Dispatch<SetStateAction<number[]>>;
   }

@@ -36,12 +36,60 @@ const Products: FC = () => {
   const [params, setParams] = useState<TParams | undefined>(undefined)
   const [sortedColumns, setSortedColumns] = useState<TColumn[]>([])
 
+  // useEffect(() => {
+  //   const getStoreSetting = localStorage.getItem("username_gridColumnsVisible_products")
+  //   if (!getStoreSetting) {
+  //     const visibleIDs = columns.filter(item => item.visible === true)
+  //       .map(item => item.position);
+  //     setVisibleRows(visibleIDs)
+  //     const sortableIDs = columns.filter(item => item.sortable === true)
+  //       .map(item => item.position);
+  //     setVisibleRows(sortableIDs)
+  //   } else {
+  //     const storeSettings = JSON.parse(getStoreSetting)
+  //     setVisibleRows(storeSettings?.visibleRows)
+  //     setSortableRows(storeSettings?.sortableRows)
+  //   }
+  // }, []);
+
+  function buildColumns(columns: TColumn[]) {
+    const cols = columns.sort((a, b) => a.position - b.position);
+    const getStoreSetting = localStorage.getItem("username_gridSetting_products")
+    if (getStoreSetting) {
+      const storeSettings = JSON.parse(getStoreSetting);
+      const visibleIdentifiers = storeSettings?.visibleIdentifiers;
+      if (_.isArray(visibleIdentifiers)) {
+        const visibleColumns = cols.map(column => {
+          // console.log(column.visible)
+          if (visibleIdentifiers.includes(column?.identifier)) {
+            column.visible = true;
+            // console.log(column.visible)
+          } else {
+            column.visible = false;
+          }
+          // console.log(column.visible)
+          return column;
+        })
+        // console.log(visibleColumns)
+        setSortedColumns(visibleColumns);
+      }
+    } else {
+      setSortedColumns(cols);
+    }
+  }
+
   useEffect(() => {
-    setSortedColumns(columns.sort((a, b) => a.position - b.position));
+    if (params)
+      buildColumns(columns)
+  }, [params])
+
+  useEffect(() => {
+    buildColumns(columns)
     loadDataGrid();
   }, [])
 
   useEffect(() => {
+    // console.log(sortedColumns)
     if (responseData?.products) {
       const rows = responseData?.products;
       setParams({ rows, columns: sortedColumns })
@@ -52,7 +100,7 @@ const Products: FC = () => {
 
   const loadDataGrid = async () => {
     setParams(undefined)
-    await fetch('https://dummyjson.com/products?limit=100')
+    await fetch('https://dummyjson.com/products?limit=30')
       .then(response => response.json())
       .then(data => setResponseData(data))
   }

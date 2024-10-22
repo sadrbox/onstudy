@@ -44,7 +44,7 @@ const GridDataTabHeader: FC<TProps> = ({ columns }) => {
   return (
     <thead>
       <tr>
-        {columns && columns.map((column: TColumn, keyID: number) => {
+        {columns && columns.filter(column => column.visible).map((column: TColumn, keyID: number) => {
           if (column.type === 'string' || column.type === "number" || column.type === 'boolean') {
             if (column.identifier === 'switcher') {
               return (
@@ -55,8 +55,9 @@ const GridDataTabHeader: FC<TProps> = ({ columns }) => {
                 </th>
               )
             } else {
+              const styleWidth = (column.type === "string" ? { minWidth: column?.width } : { width: column?.width, minWidth: column?.width });
               return (
-                <th key={keyID} style={{ width: column?.width, minWidth: column?.width, maxWidth: column?.width }} onClick={() => handleSorting(column.identifier)}>
+                <th key={keyID} style={styleWidth} onClick={() => handleSorting(column.identifier)}>
                   <div>
                     <span>{getTranslateColumn(column)}</span>
                     {orderID === column.identifier && orderType === 'asc' ? <FaSortAmountDownAlt size={16} style={{ justifySelf: 'end', marginLeft: '10px', color: (orderID === column.identifier ? '#333' : 'transparent') }} /> : <FaSortAmountDown size={16} style={{ justifySelf: 'end', marginLeft: '10px', color: (orderID === column.identifier ? '#333' : 'transparent') }} />}

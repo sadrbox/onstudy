@@ -13,14 +13,12 @@ import GridSettingTabBodyRowCheckboxVisible from './GridSettingTabBodyRowCheckbo
 import GridSettingTabBodyRowCheckboxSortable from './GridSettingTabBodyRowCheckboxSortable';
 
 type TProps = {
-  row: TColumn;
-  // states: {
-  //   activeRow: number | null, setActiveRow: Dispatch<SetStateAction<number | null>>
-  // }
+  column: TColumn;
+  rowID: number;
 }
 
-const GridSettingTabBodyRow: FC<TProps> = ({ row }) => {
-  const [columns, setColumns] = useState<TColumn[]>([])
+const GridSettingTabBodyRow: FC<TProps> = ({ column, rowID }) => {
+  const [rowSettingColumns, setRowSettingColumns] = useState<TColumn[]>([])
 
   const { context } = useContextGridSetting();
 
@@ -34,46 +32,52 @@ const GridSettingTabBodyRow: FC<TProps> = ({ row }) => {
   }
 
   useEffect(() => {
-    if (columns) {
+    if (rowSettingColumns) {
       const sortedColumns = settings.columns.sort((a, b) => a.position - b.position);
-      setColumns(sortedColumns)
+      setRowSettingColumns(sortedColumns)
     }
   }, [])
 
-  const rowID = +row?.position
-
   return (
     <tr data-row-id={rowID}>
-      {columns && columns.map((column, keyID) => {
-
-        const value = getColumnSettingValue(row, column);
-        if (column.type === 'boolean' && column.identifier === 'visible') {
+      {rowSettingColumns && rowSettingColumns.map((rowSettingColumn, keyID) => {
+        const value = getColumnSettingValue(column, rowSettingColumn);
+        const keyForPosition = Object.keys(rowSettingColumn);
+        // console.log(rowSettingColumn)
+        if (keyForPosition[keyID] === "position") {
           return (
-            <td key={keyID}>
-              <div style={{ justifyItems: column.alignment }} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
-                <GridSettingTabBodyRowCheckboxVisible rowID={rowID} />
+            <td key={keyID} onClick={() => setActiveRow(rowID)}>
+              <div style={getTextAlignByColumnType(rowSettingColumn)} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
+                <span>{rowID}</span>
               </div>
             </td>)
-        } else if (column.identifier === 'column' || column.identifier === 'alignment') {
+        } else if (rowSettingColumn.type === 'boolean' && rowSettingColumn.identifier === 'visible') {
+          return (
+            <td key={keyID}>
+              <div style={{ justifyItems: rowSettingColumn.alignment }} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
+                <GridSettingTabBodyRowCheckboxVisible rowID={rowID} columnKEY={column?.identifier as keyof TColumn} />
+              </div>
+            </td>)
+        } else if (rowSettingColumn.identifier === 'column' || rowSettingColumn.identifier === 'alignment') {
           // const colValue: string = (column.type === 'string') ? (row[column.identifier as keyof TColumn]?.toString() ?? "") : "";
           return (
             <td key={keyID} onClick={() => setActiveRow(rowID)}>
-              <div style={getTextAlignByColumnType(column)} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
+              <div style={getTextAlignByColumnType(rowSettingColumn)} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
                 <span>{getTranslation(value)}</span>
               </div>
             </td>)
-        } else if (column.type === 'boolean' && column.identifier === 'sortable') {
+        } else if (rowSettingColumn.type === 'boolean' && rowSettingColumn.identifier === 'sortable') {
           return (
             <td key={keyID}>
-              <div style={{ justifyItems: column.alignment }} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
+              <div style={{ justifyItems: rowSettingColumn.alignment }} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
                 <GridSettingTabBodyRowCheckboxSortable rowID={rowID} />
               </div>
             </td>)
-        } else {
+        } else if (rowSettingColumn.type === 'string') {
           return (
             <td key={keyID} onClick={() => setActiveRow(rowID)}>
-              <div style={getTextAlignByColumnType(column)} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
-                <span>{value}</span>
+              <div style={getTextAlignByColumnType(rowSettingColumn)} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
+                <span>{getTranslation(value)}</span>
               </div>
             </td>)
         }

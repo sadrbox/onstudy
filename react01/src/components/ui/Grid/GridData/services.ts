@@ -76,13 +76,16 @@ export function getTextAlignByColumnType(column: TColumn): CSSProperties {
 			return { textAlign: "left" };
 	}
 }
-export function getColumnSettingValue(row: TColumn, column: TColumn): string {
+export function getColumnSettingValue(
+	rowSettingColumn: TColumn,
+	column: TColumn,
+): string {
 	if (column.type === "string") {
-		return row[column.identifier as keyof TColumn] + "";
+		return rowSettingColumn[column.identifier as keyof TColumn] + "";
 	} else if (column.type === "number") {
-		return row[column.identifier as keyof TColumn] + "";
+		return rowSettingColumn[column.identifier as keyof TColumn] + "";
 	}
-	return row[column.identifier as keyof TColumn] + "";
+	return rowSettingColumn[column.identifier as keyof TColumn] + "";
 }
 
 export function getFormatColumnValue(row: TDataItem, column: TColumn): string {
@@ -97,9 +100,12 @@ export function getFormatColumnValue(row: TDataItem, column: TColumn): string {
 	} else if (column.identifier === "position" && column.type === "position") {
 		return row[column.identifier] + "";
 	} else if (column.type === "string") {
-		return row[column.identifier] + "";
+		// console.log("first");
+		return row[column.identifier] !== undefined
+			? row[column.identifier] + ""
+			: "";
 	}
-	return row[column.identifier] + "";
+	return "";
 }
 
 // Формат числовой идентификатор /////////////////////////////////////////////////////////////////////////
