@@ -12,7 +12,8 @@ const GridSettingTabBodyRowCheckboxSortable: FC<TProps> = ({ rowID }) => {
   const { context } = useContextGridSetting();
 
   function isCheckedRow(rowID: number) {
-    return context?.states?.sortableRows.includes(rowID) || false;
+    // return context?.states?.sortableRows.includes(rowID) || false;
+    return false;
   }
 
   function onToggle(rowID: number) {

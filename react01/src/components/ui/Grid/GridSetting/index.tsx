@@ -28,67 +28,82 @@ const GridSetting: FC<TProps> = ({ params: { columns }, actions: { loadDataGrid,
   const [contextGridSetting, setContextGridSetting] = useState<TContextGridSetting | undefined>(undefined);
   const [activeRow, setActiveRow] = useState<number | null>(null)
   // const [visibleRows, setVisibleRows] = useState<number[]>([])
-  const [sortableRows, setSortableRows] = useState<number[]>([])
-  const [visibleIdentifiers, setVisibleIdentifiers] = useState<(keyof TColumn)[]>([]);
-  // const [gridSettings, setGridSettings] = useState({})
+  // const [sortableRows, setSortableRows] = useState<number[]>([])
+  // const [visibleIdentifiers, setVisibleIdentifiers] = useState<(keyof TColumn)[]>([]);
+  const [gridColumns, setGridColumns] = useState<TColumn[]>([])
 
   useEffect(() => {
-    const getStoreSetting = localStorage.getItem("username_gridSetting_products")
-    if (!getStoreSetting) {
-      const identifiers = columns.filter(column => column.visible).map(col => col.identifier) as (keyof TColumn)[];
-      // console.log(identifiers)
-      setVisibleIdentifiers(identifiers)
-      // setGridSettings(columns)
-      // console.log(columns.filter(column => column.visible === true && column.identifier))
-      // console.log(columns.filter(column => column.visible === true && column.identifier))
-      // .map(item => item.position);
-      // setVisibleRows(visibleIDs)
-      // const sortableIDs = columns.filter(item => item.sortable === true)
-      //   .map(item => item.position);
-      // setVisibleRows(sortableIDs)
+    const getStorageOfSettings = localStorage.getItem("username_gridSetting_products");
+    let storageOfSettings: TColumn[] = [];
+    try {
+      storageOfSettings = getStorageOfSettings && JSON.parse(getStorageOfSettings)
+    } catch (e) {
+      // storageOfSettings = {}
+    }
+    if (!storageOfSettings) {
+      setGridColumns(columns)
+
     } else {
-      const storeSettings = JSON.parse(getStoreSetting)
-      setVisibleIdentifiers(storeSettings?.visibleIdentifiers)
-      // setVisibleRows(storeSettings?.visibleRows)
-      setSortableRows(storeSettings?.sortableRows)
+
+      setGridColumns(storageOfSettings)
     }
   }, []);
 
   useEffect(() => {
-
-    const IDs = columns.map(row => row?.position) || [];
-    // console.log(columns)
     setContextGridSetting({
-      IDs,
       actions: {
       },
       states: {
         activeRow, setActiveRow,
-        visibleIdentifiers, setVisibleIdentifiers,
-        sortableRows, setSortableRows
+        gridColumns, setGridColumns,
       }
     })
-  }, [visibleIdentifiers, activeRow, sortableRows]);
+  }, [activeRow, gridColumns]);
 
   useEffect(() => {
-    const setting = {
-      visibleIdentifiers,
-      columns
-    }
-    localStorage.setItem("username_gridSetting_products", JSON.stringify(setting))
-  }, [visibleIdentifiers, columns])
+    const json = JSON.stringify(gridColumns)
+    localStorage.setItem("username_gridSetting_products", json)
+    // loadDataGrid();
+  }, [gridColumns])
 
   function onClickButtonTabSetting(e: React.UIEvent<HTMLButtonElement>) {
     e.preventDefault();
     loadDataGrid();
     setShowTabSetting((prev) => !prev)
   }
+  function PositionLevelUp() {
+    const arr = gridColumns.map((column, keyID) => {
+      const numberID = ++keyID;
+      const nextPosition = (activeRow !== null ? activeRow > 0 ? activeRow - 1 : 0 : 0);
+
+      if (nextPosition === column.position) {
+        column.position = nextPosition + 1;
+      }
+      // console.log("---------------", nextPosition)
+
+      // console.log({ next: nextPosition, active: activeRow, position: column.position })
+      // console.log(column.position, numberID)
+      else if (activeRow === column.position) {
+        // console.log({ next: nextPosition, active: activeRow, position: column.position })
+        // console.log(activeRow, column.position)
+        column.position = nextPosition;
+        setActiveRow(nextPosition)
+        // console.log(column.position)
+      } else {
+        column.position = numberID;
+      }
+      return column;
+    })
+    const cols = arr.sort((a, b) => a.position - b.position)
+    // console.log(cols)
+    setGridColumns(cols)
+  }
 
   return (
     <ContextWrapper contextGridSetting={contextGridSetting}>
       <div className={styles.TabPanel}>
         <div className={styles.rowGroup} style={{ justifyContent: 'left', gap: '5px' }}>
-          <button onClick={() => loadDataGrid()} className={[styles.Button, styles.ButtonImg].join(' ')}>
+          <button onClick={() => PositionLevelUp()} className={[styles.Button, styles.ButtonImg].join(' ')}>
             <LiaChevronUpSolid size={16} />
           </button>
           <button onClick={() => loadDataGrid()} className={[styles.Button, styles.ButtonImg].join(' ')}>
@@ -96,7 +111,6 @@ const GridSetting: FC<TProps> = ({ params: { columns }, actions: { loadDataGrid,
           </button>
         </div>
         <div className={styles.rowGroup} style={{ justifyContent: 'right', gap: '5px' }}>
-
           <button className={[styles.Button, styles.ButtonImg].join(' ')} onClick={(e) => onClickButtonTabSetting(e)}>
             <div className={styles.ImgSetting}></div>
           </button>
@@ -105,7 +119,7 @@ const GridSetting: FC<TProps> = ({ params: { columns }, actions: { loadDataGrid,
       <div className={styles.TabWrapper}>
         <table>
           <GridHeadSetting />
-          <GridBodySetting columns={columns} />
+          <GridBodySetting columns={gridColumns} />
         </table>
       </div>
     </ContextWrapper>

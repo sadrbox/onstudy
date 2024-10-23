@@ -6,7 +6,6 @@
     "width": "30px",
     "alignment": "center",
     "hint": "Пометка",
-    "sortable": false,
     "visible": true,
     "position": 1
   },
@@ -17,7 +16,6 @@
     "width": "80px",
     "alignment": "left",
     "hint": "Идентификатор продукта",
-    "sortable": true,
     "visible": true,
     "position": 2
   },
@@ -28,7 +26,6 @@
     "width": "150px",
     "alignment": "left",
     "hint": "Название продукта",
-    "sortable": true,
     "visible": true,
     "position": 3
   },
@@ -39,7 +36,6 @@
     "width": "250px",
     "alignment": "left",
     "hint": "Описание продукта",
-    "sortable": false,
     "visible": true,
     "position": 4
   },
@@ -50,7 +46,6 @@
     "width": "100px",
     "alignment": "left",
     "hint": "Категория продукта",
-    "sortable": true,
     "visible": true,
     "position": 5
   },
@@ -61,7 +56,6 @@
     "width": "80px",
     "alignment": "right",
     "hint": "Цена продукта",
-    "sortable": true,
     "visible": true,
     "position": 6
   },
@@ -72,7 +66,6 @@
     "width": "120px",
     "alignment": "right",
     "hint": "Процент скидки",
-    "sortable": true,
     "visible": true,
     "position": 7
   },
@@ -83,7 +76,6 @@
     "width": "80px",
     "alignment": "right",
     "hint": "Рейтинг продукта",
-    "sortable": true,
     "visible": true,
     "position": 8
   },
@@ -94,7 +86,6 @@
     "width": "80px",
     "alignment": "right",
     "hint": "Наличие на складе",
-    "sortable": true,
     "visible": true,
     "position": 9
   },
@@ -105,7 +96,6 @@
     "width": "100px",
     "alignment": "left",
     "hint": "Бренд продукта",
-    "sortable": true,
     "visible": true,
     "position": 11
   },
@@ -116,7 +106,6 @@
     "width": "100px",
     "alignment": "left",
     "hint": "Артикул",
-    "sortable": true,
     "visible": true,
     "position": 12
   },
@@ -127,7 +116,6 @@
     "width": "80px",
     "alignment": "right",
     "hint": "Вес продукта",
-    "sortable": true,
     "visible": true,
     "position": 13
   },
@@ -138,7 +126,6 @@
     "width": "150px",
     "alignment": "left",
     "hint": "Изображения продукта",
-    "sortable": false,
     "visible": true,
     "position": 22
   }

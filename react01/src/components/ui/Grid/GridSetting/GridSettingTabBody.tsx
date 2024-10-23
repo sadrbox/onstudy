@@ -19,7 +19,7 @@ const GridSettingTabBody: FC<TProps> = ({ columns }) => {
   return (
     <tbody>
       {columns && columns.map((column, key: number) =>
-        <GridSettingTabBodyRow key={key} column={column} rowID={++key} />)}
+        <GridSettingTabBodyRow key={key} column={column} rowID={column.position} />)}
       <tr style={{ height: "100%", visibility: 'hidden' }}></tr>
     </tbody>
   );

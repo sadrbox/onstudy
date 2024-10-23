@@ -16,28 +16,26 @@ const GridSettingTabBodyRowCheckboxVisible: FC<TProps> = ({ columnKEY, rowID }) 
   const { context } = useContextGridSetting();
 
   function isCheckedRow(columnKEY: keyof TColumn): boolean {
-    if (context?.states?.visibleIdentifiers) {
-      return context?.states?.visibleIdentifiers.includes(columnKEY) || false;
+    if (context?.states?.gridColumns) {
+      // return context?.states?.gridColumns.filter(column => column.identifier === columnKEY) || false;
+      const column = context?.states?.gridColumns.filter(column => column.identifier === columnKEY);
+      if (column[0]) {
+        return column[0].visible;
+      }
     }
     return false;
   }
 
   function onToggle(columnKEY: keyof TColumn) {
-    if (context?.states?.setVisibleIdentifiers) {
-      context?.states?.setVisibleIdentifiers((prev) => {
-
-        // console.log(prev)
-        if (prev !== null) {
-          // console.log(prev)
-          if ([...prev].includes(columnKEY)) {
-            return prev.filter(identifier => identifier !== columnKEY);
-          } else {
-            return [...prev, columnKEY];
+    if (context?.states?.setGridColumns) {
+      context?.states?.setGridColumns((prev) => {
+        const changedSettings = prev.map(column => {
+          if (column.identifier === columnKEY) {
+            column.visible = !column.visible;
           }
-        }
-        else {
-          return [];
-        }
+          return column;
+        })
+        return changedSettings;
       })
     }
   }

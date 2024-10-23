@@ -17,6 +17,9 @@ type TProps = {
 const Grid: FC<TProps> = ({ params, actions: { loadDataGrid } }) => {
 
   const [showTabSetting, setShowTabSetting] = useState<boolean>(false)
+  // useEffect(() => {
+  //   // loadDataGrid()
+  // }, [setShowTabSetting])
 
   return (
     <>

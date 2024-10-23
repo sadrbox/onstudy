@@ -9,17 +9,17 @@ import { TColumn, TGridStates } from "../types";
 // import { TColumn, TDataItem } from "src/objects/Todos";
 
 export type TContextGridSetting = {
-  IDs: number[];
+  // IDs: number[];
   actions: {
     // loadDataGrid?: () => void;
   }
   states: {
     activeRow?: number | null;
     setActiveRow?: Dispatch<SetStateAction<number | null>>;
-    visibleIdentifiers: (keyof TColumn)[];
-    setVisibleIdentifiers: Dispatch<SetStateAction<(keyof TColumn)[]>>;
-    sortableRows: number[];
-    setSortableRows: Dispatch<SetStateAction<number[]>>;
+    gridColumns: TColumn[];
+    setGridColumns: Dispatch<SetStateAction<TColumn[]>>;
+    // sortableRows: number[];
+    // setSortableRows: Dispatch<SetStateAction<number[]>>;
   }
 
 };

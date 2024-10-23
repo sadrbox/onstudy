@@ -66,13 +66,6 @@ const GridSettingTabBodyRow: FC<TProps> = ({ column, rowID }) => {
                 <span>{getTranslation(value)}</span>
               </div>
             </td>)
-        } else if (rowSettingColumn.type === 'boolean' && rowSettingColumn.identifier === 'sortable') {
-          return (
-            <td key={keyID}>
-              <div style={{ justifyItems: rowSettingColumn.alignment }} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
-                <GridSettingTabBodyRowCheckboxSortable rowID={rowID} />
-              </div>
-            </td>)
         } else if (rowSettingColumn.type === 'string') {
           return (
             <td key={keyID} onClick={() => setActiveRow(rowID)}>

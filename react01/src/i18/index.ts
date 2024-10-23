@@ -14,9 +14,7 @@ export function getTranslation(word: string): string {
 }
 
 export function getTranslateColumn(column: TColumn) {
-	if (column.column) {
-		return getTranslation(column.column.toString());
-	} else if (column.identifier) {
+	if (column.identifier) {
 		return getTranslation(column.identifier.toString());
 	}
 	return column.column || column.identifier;
