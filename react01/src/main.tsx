@@ -8,11 +8,12 @@ import "@/styles/index.css";
 import Products from "./objects/Products";
 import Users from "./objects/Users";
 import Todos from "./objects/Todos";
+import Counterparties from "./objects/Counterparties";
 // import TabBar from "@/components/ui/TabBar";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/products",
     element: <Products />,
   },
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/users",
     element: <Users />,
+  },
+  {
+    path: '/counterparties',
+    element: <Counterparties />
   },
   { path: "/users/elm", element: <Users /> },
 ]);

@@ -26,7 +26,7 @@ const GridDataTabBody: FC<TProps> = ({ columns, rows }) => {
   return (
     <tbody>
       {rows && rows.map((row: TDataItem, key: number) =>
-        <GridDataTabBodyRow key={key} rowID={row.id} columns={columns} row={row} />
+        <GridDataTabBodyRow key={key} countID={++key} rowID={row.id} columns={columns} row={row} />
       )}
       <tr style={{ height: "100%", visibility: 'hidden' }}></tr>
     </tbody>

@@ -9,6 +9,7 @@ import { useContextGridData } from './GridDataContext';
 
 
 type TProps = {
+  countID: number;
   rowID: number;
   columns: TColumn[];
   row: TDataItem;
@@ -17,7 +18,7 @@ type TProps = {
   // }
 }
 
-const GridDataTabBodyRow: FC<TProps> = ({ rowID, columns, row }) => {
+const GridDataTabBodyRow: FC<TProps> = ({ countID, rowID, columns, row }) => {
 
   const { context } = useContextGridData();
 
@@ -34,7 +35,7 @@ const GridDataTabBodyRow: FC<TProps> = ({ rowID, columns, row }) => {
 
 
   return (
-    <tr data-row-id={rowID}>
+    <tr data-count-id={countID} data-row-id={rowID} onDoubleClick={() => console.log("onDoubleClick")}>
       {columns && columns.filter(column => column.visible).map((column: TColumn, columnIndex: number) => {
         const rowsKey = Object.keys(row);
         if (columns.find(el => rowsKey.includes(el.identifier)))
@@ -43,7 +44,7 @@ const GridDataTabBodyRow: FC<TProps> = ({ rowID, columns, row }) => {
               return (
                 <td key={columnIndex}>
                   <div style={{ justifyItems: column?.alignment }} className={isActiveRow(rowID) ? styles.TabFieldActive : styles.TabField}>
-                    <GridDataTabBodyRowCheckbox tabIndex={rowID} rowID={rowID} />
+                    <GridDataTabBodyRowCheckbox countID={countID} rowID={rowID} />
                   </div>
                 </td>)
             } else if (column.type === 'string' || column.type === 'number') {

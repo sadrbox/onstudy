@@ -15,7 +15,7 @@
       "identifier": "visible",
       "type": "boolean",
       "column": "Visible",
-      "width": "30px",
+      "width": "33px",
       "alignment": "center",
       "hint": "Отображение колонки в таблице",
       "visible": true

@@ -11,9 +11,11 @@ import styles from "../styles.module.scss"
 // import { columns } from "./settings.json"
 // import { columns } from '../../../../objects/Products/config';
 import { LiaChevronUpSolid, LiaChevronDownSolid } from "react-icons/lia";
+import { useParams } from 'react-router-dom';
 
 type TProps = {
   params: {
+    tabName: string
     columns: TColumn[]
     rows?: TDataItem[]
   }
@@ -22,7 +24,7 @@ type TProps = {
     setShowTabSetting: Dispatch<SetStateAction<boolean>>
   }
 }
-const GridSetting: FC<TProps> = ({ params: { columns }, actions: { loadDataGrid, setShowTabSetting } }) => {
+const GridSetting: FC<TProps> = ({ params: { columns, tabName }, actions: { loadDataGrid, setShowTabSetting } }) => {
 
 
   const [contextGridSetting, setContextGridSetting] = useState<TContextGridSetting | undefined>(undefined);
@@ -33,7 +35,8 @@ const GridSetting: FC<TProps> = ({ params: { columns }, actions: { loadDataGrid,
   const [gridColumns, setGridColumns] = useState<TColumn[]>([])
 
   useEffect(() => {
-    const getStorageOfSettings = localStorage.getItem("username_gridSetting_products");
+
+    const getStorageOfSettings = localStorage.getItem("username_gridSetting_" + tabName);
     let storageOfSettings: TColumn[] = [];
     try {
       storageOfSettings = getStorageOfSettings && JSON.parse(getStorageOfSettings)
@@ -62,7 +65,7 @@ const GridSetting: FC<TProps> = ({ params: { columns }, actions: { loadDataGrid,
 
   useEffect(() => {
     const json = JSON.stringify(gridColumns)
-    localStorage.setItem("username_gridSetting_products", json)
+    localStorage.setItem("username_gridSetting_" + tabName, json)
     // loadDataGrid();
   }, [gridColumns])
 
@@ -71,32 +74,52 @@ const GridSetting: FC<TProps> = ({ params: { columns }, actions: { loadDataGrid,
     loadDataGrid();
     setShowTabSetting((prev) => !prev)
   }
+
+  function updatePosition(direction: string) {
+    if (activeRow === null) return;
+
+    const gridLength = gridColumns.length;
+    const activePosition = activeRow;
+    let nextPosition = direction === 'up' ? activePosition - 1 : activePosition + 1;
+
+    if (nextPosition > gridLength) {
+      nextPosition = 1;
+    } else if (nextPosition < 1) {
+      nextPosition = gridLength;
+    }
+
+    const updatedColumns = gridColumns.map((column, keyID) => {
+      const updatedColumn = { ...column };
+      const numberID = keyID + 1;
+
+      if (column.position === activePosition) {
+        updatedColumn.position = nextPosition;
+      } else if (nextPosition >= 1 && nextPosition <= gridLength) {
+        if (direction === 'up' && nextPosition === gridLength) {
+          updatedColumn.position = numberID - 1;
+        } else if (direction === 'down' && nextPosition === 1) {
+          updatedColumn.position = numberID + 1;
+        } else if (column.position === nextPosition) {
+          updatedColumn.position = activePosition;
+        } else {
+          updatedColumn.position = numberID;
+        }
+      }
+
+      return updatedColumn;
+    });
+
+    const sortedColumns = updatedColumns.sort((a, b) => a.position - b.position);
+    setActiveRow(nextPosition);
+    setGridColumns(sortedColumns);
+  }
+
   function PositionLevelUp() {
-    const arr = gridColumns.map((column, keyID) => {
-      const numberID = ++keyID;
-      const nextPosition = (activeRow !== null ? activeRow > 0 ? activeRow - 1 : 0 : 0);
+    updatePosition('up');
+  }
 
-      if (nextPosition === column.position) {
-        column.position = nextPosition + 1;
-      }
-      // console.log("---------------", nextPosition)
-
-      // console.log({ next: nextPosition, active: activeRow, position: column.position })
-      // console.log(column.position, numberID)
-      else if (activeRow === column.position) {
-        // console.log({ next: nextPosition, active: activeRow, position: column.position })
-        // console.log(activeRow, column.position)
-        column.position = nextPosition;
-        setActiveRow(nextPosition)
-        // console.log(column.position)
-      } else {
-        column.position = numberID;
-      }
-      return column;
-    })
-    const cols = arr.sort((a, b) => a.position - b.position)
-    // console.log(cols)
-    setGridColumns(cols)
+  function PositionLevelDown() {
+    updatePosition('down');
   }
 
   return (
@@ -106,7 +129,7 @@ const GridSetting: FC<TProps> = ({ params: { columns }, actions: { loadDataGrid,
           <button onClick={() => PositionLevelUp()} className={[styles.Button, styles.ButtonImg].join(' ')}>
             <LiaChevronUpSolid size={16} />
           </button>
-          <button onClick={() => loadDataGrid()} className={[styles.Button, styles.ButtonImg].join(' ')}>
+          <button onClick={() => PositionLevelDown()} className={[styles.Button, styles.ButtonImg].join(' ')}>
             <LiaChevronDownSolid size={16} />
           </button>
         </div>

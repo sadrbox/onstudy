@@ -7,6 +7,7 @@ import GridSetting from './GridSetting';
 
 type TProps = {
   params: {
+    tabName: string
     columns: TColumn[]
     rows: TDataItem[]
   }

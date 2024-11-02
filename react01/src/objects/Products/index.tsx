@@ -25,6 +25,7 @@ type TResponseData = { products: TDataItem[] } & {
 };
 
 type TParams = {
+  tabName: string;
   rows: TDataItem[]
   columns: TColumn[];
 }
@@ -37,9 +38,12 @@ const Products: FC = () => {
   const [sortedColumns, setSortedColumns] = useState<TColumn[]>([])
 
 
-  function buildColumns(columns: TColumn[]) {
-    const cols = columns.sort((a, b) => a.position - b.position);
-    const getStorageOfSettings = localStorage.getItem("username_gridSetting_products");
+  function buildColumns(columns: TColumn[], tabName: string) {
+    const cols = columns.map((col, keyID) => {
+      col.position = keyID + 1
+      return col;
+    }).sort((a, b) => a.position - b.position);
+    const getStorageOfSettings = localStorage.getItem("username_gridSetting_" + tabName);
     let storageOfSettings = [];
     storageOfSettings = getStorageOfSettings && JSON.parse(getStorageOfSettings)
 
@@ -52,11 +56,11 @@ const Products: FC = () => {
 
   useEffect(() => {
     if (params)
-      buildColumns(columns)
+      buildColumns(columns, params?.tabName)
   }, [params])
 
   useEffect(() => {
-    buildColumns(columns)
+    buildColumns(columns, 'products')
     loadDataGrid();
   }, [])
 
@@ -64,14 +68,14 @@ const Products: FC = () => {
     // console.log(sortedColumns)
     if (responseData?.products) {
       const rows = responseData?.products;
-      setParams({ rows, columns: sortedColumns })
+      setParams({ tabName: 'products', rows, columns: sortedColumns })
     } else {
       setParams(undefined)
     }
   }, [responseData])
 
   const loadDataGrid = async () => {
-    buildColumns(columns);
+    buildColumns(columns, 'products');
     setParams(undefined)
     await fetch('https://dummyjson.com/products?limit=30')
       .then(response => response.json())

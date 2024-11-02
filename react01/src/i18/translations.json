@@ -69,6 +69,8 @@
   "stock": "Запас",
   "brand": "Бренд",
   "sku": "Артикул",
+  "fullname": "Полное наименование",
+  "bin": "БИН",
 
   "warrantyInformation": "Информация о гарантии",
   "shippingInformation": "Информация о доставке",

@@ -4,14 +4,14 @@ import styles from "../styles.module.scss"
 
 
 type TProps = {
-  tabIndex: number;
+  countID: number;
   rowID: number;
   // states: {
   //   activeRow: number | null, setActiveRow: Dispatch<SetStateAction<number | null>>
   // }
 }
 
-const GridDataTabBodyRowCheckbox: FC<TProps> = ({ tabIndex, rowID }) => {
+const GridDataTabBodyRowCheckbox: FC<TProps> = ({ countID, rowID }) => {
   const { context } = useContextGridData();
 
 
@@ -36,7 +36,7 @@ const GridDataTabBodyRowCheckbox: FC<TProps> = ({ tabIndex, rowID }) => {
 
   return (
     <label className={styles.LabelForCheckbox} htmlFor={`selectOption_${rowID}`}>
-      <input type="checkbox" tabIndex={tabIndex} id={`selectOption_${rowID}`} checked={isCheckedRow(rowID)} onFocus={() => onFocus(rowID)} onChange={() => onToggle(rowID)} />
+      <input type="checkbox" tabIndex={countID} id={`selectOption_${rowID}`} checked={isCheckedRow(rowID)} onFocus={() => onFocus(rowID)} onChange={() => onToggle(rowID)} />
     </label>
   );
 };
