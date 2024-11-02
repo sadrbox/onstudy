@@ -13,29 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id           Int        @id @default(autoincrement())
-  title        String
-  description  String?
-  status       PostStatus @relation(fields: [postStatusId], references: [id])
-  alias        String
-  postStatusId Int
-  comments     Comment[]
-}
-
-model PostStatus {
-  id    Int    @id @default(autoincrement())
-  title String
-  post  Post[]
-}
-
-model Comment {
-  id     Int   @id @default(autoincrement())
-  post   Post? @relation(fields: [postId], references: [id])
-  postId Int?
-}
-
-model User {
+model Users {
   id         Int     @id @default(autoincrement())
   username   String?
   password   String?
@@ -44,4 +22,11 @@ model User {
   lastname   String?
   middlename String?
   fullname   String?
+}
+
+model Counterparties {
+  id       Int     @id @default(autoincrement())
+  title    String?
+  fullname String?
+  bin      String?
 }

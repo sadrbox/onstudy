@@ -33,6 +33,13 @@ app.post("/users", async (req, res) => {
 	}
 });
 
+app.get("/counterparties", async (req, res) => {
+	const all = await prisma.counterparties.findMany();
+	// console.log(counterparties);
+	const p = { counterparties: all };
+	res.json(p);
+});
+
 app.listen(3000, () => {
 	console.log("Server is running on http://localhost:3000");
 });
