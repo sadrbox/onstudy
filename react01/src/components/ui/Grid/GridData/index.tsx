@@ -15,6 +15,9 @@ import { TSorting } from '../types';
 import { sortGridRows } from './services';
 // import { columns } from '../../../objects/Products/config';
 import GridSetting from '../GridSetting';
+import { createPortal } from 'react-dom';
+import { useAppContext } from 'src/components/app/AppContext';
+import { TTabs } from '../../Tabs/types';
 
 type TProps = {
   params: {
@@ -30,6 +33,7 @@ type TProps = {
 
 const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGrid, setShowTabSetting } }) => {
 
+  const appContext = useAppContext();
   const [contextGridData, setContextGridData] = useState<TContextData | undefined>(undefined);
   const [sortedDataGrid, setSortedDataGrid] = useState<TDataItem[] | undefined>(undefined);
   const [checkedRows, setCheckedRows] = useState<number[]>([])
@@ -127,16 +131,25 @@ const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGr
     setShowTabSetting((prev) => !prev)
   }
 
+  function addTab() {
+    const addNewTab = appContext?.setContext;
+    addNewTab((prev) => {
+      const prevTabs = prev?.tabs;
+      return { tabs: [...prevTabs, { id: "293h48h8", label: "Контрагент", active: false, description: 'asdfasdf' }] }
+    })
+  }
+
 
 
   return (
     <ContextWrapper contextGridData={contextGridData}>
       <div className={styles.TabPanel}>
-        <div className={styles.rowGroup} style={{ justifyContent: 'left', gap: '5px' }}>
+        <div className={styles.colGroup} style={{ justifyContent: 'left', gap: '5px' }}>
           <button className={styles.Button}><span>Добавить</span></button>
           <button className={styles.Button}><span>Удалить</span></button>
-        </div>  <h1></h1>
-        <div className={styles.rowGroup} style={{ justifyContent: 'right', gap: '5px' }}>
+          <button onClick={() => addTab()} className={styles.Button}><span>Tab</span></button>
+        </div>
+        <div className={styles.colGroup} style={{ justifyContent: 'right', gap: '5px' }}>
           <button onClick={() => loadDataGrid()} className={[styles.Button, styles.ButtonImg].join(' ')}>
             <div className={styles.ImgReload} ></div>
           </button>

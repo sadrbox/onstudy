@@ -4,12 +4,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // import DataGrid from "./ui/DataGrid/index.tsx";
 import "@/styles/index.css";
-// import { Provider } from "jotai";
+// import "@/styles/variables.scss"
+// import { Provider } from "i4utai";
 import Products from "./objects/Products";
 import Users from "./objects/Users";
 import Todos from "./objects/Todos";
 import Counterparties from "./objects/Counterparties";
-// import TabBar from "@/components/ui/TabBar";
+import CounterpartiesCreate from "./objects/Counterparties/form";
+import TabBar from "src/components/ui/Tabs";
+import { App } from "./components/app";
 
 const router = createBrowserRouter([
   {
@@ -28,12 +31,19 @@ const router = createBrowserRouter([
     path: '/counterparties',
     element: <Counterparties />
   },
+  {
+    path: '/counterparties/create',
+    element: <CounterpartiesCreate />
+  },
   { path: "/users/elm", element: <Users /> },
 ]);
 
+
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
-    {/* <TabBar /> */}
-    <RouterProvider router={router} />
+    <App />
+    {/* <TabBar tabs={tabs} /> */}
+    {/* <RouterProvider router={router} /> */}
   </>,
 );

@@ -11,17 +11,18 @@ $color2: #bcd6ff;
 $colorPrimaryLight: #2c77ef;
 $colorPrimaryDark: #1c5fcb;
 
+// доступ через styles.rowGroup
 .rowGroup {
   /* горизонтально */
   display: flex;
-  flex-direction: row;
-  /* padding: 10px; */
+  flex-direction: column;
+  /* padding: 9px; */
 }
 .colGroup {
   /* вертикально */
   display: flex;
-  flex-direction: column;
-  /* padding: 10px; */
+  flex-direction: row;
+  /* padding: 9px; */
 }
 
 .ImgReload {
@@ -31,8 +32,6 @@ $colorPrimaryDark: #1c5fcb;
   background-size: contain; /* Масштабирует изображение, чтобы оно поместилось в блок, сохраняя пропорции */
   height: 20px;
   width: 20px;
-  // box-shadow: inset 0px 0px 1px $color60;
-  // border-radius: 8px;
 }
 
 .ImgSetting {
@@ -42,8 +41,8 @@ $colorPrimaryDark: #1c5fcb;
   background-size: contain; /* Масштабирует изображение, чтобы оно поместилось в блок, сохраняя пропорции */
   height: 18px;
   width: 18px;
-  // box-shadow: inset 0px 0px 10px $color5;
-  // border-radius: 8px;
+  /* // box-shadow: inset 0px 0px 10px $color5;
+  // border-radius: 8px; */
 }
 
 .ImgAddNew {
@@ -53,8 +52,8 @@ $colorPrimaryDark: #1c5fcb;
   background-size: contain; /* Масштабирует изображение, чтобы оно поместилось в блок, сохраняя пропорции */
   height: 20px;
   width: 20px;
-  // box-shadow: inset 0px 0px 5px $color60;
-  // border-radius: 8px;
+  /* // box-shadow: inset 0px 0px 5px $color60;
+  // border-radius: 8px; */
   margin-left: 5px;
 }
 

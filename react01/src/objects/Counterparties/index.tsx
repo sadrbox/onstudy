@@ -1,4 +1,8 @@
+
+
 import React, { useState, useEffect, ReactNode, FC } from 'react';
+
+import { createPortal } from "react-dom";
 import { TColumn, TDataItem } from 'src/components/ui/Grid/types';
 import columns from "./columns.json"
 import Grid from 'src/components/ui/Grid';
@@ -15,6 +19,7 @@ type TParams = {
 
 const Counterparties: FC = () => {
 
+  // const navigate = useNavigate();
   const [responseData, setResponseData] = useState<TResponseData | undefined>(undefined);
   const [params, setParams] = useState<TParams | undefined>(undefined)
   const [sortedColumns, setSortedColumns] = useState<TColumn[]>([])
@@ -65,11 +70,21 @@ const Counterparties: FC = () => {
       .then(data => setResponseData(data))
   }
 
+  function createNew() {
+    return <Form />
+  }
+
+
   return (
     <>
       {params ? (<Grid params={params} actions={{ loadDataGrid }} />) : (<h1>Loading...</h1>)}
     </>
   )
 };
+
+const Form: React.FC = () => {
+  return <div>Portal</div>
+}
+
 
 export default Counterparties;

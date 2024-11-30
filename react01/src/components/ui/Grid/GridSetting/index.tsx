@@ -125,7 +125,7 @@ const GridSetting: FC<TProps> = ({ params: { columns, tabName }, actions: { load
   return (
     <ContextWrapper contextGridSetting={contextGridSetting}>
       <div className={styles.TabPanel}>
-        <div className={styles.rowGroup} style={{ justifyContent: 'left', gap: '5px' }}>
+        <div className={styles.colGroup} style={{ justifyContent: 'left', gap: '5px' }}>
           <button onClick={() => PositionLevelUp()} className={[styles.Button, styles.ButtonImg].join(' ')}>
             <LiaChevronUpSolid size={16} />
           </button>
@@ -133,7 +133,7 @@ const GridSetting: FC<TProps> = ({ params: { columns, tabName }, actions: { load
             <LiaChevronDownSolid size={16} />
           </button>
         </div>
-        <div className={styles.rowGroup} style={{ justifyContent: 'right', gap: '5px' }}>
+        <div className={styles.colGroup} style={{ justifyContent: 'right', gap: '5px' }}>
           <button className={[styles.Button, styles.ButtonImg].join(' ')} onClick={(e) => onClickButtonTabSetting(e)}>
             <div className={styles.ImgSetting}></div>
           </button>
