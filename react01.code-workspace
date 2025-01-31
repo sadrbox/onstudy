@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "react01"
+		},
+		{
+			"path": "prisma-express-server"
+		}
+	],
+	"settings": {
+		"liveServer.settings.AdvanceCustomBrowserCmdLine": "",
+		"typescript.reportStyleChecksAsWarnings": true,
+		"js/ts.implicitProjectConfig.checkJs": false,
+		"js/ts.implicitProjectConfig.experimentalDecorators": false
+	}
+}

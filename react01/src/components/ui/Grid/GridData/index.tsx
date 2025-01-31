@@ -18,6 +18,7 @@ import GridSetting from '../GridSetting';
 import { createPortal } from 'react-dom';
 import { useAppContext } from 'src/components/app/AppContext';
 import { TTabs } from '../../Tabs/types';
+import { isArray } from 'lodash';
 
 type TProps = {
   params: {
@@ -131,13 +132,6 @@ const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGr
     setShowTabSetting((prev) => !prev)
   }
 
-  function addTab() {
-    const addNewTab = appContext?.setContext;
-    addNewTab((prev) => {
-      const prevTabs = prev?.tabs;
-      return { tabs: [...prevTabs, { id: "293h48h8", label: "Контрагент", active: false, description: 'asdfasdf' }] }
-    })
-  }
 
 
 
@@ -147,7 +141,6 @@ const GridData: FC<TProps> = ({ params: { columns, rows }, actions: { loadDataGr
         <div className={styles.colGroup} style={{ justifyContent: 'left', gap: '5px' }}>
           <button className={styles.Button}><span>Добавить</span></button>
           <button className={styles.Button}><span>Удалить</span></button>
-          <button onClick={() => addTab()} className={styles.Button}><span>Tab</span></button>
         </div>
         <div className={styles.colGroup} style={{ justifyContent: 'right', gap: '5px' }}>
           <button onClick={() => loadDataGrid()} className={[styles.Button, styles.ButtonImg].join(' ')}>

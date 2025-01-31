@@ -1,7 +1,13 @@
 // server.js
-const express = require("express");
-const cors = require("cors");
-const { PrismaClient } = require("@prisma/client");
+import express from "express";
+import winax from "winax";
+import net from "node:net";
+import edge from "edge-js";
+import { Buffer } from "node:buffer";
+import cors from "cors";
+import { PrismaClient } from "@prisma/client";
+import { getClusterInfobases } from "./services/v83com.js";
+
 const prisma = new PrismaClient();
 const app = express();
 
@@ -38,6 +44,11 @@ app.get("/counterparties", async (req, res) => {
 	// console.log(counterparties);
 	const p = { counterparties: all };
 	res.json(p);
+});
+
+app.post("/json", (req, res) => {
+	console.log(req.body); // Логируем полученный JSON
+	res.status(200).json({ message: "JSON успешно получен!" }); // Ответ клиенту
 });
 
 app.listen(3000, () => {

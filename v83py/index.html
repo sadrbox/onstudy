@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1C Query</title>
+</head>
+
+<body>
+  <h1>Запрос к 1С</h1>
+  <button id="startRequest">Выполнить запрос</button>
+  <div id="result"></div>
+
+  <script>
+    const startButton = document.getElementById('startRequest');
+    const resultDiv = document.getElementById('result');
+
+    startButton.addEventListener('click', () => {
+      const socket = new WebSocket('ws://localhost:8000/ws');
+
+      socket.onopen = () => {
+        console.log("WebSocket connection opened.");
+      };
+
+      socket.onmessage = (event) => {
+        const result = JSON.parse(event.data);
+        resultDiv.innerHTML = JSON.stringify(result, null, 2);
+      };
+
+      socket.onclose = () => {
+        console.log("WebSocket connection closed.");
+      };
+    });
+  </script>
+</body>
+
+</html>
